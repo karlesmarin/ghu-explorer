@@ -2,6 +2,8 @@
 
 **▶️ [karlesmarin.github.io/ghu-explorer](https://karlesmarin.github.io/ghu-explorer/)**
 
+[![The Orbifold Explorer](preview.png)](https://karlesmarin.github.io/ghu-explorer/)
+
 A single self-contained HTML file. Open `index.html`; no server, no install, no network.
 Nothing you type leaves the page.
 
