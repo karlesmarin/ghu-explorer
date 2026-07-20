@@ -50,7 +50,18 @@ for(const k in SU4.reps){
   const want=(((a+2*b+3*c)%%2)===1)||deg;
   if(evenZero!==want){ fail++; console.log("  FAIL  notch mismatch at "+k); }
 }
-console.log(fail? "\\n*** "+fail+" FAILURE(S) ***" : "\\nall checks pass (119 reps + 9 residuals)");
+// Part IV: the closed form delta = +-chi_p chi_q chi_r (no weight table) must reproduce the
+// enumerated delta(m) on every catalogued rep. This is what lets the page run past the catalogue.
+let pivfail=0;
+for(const k in SU4.reps){
+  const [a,b,c]=k.split(",").map(Number);
+  const dh=delta(SU4.reps[k].h), dc=deltaClosed(reduction(a,b,c));
+  for(const m of new Set([...Object.keys(dh),...Object.keys(dc)]))
+    if((dh[m]||0)!==(dc[m]||0)){ pivfail++; break; }
+}
+if(pivfail){ fail+=pivfail; console.log("  FAIL  Part IV closed form disagrees on "+pivfail+" reps"); }
+else console.log("  ok    Part IV closed form reproduces delta(m) on all 119 reps");
+console.log(fail? "\\n*** "+fail+" FAILURE(S) ***" : "\\nall checks pass (119 reps + 9 residuals + Part IV closed form)");
 process.exit(fail?1:0);
 """ % (blob, maths, json.dumps(QUOTED_PERIOD))
 

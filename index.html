@@ -68,6 +68,14 @@ footer a{color:var(--ink2)}
 .s b{font-family:var(--mono);font-size:1.15rem;font-variant-numeric:tabular-nums}
 .s span{font-size:.7rem;color:var(--ink3);letter-spacing:.04em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.views,.tabs{display:flex;gap:.4rem;flex-wrap:wrap}
+.views button,.tab{font-family:var(--mono);font-size:.72rem;padding:.32rem .62rem;background:var(--paper);
+  color:var(--ink2);border:1px solid var(--rule);border-radius:3px;cursor:pointer;line-height:1.2}
+.views button.on,.tab[aria-selected=true]{border-color:var(--even);color:var(--even);font-weight:600}
+.chip.v{border-color:var(--odd);color:var(--odd)}
+canvas#pot{touch-action:none;cursor:grab}
+.formula{font-family:var(--serif);font-size:1.14rem;padding:.3rem 0 .55rem;color:var(--ink);letter-spacing:-.01em}
+.formula .chip{vertical-align:2px;margin-left:.4rem}
 </style>
 
 <div class="wrap">
@@ -116,10 +124,14 @@ footer a{color:var(--ink2)}
   <div style="display:flex;flex-direction:column;gap:1.25rem">
     <div class="card">
       <h2>One-loop Wilson-line potential over the period-2 torus</h2>
+      <div class="views" id="potviews">
+        <button data-v="torus" class="on">&#127849; Torus</button>
+        <button data-v="surface">&#9968; Surface</button>
+        <button data-v="heatmap">&#128506; Heatmap</button>
+      </div>
       <canvas id="pot" width="900" height="470"></canvas>
       <div class="legend">
-        <span>dashed &mdash; the half-domain cut at &alpha;&#8322;=&frac12;</span>
-        <span>&times; &mdash; the minimum on this grid</span>
+        <span>three views of the same field &mdash; drag the 3D ones to rotate</span>
         <span id="perr"></span>
       </div>
     </div>
@@ -140,6 +152,11 @@ footer a{color:var(--ink2)}
     <div class="card">
       <h2>What is proved, what is measured</h2>
       <div class="scroll"><table><tbody id="facts"></tbody></table></div>
+    </div>
+
+    <div class="card">
+      <h2>Part IV &mdash; the compression to three integers</h2>
+      <div id="pivbox"></div>
     </div>
 
     <div class="card">
@@ -182,9 +199,13 @@ footer a{color:var(--ink2)}
     multiplication by the central element &minus;<b>1</b> of <i>Z</i>(SU(4)). A representation answers
     with the scalar (&minus;1)<sup>a+2b+3c</sup>, so the harmonics carrying the opposite sign are
     identically absent &mdash; not suppressed, absent.</p>
-  <p>Built from Part III of a three-paper series &middot;
-    <a href="https://doi.org/10.5281/zenodo.21438227">10.5281/zenodo.21438227</a> &middot;
-    <a href="https://github.com/karlesmarin/centre-parity-selection">scripts and Lean certificate</a>
+  <p>Built from <strong>Part III</strong> of a four-paper series &middot;
+    <a href="https://doi.org/10.5281/zenodo.21438226">10.5281/zenodo.21438226</a>
+    (concept DOI &mdash; always the current version, now&nbsp;v5) &middot;
+    <a href="https://github.com/karlesmarin/centre-parity-selection">scripts &amp; Lean certificate</a>.</p>
+  <p>The closed form shown in the &ldquo;compression&rdquo; panel is <strong>Part IV</strong> &middot;
+    <a href="https://doi.org/10.5281/zenodo.21463000">10.5281/zenodo.21463000</a> &middot;
+    <a href="https://github.com/karlesmarin/schur-nonidentity-o4">schur-nonidentity-o4</a>
     &middot; Carles Mar&iacute;n, with Claude (Anthropic) as AI research assistant.</p>
 </footer>
 </div>
@@ -230,6 +251,47 @@ function field(C,N){
   return V;
 }
 
+/* ---------- Part IV: the closed form, no weight table needed ----------
+   A representation (a,b,c) is the four-row partition lambda=(a+b+c, b+c, c, 0). Its shadow
+   character on the reflection element {1,-1,t,1/t} is +- a product of exactly three SU(2)
+   characters chi_p chi_q chi_r read off the 2-quotient of lambda, or zero. So the whole twist
+   imbalance delta(m) collapses to three integers (p,q,r). Verified to reproduce the enumerated
+   delta(m) on all 119 catalogued reps, 0 mismatches -- and it needs no catalogue, so it runs
+   for any labels. This is the reduction Phi = F o Q the paper is about, made computable here. */
+function reduction(a,b,c){
+  const lam=[a+b+c,b+c,c,0], mu=lam.map((l,i)=>l+3-i);
+  const E=[],O=[]; mu.forEach((m,j)=>((m%2)?O:E).push(j));
+  const base={a,b,c,lam,mu};
+  if(!E.length||!O.length) return {...base,zero:"a parity class is empty"};
+  let inv=0; for(let i=0;i<4;i++)for(let j=i+1;j<4;j++) if((mu[i]%2)&&(mu[j]%2)===0) inv++;
+  const zeta=((inv+E.length*O.length)%2)? -1:1;
+  const part=bs=>bs.map((v,i)=>v-(bs.length-1-i));
+  const al=part(E.map(j=>mu[j]/2).sort((x,y)=>y-x)),
+        be=part(O.map(j=>(mu[j]-1)/2).sort((x,y)=>y-x));
+  let p,q,r,sgn;
+  if(E.length===2){
+    const z=(al[0]+al[1])-(be[0]+be[1])-1;
+    if(z===0) return {...base,zero:"balanced 2-quotient (cross index z=0)"};
+    p=al[0]-al[1]; q=be[0]-be[1]; r=Math.abs(z)-1; sgn=zeta*(z>0?1:-1);
+  } else {
+    const nu=E.length===3?al:be; p=nu[0]-nu[1]; q=nu[1]-nu[2]; r=nu[0]-nu[2]+1; sgn=zeta;
+  }
+  return {...base,zero:false,p,q,r,sgn,s:p+q+r};
+}
+function deltaClosed(red){                 // delta(m) as the threefold convolution chi_p*chi_q*chi_r
+  if(red.zero) return {};
+  const chi=k=>{const o={};for(let i=0;i<=k;i++)o[k-2*i]=(o[k-2*i]||0)+1;return o;};
+  const conv=(A,B)=>{const c={};for(const i in A)for(const j in B){const e=+i+ +j;c[e]=(c[e]||0)+A[i]*B[j];}return c;};
+  const d=conv(conv(chi(red.p),chi(red.q)),chi(red.r)), o={};
+  for(const m in d) o[m]=red.sgn*d[m];
+  return o;
+}
+function pivMoments(red){                   // M0, M2 and the SU(2)-Casimir reading of the variance
+  if(red.zero) return null;
+  const C=k=>k*(k+2), {p,q,r}=red, M0=(p+1)*(q+1)*(r+1), e1=C(p)+C(q)+C(r);
+  return {M0, M2:M0*e1/3, variance:e1/3, Cp:C(p),Cq:C(q),Cr:C(r), support:red.s};
+}
+
 /* ---------- palette ---------- */
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function ramp(t){ // one hue, light -> dark, honest sequential
@@ -242,43 +304,99 @@ function ramp(t){ // one hue, light -> dark, honest sequential
   return `rgb(${A.map((v,k)=>Math.round(v+(B[k]-v)*f)).join(",")})`;
 }
 
-/* ---------- draw: potential ---------- */
+/* ---------- draw: potential — two views of one field ---------- */
+let POTMODE="torus", YAW=-0.6, PITCH=1.05;  // view state; the 3D views rotate by dragging
+let POTFIELD=null;                          // cached field, so rotating needn't recompute it
 function drawPot(h){
-  const cv=$("#pot"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;
-  ctx.clearRect(0,0,W,H);
-  if(!h){ctx.fillStyle=css("--ink3");ctx.font="14px "+css("--sans");
-    ctx.fillText("no precomputed weights for that representation",16,28);return null;}
+  const cv=$("#pot"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  if(!h){POTFIELD=null;ctx.fillStyle=css("--ink3");ctx.font="14px "+css("--sans");
+    ctx.fillText("no precomputed weights — try the closed form below, it needs none",16,28);return null;}
   const C=coeffs(h),V=field(C,NG);
-  let lo=Infinity,hi=-Infinity,mi=0;
-  for(let i=0;i<V.length;i++){if(V[i]<lo){lo=V[i];mi=i;}if(V[i]>hi)hi=V[i];}
-  const cell=Math.floor(Math.min(W/NG,H/NG)*100)/100;
-  const w=cell*NG,h0=cell*NG,ox=(W-w)/2,oy=(H-h0)/2;
+  let lo=Infinity,hi=-Infinity,mi=0,mean=0;
+  for(let i=0;i<V.length;i++){mean+=V[i];if(V[i]<lo){lo=V[i];mi=i;}if(V[i]>hi)hi=V[i];}
+  mean/=V.length;let scale=0;for(let i=0;i<V.length;i++)scale=Math.max(scale,Math.abs(V[i]-mean));
+  let mx2=0;for(let i=0;i<NG;i++)for(let j=0;j<NG;j++)
+    mx2=Math.max(mx2,Math.abs(V[i*NG+((j+NG/2)|0)%NG]-V[i*NG+j]));
+  POTFIELD={V,lo,hi,mi};repaintPot();
+  return {rel:mx2/(scale||1), min:[Math.floor(mi/NG)/NG*2,(mi%NG)/NG*2]};
+}
+function repaintPot(){
+  if(!POTFIELD)return;
+  const cv=$("#pot"),ctx=cv.getContext("2d");ctx.clearRect(0,0,cv.width,cv.height);
+  const {V,lo,hi,mi}=POTFIELD;
+  ({heatmap:draw2D,surface:draw3D,torus:draw3DTorus}[POTMODE]||draw3DTorus)(ctx,V,cv.width,cv.height,lo,hi,mi);
+}
+function draw2D(ctx,V,W,H,lo,hi,mi){        // top-down heat map — the half-domain cut is a clean line
+  const cell=Math.floor(Math.min(W/NG,H/NG)*100)/100,w=cell*NG,h0=cell*NG,ox=(W-w)/2,oy=(H-h0)/2;
   for(let i=0;i<NG;i++)for(let j=0;j<NG;j++){
     ctx.fillStyle=ramp((V[i*NG+j]-lo)/(hi-lo+1e-12));
-    ctx.fillRect(ox+i*cell,oy+h0-(j+1)*cell,cell+.6,cell+.6);
-  }
-  // the half-domain cut, and the period-1 line
+    ctx.fillRect(ox+i*cell,oy+h0-(j+1)*cell,cell+.6,cell+.6);}
   ctx.setLineDash([5,4]);ctx.strokeStyle=css("--alarm");ctx.lineWidth=1.4;
   ctx.beginPath();ctx.moveTo(ox,oy+h0-h0*0.25);ctx.lineTo(ox+w,oy+h0-h0*0.25);ctx.stroke();
   ctx.setLineDash([2,3]);ctx.strokeStyle=css("--ink3");
-  ctx.beginPath();ctx.moveTo(ox,oy+h0/2);ctx.lineTo(ox+w,oy+h0/2);ctx.stroke();
-  ctx.setLineDash([]);
-  // minimum
+  ctx.beginPath();ctx.moveTo(ox,oy+h0/2);ctx.lineTo(ox+w,oy+h0/2);ctx.stroke();ctx.setLineDash([]);
   const mx=Math.floor(mi/NG),my=mi%NG;
   ctx.strokeStyle=css("--paper");ctx.lineWidth=2.4;
   const px=ox+(mx+.5)*cell,py=oy+h0-(my+.5)*cell;
   ctx.beginPath();ctx.moveTo(px-6,py-6);ctx.lineTo(px+6,py+6);ctx.moveTo(px+6,py-6);ctx.lineTo(px-6,py+6);ctx.stroke();
   ctx.font="11px "+css("--mono");ctx.fillStyle=css("--ink3");
-  ctx.fillText("α₁ →",ox+w-34,oy+h0+13); ctx.save();ctx.translate(ox-8,oy+12);ctx.rotate(-Math.PI/2);
-  ctx.fillText("α₂ →",0,0);ctx.restore();
-  ctx.fillStyle=css("--alarm");ctx.fillText("α₂=½",ox+4,oy+h0-h0*0.25-4);
-  ctx.fillStyle=css("--ink3");ctx.fillText("α₂=1",ox+4,oy+h0/2-4);
-  // periodicity residual
-  let mx2=0,scale=0,mean=0;for(let i=0;i<V.length;i++)mean+=V[i];mean/=V.length;
-  for(let i=0;i<V.length;i++)scale=Math.max(scale,Math.abs(V[i]-mean));
-  for(let i=0;i<NG;i++)for(let j=0;j<NG;j++)
-    mx2=Math.max(mx2,Math.abs(V[i*NG+((j+NG/2)|0)%NG]-V[i*NG+j]));
-  return {rel:mx2/(scale||1), min:[mx/NG*2,my/NG*2]};
+  ctx.fillText("α₁ →",ox+w-34,oy+h0+13);ctx.save();ctx.translate(ox-8,oy+12);ctx.rotate(-Math.PI/2);ctx.fillText("α₂ →",0,0);ctx.restore();
+  ctx.fillStyle=css("--alarm");ctx.fillText("α₂=½  (the tempting cut)",ox+4,oy+h0-h0*0.25-4);
+  ctx.fillStyle=css("--ink3");ctx.fillText("α₂=1  (one period)",ox+4,oy+h0/2-4);
+}
+function draw3D(ctx,V,W,H,lo,hi,mi){        // the landscape — height is the potential; drag to rotate
+  const M=46,ZAMP=0.95,pad=34;
+  const cY=Math.cos(YAW),sY=Math.sin(YAW),cP=Math.cos(PITCH),sP=Math.sin(PITCH);
+  const hz=v=>(v-lo)/(hi-lo+1e-12);
+  const samp=(i,j)=>V[Math.min((i*NG/M)|0,NG-1)*NG+Math.min((j*NG/M)|0,NG-1)];
+  const P=(x,y,z)=>{const x1=x*cY-y*sY,y1=x*sY+y*cY;return [x1,y1*sP+z*cP,y1*cP-z*sP];};
+  const G=[];
+  for(let i=0;i<=M;i++){G.push([]);for(let j=0;j<=M;j++){
+    const x=(i/M-.5)*2,y=(j/M-.5)*2,v=samp(Math.min(i,M-1),Math.min(j,M-1));
+    G[i].push(P(x,y,(hz(v)-.5)*ZAMP));}}
+  let a=1e9,b=-1e9,c=1e9,d=-1e9;
+  for(const r of G)for(const p of r){a=Math.min(a,p[0]);b=Math.max(b,p[0]);c=Math.min(c,p[1]);d=Math.max(d,p[1]);}
+  const sc=Math.min((W-2*pad)/(b-a),(H-2*pad)/(d-c)),ox=(W-(a+b)*sc)/2,oy=(H+(c+d)*sc)/2;
+  const scr=p=>[ox+p[0]*sc,oy-p[1]*sc];
+  const quads=[];
+  for(let i=0;i<M;i++)for(let j=0;j<M;j++){
+    const cc=[G[i][j],G[i+1][j],G[i+1][j+1],G[i][j+1]];
+    quads.push({cc,depth:(cc[0][2]+cc[1][2]+cc[2][2]+cc[3][2])/4,h:hz(samp(i,j))});}
+  quads.sort((u,v)=>u.depth-v.depth);       // far first (ascending) — the torus proved this is correct
+  for(const q of quads){const s=q.cc.map(scr);
+    ctx.beginPath();ctx.moveTo(s[0][0],s[0][1]);for(let k=1;k<4;k++)ctx.lineTo(s[k][0],s[k][1]);ctx.closePath();
+    ctx.fillStyle=ramp(q.h);ctx.fill();ctx.strokeStyle="rgba(128,128,128,.10)";ctx.lineWidth=.5;ctx.stroke();}
+  // the α₂=½ ridge — the cut you are tempted to make; watch how the surface does NOT repeat across it
+  const jc=Math.round(M/4);
+  ctx.strokeStyle=css("--alarm");ctx.lineWidth=2;ctx.beginPath();
+  for(let i=0;i<=M;i++){const s=scr(G[i][jc]);i?ctx.lineTo(s[0],s[1]):ctx.moveTo(s[0],s[1]);}ctx.stroke();
+  ctx.font="11px "+css("--mono");ctx.fillStyle=css("--ink3");
+  ctx.fillText("↕ height = one-loop potential   ·   drag to rotate",12,18);
+  ctx.fillStyle=css("--alarm");ctx.fillText("red ridge = the α₂=½ cut",12,34);
+}
+function draw3DTorus(ctx,V,W,H,lo,hi,mi){   // the potential ON its torus — periodicity is now literal
+  const M=64,pad=18,R=1.0,r=0.42;
+  const cY=Math.cos(YAW),sY=Math.sin(YAW),cP=Math.cos(PITCH),sP=Math.sin(PITCH);
+  const hz=(i,j)=>{const ii=((i%NG)+NG)%NG,jj=((j%NG)+NG)%NG;return (V[ii*NG+jj]-lo)/(hi-lo+1e-12);};
+  const Pr=(x,y,z)=>{const x1=x*cY-y*sY,y1=x*sY+y*cY;return [x1,y1*sP+z*cP,y1*cP-z*sP];};
+  const vert=(i,j)=>{const th=2*Math.PI*i/M,ph=2*Math.PI*j/M,h=hz((i*NG/M)|0,(j*NG/M)|0),rr=r*(0.82+0.36*h);
+    return {p:Pr((R+rr*Math.cos(ph))*Math.cos(th),(R+rr*Math.cos(ph))*Math.sin(th),rr*Math.sin(ph)),h};};
+  const G=[];for(let i=0;i<=M;i++){G.push([]);for(let j=0;j<=M;j++)G[i].push(vert(i,j));}
+  let a=1e9,b=-1e9,c=1e9,d=-1e9;
+  for(const row of G)for(const q of row){a=Math.min(a,q.p[0]);b=Math.max(b,q.p[0]);c=Math.min(c,q.p[1]);d=Math.max(d,q.p[1]);}
+  const sc=Math.min((W-2*pad)/(b-a),(H-2*pad)/(d-c)),ox=(W-(a+b)*sc)/2,oy=(H+(c+d)*sc)/2;
+  const scr=p=>[ox+p[0]*sc,oy-p[1]*sc];
+  const quads=[];
+  for(let i=0;i<M;i++)for(let j=0;j<M;j++){
+    const cc=[G[i][j],G[i+1][j],G[i+1][j+1],G[i][j+1]];
+    quads.push({cc,depth:(cc[0].p[2]+cc[1].p[2]+cc[2].p[2]+cc[3].p[2])/4,h:(cc[0].h+cc[1].h+cc[2].h+cc[3].h)/4});}
+  quads.sort((u,v)=>u.depth-v.depth);       // far first
+  for(const q of quads){const s=q.cc.map(x=>scr(x.p));
+    ctx.beginPath();ctx.moveTo(s[0][0],s[0][1]);for(let k=1;k<4;k++)ctx.lineTo(s[k][0],s[k][1]);ctx.closePath();
+    ctx.fillStyle=ramp(q.h);ctx.fill();}
+  ctx.font="11px "+css("--mono");ctx.fillStyle=css("--ink3");
+  ctx.fillText("the potential on its torus T²   ·   drag to rotate   ·   colour = height",12,18);
+  ctx.fillText("α₁ goes around the ring, α₂ around the tube",12,34);
 }
 
 /* ---------- draw: comb ---------- */
@@ -403,7 +521,7 @@ function run(){
      <div class="vs">(${a},${b},${c})${dim?` · dim ${dim}`:""} · centre charge ${a+2*b+3*c}
      ${ad?" · hosts a generation":""}</div>`;
   const res=drawPot(h);
-  drawComb(h,odd); drawFS(h,odd||dg); drawMap([a,b,c]); facts(a,b,c,res);
+  drawComb(h,odd); drawFS(h,odd||dg); drawMap([a,b,c]); facts(a,b,c,res); pivotView(a,b,c);
   $("#combnote").innerHTML = h ? (odd&&!dg
       ? "the even teeth vanish identically — that is the notch"
       : (dg ? "degenerate: both combs vanish" : "the odd teeth vanish identically")) : "";
@@ -468,6 +586,60 @@ document.querySelectorAll(".tab[data-x]").forEach(t=>t.addEventListener("click",
 }));
 $("#tbl").addEventListener("input",renderX);
 $("#alph").addEventListener("input",renderX);
+
+/* ---------- Part IV panel: the reduction (a,b,c) -> three integers ---------- */
+function pivotView(a,b,c){
+  const red=reduction(a,b,c), box=$("#pivbox");
+  const sub=k=>"&chi;<sub>"+k+"</sub>";
+  const tbl=rows=>`<div class="scroll" style="max-height:none;overflow-y:visible"><table><tbody>`+
+    rows.map(([k,v,ch,cl])=>`<tr><th>${k}</th><td class="n">${v}</td><td><span class="chip ${cl}">${ch}</span></td></tr>`).join("")+
+    `</tbody></table></div>`;
+  if(red.zero){
+    box.innerHTML=
+      `<div class="formula">s<sub>&lambda;</sub>(1,&minus;1,t,t<sup>&minus;1</sup>) = <b>0</b></div>`+
+      tbl([
+        ["partition &lambda; of (a,b,c)",`(${red.lam.join(", ")})`,"theorem","t"],
+        ["character vanishes because",red.zero,"theorem","t"],
+      ])+
+      `<p class="hint">The shadow character is identically zero: this representation lies in Part&nbsp;III's
+       degenerate class <i>&#x1D4B5;</i>, whose classification is proved and certified in Lean. That is exactly
+       why one of the two combs above is empty &mdash; there is nothing left to carry.</p>`;
+    return;
+  }
+  const {p,q,r,sgn,s}=red, mm=pivMoments(red);
+  const varv=Number.isInteger(mm.variance)?mm.variance:mm.variance.toFixed(3);
+  box.innerHTML=
+    `<div class="formula">s<sub>&lambda;</sub>(1,&minus;1,t,t<sup>&minus;1</sup>) = ${sgn<0?"&minus;":"+"}&thinsp;${sub(p)}${sub(q)}${sub(r)}<span class="chip v">verified</span></div>`+
+    tbl([
+      ["partition &lambda; of (a,b,c)",`(${red.lam.join(", ")})`,"theorem","t"],
+      ["2-quotient &rarr; three integers (p,q,r)",`(${p}, ${q}, ${r})`,"theorem","t"],
+      ["&delta;(m) support",`[&minus;${s}, ${s}] &mdash; nothing beyond charge ${s}`,"verified","v"],
+      ["total mass M&#8320; = (p+1)(q+1)(r+1)",`${mm.M0}`,"verified","v"],
+      ["variance M&#8322;/M&#8320; = &#8531;(C<sub>p</sub>+C<sub>q</sub>+C<sub>r</sub>)",`${varv}`,"verified","v"],
+    ])+
+    `<p class="hint"><span class="chip v" style="vertical-align:1px">verified</span> means checked
+     exhaustively but <b>not proved</b>: the closed form reproduces the enumerated &delta;(m) on all 119
+     catalogued representations here, and matches the bialternant on 7904 partitions in the paper, where it
+     is stated as an <i>Observation</i>. C<sub>k</sub>=k(k+2) is the SU(2) Casimir. The point is the
+     compression: however large the representation, everything the physics keeps once the leading term
+     cancels passes through these three integers &mdash; and reading them off the 2-quotient needs no weight
+     table, so this runs past the catalogue.</p>`;
+}
+
+/* ---------- potential: switch view, drag to rotate ---------- */
+document.querySelectorAll("#potviews button").forEach(btn=>btn.addEventListener("click",()=>{
+  POTMODE=btn.dataset.v;
+  document.querySelectorAll("#potviews button").forEach(x=>x.classList.toggle("on",x===btn));
+  repaintPot();
+}));
+let potdrag=null;
+$("#pot").addEventListener("pointerdown",e=>{if(POTMODE==="heatmap")return;
+  potdrag={x:e.clientX,y:e.clientY,yaw:YAW,pitch:PITCH};
+  try{$("#pot").setPointerCapture(e.pointerId);}catch(_){}$("#pot").style.cursor="grabbing";});
+$("#pot").addEventListener("pointermove",e=>{if(!potdrag)return;
+  YAW=potdrag.yaw+(e.clientX-potdrag.x)*0.008;
+  PITCH=Math.max(0.15,Math.min(1.5,potdrag.pitch-(e.clientY-potdrag.y)*0.008));repaintPot();});
+$("#pot").addEventListener("pointerup",()=>{potdrag=null;$("#pot").style.cursor="grab";});
 
 ["a","b","c"].forEach(i=>$("#"+i).addEventListener("input",run));
 matchMedia("(prefers-color-scheme:dark)").addEventListener("change",run);
