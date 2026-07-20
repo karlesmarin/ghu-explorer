@@ -1,6 +1,6 @@
-# Orbifold Explorer — SU(4) gauge–Higgs on T²/Z₂
+# 🧭 Orbifold Explorer — SU(4) gauge–Higgs on T²/Z₂
 
-**▶ [karlesmarin.github.io/ghu-explorer](https://karlesmarin.github.io/ghu-explorer/)**
+**▶️ [karlesmarin.github.io/ghu-explorer](https://karlesmarin.github.io/ghu-explorer/)**
 
 A single self-contained HTML file. Open `index.html`; no server, no install, no network.
 Nothing you type leaves the page.
@@ -21,7 +21,7 @@ centre-parity rule exists at all. Outputs are labelled `theorem`, `measured` or 
 The page computes the one-loop potential and where it may be searched; it does not compute a
 Higgs mass, which at this order is degenerate by the same theorem.
 
-## Build
+## 🔧 Build
 
 ```
 python build.py
@@ -34,14 +34,25 @@ period-1 residuals, and the notch predicate across all 119 representations. A br
 that quietly disagreed with the paper it advertises would be worse than no tool, so the build
 fails if it does.
 
-## The result behind it
+## 🎯 The result behind it
 
 Advancing the Wilson line by one period is, up to a Weyl reflection, multiplication by the
 central element −**1** ∈ Z(SU(4)). A representation answers with the scalar (−1)^(a+2b+3c),
 so the harmonics carrying the opposite sign are identically absent — not suppressed, absent.
 
-Part III of a series · DOI [10.5281/zenodo.21438226](https://doi.org/10.5281/zenodo.21438226)
-(concept DOI, always the current version) ·
-[paper, Lean certificate and scripts](https://github.com/karlesmarin/centre-parity-selection)
+## 📚 The series
+
+This explorer accompanies **Part III**. The full arc:
+
+- **Part I — *Anomaly- and Tadpole-Compatible Fermion Completion of 6D SU(4) GHU***
+  → [github.com/karlesmarin/ghu-su4-completion](https://github.com/karlesmarin/ghu-su4-completion) · [Zenodo 10.5281/zenodo.21432625](https://doi.org/10.5281/zenodo.21432625)
+- **Part II — *Three Gates to a Quark Generation***
+  → [github.com/karlesmarin/su4-sm-cell-criterion](https://github.com/karlesmarin/su4-sm-cell-criterion) · [Zenodo 10.5281/zenodo.21432627](https://doi.org/10.5281/zenodo.21432627)
+- **Part III — *A Centre-Charge Selection Rule for the Wilson-Line Potential*** (this explorer)
+  → [github.com/karlesmarin/centre-parity-selection](https://github.com/karlesmarin/centre-parity-selection) · [Zenodo 10.5281/zenodo.21438226](https://doi.org/10.5281/zenodo.21438226)
+- **Part IV — *Schur Functions at (1,−1,t,t⁻¹)***
+  → [github.com/karlesmarin/schur-nonidentity-o4](https://github.com/karlesmarin/schur-nonidentity-o4) · [Zenodo 10.5281/zenodo.21463000](https://doi.org/10.5281/zenodo.21463000)
+
+---
 
 Carles Marín · `karlesmarin@gmail.com` · Claude (Anthropic) as AI research assistant
