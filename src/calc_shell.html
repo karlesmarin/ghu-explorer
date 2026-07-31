@@ -706,11 +706,22 @@ function cutPoint(e) {                          // dragging the curve moves alph
   const [px] = localXY(cutEl, e, w, CUTH);
   return Math.min(Math.max((px - CP.l) / (w - CP.l - CP.r), 0), 1);
 }
-let pending = null, raf = 0;
-function queue(p) {                             // one repaint per frame, however fast the mouse moves
+/* One repaint per frame, however fast the mouse moves -- but never fewer than one. A frame
+   requested while the tab is hidden does not run, and gating on "a frame is pending" alone left
+   the cursor frozen for good once that happened: every later move was swallowed. So the flush is
+   armed twice, by the frame and by a timer, and whichever arrives first disarms the other. */
+let pending = null, raf = 0, rafT = 0;
+function flushCursor() {
+  if (raf) cancelAnimationFrame(raf);
+  clearTimeout(rafT);
+  raf = rafT = 0;
+  if (pending) { CUR = pending; pending = null; refresh(); }
+}
+function queue(p) {
   pending = p;
-  if (raf) return;
-  raf = requestAnimationFrame(() => { raf = 0; if (pending) { CUR = pending; pending = null; refresh(); } });
+  if (raf || rafT) return;
+  raf = requestAnimationFrame(flushCursor);
+  rafT = setTimeout(flushCursor, 120);
 }
 function grab(e, el) {                          // taking the cursor by hand stops any roll
   if (!SP || e.button !== 0 || !e.isPrimary) return false;
@@ -768,7 +779,7 @@ surfEl.addEventListener('pointermove', e => {
   if (spin) {
     SURF.az = spin.az + (px - spin.px) * 0.011;
     SURF.el = Math.min(Math.max(spin.el + (py - spin.py) * 0.006, 0.12), 1.35);
-    if (!raf) { raf = requestAnimationFrame(() => { raf = 0; respin(); }); }
+    if (!raf) { raf = requestAnimationFrame(() => { raf = 0; respin(); }); setTimeout(() => { if (raf) { cancelAnimationFrame(raf); raf = 0; respin(); } }, 120); }
   } else if (dragSurf) {
     const p = pickSurface(px, py); if (p) queue(p);
   }

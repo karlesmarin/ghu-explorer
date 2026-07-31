@@ -1225,11 +1225,20 @@ function readCursor() {
     ` &nbsp; <b>double-click</b> to drop the field here`;
 }
 function repaintPanels() { paintMap(); paintSurface(); readCursor(); }
-let dragMap = false, spin = null, praf = 0, pend = null;
+/* armed twice, by the frame and by a timer: a frame requested while the tab is hidden never runs,
+   and gating on it alone froze the cursor permanently once that happened */
+let dragMap = false, spin = null, praf = 0, prafT = 0, pend = null;
+function flushCursor() {
+  if (praf) cancelAnimationFrame(praf);
+  clearTimeout(prafT);
+  praf = prafT = 0;
+  if (pend) { CUR = pend; pend = null; repaintPanels(); }
+}
 function queueCursor(p) {
   pend = p;
-  if (praf) return;
-  praf = requestAnimationFrame(() => { praf = 0; if (pend) { CUR = pend; pend = null; repaintPanels(); } });
+  if (praf || prafT) return;
+  praf = requestAnimationFrame(flushCursor);
+  prafT = setTimeout(flushCursor, 120);
 }
 mapEl.addEventListener('pointerdown', e => {
   if (!SP || !SP.length || e.button !== 0) return;
@@ -1275,7 +1284,10 @@ surfEl.addEventListener('pointermove', e => {
   const [px, py] = localXY(surfEl, e, MAPW, MAPH);
   SURF.az = spin.az + (px - spin.px) * 0.011;
   SURF.el = Math.min(Math.max(spin.el + (py - spin.py) * 0.006, 0.12), 1.35);
-  if (!praf) praf = requestAnimationFrame(() => { praf = 0; drawSurface(); paintSurface(); });
+  if (!praf) {
+    const turn = () => { if (praf) cancelAnimationFrame(praf); praf = 0; drawSurface(); paintSurface(); };
+    praf = requestAnimationFrame(turn); setTimeout(() => { if (praf) turn(); }, 120);
+  }
 });
 surfEl.addEventListener('dblclick', e => { SURF.az = -0.62; SURF.el = 0.66; drawSurface(); paintSurface(); e.preventDefault(); });
 surfEl.addEventListener('wheel', e => {
