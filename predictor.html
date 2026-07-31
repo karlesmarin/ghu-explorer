@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>η-meter — predict the boundary sign in closed form, then watch the Higgs field roll</title>
+<meta name="description" content="Part IV's closed form turned into an instrument: three integers per multiplet, three moments, and the whole eta-dependence of the Higgs mass matrix as a single number — predicted without evaluating the potential, and checked against it on the page.">
+<style>
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+     font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:22px 20px 64px}
+h1{font-size:25px;margin:0 0 4px;letter-spacing:-.015em}
+h1 small{display:block;font-size:15px;font-weight:400;color:var(--ink2);margin-top:5px;letter-spacing:0}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);margin:0 0 12px;font-weight:650}
+h3{font-size:13px;margin:0 0 8px;color:var(--ink2);font-weight:650}
+a{color:var(--blue)}
+header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.live{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:16px 17px;margin-bottom:18px}
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+input[type=search],select,input[type=text]{font:14px/1 inherit;padding:7px 9px;border:1px solid var(--line);
+     border-radius:7px;background:#fff;color:var(--ink)}
+input[type=search]{flex:1;min-width:120px}
+button{font:600 13px/1 inherit;padding:7px 11px;border-radius:7px;border:1px solid var(--line);
+       background:#fff;color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--blue);color:var(--blue-d)}
+button.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+button.primary:hover{background:var(--blue-d)}
+button.ghost{border:none;background:none;color:var(--ink3);padding:4px 6px}
+button.ghost:hover{color:var(--rust)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:6px 8px;border-bottom:1px solid #f0f4f7;vertical-align:middle}
+.num{font-family:var(--mono);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.scroll{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.mono{font-family:var(--mono)}
+.tag{font:600 10.5px/1 var(--mono);padding:3px 6px;border-radius:5px;letter-spacing:.03em}
+.tag.blind{background:var(--rust-l);color:var(--rust)}
+.tag.sees{background:var(--blue-l);color:var(--blue-d)}
+.eta{font:600 12px var(--mono);padding:4px 8px;border-radius:6px;border:1px solid var(--line);
+     background:#fff;cursor:pointer;min-width:34px}
+.eta.plus{color:var(--blue-d);border-color:#c3dce6;background:var(--blue-l)}
+.eta.minus{color:var(--rust);border-color:#eccfb8;background:var(--rust-l)}
+.rowin{width:46px;font:13px var(--mono);padding:4px 5px;border:1px solid var(--line);border-radius:5px;text-align:right}
+.empty{color:var(--ink3);font-size:13px;padding:16px 8px;text-align:center}
+canvas{display:block;width:100%}
+.pair{display:grid;gap:12px}@media(min-width:900px){.pair{grid-template-columns:1fr 1fr}}
+.panel{position:relative;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.panel.dark{border-color:#0c161d;background:#0c161d}
+.plab{position:absolute;top:7px;right:9px;z-index:1;font:600 9.5px/1 var(--mono);letter-spacing:.07em;
+      text-transform:uppercase;color:var(--ink3);background:rgba(255,255,255,.82);
+      border:1px solid var(--line);border-radius:99px;padding:4px 8px;pointer-events:none}
+.panel.dark .plab{color:#9fb7c4;background:rgba(12,22,29,.72);border-color:#22333f}
+
+.sitenav{display:flex;align-items:center;gap:4px;margin:0 0 16px;padding:5px;border:1px solid #dfe6ec;border-radius:10px;background:#fff;font-size:13.5px;flex-wrap:wrap}
+.sitenav a{display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:7px;text-decoration:none;color:#4a5b6a;font-weight:600}
+.sitenav a b{display:grid;place-items:center;width:19px;height:19px;border-radius:5px;background:#eef3f6;color:#7d8c99;font:600 11px/1 ui-monospace,monospace}
+.sitenav a i{font-style:normal;font-weight:400;font-size:12px;color:#7d8c99}
+.sitenav a:hover{background:#f5f8fa;color:#12546b}
+.sitenav a.here{background:#1B6F8C;color:#fff}.sitenav a.here b{background:#ffffff33;color:#fff}
+.sitenav a.here i{color:#cfe4ec}
+@media(max-width:820px){.sitenav a i{display:none}}
+
+/* a formula card: the formula, what it eats, what it gives back, and what it lets you see */
+.fx{border:1px solid var(--line);border-radius:11px;background:#fff;margin-bottom:14px;overflow:hidden}
+.fx > header{display:flex;align-items:center;gap:9px;padding:10px 14px;background:#f6f9fb;
+             border-bottom:1px solid var(--line);border-radius:0;margin:0}
+.fx > header b{font-size:13.5px}
+.fx > header .chip{margin-left:auto}
+.fx .body{padding:13px 15px}
+.eq{font-family:var(--mono);font-size:13px;background:#f7fafc;border:1px solid var(--line);
+    border-radius:8px;padding:11px 13px;overflow-x:auto;white-space:pre;color:var(--ink)}
+.io{display:grid;gap:9px;margin:11px 0 0}
+@media(min-width:760px){.io{grid-template-columns:1fr 1fr 1fr}}
+.io div{border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:#fbfcfd}
+.io .k{font:650 10px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.io .t{font-size:12.7px;line-height:1.45;color:var(--ink2)}
+.live{margin-top:11px;padding:11px 13px;border-left:3px solid var(--blue);background:#f7fafc;
+      border-radius:0 8px 8px 0;font-size:13px;color:var(--ink2)}
+.live b{color:var(--ink)}
+.live .mono{font-size:12.5px}
+.big{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;
+     overflow:hidden;margin-top:11px}
+@media(min-width:700px){.big{grid-template-columns:repeat(4,1fr)}}
+.big > div{background:#fff;padding:10px 12px}
+.big .k{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);font-weight:650;margin-bottom:4px}
+.big .v{font:600 16px/1.2 var(--mono)}
+.big .s{font-size:11px;color:var(--ink3);margin-top:4px}
+.ok{color:var(--green)} .no{color:#9b2226}
+.answer{border-left:4px solid var(--blue)}
+.ans{font-size:15.5px;line-height:1.6;color:var(--ink)}
+.ans b{font-weight:650}
+.ans .mono{font-size:14px}
+.more{border:1px solid var(--line);border-radius:11px;background:#fff;margin-bottom:18px;padding:0 15px}
+.more > summary{cursor:pointer;padding:13px 0;font-size:13.5px;font-weight:650;color:var(--ink2);
+                list-style:none;display:flex;align-items:center;gap:8px}
+.more > summary::before{content:"▸";color:var(--blue);font-size:12px}
+.more[open] > summary::before{content:"▾"}
+.more > summary::-webkit-details-marker{display:none}
+.more[open]{padding-bottom:6px}
+.i{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;border:1px solid #c3dce6;
+   color:var(--blue);background:var(--blue-l);font:600 9.5px/1 var(--mono);cursor:help;vertical-align:.12em;
+   margin-left:4px;user-select:none}
+.i:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2)}
+.foot b{color:var(--ink)}
+.note{font-size:12.5px;color:var(--ink2)}
+#map{cursor:crosshair;touch-action:none}
+#surf{cursor:grab;touch-action:none}
+#surf:active{cursor:grabbing}
+.keys{margin:9px 0 0;font-size:12.5px;color:var(--ink2)}
+.keys b{font:600 11px/1 var(--mono);background:#f0f4f7;border:1px solid var(--line);border-radius:5px;
+        padding:3px 6px;color:var(--ink);margin-right:4px}
+.simctl{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.simctl label{font-size:12.5px;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.atlas{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:9px}
+.at{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;cursor:pointer;
+    padding:0 0 5px;text-align:center}
+.at:hover{border-color:var(--blue)}
+.at canvas{width:100%;height:auto;display:block;background:#f2f6f9}
+.at b{display:block;font:600 11px/1.3 var(--mono);margin-top:5px;color:var(--ink)}
+.at i{display:block;font-style:normal;font:10px/1.35 var(--mono);color:var(--ink3)}
+.at.flat b{color:var(--rust)}
+.at.shift b{color:var(--amber)}
+.bars{display:grid;gap:6px;margin-top:10px}
+.bar{display:grid;grid-template-columns:130px 1fr 54px;gap:9px;align-items:center;font:12px var(--mono)}
+.bar i{font-style:normal;color:var(--ink2)}
+.bar u{text-decoration:none;display:block;height:9px;border-radius:99px;background:var(--blue)}
+.bar span{text-align:right;color:var(--ink2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="sitenav" aria-label="tools">
+  <a href="index.html"><b>1</b> Selection rule <i>— which α-domain is legal</i></a>
+  <a href="calculator.html"><b>2</b> Model calculator <i>— a content in, the Higgs out</i></a>
+  <a href="predictor.html" class="here"><b>3</b> η-meter <i>— predict without computing, then let it roll</i></a>
+</nav>
+
+<header>
+  <h1>The η-meter
+    <small>Part IV says every multiplet enters through <b>three integers</b>. This page turns that into an
+    instrument: it predicts what the boundary sign η does to the Higgs mass matrix <b>without evaluating
+    the potential at all</b>, and then evaluates it to show you the prediction was right. Below, the same
+    potential with the field released on it.</small>
+  </h1>
+  <div class="chips">
+    <span class="chip ver">verified — Part IV closed form</span>
+    <span class="chip thm">theorem · Lean 4 — blindness</span>
+    <span class="chip mea">measured — prediction vs brute force</span>
+    <span class="chip live" id="selfcheck">self-check: running…</span>
+  </div>
+</header>
+
+<section class="card">
+  <h2>0 · What this is about, in one screen <span class="i" title="Gauge-Higgs unification on a six-dimensional orbifold: the Higgs is the Wilson line of the gauge field around the two cycles of the torus, so its vacuum is a point alpha = (alpha1, alpha2) and its potential is a function on that torus.">i</span></h2>
+  <div class="io" style="grid-template-columns:1fr 1fr">
+    <div><div class="k">the field</div><div class="t"><b>The Higgs is a Wilson line.</b> In gauge–Higgs
+      unification the extra components <span class="mono">A₅, A₆</span> of a six-dimensional gauge field
+      are the Higgs doublet; its vacuum value is the pair of phases
+      <span class="mono">α = (α₁, α₂)</span> a Wilson line picks up around the two cycles of the torus.
+      So &ldquo;where the Higgs sits&rdquo; is literally a point on a torus, and the Higgs potential is a
+      function on that torus.</div></div>
+    <div><div class="k">the potential</div><div class="t">There is no Higgs potential at tree level —
+      gauge invariance forbids it. It appears at <b>one loop</b>, as a sum over the windings
+      <span class="mono">k</span> of the torus of every mode the matter content carries:
+      <span class="mono">V(α) = Σ<sub>k≠0</sub>|k|⁻⁶ Σ<sub>q</sub>[A<sub>q</sub> + B<sub>q</sub>(−1)<sup>k₂</sup>]cos(2πq·kα)</span>.
+      The Higgs mass is the curvature of that at its minimum. That is why the mass is calculable here
+      and not a free parameter.</div></div>
+    <div><div class="k">the boundary sign</div><div class="t">On the orbifold <span class="mono">T²/Z₂</span>
+      each multiplet carries a discrete choice <span class="mono">η = η₀η₁ = ±1</span> — how it comes back
+      to itself around the fixed points. It multiplies the <b>coset half</b> of the spectrum and nothing
+      else, so it is a genuinely physical knob: flip it and the Higgs mass can change.</div></div>
+    <div><div class="k">what this page adds</div><div class="t">The coset half is an <b>index</b>
+      <span class="mono">D<sub>λ</sub> = A − B</span>, so it can cancel. Part IV says D is a product of three
+      SU(2) characters — three integers per multiplet. This page uses that to answer, by arithmetic and in
+      no time at all, <b>what η does to the Higgs</b> for any content you type, and then does the honest
+      thing: it evaluates the loop sum and shows you both numbers.</div></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>1 · Your matter content <span class="i" title="The bulk fields of your model: which multiplets, how many of each, the boundary sign eta of each, and whether it enters as matter or as the gauge sector (which carries the antiperiodic twist).">i</span></h2>
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Dynkin labels or dimension…  e.g. 4 0 0  or  35">
+    <button id="loadAhmn">load AHMN 2312.08608</button>
+    <button id="clear">clear</button>
+  </div>
+  <div class="scroll">
+    <table><thead><tr><th>(a,b,c)</th><th class="num">dim</th><th>box (p,q,r)</th><th class="num">M₀</th>
+      <th>η</th><th></th></tr></thead><tbody id="catbody"></tbody></table>
+  </div>
+  <table style="margin-top:12px"><thead><tr><th>multiplet</th><th class="num">dim</th><th class="num">n</th>
+    <th>η</th><th>role</th><th></th></tr></thead><tbody id="content"></tbody></table>
+  <div class="empty" id="empty">Pick multiplets above, or load AHMN's content.</div>
+</section>
+
+<section class="card answer">
+  <h2>2 · The answer <span class="i" title="Everything on this page is this one sentence. The rest is the machinery that produces it and the check that it is true.">i</span></h2>
+  <div id="answer" class="ans">—</div>
+  <div class="big" id="f4"></div>
+  <p class="note" style="margin:10px 0 0" id="f4note"></p>
+</section>
+
+<details class="more">
+  <summary>The five formulas behind that answer — open only if you want the machinery</summary>
+
+  <div class="fx">
+    <header><b>F1 · The box</b> <span class="note">— a whole multiplet, in three integers</span>
+      <span class="chip ver">verified</span></header>
+    <div class="body">
+      <div class="eq">D<sub>λ</sub>(j) = ζ · (χ<sub>p</sub> ∗ χ<sub>q</sub> ∗ χ<sub>r</sub>)(j)        (p,q,r) read off the 2-quotient of λ</div>
+      <div class="io">
+        <div><div class="k">goes in</div><div class="t">One irreducible multiplet, as a partition λ of four rows — of any size.</div></div>
+        <div><div class="k">comes out</div><div class="t">Three integers and a sign. The coset index D is the convolution of three SU(2) characters, and nothing else about λ survives.</div></div>
+        <div><div class="k">what it buys you</div><div class="t">The η-dependence of a multiplet <b>without enumerating its Kaluza–Klein tower</b>. A 3000-dimensional representation costs the same as a singlet.</div></div>
+      </div>
+      <div class="live" id="f1"></div>
+    </div>
+  </div>
+
+  <div class="fx">
+    <header><b>F2 · The moments</b> <span class="note">— three numbers you are allowed to add up</span>
+      <span class="chip ver">verified</span></header>
+    <div class="body">
+      <div class="eq">M₀ = ζ (p+1)(q+1)(r+1)          C<sub>k</sub> = k(k+2),  e₁ = C<sub>p</sub>+C<sub>q</sub>+C<sub>r</sub>
+M₂ / M₀ = e₁ / 3               M₄ / M₀ = (2/3)e₂ + (1/5)(C²<sub>p</sub>+C²<sub>q</sub>+C²<sub>r</sub>) − (4/15)e₁</div>
+      <div class="io">
+        <div><div class="k">goes in</div><div class="t">The box of each multiplet in your content, with its multiplicity n and its boundary sign η.</div></div>
+        <div><div class="k">comes out</div><div class="t">The moments of the coset index. They are <b>linear in the content</b>: M(total) = Σ n·η·M(λ), so a model is the sum of its parts here.</div></div>
+        <div><div class="k">what it buys you</div><div class="t">A model of any size is compressed to three numbers — and M₂ is the one the physics below turns out to need.</div></div>
+      </div>
+      <div class="live" id="f2"></div>
+    </div>
+  </div>
+
+  <div class="fx">
+    <header><b>F3 · The inversion</b> <span class="note">— run the compression backwards</span>
+      <span class="chip ver">verified</span></header>
+    <div class="body">
+      <div class="eq">e₁ = 3M₂/M₀     e₂ = (15/4)(M₄/M₀) − (3/4)e₁² + e₁     e₃ = M₀² − 1 − e₁ − e₂
+{C<sub>p</sub>, C<sub>q</sub>, C<sub>r</sub>} = roots of  x³ − e₁x² + e₂x − e₃        k = √(C+1) − 1</div>
+      <div class="io">
+        <div><div class="k">goes in</div><div class="t">Three moments — M₀, M₂, M₄ — of anything, a single multiplet or a whole model.</div></div>
+        <div><div class="k">comes out</div><div class="t">The box back, exactly. Three moments suffice; M₀ is not a normalisation, it carries e₃.</div></div>
+        <div><div class="k">what it buys you</div><div class="t">You can <b>ask a model whether it behaves like a single multiplet</b>. If the inversion lands on integers, your whole content has an effective box; if it does not, it is a genuine mixture. That is not visible by looking at the content.</div></div>
+      </div>
+      <div class="live" id="f3"></div>
+    </div>
+  </div>
+
+  <div class="fx">
+    <header><b>F4 · The prediction</b> <span class="note">— the whole effect of η, in one number</span>
+      <span class="chip mea">derived here · checked against brute force</span></header>
+    <div class="body">
+      <div class="eq">ΔH<sub>ij</sub> ≡ H<sub>ij</sub>(η) − H<sub>ij</sub>(−η)  at α = 0
+
+ΔH<sub>11</sub> = −2(2π)² L₁ · S₂     ΔH<sub>22</sub> = −2(2π)² L₂ · S₂     ΔH<sub>12</sub> = 0
+
+L₁ = Σ<sub>k₂ odd</sub> |k|⁻⁶ k₁²   L₂ = Σ<sub>k₂ odd</sub> |k|⁻⁶ k₂²   (the lattice, once and for all)   S₂ = M₂/8</div>
+      <div class="io">
+        <div><div class="k">goes in</div><div class="t">M₂ of your content — one number, from F2, with no sum over windings and no potential evaluated.</div></div>
+        <div><div class="k">comes out</div><div class="t">The complete change of the Higgs mass matrix at the symmetric point when the boundary sign flips. The off-diagonal is <b>exactly zero</b>, by the parity of the lattice sum.</div></div>
+        <div><div class="k">what it buys you</div><div class="t">Scan models by <b>arithmetic</b> instead of by numerics: any content with M₂ = 0 is invisible to η at this order however large it is, and the sign of M₂ says which way the boundary sign pushes the Higgs.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fx">
+    <header><b>F6 · The search</b> <span class="note">— can this content be made blind on purpose?</span>
+      <span class="chip mea">exact integer arithmetic</span></header>
+    <div class="body">
+      <div class="eq">D<sub>total</sub>(j) = Σ<sub>λ</sub> n<sub>λ</sub> η<sub>λ</sub> D<sub>λ</sub>(j) ≡ 0   with n<sub>λ</sub> ∈ {1…6}, η<sub>λ</sub> = ±1</div>
+      <div class="io">
+        <div><div class="k">goes in</div><div class="t">The multiplets you have chosen — the sighted ones; blind ones are along for free.</div></div>
+        <div><div class="k">comes out</div><div class="t">Multiplicities and boundary signs for which the coset index cancels <b>identically</b>, charge by charge, in exact integers — or the honest statement that none does.</div></div>
+        <div><div class="k">what it buys you</div><div class="t"><b>Collective blindness.</b> A model built entirely from multiplets that each see η, and which as a whole cannot: η becomes unobservable in this Higgs sector not by a theorem about one multiplet but by your choice of content.</div></div>
+      </div>
+      <div class="live" id="f6">—</div>
+      <div class="toolbar" style="margin-top:9px"><button id="search">search this content</button>
+        <button id="apply" style="display:none">apply the solution</button>
+        <button id="export">copy everything as JSON</button></div>
+    </div>
+  </div>
+
+  <div class="fx">
+    <header><b>F5 · Blindness</b> <span class="note">— when η cannot be measured at all</span>
+      <span class="chip thm">theorem · Lean 4</span></header>
+    <div class="body">
+      <div class="eq">D<sub>λ</sub> ≡ 0  ⟺  λ₁ ≢ λ₂ ≢ λ₃ ≢ λ₄  (alternating parity)
+            or  λ<sub>i</sub> + λ<sub>5−i</sub> = c for all i, with c odd  (self-complementary, odd constant)</div>
+      <div class="io">
+        <div><div class="k">goes in</div><div class="t">The partition alone — no character, no spectrum, no potential.</div></div>
+        <div><div class="k">comes out</div><div class="t">Whether the boundary condition has <b>any</b> measurable consequence for that multiplet.</div></div>
+        <div><div class="k">what it buys you</div><div class="t">A model built only from blind multiplets cannot be told apart from its η-flipped twin by anything in this Higgs sector. F4 is the graded version of the same statement: blind ⇒ M₂ = 0.</div></div>
+      </div>
+      <div class="live" id="f5"></div>
+    </div>
+  </div>
+</section>
+
+</details>
+
+<section class="card">
+  <h2>3 · Let the field roll <span class="i" title="Many field configurations released at random points and integrated with friction on the same potential. Where they end up is the basin structure: which vacuum a region picks. The zero mode only -- one alpha for all of space -- not a lattice field simulation.">i</span></h2>
+  <p class="note" style="margin:0 0 11px">The Wilson line <i>is</i> the Higgs here, so the potential above is
+  what the field falls down. Release many configurations at once and watch where they end up: the
+  <b>basins</b> are what decides which vacuum a region of the universe picks. This is the zero mode relaxing
+  — one α for all of space, with friction — <b>not</b> a lattice field simulation, and it is drawn on the same
+  V the rest of the page computes.</p>
+  <div class="simctl">
+    <button class="primary" id="run">▶ release the field</button>
+    <label>walkers <input type="range" id="nw" min="20" max="300" step="20" value="120"><span class="mono" id="nwv">120</span></label>
+    <label>friction <input type="range" id="fr" min="10" max="90" step="5" value="40"><span class="mono" id="frv">0.40</span></label>
+    <span class="note" id="simnote"></span>
+  </div>
+  <div class="pair">
+    <div class="panel"><span class="plab">plan · where they land</span><canvas id="map" width="420" height="412"></canvas></div>
+    <div class="panel dark"><span class="plab">relief · the same V</span><canvas id="surf" width="420" height="412"></canvas></div>
+  </div>
+  <p class="keys" id="preadout">—</p>
+  <div class="bars" id="basins"></div>
+  <canvas id="cut" width="520" height="10" style="display:none"></canvas>
+</section>
+
+<section class="card">
+  <h2>4 · The atlas — every multiplet's landscape, side by side <span class="i" title="One thumbnail per multiplet, each on its own colour scale so you compare shape and not depth. In eta-difference mode a tile shows V(eta) - V(-eta): a blind multiplet has nothing to draw.">i</span></h2>
+  <p class="note" style="margin:0 0 11px">One thumbnail per multiplet: the one-loop potential that
+  multiplet alone would make, over the same square, on the same colour scale as itself. This is the
+  page as a <b>research instrument</b>: put a hundred landscapes next to each other and the structure
+  Part IV predicts is visible without reading a number — multiplets that share a box share a landscape,
+  and the corrugation grows with <span class="mono">p+q+r</span>. Switch to <b>η-difference</b> and every
+  blind multiplet goes blank: that is Theorem 1, as a picture, a hundred times at once.</p>
+  <div class="simctl">
+    <button class="primary" id="atlas">▶ draw the atlas</button>
+    <label>show
+      <select id="amode">
+        <option value="V">the potential V</option>
+        <option value="D">the η-difference V(η) − V(−η)</option>
+      </select></label>
+    <label>which
+      <select id="afilter">
+        <option value="all">all multiplets</option>
+        <option value="sees">only those that see η</option>
+        <option value="blind">only the blind ones</option>
+      </select></label>
+    <label>order
+      <select id="asort">
+        <option value="dim">by dimension</option>
+        <option value="m2">by |M₂|</option>
+        <option value="box">by p+q+r</option>
+      </select></label>
+    <span class="note" id="anote"></span>
+  </div>
+  <div class="atlas" id="atlasbox"></div>
+</section>
+
+<div class="foot">
+  <p><b>What is what.</b> <span class="chip ver" style="text-transform:none">verified</span> F1–F3 are
+  Part IV's closed form and its inversion: exhaustively checked, <b>not proved</b>.
+  <span class="chip thm" style="text-transform:none">theorem</span> F5 is Part V, machine-checked in Lean 4.
+  <span class="chip mea" style="text-transform:none">measured</span> F4 is derived here from the one-loop sum
+  and is checked on this page against the brute-force Hessian every time you change the content — if the two
+  columns ever disagree, the page says so instead of hiding it.</p>
+  <p><b>Papers.</b>
+  Part III <a href="https://doi.org/10.5281/zenodo.21438226">10.5281/zenodo.21438226</a> ·
+  Part IV <a href="https://doi.org/10.5281/zenodo.21463000">10.5281/zenodo.21463000</a> ·
+  Part V <a href="https://doi.org/10.5281/zenodo.21727095">10.5281/zenodo.21727095</a> ·
+  code <a href="https://github.com/karlesmarin/higgs-blind-class">higgs-blind-class</a>.
+  Carles Marín Muñoz, independent researcher, with Claude (Anthropic) as AI research assistant.
+  Apache 2.0. Nothing you type leaves this page.</p>
+</div>
+
+</div>
+<script>
+const DATA = {"adjoint":"1,1,0","maxdim":3000,"maxsum":7,"note":"Part V options table. modes = [charge, A, B]; A+B(-1)^k2 is AHMN's coefficient. blind = the boundary sign is invisible on this multiplet (Part V, Lean-checked). Generated by make_calc_data.py from the verified characters; do not hand-edit.","reps":{"0,0,0":{"blind":false,"dim":1,"m":[1,0,0],"modes":[],"sides":[0,0,0],"zeta":1},"0,0,1":{"blind":false,"dim":4,"m":[-2,-2,-2],"modes":[[0.5,0,1]],"sides":[1,0,0],"zeta":-1},"0,0,2":{"blind":false,"dim":10,"m":[4,8,32],"modes":[[0.5,1,1],[1.0,1,0]],"sides":[1,1,0],"zeta":1},"0,0,3":{"blind":false,"dim":20,"m":[-6,-22,-166],"modes":[[0.5,1,3],[1.0,1,1],[1.5,0,1]],"sides":[2,1,0],"zeta":-1},"0,0,4":{"blind":false,"dim":35,"m":[9,48,576],"modes":[[0.5,3,3],[1.0,3,1],[1.5,1,1],[2.0,1,0]],"sides":[2,2,0],"zeta":1},"0,0,5":{"blind":false,"dim":56,"m":[-12,-92,-1580],"modes":[[0.5,3,6],[1.0,3,3],[1.5,1,3],[2.0,1,1],[2.5,0,1]],"sides":[3,2,0],"zeta":-1},"0,0,6":{"blind":false,"dim":84,"m":[16,160,3712],"modes":[[0.5,6,6],[1.0,6,3],[1.5,3,3],[2.0,3,1],[2.5,1,1],[3.0,1,0]],"sides":[3,3,0],"zeta":1},"0,0,7":{"blind":false,"dim":120,"m":[-20,-260,-7796],"modes":[[0.5,6,10],[1.0,6,6],[1.5,3,6],[2.0,3,3],[2.5,1,3],[3.0,1,1],[3.5,0,1]],"sides":[4,3,0],"zeta":-1},"0,1,0":{"blind":true,"dim":6,"m":[0,0,0],"modes":[[0.5,1,1]],"sides":null,"zeta":0},"0,1,1":{"blind":false,"dim":20,"m":[2,2,2],"modes":[[0.5,3,2],[1.0,1,1]],"sides":[1,0,0],"zeta":1},"0,1,2":{"blind":false,"dim":45,"m":[-3,-8,-32],"modes":[[0.5,5,5],[1.0,2,3],[1.5,1,1]],"sides":[2,0,0],"zeta":-1},"0,1,3":{"blind":false,"dim":84,"m":[6,22,166],"modes":[[0.5,9,7],[1.0,5,5],[1.5,3,2],[2.0,1,1]],"sides":[2,1,0],"zeta":1},"0,1,4":{"blind":false,"dim":140,"m":[-8,-48,-576],"modes":[[0.5,12,12],[1.0,7,9],[1.5,5,5],[2.0,2,3],[2.5,1,1]],"sides":[3,1,0],"zeta":-1},"0,1,5":{"blind":false,"dim":216,"m":[12,92,1580],"modes":[[0.5,18,15],[1.0,12,12],[1.5,9,7],[2.0,5,5],[2.5,3,2],[3.0,1,1]],"sides":[3,2,0],"zeta":1},"0,1,6":{"blind":false,"dim":315,"m":[-15,-160,-3712],"modes":[[0.5,22,22],[1.0,15,18],[1.5,12,12],[2.0,7,9],[2.5,5,5],[3.0,2,3],[3.5,1,1]],"sides":[4,2,0],"zeta":-1},"0,2,0":{"blind":false,"dim":20,"m":[4,8,32],"modes":[[0.5,2,2],[1.0,2,1]],"sides":[1,1,0],"zeta":1},"0,2,1":{"blind":false,"dim":60,"m":[-6,-22,-166],"modes":[[0.5,5,7],[1.0,4,4],[1.5,1,2]],"sides":[2,1,0],"zeta":-1},"0,2,2":{"blind":false,"dim":126,"m":[12,56,608],"modes":[[0.5,11,11],[1.0,10,7],[1.5,4,4],[2.0,2,1]],"sides":[2,1,1],"zeta":1},"0,2,3":{"blind":false,"dim":224,"m":[-16,-112,-1744],"modes":[[0.5,16,20],[1.0,14,14],[1.5,7,10],[2.0,4,4],[2.5,1,2]],"sides":[3,1,1],"zeta":-1},"0,2,4":{"blind":false,"dim":360,"m":[24,208,4288],"modes":[[0.5,26,26],[1.0,24,19],[1.5,14,14],[2.0,10,7],[2.5,4,4],[3.0,2,1]],"sides":[3,2,1],"zeta":1},"0,2,5":{"blind":false,"dim":540,"m":[-30,-350,-9374],"modes":[[0.5,33,39],[1.0,30,30],[1.5,19,24],[2.0,14,14],[2.5,7,10],[3.0,4,4],[3.5,1,2]],"sides":[4,2,1],"zeta":-1},"0,3,0":{"blind":true,"dim":50,"m":[0,0,0],"modes":[[0.5,5,5],[1.0,3,3],[1.5,2,2]],"sides":null,"zeta":0},"0,3,1":{"blind":false,"dim":140,"m":[6,22,166],"modes":[[0.5,13,11],[1.0,9,9],[1.5,6,5],[2.0,2,2]],"sides":[2,1,0],"zeta":1},"0,3,2":{"blind":false,"dim":280,"m":[-8,-48,-576],"modes":[[0.5,22,22],[1.0,16,18],[1.5,12,12],[2.0,5,6],[2.5,2,2]],"sides":[3,1,0],"zeta":-1},"0,3,3":{"blind":false,"dim":480,"m":[16,112,1744],"modes":[[0.5,36,32],[1.0,28,28],[1.5,22,19],[2.0,12,12],[2.5,6,5],[3.0,2,2]],"sides":[3,1,1],"zeta":1},"0,3,4":{"blind":false,"dim":750,"m":[-20,-200,-4256],"modes":[[0.5,49,49],[1.0,39,43],[1.5,32,32],[2.0,19,22],[2.5,12,12],[3.0,5,6],[3.5,2,2]],"sides":[4,1,1],"zeta":-1},"0,4,0":{"blind":false,"dim":105,"m":[9,48,576],"modes":[[0.5,8,8],[1.0,8,6],[1.5,4,4],[2.0,3,2]],"sides":[2,2,0],"zeta":1},"0,4,1":{"blind":false,"dim":280,"m":[-12,-92,-1580],"modes":[[0.5,19,22],[1.0,17,17],[1.5,11,13],[2.0,7,7],[2.5,2,3]],"sides":[3,2,0],"zeta":-1},"0,4,2":{"blind":false,"dim":540,"m":[24,208,4288],"modes":[[0.5,36,36],[1.0,34,29],[1.5,23,23],[2.0,17,14],[2.5,7,7],[3.0,3,2]],"sides":[3,2,1],"zeta":1},"0,4,3":{"blind":false,"dim":900,"m":[-30,-350,-9374],"modes":[[0.5,53,59],[1.0,49,49],[1.5,36,41],[2.0,27,27],[2.5,14,17],[3.0,7,7],[3.5,2,3]],"sides":[4,2,1],"zeta":-1},"0,5,0":{"blind":true,"dim":196,"m":[0,0,0],"modes":[[0.5,14,14],[1.0,11,11],[1.5,9,9],[2.0,5,5],[2.5,3,3]],"sides":null,"zeta":0},"0,5,1":{"blind":false,"dim":504,"m":[12,92,1580],"modes":[[0.5,34,31],[1.0,28,28],[1.5,23,21],[2.0,15,15],[2.5,9,8],[3.0,3,3]],"sides":[3,2,0],"zeta":1},"0,5,2":{"blind":false,"dim":945,"m":[-15,-160,-3712],"modes":[[0.5,57,57],[1.0,48,51],[1.5,41,41],[2.0,28,30],[2.5,19,19],[3.0,8,9],[3.5,3,3]],"sides":[4,2,0],"zeta":-1},"0,6,0":{"blind":false,"dim":336,"m":[16,160,3712],"modes":[[0.5,20,20],[1.0,20,17],[1.5,14,14],[2.0,12,10],[2.5,6,6],[3.0,4,3]],"sides":[3,3,0],"zeta":1},"0,6,1":{"blind":false,"dim":840,"m":[-20,-260,-7796],"modes":[[0.5,46,50],[1.0,43,43],[1.5,34,37],[2.0,27,27],[2.5,17,19],[3.0,10,10],[3.5,3,4]],"sides":[4,3,0],"zeta":-1},"0,7,0":{"blind":true,"dim":540,"m":[0,0,0],"modes":[[0.5,30,30],[1.0,26,26],[1.5,23,23],[2.0,17,17],[2.5,13,13],[3.0,7,7],[3.5,4,4]],"sides":null,"zeta":0},"1,0,0":{"blind":false,"dim":4,"m":[2,2,2],"modes":[[0.5,1,0]],"sides":[1,0,0],"zeta":1},"1,0,1":{"blind":false,"dim":15,"m":[-3,-8,-32],"modes":[[0.5,2,2],[1.0,0,1]],"sides":[2,0,0],"zeta":-1},"1,0,2":{"blind":false,"dim":36,"m":[6,22,166],"modes":[[0.5,5,3],[1.0,2,2],[1.5,1,0]],"sides":[2,1,0],"zeta":1},"1,0,3":{"blind":false,"dim":70,"m":[-8,-48,-576],"modes":[[0.5,7,7],[1.0,3,5],[1.5,2,2],[2.0,0,1]],"sides":[3,1,0],"zeta":-1},"1,0,4":{"blind":false,"dim":120,"m":[12,92,1580],"modes":[[0.5,12,9],[1.0,7,7],[1.5,5,3],[2.0,2,2],[2.5,1,0]],"sides":[3,2,0],"zeta":1},"1,0,5":{"blind":false,"dim":189,"m":[-15,-160,-3712],"modes":[[0.5,15,15],[1.0,9,12],[1.5,7,7],[2.0,3,5],[2.5,2,2],[3.0,0,1]],"sides":[4,2,0],"zeta":-1},"1,0,6":{"blind":false,"dim":280,"m":[20,260,7796],"modes":[[0.5,22,18],[1.0,15,15],[1.5,12,9],[2.0,7,7],[2.5,5,3],[3.0,2,2],[3.5,1,0]],"sides":[4,3,0],"zeta":1},"1,1,0":{"blind":false,"dim":20,"m":[2,2,2],"modes":[[0.5,3,2],[1.0,1,1]],"sides":[1,0,0],"zeta":1},"1,1,1":{"blind":true,"dim":64,"m":[0,0,0],"modes":[[0.5,7,7],[1.0,4,4],[1.5,1,1]],"sides":null,"zeta":0},"1,1,2":{"blind":false,"dim":140,"m":[2,2,2],"modes":[[0.5,14,13],[1.0,9,9],[1.5,4,4],[2.0,1,1]],"sides":[1,0,0],"zeta":1},"1,1,3":{"blind":true,"dim":256,"m":[0,0,0],"modes":[[0.5,22,22],[1.0,16,16],[1.5,9,9],[2.0,4,4],[2.5,1,1]],"sides":null,"zeta":0},"1,1,4":{"blind":false,"dim":420,"m":[2,2,2],"modes":[[0.5,33,32],[1.0,25,25],[1.5,16,16],[2.0,9,9],[2.5,4,4],[3.0,1,1]],"sides":[1,0,0],"zeta":1},"1,1,5":{"blind":true,"dim":640,"m":[0,0,0],"modes":[[0.5,45,45],[1.0,36,36],[1.5,25,25],[2.0,16,16],[2.5,9,9],[3.0,4,4],[3.5,1,1]],"sides":null,"zeta":0},"1,2,0":{"blind":false,"dim":60,"m":[6,22,166],"modes":[[0.5,7,5],[1.0,4,4],[1.5,2,1]],"sides":[2,1,0],"zeta":1},"1,2,1":{"blind":false,"dim":175,"m":[-5,-40,-544],"modes":[[0.5,16,16],[1.0,11,12],[1.5,6,6],[2.0,1,2]],"sides":[4,0,0],"zeta":-1},"1,2,2":{"blind":false,"dim":360,"m":[12,92,1580],"modes":[[0.5,31,28],[1.0,23,23],[1.5,15,13],[2.0,6,6],[2.5,2,1]],"sides":[3,2,0],"zeta":1},"1,2,3":{"blind":false,"dim":630,"m":[-12,-152,-3680],"modes":[[0.5,47,47],[1.0,37,39],[1.5,26,26],[2.0,13,15],[2.5,6,6],[3.0,1,2]],"sides":[5,1,0],"zeta":-1},"1,2,4":{"blind":false,"dim":1000,"m":[20,260,7796],"modes":[[0.5,70,66],[1.0,57,57],[1.5,43,40],[2.0,26,26],[2.5,15,13],[3.0,6,6],[3.5,2,1]],"sides":[4,3,0],"zeta":1},"1,3,0":{"blind":false,"dim":140,"m":[6,22,166],"modes":[[0.5,13,11],[1.0,9,9],[1.5,6,5],[2.0,2,2]],"sides":[2,1,0],"zeta":1},"1,3,1":{"blind":true,"dim":384,"m":[0,0,0],"modes":[[0.5,30,30],[1.0,24,24],[1.5,16,16],[2.0,8,8],[2.5,2,2]],"sides":null,"zeta":0},"1,3,2":{"blind":false,"dim":756,"m":[6,22,166],"modes":[[0.5,55,53],[1.0,45,45],[1.5,33,32],[2.0,19,19],[2.5,8,8],[3.0,2,2]],"sides":[2,1,0],"zeta":1},"1,3,3":{"blind":true,"dim":1280,"m":[0,0,0],"modes":[[0.5,84,84],[1.0,72,72],[1.5,55,55],[2.0,36,36],[2.5,19,19],[3.0,8,8],[3.5,2,2]],"sides":null,"zeta":0},"1,4,0":{"blind":false,"dim":280,"m":[12,92,1580],"modes":[[0.5,22,19],[1.0,17,17],[1.5,13,11],[2.0,7,7],[2.5,3,2]],"sides":[3,2,0],"zeta":1},"1,4,1":{"blind":false,"dim":735,"m":[-7,-112,-3136],"modes":[[0.5,50,50],[1.0,42,43],[1.5,32,32],[2.0,20,21],[2.5,10,10],[3.0,2,3]],"sides":[6,0,0],"zeta":-1},"1,4,2":{"blind":false,"dim":1400,"m":[20,260,7796],"modes":[[0.5,90,86],[1.0,77,77],[1.5,62,59],[2.0,42,42],[2.5,25,23],[3.0,10,10],[3.5,3,2]],"sides":[4,3,0],"zeta":1},"1,5,0":{"blind":false,"dim":504,"m":[12,92,1580],"modes":[[0.5,34,31],[1.0,28,28],[1.5,23,21],[2.0,15,15],[2.5,9,8],[3.0,3,3]],"sides":[3,2,0],"zeta":1},"1,5,1":{"blind":true,"dim":1280,"m":[0,0,0],"modes":[[0.5,77,77],[1.0,68,68],[1.5,55,55],[2.0,40,40],[2.5,25,25],[3.0,12,12],[3.5,3,3]],"sides":null,"zeta":0},"1,6,0":{"blind":false,"dim":840,"m":[20,260,7796],"modes":[[0.5,50,46],[1.0,43,43],[1.5,37,34],[2.0,27,27],[2.5,19,17],[3.0,10,10],[3.5,4,3]],"sides":[4,3,0],"zeta":1},"2,0,0":{"blind":false,"dim":10,"m":[4,8,32],"modes":[[0.5,1,1],[1.0,1,0]],"sides":[1,1,0],"zeta":1},"2,0,1":{"blind":false,"dim":36,"m":[-6,-22,-166],"modes":[[0.5,3,5],[1.0,2,2],[1.5,0,1]],"sides":[2,1,0],"zeta":-1},"2,0,2":{"blind":false,"dim":84,"m":[12,56,608],"modes":[[0.5,8,8],[1.0,7,4],[1.5,2,2],[2.0,1,0]],"sides":[2,1,1],"zeta":1},"2,0,3":{"blind":false,"dim":160,"m":[-16,-112,-1744],"modes":[[0.5,12,16],[1.0,10,10],[1.5,4,7],[2.0,2,2],[2.5,0,1]],"sides":[3,1,1],"zeta":-1},"2,0,4":{"blind":false,"dim":270,"m":[24,208,4288],"modes":[[0.5,21,21],[1.0,19,14],[1.5,10,10],[2.0,7,4],[2.5,2,2],[3.0,1,0]],"sides":[3,2,1],"zeta":1},"2,0,5":{"blind":false,"dim":420,"m":[-30,-350,-9374],"modes":[[0.5,27,33],[1.0,24,24],[1.5,14,19],[2.0,10,10],[2.5,4,7],[3.0,2,2],[3.5,0,1]],"sides":[4,2,1],"zeta":-1},"2,1,0":{"blind":false,"dim":45,"m":[3,8,32],"modes":[[0.5,5,5],[1.0,3,2],[1.5,1,1]],"sides":[2,0,0],"zeta":1},"2,1,1":{"blind":false,"dim":140,"m":[2,2,2],"modes":[[0.5,14,13],[1.0,9,9],[1.5,4,4],[2.0,1,1]],"sides":[1,0,0],"zeta":1},"2,1,2":{"blind":true,"dim":300,"m":[0,0,0],"modes":[[0.5,26,26],[1.0,19,19],[1.5,11,11],[2.0,4,4],[2.5,1,1]],"sides":null,"zeta":0},"2,1,3":{"blind":false,"dim":540,"m":[6,22,166],"modes":[[0.5,43,41],[1.0,33,33],[1.5,22,21],[2.0,11,11],[2.5,4,4],[3.0,1,1]],"sides":[2,1,0],"zeta":1},"2,1,4":{"blind":false,"dim":875,"m":[-5,-40,-544],"modes":[[0.5,62,62],[1.0,50,51],[1.5,36,36],[2.0,21,22],[2.5,11,11],[3.0,4,4],[3.5,1,1]],"sides":[4,0,0],"zeta":-1},"2,2,0":{"blind":false,"dim":126,"m":[12,56,608],"modes":[[0.5,11,11],[1.0,10,7],[1.5,4,4],[2.0,2,1]],"sides":[2,1,1],"zeta":1},"2,2,1":{"blind":false,"dim":360,"m":[-12,-92,-1580],"modes":[[0.5,28,31],[1.0,23,23],[1.5,13,15],[2.0,6,6],[2.5,1,2]],"sides":[3,2,0],"zeta":-1},"2,2,2":{"blind":false,"dim":729,"m":[27,216,4320],"modes":[[0.5,54,54],[1.0,48,42],[1.5,30,30],[2.0,18,15],[2.5,6,6],[3.0,2,1]],"sides":[2,2,2],"zeta":1},"2,2,3":{"blind":false,"dim":1260,"m":[-30,-350,-9374],"modes":[[0.5,83,89],[1.0,73,73],[1.5,51,56],[2.0,33,33],[2.5,15,18],[3.0,6,6],[3.5,1,2]],"sides":[4,2,1],"zeta":-1},"2,3,0":{"blind":false,"dim":280,"m":[8,48,576],"modes":[[0.5,22,22],[1.0,18,16],[1.5,12,12],[2.0,6,5],[2.5,2,2]],"sides":[3,1,0],"zeta":1},"2,3,1":{"blind":false,"dim":756,"m":[6,22,166],"modes":[[0.5,55,53],[1.0,45,45],[1.5,33,32],[2.0,19,19],[2.5,8,8],[3.0,2,2]],"sides":[2,1,0],"zeta":1},"2,3,2":{"blind":true,"dim":1470,"m":[0,0,0],"modes":[[0.5,97,97],[1.0,83,83],[1.5,64,64],[2.0,41,41],[2.5,22,22],[3.0,8,8],[3.5,2,2]],"sides":null,"zeta":0},"2,4,0":{"blind":false,"dim":540,"m":[24,208,4288],"modes":[[0.5,36,36],[1.0,34,29],[1.5,23,23],[2.0,17,14],[2.5,7,7],[3.0,3,2]],"sides":[3,2,1],"zeta":1},"2,4,1":{"blind":false,"dim":1400,"m":[-20,-260,-7796],"modes":[[0.5,86,90],[1.0,77,77],[1.5,59,62],[2.0,42,42],[2.5,23,25],[3.0,10,10],[3.5,2,3]],"sides":[4,3,0],"zeta":-1},"2,5,0":{"blind":false,"dim":945,"m":[15,160,3712],"modes":[[0.5,57,57],[1.0,51,48],[1.5,41,41],[2.0,30,28],[2.5,19,19],[3.0,9,8],[3.5,3,3]],"sides":[4,2,0],"zeta":1},"3,0,0":{"blind":false,"dim":20,"m":[6,22,166],"modes":[[0.5,3,1],[1.0,1,1],[1.5,1,0]],"sides":[2,1,0],"zeta":1},"3,0,1":{"blind":false,"dim":70,"m":[-8,-48,-576],"modes":[[0.5,7,7],[1.0,3,5],[1.5,2,2],[2.0,0,1]],"sides":[3,1,0],"zeta":-1},"3,0,2":{"blind":false,"dim":160,"m":[16,112,1744],"modes":[[0.5,16,12],[1.0,10,10],[1.5,7,4],[2.0,2,2],[2.5,1,0]],"sides":[3,1,1],"zeta":1},"3,0,3":{"blind":false,"dim":300,"m":[-20,-200,-4256],"modes":[[0.5,24,24],[1.0,16,20],[1.5,12,12],[2.0,4,7],[2.5,2,2],[3.0,0,1]],"sides":[4,1,1],"zeta":-1},"3,0,4":{"blind":false,"dim":500,"m":[30,350,9374],"modes":[[0.5,39,33],[1.0,29,29],[1.5,23,18],[2.0,12,12],[2.5,7,4],[3.0,2,2],[3.5,1,0]],"sides":[4,2,1],"zeta":1},"3,1,0":{"blind":false,"dim":84,"m":[6,22,166],"modes":[[0.5,9,7],[1.0,5,5],[1.5,3,2],[2.0,1,1]],"sides":[2,1,0],"zeta":1},"3,1,1":{"blind":true,"dim":256,"m":[0,0,0],"modes":[[0.5,22,22],[1.0,16,16],[1.5,9,9],[2.0,4,4],[2.5,1,1]],"sides":null,"zeta":0},"3,1,2":{"blind":false,"dim":540,"m":[6,22,166],"modes":[[0.5,43,41],[1.0,33,33],[1.5,22,21],[2.0,11,11],[2.5,4,4],[3.0,1,1]],"sides":[2,1,0],"zeta":1},"3,1,3":{"blind":true,"dim":960,"m":[0,0,0],"modes":[[0.5,68,68],[1.0,56,56],[1.5,40,40],[2.0,24,24],[2.5,11,11],[3.0,4,4],[3.5,1,1]],"sides":null,"zeta":0},"3,2,0":{"blind":false,"dim":224,"m":[16,112,1744],"modes":[[0.5,20,16],[1.0,14,14],[1.5,10,7],[2.0,4,4],[2.5,2,1]],"sides":[3,1,1],"zeta":1},"3,2,1":{"blind":false,"dim":630,"m":[-12,-152,-3680],"modes":[[0.5,47,47],[1.0,37,39],[1.5,26,26],[2.0,13,15],[2.5,6,6],[3.0,1,2]],"sides":[5,1,0],"zeta":-1},"3,2,2":{"blind":false,"dim":1260,"m":[30,350,9374],"modes":[[0.5,89,83],[1.0,73,73],[1.5,56,51],[2.0,33,33],[2.5,18,15],[3.0,6,6],[3.5,2,1]],"sides":[4,2,1],"zeta":1},"3,3,0":{"blind":false,"dim":480,"m":[16,112,1744],"modes":[[0.5,36,32],[1.0,28,28],[1.5,22,19],[2.0,12,12],[2.5,6,5],[3.0,2,2]],"sides":[3,1,1],"zeta":1},"3,3,1":{"blind":true,"dim":1280,"m":[0,0,0],"modes":[[0.5,84,84],[1.0,72,72],[1.5,55,55],[2.0,36,36],[2.5,19,19],[3.0,8,8],[3.5,2,2]],"sides":null,"zeta":0},"3,4,0":{"blind":false,"dim":900,"m":[30,350,9374],"modes":[[0.5,59,53],[1.0,49,49],[1.5,41,36],[2.0,27,27],[2.5,17,14],[3.0,7,7],[3.5,3,2]],"sides":[4,2,1],"zeta":1},"4,0,0":{"blind":false,"dim":35,"m":[9,48,576],"modes":[[0.5,3,3],[1.0,3,1],[1.5,1,1],[2.0,1,0]],"sides":[2,2,0],"zeta":1},"4,0,1":{"blind":false,"dim":120,"m":[-12,-92,-1580],"modes":[[0.5,9,12],[1.0,7,7],[1.5,3,5],[2.0,2,2],[2.5,0,1]],"sides":[3,2,0],"zeta":-1},"4,0,2":{"blind":false,"dim":270,"m":[24,208,4288],"modes":[[0.5,21,21],[1.0,19,14],[1.5,10,10],[2.0,7,4],[2.5,2,2],[3.0,1,0]],"sides":[3,2,1],"zeta":1},"4,0,3":{"blind":false,"dim":500,"m":[-30,-350,-9374],"modes":[[0.5,33,39],[1.0,29,29],[1.5,18,23],[2.0,12,12],[2.5,4,7],[3.0,2,2],[3.5,0,1]],"sides":[4,2,1],"zeta":-1},"4,1,0":{"blind":false,"dim":140,"m":[8,48,576],"modes":[[0.5,12,12],[1.0,9,7],[1.5,5,5],[2.0,3,2],[2.5,1,1]],"sides":[3,1,0],"zeta":1},"4,1,1":{"blind":false,"dim":420,"m":[2,2,2],"modes":[[0.5,33,32],[1.0,25,25],[1.5,16,16],[2.0,9,9],[2.5,4,4],[3.0,1,1]],"sides":[1,0,0],"zeta":1},"4,1,2":{"blind":false,"dim":875,"m":[5,40,544],"modes":[[0.5,62,62],[1.0,51,50],[1.5,36,36],[2.0,22,21],[2.5,11,11],[3.0,4,4],[3.5,1,1]],"sides":[4,0,0],"zeta":1},"4,2,0":{"blind":false,"dim":360,"m":[24,208,4288],"modes":[[0.5,26,26],[1.0,24,19],[1.5,14,14],[2.0,10,7],[2.5,4,4],[3.0,2,1]],"sides":[3,2,1],"zeta":1},"4,2,1":{"blind":false,"dim":1000,"m":[-20,-260,-7796],"modes":[[0.5,66,70],[1.0,57,57],[1.5,40,43],[2.0,26,26],[2.5,13,15],[3.0,6,6],[3.5,1,2]],"sides":[4,3,0],"zeta":-1},"4,3,0":{"blind":false,"dim":750,"m":[20,200,4256],"modes":[[0.5,49,49],[1.0,43,39],[1.5,32,32],[2.0,22,19],[2.5,12,12],[3.0,6,5],[3.5,2,2]],"sides":[4,1,1],"zeta":1},"5,0,0":{"blind":false,"dim":56,"m":[12,92,1580],"modes":[[0.5,6,3],[1.0,3,3],[1.5,3,1],[2.0,1,1],[2.5,1,0]],"sides":[3,2,0],"zeta":1},"5,0,1":{"blind":false,"dim":189,"m":[-15,-160,-3712],"modes":[[0.5,15,15],[1.0,9,12],[1.5,7,7],[2.0,3,5],[2.5,2,2],[3.0,0,1]],"sides":[4,2,0],"zeta":-1},"5,0,2":{"blind":false,"dim":420,"m":[30,350,9374],"modes":[[0.5,33,27],[1.0,24,24],[1.5,19,14],[2.0,10,10],[2.5,7,4],[3.0,2,2],[3.5,1,0]],"sides":[4,2,1],"zeta":1},"5,1,0":{"blind":false,"dim":216,"m":[12,92,1580],"modes":[[0.5,18,15],[1.0,12,12],[1.5,9,7],[2.0,5,5],[2.5,3,2],[3.0,1,1]],"sides":[3,2,0],"zeta":1},"5,1,1":{"blind":true,"dim":640,"m":[0,0,0],"modes":[[0.5,45,45],[1.0,36,36],[1.5,25,25],[2.0,16,16],[2.5,9,9],[3.0,4,4],[3.5,1,1]],"sides":null,"zeta":0},"5,2,0":{"blind":false,"dim":540,"m":[30,350,9374],"modes":[[0.5,39,33],[1.0,30,30],[1.5,24,19],[2.0,14,14],[2.5,10,7],[3.0,4,4],[3.5,2,1]],"sides":[4,2,1],"zeta":1},"6,0,0":{"blind":false,"dim":84,"m":[16,160,3712],"modes":[[0.5,6,6],[1.0,6,3],[1.5,3,3],[2.0,3,1],[2.5,1,1],[3.0,1,0]],"sides":[3,3,0],"zeta":1},"6,0,1":{"blind":false,"dim":280,"m":[-20,-260,-7796],"modes":[[0.5,18,22],[1.0,15,15],[1.5,9,12],[2.0,7,7],[2.5,3,5],[3.0,2,2],[3.5,0,1]],"sides":[4,3,0],"zeta":-1},"6,1,0":{"blind":false,"dim":315,"m":[15,160,3712],"modes":[[0.5,22,22],[1.0,18,15],[1.5,12,12],[2.0,9,7],[2.5,5,5],[3.0,3,2],[3.5,1,1]],"sides":[4,2,0],"zeta":1},"7,0,0":{"blind":false,"dim":120,"m":[20,260,7796],"modes":[[0.5,10,6],[1.0,6,6],[1.5,6,3],[2.0,3,3],[2.5,3,1],[3.0,1,1],[3.5,1,0]],"sides":[4,3,0],"zeta":1}}};
+const KMAX = 10, GRID = 72;
+
+/* ---------- the engine: the same two halves the paper is about ---------------------------- */
+const LATT = [];
+for (let k1 = -KMAX; k1 <= KMAX; k1++)
+  for (let k2 = -KMAX; k2 <= KMAX; k2++)
+    if (k1 || k2) LATT.push([k1, k2, Math.pow(k1 * k1 + k2 * k2, -3), k2 & 1]);
+
+/* content row: {key, n, eta, role}  role: +1 matter, -1 gauge (carries the antiperiodic twist) */
+function spectrum(rows) {
+  const acc = new Map();                       // charge -> [coefEven, coefOdd]
+  for (const r of rows) {
+    const rep = DATA.reps[r.key]; if (!rep) continue;
+    for (const [q, A, B] of rep.modes) {
+      const a = r.role > 0 ? A : B, b = r.role > 0 ? B : A;   // the gauge sector's A<->B twist
+      const w = r.n * r.role;
+      const cur = acc.get(q) || [0, 0];
+      // eta multiplies the COSET half and nothing else -- that is the whole theorem, and
+      // writing it as (a + eta*b) instead put eta on the identity half too, which made the
+      // potential of a BLIND multiplet move. The node test caught it; this is the fix.
+      cur[0] += w * (a + b);                   // even windings: Sigma, a graded dimension
+      cur[1] += w * r.eta * (a - b);           // odd  windings: eta * D, an index
+      acc.set(q, cur);
+    }
+  }
+  return [...acc.entries()].map(([q, c]) => [q, c[0], c[1]]).filter(x => x[1] || x[2]);
+}
+function V(sp, a1, a2) {
+  let v = 0;
+  for (const [k1, k2, w, odd] of LATT) {
+    const th = k1 * a1 + k2 * a2;
+    let s = 0;
+    for (const [q, cE, cO] of sp) s += (odd ? cO : cE) * Math.cos(2 * Math.PI * q * th);
+    v += w * s;
+  }
+  return v;
+}
+function gradV(sp, x, y, h = 0.004) {
+  return [(V(sp, x + h, y) - V(sp, x - h, y)) / (2 * h),
+          (V(sp, x, y + h) - V(sp, x, y - h)) / (2 * h)];
+}
+function minimise(sp) {
+  let best = [Infinity, 0, 0];
+  for (let i = 0; i <= 60; i++) for (let j = 0; j <= 60; j++) {
+    const a1 = i / 60, a2 = j / 60, v = V(sp, a1, a2);
+    if (v < best[0]) best = [v, a1, a2];
+  }
+  let [v0, A1, A2] = best;
+  for (const st of [0.008, 0.002, 0.0005]) {
+    for (let it = 0; it < 60; it++) {
+      let moved = false;
+      for (const d1 of [-st, 0, st]) for (const d2 of [-st, 0, st]) {
+        const x = Math.min(Math.max(A1 + d1, 0), 1), y = Math.min(Math.max(A2 + d2, 0), 1);
+        const v = V(sp, x, y);
+        if (v < v0 - 1e-12) { v0 = v; A1 = x; A2 = y; moved = true; }
+      }
+      if (!moved) break;
+    }
+  }
+  // Polish. The pattern search stops one step-length short, which left |grad V| ~ 0.1 at what the
+  // page calls the vacuum -- visible now that the reading bar prints the gradient. Newton on the
+  // 2x2 Hessian, accepted only when it lowers V and stays small, makes the reported vacuum
+  // stationary in fact and not just in name.
+  for (let it = 0; it < 4; it++) {
+    const [fxx, fyy, fxy] = hessian(sp, A1, A2), [gx, gy] = gradV(sp, A1, A2);
+    const det = fxx * fyy - fxy * fxy;
+    if (!(Math.abs(det) > 1e-9)) break;
+    const dx = -(fyy * gx - fxy * gy) / det, dy = -(fxx * gy - fxy * gx) / det;
+    if (!isFinite(dx) || !isFinite(dy) || Math.hypot(dx, dy) > 0.02) break;
+    const x = A1 + dx, y = A2 + dy, v = V(sp, x, y);
+    if (!(v <= v0 + 1e-9)) break;
+    A1 = x; A2 = y; v0 = v;
+  }
+  A1 -= Math.floor(A1); A2 -= Math.floor(A2);      // keep it on the period the page draws
+  return [A1, A2, v0];
+}
+function hessian(sp, a1, a2, h = 0.002) {
+  const f = (x, y) => V(sp, x, y);
+  const fxx = (f(a1 + h, a2) - 2 * f(a1, a2) + f(a1 - h, a2)) / (h * h);
+  const fyy = (f(a1, a2 + h) - 2 * f(a1, a2) + f(a1, a2 - h)) / (h * h);
+  const fxy = (f(a1 + h, a2 + h) - f(a1 + h, a2 - h) - f(a1 - h, a2 + h) + f(a1 - h, a2 - h)) / (4 * h * h);
+  return [fxx, fyy, fxy];
+}
+function eig(xx, yy, xy) {
+  const tr = xx + yy, det = xx * yy - xy * xy, d = Math.sqrt(Math.max(tr * tr / 4 - det, 0));
+  return [tr / 2 + d, tr / 2 - d];
+}
+
+
+
+/* ---------- the closed form: Part IV as arithmetic, and the prediction it pays for ---------
+   Everything here is exact rational work on integers. Not one winding is summed: that is the
+   whole point of the page, and the brute force below is only there to be agreed with. -------- */
+const Ck = k => k * (k + 2);
+
+function momentsOfBox(sides, zeta) {          // F2: the moments of one multiplet, from its box
+  const [p, q, r] = sides;
+  const M0 = zeta * (p + 1) * (q + 1) * (r + 1);
+  const C = [Ck(p), Ck(q), Ck(r)];
+  const e1 = C[0] + C[1] + C[2];
+  const e2 = C[0] * C[1] + C[0] * C[2] + C[1] * C[2];
+  const sq = C[0] * C[0] + C[1] * C[1] + C[2] * C[2];
+  return [M0, M0 * e1 / 3, M0 * ((2 / 3) * e2 + sq / 5 - (4 / 15) * e1)];
+}
+
+function boxFromMoments(M0, M2, M4) {         // F3: three moments -> the box, or null if it is a mixture
+  if (!M0) return null;
+  const e1 = 3 * M2 / M0;
+  const e2 = (15 / 4) * (M4 / M0) - (3 / 4) * e1 * e1 + e1;
+  const e3 = M0 * M0 - 1 - e1 - e2;
+  const f = C => ((C - e1) * C + e2) * C - e3;
+  const scale = Math.max(1, Math.abs(e1), Math.abs(e2), Math.abs(e3));
+  const roots = [];
+  for (let k = 0; k <= 80; k++) if (Math.abs(f(Ck(k))) < 1e-6 * scale) roots.push(k);
+  for (const p of roots) for (const q of roots) for (const r of roots) {
+    if (p < q || q < r) continue;
+    const [m0, m2, m4] = momentsOfBox([p, q, r], Math.sign(M0) || 1);
+    if (Math.abs(m0 - M0) < 1e-9 && Math.abs(m2 - M2) < 1e-6 && Math.abs(m4 - M4) < 1e-4) return [p, q, r];
+  }
+  return null;
+}
+
+/* the lattice constants of F4. They are a property of T²/Z₂ and of nothing else: the same two
+   numbers for every model anyone will ever type into this page. */
+const LODD = (() => {
+  let l1 = 0, l2 = 0;
+  for (const [k1, k2, w, odd] of LATT) if (odd) { l1 += w * k1 * k1; l2 += w * k2 * k2; }
+  return [l1, l2];
+})();
+
+function contentMoments(rows) {               // linear in the content: the sum of n*eta*M(lambda)
+  let M0 = 0, M2 = 0, M4 = 0, blindOnly = true, any = false;
+  for (const r of rows) {
+    const rep = DATA.reps[r.key]; if (!rep) continue;
+    any = true;
+    if (rep.blind) continue;
+    blindOnly = false;
+    const [m0, m2, m4] = momentsOfBox(rep.sides, rep.zeta);
+    const w = r.n * r.eta;                    // the gauge sector's twist and its sign cancel here
+    M0 += w * m0; M2 += w * m2; M4 += w * m4;
+  }
+  return { M0, M2, M4, blindOnly: any && blindOnly, any };
+}
+
+function predict(rows) {                      // F4: the whole eta-dependence of the mass matrix
+  const { M0, M2, M4 } = contentMoments(rows);
+  const S2 = M2 / 8;                          // the charges of the potential are j/2, and D(-j)=D(j)
+  const c = -2 * (2 * Math.PI) ** 2;
+  return { M0, M2, M4, dHxx: c * LODD[0] * S2, dHyy: c * LODD[1] * S2, dHxy: 0 };
+}
+
+/* ---------- F6: the search for a content that cancels the index exactly -------------------
+   D is an integer vector indexed by charge, so this is integer arithmetic and the answer is
+   exact: no tolerance, no numerics, nothing to trust. The catalogue keeps D only at j > 0, and
+   D is symmetric, so that half is the whole statement. --------------------------------------*/
+function dvec(key) {
+  const rep = DATA.reps[key], m = new Map();
+  for (const [charge, A, B] of rep.modes) if (A - B) m.set(2 * charge, A - B);
+  return m;
+}
+function searchBlind(keys, NMAX = 6) {
+  const sighted = keys.filter(k => !DATA.reps[k].blind);
+  if (sighted.length < 2) return { none: true, why: 'a single sighted multiplet can never cancel itself' };
+  const vecs = sighted.map(dvec);
+  const charges = [...new Set(vecs.flatMap(v => [...v.keys()]))].sort((a, b) => a - b);
+  const rowsOf = vecs.map(v => charges.map(j => v.get(j) || 0));
+  let best = null, tried = 0;
+  const combo = new Array(sighted.length).fill(0);
+  (function rec(i, acc) {
+    if (best) return;                               // the smallest total comes first: stop there
+    if (i === sighted.length) {
+      tried++;
+      if (acc.every(x => x === 0)) best = combo.slice();
+      return;
+    }
+    for (let n = 1; n <= NMAX && !best; n++) for (const e of [1, -1]) {
+      combo[i] = n * e;
+      rec(i + 1, acc.map((x, c) => x + n * e * rowsOf[i][c]));
+    }
+    combo[i] = 0;
+  })(0, charges.map(() => 0));
+  return best ? { keys: sighted, combo: best, tried } : { none: true, tried, why: 'no combination up to multiplicity ' + NMAX + ' cancels it' };
+}
+
+/* ---------- the page ---------------------------------------------------------------------- */
+/* ---------- the panels: one geometry, one grammar ----------------------------------------
+   Every panel is a padded field with the same axes, drawn at device resolution. The field is a
+   square in [0,1]^2; PAD is the margin the ticks live in, and fx/fy are the only two functions
+   that turn an alpha into a pixel. Nothing else may do that arithmetic. ------------------- */
+const PAD = { l: 34, r: 11, t: 11, b: 26 }, CUTH = 240;
+let MAPW = 420, MAPH = 412, FW = 375, FH = 375;  // the CURRENT panel geometry, in CSS pixels
+const fx = t => PAD.l + t * FW, fy = t => PAD.t + (1 - t) * FH;
+
+/* A canvas drawn in fixed logical units and stretched by CSS scales its type with it: at full
+   width the labels came out at double size, which is what "amateur" looks like. So the logical
+   size IS the element's own size, the backing store is that times the device ratio, and 10px
+   type is 10px on any screen. Panels are square in alpha; the cut keeps a fixed height. */
+function fitCanvas(c, fixedH) {
+  const w = Math.max(260, Math.round(c.getBoundingClientRect().width || 420));
+  const h = fixedH || Math.round(w - PAD.l - PAD.r + PAD.t + PAD.b);
+  c.style.height = h + 'px';
+  const d = Math.min(window.devicePixelRatio || 1, 2);
+  if (c.width !== Math.round(w * d) || c.height !== Math.round(h * d)) {
+    c.width = Math.round(w * d); c.height = Math.round(h * d);
+  }
+  const g = c.getContext('2d');
+  g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h);
+  return [g, w, h, d];
+}
+function panelGeom(c) {                          // map and relief share one geometry, always
+  const [g, w, h, d] = fitCanvas(c);
+  MAPW = w; MAPH = h; FW = w - PAD.l - PAD.r; FH = h - PAD.t - PAD.b;
+  return [g, d];
+}
+function offscreen(d) {                          // a base image at the current panel geometry
+  const c = document.createElement('canvas');
+  c.width = Math.round(MAPW * d); c.height = Math.round(MAPH * d);
+  const g = c.getContext('2d'); g.setTransform(d, 0, 0, d, 0, 0);
+  return [c, g];
+}
+const TICKS = [0, .25, .5, .75, 1], TLAB = { 0: '0', 0.5: '½', 1: '1' };
+function axes(g, dark) {
+  g.font = '10px ui-monospace,monospace';
+  g.textBaseline = 'middle';
+  for (const t of TICKS) {
+    const X = fx(t), Y = fy(t);
+    g.strokeStyle = dark ? 'rgba(255,255,255,.30)' : 'rgba(22,32,42,.28)'; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(X, PAD.t + FH); g.lineTo(X, PAD.t + FH + 4);
+    g.moveTo(PAD.l - 4, Y); g.lineTo(PAD.l, Y); g.stroke();
+    if (TLAB[t]) {
+      g.fillStyle = '#7d8c99'; g.textAlign = 'center';
+      g.fillText(TLAB[t], X, PAD.t + FH + 13);
+      g.textAlign = 'right'; g.fillText(TLAB[t], PAD.l - 7, Y);
+    }
+  }
+  g.textAlign = 'left'; g.fillStyle = '#9fb0bd'; g.font = '10px ui-monospace,monospace';
+  g.fillText('α₁ →', PAD.l + FW - 30, PAD.t + FH + 13);
+  g.save(); g.translate(11, PAD.t + 4); g.rotate(-Math.PI / 2);
+  g.textAlign = 'right'; g.fillText('← α₂', 0, 0); g.restore();
+  g.strokeStyle = dark ? 'rgba(255,255,255,.16)' : 'rgba(22,32,42,.18)'; g.lineWidth = 1;
+  g.strokeRect(PAD.l + .5, PAD.t + .5, FW - 1, FH - 1);
+}
+function marker(g, x, y, kind) {                 // ✕ = the vacuum, ○ = the cursor. Nothing else.
+  const X = fx(x), Y = fy(y);
+  if (kind === 'vac') {
+    for (const [col, w] of [['rgba(255,255,255,.92)', 5], ['#16202a', 2]]) {
+      g.strokeStyle = col; g.lineWidth = w; g.lineCap = 'round';
+      g.beginPath(); g.moveTo(X - 7, Y - 7); g.lineTo(X + 7, Y + 7);
+      g.moveTo(X + 7, Y - 7); g.lineTo(X - 7, Y + 7); g.stroke();
+    }
+  } else {
+    g.save(); g.beginPath(); g.rect(PAD.l, PAD.t, FW, FH); g.clip();
+    g.strokeStyle = 'rgba(255,255,255,.45)'; g.lineWidth = 1; g.setLineDash([2, 4]);
+    g.beginPath(); g.moveTo(X, PAD.t); g.lineTo(X, PAD.t + FH);
+    g.moveTo(PAD.l, Y); g.lineTo(PAD.l + FW, Y); g.stroke(); g.setLineDash([]);
+    g.restore();
+    g.beginPath(); g.arc(X, Y, 6.5, 0, 7);
+    g.strokeStyle = 'rgba(255,255,255,.95)'; g.lineWidth = 3.4; g.stroke();
+    g.strokeStyle = '#B5530F'; g.lineWidth = 1.9; g.stroke();
+  }
+}
+
+/* marching squares on the cached grid: the isolines are what turn a heat map into a chart ---- */
+function isoline(vals, n, lev, seg) {
+  const p = (i, j) => [fx(i / (n - 1)), fy(j / (n - 1))];
+  for (let j = 0; j < n - 1; j++) for (let i = 0; i < n - 1; i++) {
+    const a = vals[j * n + i], b = vals[j * n + i + 1], c = vals[(j + 1) * n + i + 1], d = vals[(j + 1) * n + i];
+    const idx = (a > lev ? 1 : 0) | (b > lev ? 2 : 0) | (c > lev ? 4 : 0) | (d > lev ? 8 : 0);
+    if (idx === 0 || idx === 15) continue;
+    const f = (u, v) => (lev - u) / ((v - u) || 1e-12);
+    const E = { B: p(i + f(a, b), j), R: p(i + 1, j + f(b, c)), T: p(i + f(d, c), j + 1), L: p(i, j + f(a, d)) };
+    const CASES = { 1: 'BL', 2: 'BR', 3: 'LR', 4: 'RT', 5: 'BR|LT', 6: 'BT', 7: 'LT', 8: 'LT',
+                    9: 'BT', 10: 'BL|RT', 11: 'RT', 12: 'LR', 13: 'BR', 14: 'BL' };
+    for (const s of CASES[idx].split('|')) seg(E[s[0]], E[s[1]]);
+  }
+}
+
+/* ---------- the same potential as a relief: the 2D map is the plan, this is the elevation ---
+   It is built from the grid the map already computed, so it costs no winding sums at all --
+   which is why the old streamline panel, that spent about 1e8 of them and lagged seconds behind
+   everything else, is gone rather than optimised. Drag rotates; the cursor stands on it. ---- */
+let surfBase = null;
+function projRaw(x, y, h) {                        // orthographic, on the unit square, h in [0,1]
+  const cx = x - .5, cy = y - .5;
+  const ca = Math.cos(SURF.az), sa = Math.sin(SURF.az);
+  const X = cx * ca - cy * sa, Y = cx * sa + cy * ca;
+  return [X, Y * Math.sin(SURF.el) - (h - .5) * SURF.h, Y];   // third = depth, for the painter
+}
+function projS(x, y, h) {
+  const [u, v, d] = projRaw(x, y, h);
+  return [SURF.ox + u * SURF.s, SURF.oy + v * SURF.s, d];
+}
+/* the view is FITTED to the mesh, not guessed: turn it or raise it and it still fills the panel */
+function fitView(Hm, n) {
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) {
+    const [u, v] = projRaw(i / (n - 1), j / (n - 1), Hm[j * n + i]);
+    if (u < x0) x0 = u; if (u > x1) x1 = u; if (v < y0) y0 = v; if (v > y1) y1 = v;
+  }
+  SURF.s = Math.min(FW / ((x1 - x0) || 1), FH / ((y1 - y0) || 1)) * 0.93;
+  SURF.ox = PAD.l + FW / 2 - (x0 + x1) / 2 * SURF.s;
+  SURF.oy = PAD.t + FH / 2 - (y0 + y1) / 2 * SURF.s;
+}
+function surfHeight(x, y) {                        // bilinear on the cached grid, in [0,1]
+  if (!mapVals) return .5;
+  const n = mapN, u = Math.min(Math.max(x, 0), 1) * (n - 1), v = Math.min(Math.max(y, 0), 1) * (n - 1);
+  const i = Math.min(Math.floor(u), n - 2), j = Math.min(Math.floor(v), n - 2), s = u - i, t = v - j;
+  const q = (a, b) => mapVals[b * n + a];
+  const z = q(i, j) * (1 - s) * (1 - t) + q(i + 1, j) * s * (1 - t) + q(i, j + 1) * (1 - s) * t + q(i + 1, j + 1) * s * t;
+  return (z - mapLo) / ((mapHi - mapLo) || 1);
+}
+function drawSurface() {
+  const [, d] = panelGeom(document.getElementById('surf'));
+  const [base, g] = offscreen(d); surfBase = base;
+  g.fillStyle = '#0c161d'; g.fillRect(0, 0, MAPW, MAPH);
+  if (!mapVals) return;
+  const n = SURF.n, H = new Float64Array(n * n);
+  for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) H[j * n + i] = surfHeight(i / (n - 1), j / (n - 1));
+  fitView(H, n);
+
+  for (const t of [0, .25, .5, .75, 1]) {          // the floor, so the torus is still legible
+    const A = projS(t, 0, 0), B = projS(t, 1, 0), C = projS(0, t, 0), D = projS(1, t, 0);
+    g.strokeStyle = 'rgba(255,255,255,.09)'; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(A[0], A[1]); g.lineTo(B[0], B[1]);
+    g.moveTo(C[0], C[1]); g.lineTo(D[0], D[1]); g.stroke();
+  }
+  const quads = [];
+  for (let j = 0; j < n - 1; j++) for (let i = 0; i < n - 1; i++) {
+    const h00 = H[j * n + i], h10 = H[j * n + i + 1], h11 = H[(j + 1) * n + i + 1], h01 = H[(j + 1) * n + i];
+    const p00 = projS(i / (n - 1), j / (n - 1), h00), p10 = projS((i + 1) / (n - 1), j / (n - 1), h10),
+          p11 = projS((i + 1) / (n - 1), (j + 1) / (n - 1), h11), p01 = projS(i / (n - 1), (j + 1) / (n - 1), h01);
+    const hm = (h00 + h10 + h11 + h01) / 4;
+    const nx = (h00 + h01 - h10 - h11) * (n - 1) * SURF.h / 2, ny = (h00 + h10 - h01 - h11) * (n - 1) * SURF.h / 2;
+    const len = Math.hypot(nx, ny, 1), lam = Math.max(0.15, (0.55 * nx + 0.35 * ny + 0.9) / (len * 1.35));
+    quads.push([Math.min(p00[2], p10[2], p11[2], p01[2]), p00, p10, p11, p01, hm, lam,
+                [h00, h10, h11, h01]]);
+  }
+  quads.sort((a, b) => a[0] - b[0]);               // painter: far edge first
+  const LEV = [];                                  // the map's isolines, draped on the relief
+  for (let k = 1; k <= 11; k++) LEV.push(k / 12);
+  for (const q of quads) {
+    const [, a, b, c, e, hm, lam, hs, ij] = q;
+    const col = ramp(hm), m = col.match(/\d+/g);
+    g.fillStyle = `rgb(${Math.round(m[0] * lam)},${Math.round(m[1] * lam)},${Math.round(m[2] * lam)})`;
+    g.strokeStyle = g.fillStyle; g.lineWidth = .6;  // hairline stroke closes the seams between quads
+    g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.lineTo(c[0], c[1]); g.lineTo(e[0], e[1]);
+    g.closePath(); g.fill(); g.stroke();
+    // the contour is stroked immediately after ITS OWN quad, so the painter occludes it exactly
+    const lo4 = Math.min(...hs), hi4 = Math.max(...hs);
+    for (const lev of LEV) {
+      if (lev <= lo4 || lev >= hi4) continue;
+      const P = [[a, hs[0], b, hs[1]], [b, hs[1], c, hs[2]], [c, hs[2], e, hs[3]], [e, hs[3], a, hs[0]]];
+      const cut = [];
+      for (const [p0, h0, p1, h1] of P) {
+        if ((h0 - lev) * (h1 - lev) >= 0) continue;
+        const t = (lev - h0) / (h1 - h0);
+        cut.push([p0[0] + (p1[0] - p0[0]) * t, p0[1] + (p1[1] - p0[1]) * t]);
+      }
+      if (cut.length < 2) continue;
+      g.strokeStyle = 'rgba(255,255,255,.30)'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(cut[0][0], cut[0][1]); g.lineTo(cut[1][0], cut[1][1]); g.stroke();
+    }
+  }
+
+  // the two axis labels go on the floor edges NEAREST the viewer, and after the mesh, or the
+  // relief itself hides them the moment you turn it
+  const edges = [[[.5, 0], 'α₁'], [[.5, 1], 'α₁'], [[0, .5], 'α₂'], [[1, .5], 'α₂']]
+    .map(([p, s]) => ({ s, p, q: projS(p[0], p[1], 0) }))
+    .sort((a, b) => b.q[1] - a.q[1]);
+  const centre = projS(.5, .5, 0), shown = new Set();
+  g.font = '600 10px ui-monospace,monospace'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  for (const e of edges) {
+    if (shown.has(e.s)) continue;
+    shown.add(e.s);
+    const dx = e.q[0] - centre[0], dy = e.q[1] - centre[1], L = Math.hypot(dx, dy) || 1;
+    const X = e.q[0] + dx / L * 15, Y = e.q[1] + dy / L * 15;
+    g.lineWidth = 3; g.strokeStyle = 'rgba(12,22,29,.85)'; g.strokeText(e.s, X, Y);
+    g.fillStyle = 'rgba(190,210,222,.95)'; g.fillText(e.s, X, Y);
+  }
+  g.fillStyle = '#7d8c99'; g.font = '10px ui-monospace,monospace'; g.textAlign = 'left';
+  g.fillText('V(α₁, α₂) — drag to turn, wheel to raise, double-click to reset', PAD.l, MAPH - 9);
+}
+function stick(g, x, y, col, cross) {              // a pin standing on the surface at (x, y)
+  const h = surfHeight(x, y), top = projS(x, y, h), foot = projS(x, y, 0);
+  g.strokeStyle = 'rgba(255,255,255,.35)'; g.setLineDash([2, 3]); g.lineWidth = 1;
+  g.beginPath(); g.moveTo(foot[0], foot[1]); g.lineTo(top[0], top[1]); g.stroke(); g.setLineDash([]);
+  if (cross) {
+    for (const [c2, w] of [['rgba(255,255,255,.9)', 4.5], [col, 2]]) {
+      g.strokeStyle = c2; g.lineWidth = w; g.lineCap = 'round';
+      g.beginPath(); g.moveTo(top[0] - 6, top[1] - 6); g.lineTo(top[0] + 6, top[1] + 6);
+      g.moveTo(top[0] + 6, top[1] - 6); g.lineTo(top[0] - 6, top[1] + 6); g.stroke();
+    }
+  } else {
+    g.beginPath(); g.arc(top[0], top[1], 5, 0, 7);
+    g.fillStyle = col; g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 1.8; g.stroke();
+  }
+}
+/* the slice the cut chart draws, raised into the relief: same curve, seen edge-on */
+function curtain(g, a1) {
+  const N = 60, top = [];
+  for (let i = 0; i <= N; i++) { const y = i / N; top.push(projS(a1, y, surfHeight(a1, y))); }
+  g.beginPath();
+  g.moveTo(top[0][0], top[0][1]);
+  for (const p of top) g.lineTo(p[0], p[1]);
+  for (let i = N; i >= 0; i--) { const f = projS(a1, i / N, 0); g.lineTo(f[0], f[1]); }
+  g.closePath();
+  g.fillStyle = 'rgba(181,83,15,.20)'; g.fill();
+  g.beginPath(); top.forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1]));
+  g.strokeStyle = 'rgba(255,196,140,.85)'; g.lineWidth = 1.6; g.stroke();
+}
+function paintSurface() {
+  const [g] = panelGeom(document.getElementById('surf'));
+  if (!surfBase || !SP) { g.fillStyle = '#0c161d'; g.fillRect(0, 0, MAPW, MAPH); return; }
+  g.drawImage(surfBase, 0, 0, MAPW, MAPH);
+  if (ROLL && ROLL.pts.length > 1) {               // the ball, rolling on the relief itself
+    g.strokeStyle = 'rgba(255,196,140,.95)'; g.lineWidth = 2; g.lineJoin = 'round'; g.beginPath();
+    let lift = true;
+    for (let k = 1; k < ROLL.pts.length; k++) {
+      const [x0, y0] = ROLL.pts[k - 1], [x1, y1] = ROLL.pts[k];
+      if (Math.abs(x1 - x0) > .5 || Math.abs(y1 - y0) > .5) { lift = true; continue; }
+      const A = projS(x0, y0, surfHeight(x0, y0)), B = projS(x1, y1, surfHeight(x1, y1));
+      if (lift) { g.moveTo(A[0], A[1]); lift = false; }
+      g.lineTo(B[0], B[1]);
+    }
+    g.stroke();
+  }
+  if (CUR) curtain(g, CUR[0]);                     // the 1D cut, standing in the 3D view
+  if (VAC) stick(g, VAC[0], VAC[1], '#16202a', true);
+  if (CUR) stick(g, CUR[0], CUR[1], '#B5530F', false);
+}
+
+/* ---------- the cut: one curve, which anybody can read; it follows the cursor ------------- */
+const CP = { l: 46, r: 14, t: 16, b: 26 };
+function drawCut(sp, a1, a2) {
+  const [g, W, H] = fitCanvas(document.getElementById('cut'), CUTH);
+  const iw = W - CP.l - CP.r, ih = H - CP.t - CP.b;
+  g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+  const frame = () => { g.strokeStyle = '#e6edf2'; g.lineWidth = 1;
+                        g.strokeRect(CP.l + .5, CP.t + .5, iw - 1, ih - 1); };
+  if (!sp) { frame(); return; }
+  const N = 260, ys = [];
+  let lo = Infinity, hi = -Infinity;
+  for (let i = 0; i <= N; i++) { const v = V(sp, a1, i / N);
+    ys.push(v); if (v < lo) lo = v; if (v > hi) hi = v; }
+  const span = (hi - lo) || 1, pad = span * 0.08;
+  const YLO = lo - pad, YHI = hi + pad;
+  const sx = t => CP.l + t * iw, sy = v => CP.t + ih - (v - YLO) / (YHI - YLO) * ih;
+
+  g.strokeStyle = '#f0f4f7'; g.lineWidth = 1;                       // recessive grid, four lines
+  g.font = '10px ui-monospace,monospace'; g.textBaseline = 'middle'; g.textAlign = 'right';
+  for (let i = 0; i <= 3; i++) {
+    const v = YLO + (YHI - YLO) * i / 3, Y = Math.round(sy(v)) + .5;
+    g.beginPath(); g.moveTo(CP.l, Y); g.lineTo(CP.l + iw, Y); g.stroke();
+    g.fillStyle = '#9fb0bd'; g.fillText(v.toFixed(1), CP.l - 7, Y);
+  }
+  if (YLO < 0 && YHI > 0) {                                         // the zero line, if it is in range
+    g.strokeStyle = '#d7e0e7'; g.setLineDash([4, 3]);
+    g.beginPath(); g.moveTo(CP.l, sy(0)); g.lineTo(CP.l + iw, sy(0)); g.stroke(); g.setLineDash([]);
+  }
+  const fill = g.createLinearGradient(0, CP.t, 0, CP.t + ih);       // area under the curve
+  fill.addColorStop(0, 'rgba(27,111,140,.16)'); fill.addColorStop(1, 'rgba(27,111,140,.02)');
+  g.beginPath(); g.moveTo(sx(0), CP.t + ih);
+  ys.forEach((v, i) => g.lineTo(sx(i / N), sy(v)));
+  g.lineTo(sx(1), CP.t + ih); g.closePath(); g.fillStyle = fill; g.fill();
+  g.strokeStyle = '#1B6F8C'; g.lineWidth = 2.2; g.lineJoin = 'round'; g.beginPath();
+  ys.forEach((v, i) => i ? g.lineTo(sx(i / N), sy(v)) : g.moveTo(sx(0), sy(v))); g.stroke();
+
+  const onVac = VAC && Math.abs(a1 - VAC[0]) < 5e-4;
+  if (onVac && Math.abs(a2 - VAC[1]) > 5e-4) {                      // the vacuum sits on this line too
+    const XV = sx(VAC[1]), YV = sy(V(sp, a1, VAC[1]));
+    g.strokeStyle = '#16202a'; g.lineWidth = 1.4; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(XV - 4, YV - 4); g.lineTo(XV + 4, YV + 4);
+    g.moveTo(XV + 4, YV - 4); g.lineTo(XV - 4, YV + 4); g.stroke();
+  }
+  const X = sx(a2), Y = sy(V(sp, a1, a2));                          // the cursor, on the curve
+  g.strokeStyle = 'rgba(181,83,15,.55)'; g.setLineDash([3, 3]); g.lineWidth = 1;
+  g.beginPath(); g.moveTo(X, CP.t); g.lineTo(X, CP.t + ih); g.stroke(); g.setLineDash([]);
+  g.beginPath(); g.arc(X, Y, 4.6, 0, 7);
+  g.fillStyle = '#B5530F'; g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 1.8; g.stroke();
+
+  const atVac = VAC && onVac && Math.abs(a2 - VAC[1]) < 5e-4;
+  const lab = (atVac ? 'vacuum  α₂ = ' : 'cursor  α₂ = ') + a2.toFixed(3);
+  g.font = '600 11px ui-monospace,monospace'; g.textAlign = 'left';
+  const tw = g.measureText(lab).width, lx = X + 9 + tw > CP.l + iw ? X - 9 - tw : X + 9;
+  g.fillStyle = atVac ? '#16202a' : '#B5530F'; g.fillText(lab, lx, Math.max(Y - 11, CP.t + 8));
+  g.font = '10px ui-monospace,monospace'; g.fillStyle = '#9fb0bd';
+  g.textAlign = 'left';  g.fillText('V  ·  cut at α₁ = ' + a1.toFixed(3), CP.l, 8);
+  g.textAlign = 'center'; g.fillText('α₂ = 0', CP.l, H - 9);
+  g.fillText('½', CP.l + iw / 2, H - 9); g.fillText('1', CP.l + iw, H - 9);
+  frame();
+}
+
+/* ---------- the map: the field is computed once, everything else rides on top -------------- */
+let mapVals = null, mapN = 0, mapLo = 0, mapHi = 1;
+function drawMap(sp) {
+  const [, d] = panelGeom(document.getElementById('map'));
+  if (!sp) { mapBase = null; mapVals = null; return; }
+  const n = GRID, vals = new Float64Array(n * n);
+  let lo = Infinity, hi = -Infinity;
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+    const v = V(sp, i / (n - 1), j / (n - 1));
+    vals[j * n + i] = v; if (v < lo) lo = v; if (v > hi) hi = v;
+  }
+  mapVals = vals; mapN = n; mapLo = lo; mapHi = hi;
+
+  const cell = document.createElement('canvas');   // the field at grid resolution...
+  cell.width = cell.height = n;
+  const cg = cell.getContext('2d'), img = cg.createImageData(n, n);
+  for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) {
+    const t = hi > lo ? (vals[j * n + i] - lo) / (hi - lo) : .5;
+    const c = ramp(t).match(/\d+/g), o = ((n - 1 - j) * n + i) * 4;
+    img.data[o] = +c[0]; img.data[o + 1] = +c[1]; img.data[o + 2] = +c[2]; img.data[o + 3] = 255;
+  }
+  cg.putImageData(img, 0, 0);
+
+  const [base, g] = offscreen(d); mapBase = base;  // ...resampled smoothly into the field box
+  g.fillStyle = '#fff'; g.fillRect(0, 0, MAPW, MAPH);
+  g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
+  g.drawImage(cell, PAD.l, PAD.t, FW, FH);
+
+  g.save(); g.beginPath(); g.rect(PAD.l, PAD.t, FW, FH); g.clip();
+  g.lineWidth = 1;                                 // isolines: this is what makes it a chart
+  for (let k = 1; k <= 11; k++) {
+    const lev = lo + (hi - lo) * k / 12;
+    g.strokeStyle = k % 3 === 0 ? 'rgba(255,255,255,.42)' : 'rgba(255,255,255,.20)';
+    g.beginPath();
+    isoline(vals, n, lev, (A, B) => { g.moveTo(A[0], A[1]); g.lineTo(B[0], B[1]); });
+    g.stroke();
+  }
+  g.restore();
+  axes(g, false);
+  colorbar(lo, hi);
+}
+function colorbar(lo, hi) {
+  const c = document.getElementById('cbar'); if (!c) return;
+  const [g, W, H] = fitCanvas(c, 10);
+  for (let i = 0; i < W; i++) { g.fillStyle = ramp(i / (W - 1)); g.fillRect(i, 0, 1, H); }
+  g.strokeStyle = 'rgba(22,32,42,.22)'; g.lineWidth = 1; g.strokeRect(.5, .5, W - 1, H - 1);
+  document.getElementById('cblo').textContent = lo.toFixed(1);
+  document.getElementById('cbhi').textContent = hi.toFixed(1);
+}
+function rollPath(g, col) {
+  if (!(ROLL && ROLL.pts.length > 1)) return;
+  g.strokeStyle = col; g.lineWidth = 2; g.lineJoin = 'round'; g.lineCap = 'round';
+  g.beginPath();
+  let lift = true;
+  for (let k = 1; k < ROLL.pts.length; k++) {
+    const [x0, y0] = ROLL.pts[k - 1], [x1, y1] = ROLL.pts[k];
+    if (Math.abs(x1 - x0) > .5 || Math.abs(y1 - y0) > .5) { lift = true; continue; }   // not the wrap
+    if (lift) { g.moveTo(fx(x0), fy(y0)); lift = false; }
+    g.lineTo(fx(x1), fy(y1));
+  }
+  g.stroke();
+  const [sx0, sy0] = ROLL.pts[0];                  // where it was dropped
+  g.strokeStyle = 'rgba(255,255,255,.9)'; g.lineWidth = 2;
+  g.beginPath(); g.arc(fx(sx0), fy(sy0), 3.5, 0, 7); g.stroke();
+}
+function paintMap() {
+  const [g] = panelGeom(document.getElementById('map'));
+  if (!mapBase) {
+    g.fillStyle = '#fff'; g.fillRect(0, 0, MAPW, MAPH);
+    g.fillStyle = '#f2f6f9'; g.fillRect(PAD.l, PAD.t, FW, FH); axes(g, false); return;
+  }
+  g.drawImage(mapBase, 0, 0, MAPW, MAPH);
+  if (CUR && mapVals) {                            // the level set the cursor is standing on
+    g.save(); g.beginPath(); g.rect(PAD.l, PAD.t, FW, FH); g.clip();
+    g.strokeStyle = 'rgba(255,255,255,.95)'; g.lineWidth = 1.6; g.beginPath();
+    isoline(mapVals, mapN, V(SP, CUR[0], CUR[1]), (A, B) => { g.moveTo(A[0], A[1]); g.lineTo(B[0], B[1]); });
+    g.stroke(); g.restore();
+  }
+  rollPath(g, 'rgba(181,83,15,.9)');
+  if (VAC) marker(g, VAC[0], VAC[1], 'vac');
+  if (CUR) marker(g, CUR[0], CUR[1], 'cur');
+}
+/* sequential, one hue family, dark = the well: magnitude is never a rainbow */
+function ramp(t) {
+  const stops = [[10, 26, 38], [17, 62, 88], [27, 111, 140], [92, 168, 189], [175, 214, 219],
+                 [235, 232, 214], [224, 160, 106]];
+  const x = Math.max(0, Math.min(1, t)) * (stops.length - 1), i = Math.min(Math.floor(x), stops.length - 2);
+  const f = x - i, a = stops[i], b = stops[i + 1];
+  return `rgb(${a.map((v, k) => Math.round(v + f * (b[k] - v))).join(',')})`;
+}
+
+
+
+let rows = [];
+let SP = null, VAC = null, CUR = null, GMAX = 1, ROLL = null, mapBase = null;  // surfBase: in the panels block
+const SURF = { az: -0.62, el: 0.66, n: 44, h: 0.40, s: 300, ox: 210, oy: 200 };
+const fmt = (x, n = 3) => (x >= 0 ? '' : '−') + Math.abs(x).toFixed(n);
+const sci = x => Math.abs(x) >= 0.01 || x === 0 ? fmt(x, 2) : x.toExponential(1);
+
+function drawCat() {
+  const q = document.getElementById('q').value.trim().toLowerCase().replace(/[(),]/g, ' ');
+  const keys = Object.keys(DATA.reps).sort((a, b) => DATA.reps[a].dim - DATA.reps[b].dim).filter(k => {
+    if (!q) return true;
+    const r = DATA.reps[k];
+    return q.split(/\s+/).every(t => (k.replace(/,/g, ' ') + ' ' + r.dim).toLowerCase().includes(t));
+  });
+  document.getElementById('catbody').innerHTML = keys.map(k => {
+    const r = DATA.reps[k], m = r.blind ? null : momentsOfBox(r.sides, r.zeta);
+    return `<tr><td class="mono">(${k})</td><td class="num">${r.dim}</td>` +
+      `<td class="mono" style="font-size:12px">${r.sides ? '(' + r.sides.join(',') + ')' : '—'}</td>` +
+      `<td class="num">${m ? m[0] : 0}</td>` +
+      `<td>${r.blind ? '<span class="tag blind">blind</span>' : '<span class="tag sees">sees</span>'}</td>` +
+      `<td style="text-align:right"><button class="ghost" data-add="${k}">+ add</button></td></tr>`;
+  }).join('');
+}
+function drawContent() {
+  document.getElementById('empty').style.display = rows.length ? 'none' : 'block';
+  document.getElementById('content').innerHTML = rows.map((r, i) => {
+    const rep = DATA.reps[r.key];
+    return `<tr><td class="mono">(${r.key})${rep.blind ? ' <span class="tag blind">blind</span>' : ''}</td>` +
+      `<td class="num">${rep.dim}</td>` +
+      `<td class="num"><input class="rowin" type="number" min="1" max="99" value="${r.n}" data-n="${i}"></td>` +
+      `<td><button class="eta ${r.eta > 0 ? 'plus' : 'minus'}" data-eta="${i}">${r.eta > 0 ? '+1' : '−1'}</button></td>` +
+      `<td><select data-role="${i}" style="font-size:12.5px;padding:4px 6px">` +
+      `<option value="1"${r.role > 0 ? ' selected' : ''}>matter</option>` +
+      `<option value="-1"${r.role < 0 ? ' selected' : ''}>gauge</option></select></td>` +
+      `<td style="text-align:right"><button class="ghost" data-del="${i}">remove</button></td></tr>`;
+  }).join('');
+}
+
+function report() {
+  const f1 = document.getElementById('f1'), f2 = document.getElementById('f2'),
+        f3 = document.getElementById('f3'), f4 = document.getElementById('f4'),
+        f5 = document.getElementById('f5'), note = document.getElementById('f4note');
+  if (!rows.length) {
+    for (const el of [f1, f2, f3, f5]) el.innerHTML = 'Add a multiplet and every formula above reads back on it.';
+    f4.innerHTML = ''; note.textContent = ''; SP = null; drawMap(null); surfBase = null; paintMap(); paintSurface();
+    document.getElementById('answer').textContent = 'Pick a multiplet above and the answer appears here.';
+    return;
+  }
+  const P = predict(rows), CM = contentMoments(rows);
+
+  f1.innerHTML = rows.map(r => {
+    const rep = DATA.reps[r.key];
+    return rep.blind
+      ? `<b>(${r.key})</b>, dimension ${rep.dim}: <b>no box</b> — its coset index is identically zero.`
+      : `<b>(${r.key})</b>, dimension ${rep.dim} → box <span class="mono">(${rep.sides.join(',')})</span>,
+         ζ = ${rep.zeta > 0 ? '+1' : '−1'}. Its whole η-dependence is
+         <span class="mono">χ<sub>${rep.sides[0]}</sub>∗χ<sub>${rep.sides[1]}</sub>∗χ<sub>${rep.sides[2]}</sub></span>,
+         highest charge <span class="mono">${(rep.sides[0] + rep.sides[1] + rep.sides[2]) / 2}</span>.`;
+  }).join('<br>');
+
+  f2.innerHTML = `For this content, summed with each multiplicity and each η:
+     <b>M₀ = ${fmt(CM.M0, 0)}</b>, <b>M₂ = ${fmt(CM.M2, 0)}</b>, <b>M₄ = ${fmt(CM.M4, 0)}</b>.
+     ${CM.M2 === 0 && !CM.blindOnly
+       ? '<b>M₂ cancels</b> though the multiplets are not blind — the pieces are killing each other.'
+       : ''}`;
+
+  const eff = boxFromMoments(CM.M0, CM.M2, CM.M4);
+  f3.innerHTML = CM.M0 === 0
+    ? `M₀ = 0 for this content, so the inversion has nothing to divide by: the content is not a single box.`
+    : eff
+      ? `The inversion lands on integers: your whole content behaves like <b>one multiplet with box
+         <span class="mono">(${eff.join(',')})</span></b>. Every η-observable at this order is the one that
+         box gives — which is not something you can see by reading the content.`
+      : `The inversion does not land on a triple of integers: this content is a <b>genuine mixture</b>, not
+         equivalent to any single multiplet.`;
+
+  const meas = measure(rows);
+  const cell = (k, v, s, cls) => `<div><div class="k">${k}</div><div class="v ${cls || ''}">${v}</div>` +
+                                 `<div class="s">${s}</div></div>`;
+  const rel = (a, b) => Math.abs(b) < 1e-9 ? Math.abs(a) : Math.abs(a - b) / Math.abs(b);
+  const worst = Math.max(rel(P.dHxx, meas[0]), rel(P.dHyy, meas[1]));
+  f4.innerHTML =
+    cell('predicted ΔV₁₁', sci(P.dHxx), 'closed form · no winding summed') +
+    cell('measured ΔV₁₁', sci(meas[0]), 'the brute-force Hessian, both η') +
+    cell('predicted ΔV₂₂', sci(P.dHyy), 'the same single number M₂') +
+    cell('measured ΔV₂₂', sci(meas[1]), 'agreement to ' + (100 * worst).toFixed(3) + ' %',
+         worst < 0.005 ? 'ok' : 'no');
+  note.innerHTML = `Off-diagonal: predicted exactly <span class="mono">0</span>, measured
+     <span class="mono">${meas[2].toExponential(1)}</span>. The prediction used
+     <b>M₂ = ${fmt(CM.M2, 0)}</b> and the two lattice constants
+     <span class="mono">L₁ = ${LODD[0].toFixed(4)}</span>, <span class="mono">L₂ = ${LODD[1].toFixed(4)}</span>;
+     the measurement summed ${(2 * KMAX + 1) ** 2 - 1} windings twice.
+     ${worst < 0.005 ? '<b class="ok">They agree.</b>' : '<b class="no">They do not agree — do not trust this row.</b>'}`;
+
+  // the one sentence the page is for, in front of everything else
+  const ans = document.getElementById('answer');
+  const dir = CM.M2 === 0 ? '' : (P.dHxx < 0 ? 'lighter' : 'heavier');
+  ans.innerHTML = CM.M2 === 0
+    ? `<b>Flipping η does nothing to this Higgs</b> at the symmetric point:
+       <span class="mono">M₂ = 0</span>, so the prediction is exactly zero — and the loop sum agrees
+       (${sci(meas[0])}, ${sci(meas[1])}).
+       ${rows.every(r => DATA.reps[r.key].blind)
+          ? 'Every multiplet here is blind, so this is the theorem, not an accident.'
+          : '<b>The multiplets here are not blind</b> — they cancel each other. That is a property of the content you built, and it is exact.'}`
+    : `<b>Flip η and this Higgs gets ${dir}.</b> The mass² at the symmetric point moves by
+       <span class="mono">${sci(P.dHxx)}</span> in the α₁ direction and
+       <span class="mono">${sci(P.dHyy)}</span> in α₂, and not at all off-diagonal.
+       That came from <b>one integer</b>, <span class="mono">M₂ = ${fmt(CM.M2, 0)}</span>, with no potential
+       evaluated; the winding sum, run afterwards, says ${sci(meas[0])} and ${sci(meas[1])} —
+       <b class="${worst < 0.005 ? 'ok' : 'no'}">${worst < 0.005 ? 'agreement to ' + (100 * worst).toFixed(3) + ' %' : 'DISAGREEMENT'}</b>.`;
+
+  const blind = rows.filter(r => DATA.reps[r.key].blind);
+  f5.innerHTML = !blind.length
+    ? `No multiplet here is blind: every one of them carries η.`
+    : blind.length === rows.length
+      ? `<b>Every multiplet here is blind.</b> M₂ = 0 is not a cancellation, it is the theorem: nothing in
+         this Higgs sector can depend on η, whatever multiplicities you choose.`
+      : `<b>${blind.length} of ${rows.length}</b> are blind (${blind.map(r => '(' + r.key + ')').join(', ')}):
+         they contribute nothing to M₂, so they cannot move the prediction above at any multiplicity.`;
+
+  SP = spectrum(rows);
+  if (SP.length) { const v = minimise(SP); VAC = [v[0], v[1]]; CUR = VAC.slice(); GMAX = fieldScale(SP); }
+  else { VAC = CUR = null; }
+  drawMap(SP.length ? SP : null); drawSurface(); paintMap(); paintSurface();
+  document.getElementById('basins').innerHTML = '';
+  document.getElementById('simnote').textContent = '';
+}
+
+function measure(rows) {                      // the brute force this page exists to agree with
+  const hp = hessian(spectrum(rows), 0, 0);
+  const hm = hessian(spectrum(rows.map(r => ({ ...r, eta: -r.eta }))), 0, 0);
+  return [hp[0] - hm[0], hp[1] - hm[1], hp[2] - hm[2]];
+}
+function fieldScale(sp) {
+  let m = 1e-9;
+  for (let i = 0; i <= 12; i++) for (let j = 0; j <= 12; j++) {
+    const [u, v] = gradV(sp, i / 12, j / 12); m = Math.max(m, Math.hypot(u, v));
+  }
+  return m;
+}
+
+/* ---------- the simulation: many configurations, released at once ------------------------- */
+let WALK = null, simRAF = 0, seed = 12345;
+const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+function release() {
+  if (!SP || !SP.length) return;
+  cancelAnimationFrame(simRAF);
+  seed = 12345;                               // the same release every time: a run you can repeat
+  const N = +document.getElementById('nw').value, gam = +document.getElementById('fr').value / 100;
+  WALK = Array.from({ length: N }, () => ({ x: rnd(), y: rnd(), vx: 0, vy: 0, path: [] }));
+  let step = 0;
+  const dt = 0.9, acc = 0.55 / GMAX;
+  (function frame() {
+    for (let s = 0; s < 3; s++, step++) {
+      for (const w of WALK) {                 // damped Newton on V: accelerate, rub, move, wrap
+        const [gx, gy] = gradV(SP, w.x, w.y);
+        w.vx = (w.vx - acc * gx * dt) * (1 - gam * dt);
+        w.vy = (w.vy - acc * gy * dt) * (1 - gam * dt);
+        w.x += 0.012 * w.vx * dt; w.y += 0.012 * w.vy * dt;
+        w.x -= Math.floor(w.x);   w.y -= Math.floor(w.y);
+      }
+    }
+    paintWalkers();
+    if (step < 420) simRAF = requestAnimationFrame(frame); else settle();
+  })();
+}
+function paintWalkers() {
+  paintMap(); paintSurface();
+  const g = document.getElementById('map').getContext('2d'), d = Math.min(devicePixelRatio || 1, 2);
+  g.setTransform(d, 0, 0, d, 0, 0);
+  const gs = document.getElementById('surf').getContext('2d');
+  gs.setTransform(d, 0, 0, d, 0, 0);
+  for (const w of WALK) {
+    g.fillStyle = 'rgba(181,83,15,.85)';
+    g.beginPath(); g.arc(fx(w.x), fy(w.y), 2.1, 0, 7); g.fill();
+    const P = projS(w.x, w.y, surfHeight(w.x, w.y));
+    gs.fillStyle = 'rgba(255,196,140,.9)';
+    gs.beginPath(); gs.arc(P[0], P[1], 2.1, 0, 7); gs.fill();
+  }
+}
+/* Which points are the SAME vacuum, measured rather than assumed. V(−α) = V(α) exactly, and V is
+   periodic in α₂ with period 1 — but in α₁ the period is 2, because the charges are half-integers
+   and only the (−1)^k₂ of the coset half compensates that in the α₂ direction. Composing the two,
+   the identification you can see inside the drawn square is α₂ → −α₂ and nothing else: (x, 1−y) is
+   the same vacuum as (x, y), while (1−x, y) is a genuinely different point. The first version of
+   this panel folded α₁ as well and merged wells that are not the same one. */
+const mirror = ([x, y]) => [x, (1 - y) % 1];
+const same = (a, b, tol = 0.035) => {
+  const m = mirror(b), d = (p, q) => {
+    const dx = Math.min(Math.abs(p[0] - q[0]), 1 - Math.abs(p[0] - q[0]));
+    const dy = Math.min(Math.abs(p[1] - q[1]), 1 - Math.abs(p[1] - q[1]));
+    return Math.hypot(dx, dy);
+  };
+  return Math.min(d(a, b), d(a, m)) < tol;
+};
+const near1 = (a, b) =>                            // b, shifted by whole periods, closest to a
+  [b[0] + Math.round(a[0] - b[0]), b[1] + Math.round(a[1] - b[1])];
+function settle() {
+  const groups = [];
+  for (const w of WALK) {                          // fold each walker onto the class it matches
+    const p = [w.x, w.y];
+    const g = groups.find(g => same([g.x / g.n, g.y / g.n], p));
+    if (!g) { groups.push({ n: 1, x: p[0], y: p[1] }); continue; }
+    const c = [g.x / g.n, g.y / g.n];
+    const dist = (u, v) => Math.hypot(u[0] - v[0], u[1] - v[1]);
+    const cands = [near1(c, p), near1(c, mirror(p))];   // the image that actually sits on the class
+    const q = dist(c, cands[0]) <= dist(c, cands[1]) ? cands[0] : cands[1];
+    g.n++; g.x += q[0]; g.y += q[1];
+  }
+  const tot = WALK.length;
+  const G = groups.map(g => ({ n: g.n, x: g.x / g.n, y: g.y / g.n })).sort((a, b) => b.n - a.n).slice(0, 6);
+  document.getElementById('basins').innerHTML = G.map(gr => {
+    const atVac = VAC && same([gr.x, gr.y], VAC);
+    return `<div class="bar"><i>α = ${fmt(gr.x)}, ${fmt(gr.y)}${atVac ? '  ✕ vacuum' : ''}</i>` +
+           `<u style="width:${(100 * gr.n / tot).toFixed(1)}%"></u>` +
+           `<span>${(100 * gr.n / tot).toFixed(0)} %</span></div>`;
+  }).join('');
+  const vacShare = G.filter(gr => VAC && same([gr.x, gr.y], VAC)).reduce((s, gr) => s + gr.n, 0);
+  document.getElementById('simnote').innerHTML = !VAC ? '' :
+    `<b>${(100 * vacShare / tot).toFixed(0)} %</b> of the field landed in the vacuum ✕` +
+    (vacShare === tot ? ' — every configuration found it.'
+                      : `; the rest is caught in ${G.length - 1} other well${G.length > 2 ? 's' : ''}.
+                         α₂ and −α₂ are the same vacuum and are counted once.`);
+}
+
+/* ---------- the mouse on the panels of this page -------------------------------------------
+   The panels here were images and nothing else, which is not what a panel is for: on page 2 they
+   are the control, and they must be one here too. Drag the plan to move α and read V there;
+   double-click to drop a single configuration and watch it fall; drag the relief to turn it. --*/
+const mapEl = document.getElementById('map'), surfEl = document.getElementById('surf');
+function localXY(el, e, w, h) {
+  const b = el.getBoundingClientRect();
+  return [(e.clientX - b.left) / b.width * w, (e.clientY - b.top) / b.height * h];
+}
+function mapPoint(e) {
+  const [px, py] = localXY(mapEl, e, MAPW, MAPH);
+  return [Math.min(Math.max((px - PAD.l) / FW, 0), 1), Math.min(Math.max(1 - (py - PAD.t) / FH, 0), 1)];
+}
+function readCursor() {
+  const el = document.getElementById('preadout');
+  if (!SP || !SP.length || !CUR) { el.innerHTML = '<b>drag</b> the plan to move α · <b>double-click</b> to drop one configuration · <b>drag</b> the relief to turn it · <b>wheel</b> to raise it'; return; }
+  const [x, y] = CUR, v = V(SP, x, y), g = Math.hypot(...gradV(SP, x, y));
+  const dv = VAC ? v - V(SP, VAC[0], VAC[1]) : 0;
+  el.innerHTML = `<b>α</b> ${fmt(x)}, ${fmt(y)} &nbsp; <b>V</b> ${sci(v)} ` +
+    `<span class="note">(${dv > 1e-9 ? sci(dv) + ' above the vacuum' : 'at the vacuum'}, |∇V| ${g >= 0.01 ? fmt(g, 2) : g.toExponential(1)})</span>` +
+    ` &nbsp; <b>double-click</b> to drop the field here`;
+}
+function repaintPanels() { paintMap(); paintSurface(); readCursor(); }
+let dragMap = false, spin = null, praf = 0, pend = null;
+function queueCursor(p) {
+  pend = p;
+  if (praf) return;
+  praf = requestAnimationFrame(() => { praf = 0; if (pend) { CUR = pend; pend = null; repaintPanels(); } });
+}
+mapEl.addEventListener('pointerdown', e => {
+  if (!SP || !SP.length || e.button !== 0) return;
+  cancelAnimationFrame(simRAF); WALK = null; ROLL = null;
+  dragMap = true; try { mapEl.setPointerCapture(e.pointerId); } catch (_) {}
+  queueCursor(mapPoint(e)); e.preventDefault();
+});
+mapEl.addEventListener('pointermove', e => { if (dragMap) queueCursor(mapPoint(e)); });
+mapEl.addEventListener('dblclick', e => {
+  if (!SP || !SP.length) return;
+  e.preventDefault();
+  const [x0, y0] = mapPoint(e);
+  cancelAnimationFrame(simRAF); WALK = null;
+  const w = { x: x0, y: y0, vx: 0, vy: 0 };
+  ROLL = { pts: [[x0, y0]] };
+  const gam = +document.getElementById('fr').value / 100, dt = 0.9, acc = 0.55 / GMAX;
+  let step = 0;
+  (function frame() {
+    for (let s = 0; s < 3; s++, step++) {
+      const [gx, gy] = gradV(SP, w.x, w.y);
+      w.vx = (w.vx - acc * gx * dt) * (1 - gam * dt);
+      w.vy = (w.vy - acc * gy * dt) * (1 - gam * dt);
+      w.x += 0.012 * w.vx * dt; w.y += 0.012 * w.vy * dt;
+      w.x -= Math.floor(w.x); w.y -= Math.floor(w.y);
+      ROLL.pts.push([w.x, w.y]);
+    }
+    CUR = [w.x, w.y];
+    repaintPanels();
+    if (step < 420) simRAF = requestAnimationFrame(frame);
+  })();
+});
+addEventListener('pointerup', () => { dragMap = false; spin = null; });
+addEventListener('pointercancel', () => { dragMap = false; spin = null; });
+surfEl.addEventListener('pointerdown', e => {
+  if (e.button !== 0) return;
+  const [px, py] = localXY(surfEl, e, MAPW, MAPH);
+  spin = { px, py, az: SURF.az, el: SURF.el };
+  try { surfEl.setPointerCapture(e.pointerId); } catch (_) {}
+  e.preventDefault();
+});
+surfEl.addEventListener('pointermove', e => {
+  if (!spin) return;
+  const [px, py] = localXY(surfEl, e, MAPW, MAPH);
+  SURF.az = spin.az + (px - spin.px) * 0.011;
+  SURF.el = Math.min(Math.max(spin.el + (py - spin.py) * 0.006, 0.12), 1.35);
+  if (!praf) praf = requestAnimationFrame(() => { praf = 0; drawSurface(); paintSurface(); });
+});
+surfEl.addEventListener('dblclick', e => { SURF.az = -0.62; SURF.el = 0.66; drawSurface(); paintSurface(); e.preventDefault(); });
+surfEl.addEventListener('wheel', e => {
+  if (!SP || !SP.length) return;
+  SURF.h = Math.min(Math.max(SURF.h + (e.deltaY > 0 ? -0.04 : 0.04), 0.12), 0.9);
+  e.preventDefault(); drawSurface(); paintSurface();
+}, { passive: false });
+
+/* ---------- the atlas: a hundred landscapes at once, which is how you see structure -------
+   Each tile is one multiplet on its own, on its own colour scale, so the SHAPE is what you compare
+   and not the depth. In η-difference mode a tile is V(η) − V(−η): blind multiplets have nothing to
+   draw, and that emptiness is the theorem. ---------------------------------------------------- */
+const AN = 26;                                   // tile resolution: small on purpose, this is a map
+function tileField(key, mode) {
+  const rows1 = [{ key, n: 1, eta: 1, role: 1 }];
+  const sp = spectrum(rows1), spm = spectrum([{ key, n: 1, eta: -1, role: 1 }]);
+  const v = new Float64Array(AN * AN);
+  let lo = Infinity, hi = -Infinity;
+  for (let i = 0; i < AN; i++) for (let j = 0; j < AN; j++) {
+    const x = i / (AN - 1), y = j / (AN - 1);
+    const t = mode === 'D' ? V(sp, x, y) - V(spm, x, y) : V(sp, x, y);
+    v[j * AN + i] = t; if (t < lo) lo = t; if (t > hi) hi = t;
+  }
+  return { v, lo, hi };
+}
+function atlasKeys() {
+  const f = document.getElementById('afilter').value, s = document.getElementById('asort').value;
+  let ks = Object.keys(DATA.reps).filter(k => f === 'all' || (f === 'blind') === !!DATA.reps[k].blind);
+  const m2 = k => DATA.reps[k].blind ? 0 : Math.abs(momentsOfBox(DATA.reps[k].sides, DATA.reps[k].zeta)[1]);
+  const box = k => DATA.reps[k].blind ? -1 : DATA.reps[k].sides.reduce((a, b) => a + b, 0);
+  ks.sort((a, b) => s === 'dim' ? DATA.reps[a].dim - DATA.reps[b].dim
+                  : s === 'm2' ? m2(b) - m2(a) : box(b) - box(a));
+  return ks;
+}
+function drawAtlas() {
+  const box = document.getElementById('atlasbox'), note = document.getElementById('anote');
+  const mode = document.getElementById('amode').value, keys = atlasKeys();
+  box.innerHTML = keys.map(k => {
+    const r = DATA.reps[k];
+    return `<div class="at" data-key="${k}"><canvas width="${AN}" height="${AN}"></canvas>` +
+           `<b>(${k})</b><i>dim ${r.dim}</i><i class="lab">…</i></div>`;
+  }).join('');
+  const tiles = [...box.querySelectorAll('.at')];
+  let i = 0, flat = 0;
+  note.textContent = `drawing ${keys.length} landscapes…`;
+  (function chunk() {
+    const t0 = performance.now();
+    while (i < tiles.length && performance.now() - t0 < 40) {
+      const el = tiles[i], key = el.dataset.key, r = DATA.reps[key];
+      const { v, lo, hi } = tileField(key, mode);
+      const g = el.querySelector('canvas').getContext('2d');
+      const img = g.createImageData(AN, AN);
+      // Blank is not the same as blind. A multiplet whose whole index sits at charge 0 -- the
+      // singlet -- contributes a CONSTANT to V, and the engine does not carry constants, so its
+      // difference tile is exactly zero while D is not. Read that off the data, never off the
+      // picture: the picture cannot tell the two apart, which is the whole point of saying it.
+      const dead = hi - lo < 1e-9 * Math.max(1, Math.abs(hi));
+      const shift = !r.blind && !r.modes.some(([, A, B]) => A - B !== 0);
+      for (let a = 0; a < AN; a++) for (let b = 0; b < AN; b++) {
+        const t = dead ? 0 : (v[b * AN + a] - lo) / (hi - lo);
+        const c = (dead ? 'rgb(244,246,248)' : ramp(t)).match(/\d+/g), o = ((AN - 1 - b) * AN + a) * 4;
+        img.data[o] = +c[0]; img.data[o + 1] = +c[1]; img.data[o + 2] = +c[2]; img.data[o + 3] = 255;
+      }
+      g.putImageData(img, 0, 0);
+      if (shift) el.classList.add('shift');
+      if (dead && !shift) { el.classList.add('flat'); flat++; }
+      el.querySelector('.lab').textContent =
+        mode !== 'D' ? (r.blind ? 'blind' : '(' + r.sides.join(',') + ')')
+        : r.blind ? 'blind — D ≡ 0'
+        : shift ? 'η shifts V by a constant'
+        : 'M₂ ' + momentsOfBox(r.sides, r.zeta)[1];
+      i++;
+    }
+    if (i < tiles.length) requestAnimationFrame(chunk);
+    else note.innerHTML = mode === 'D'
+      ? `${flat} of ${tiles.length} tiles came out <b>empty</b>: those are exactly the multiplets η cannot
+         touch. The tiles marked <i>η shifts V by a constant</i> are blank too and are <b>not</b> blind —
+         their whole index sits at charge zero, which moves V by a constant nothing can measure.`
+      : `${tiles.length} landscapes. Tiles with the same box are the same picture — that is Part IV.`;
+  })();
+}
+document.getElementById('atlas').addEventListener('click', drawAtlas);
+for (const id of ['amode', 'afilter', 'asort'])
+  document.getElementById(id).addEventListener('change', () => {
+    if (document.getElementById('atlasbox').children.length) drawAtlas();
+  });
+document.getElementById('atlasbox').addEventListener('click', e => {
+  const t = e.target.closest('[data-key]'); if (!t) return;
+  rows = [{ key: t.dataset.key, n: 1, eta: 1, role: 1 }];
+  drawContent(); report();
+  document.querySelector('#f4').closest('.fx').scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+
+/* ---------- wiring ----------------------------------------------------------------------- */
+document.getElementById('q').addEventListener('input', drawCat);
+document.getElementById('catbody').addEventListener('click', e => {
+  const b = e.target.closest('[data-add]');
+  if (b && !rows.some(r => r.key === b.dataset.add)) {
+    rows.push({ key: b.dataset.add, n: 1, eta: 1, role: 1 }); drawContent(); report();
+  }
+});
+document.getElementById('content').addEventListener('click', e => {
+  const d = e.target.closest('[data-del]'), t = e.target.closest('[data-eta]');
+  if (d) { rows.splice(+d.dataset.del, 1); drawContent(); report(); }
+  if (t) { const i = +t.dataset.eta; rows[i].eta = -rows[i].eta; drawContent(); report(); }
+});
+document.getElementById('content').addEventListener('change', e => {
+  const n = e.target.closest('[data-n]'), r = e.target.closest('[data-role]');
+  if (n) rows[+n.dataset.n].n = Math.max(1, Math.min(99, +n.value || 1));
+  if (r) rows[+r.dataset.role].role = +r.value;
+  report();
+});
+document.getElementById('loadAhmn').addEventListener('click', () => {
+  rows = [{ key: '4,0,0', n: 3, eta: 1, role: 1 }, { key: '1,0,1', n: 1, eta: 1, role: -1 }];
+  drawContent(); report();
+});
+document.getElementById('clear').addEventListener('click', () => { rows = []; drawContent(); report(); });
+document.getElementById('run').addEventListener('click', release);
+
+let solution = null;
+document.getElementById('search').addEventListener('click', () => {
+  const box = document.getElementById('f6'), apply = document.getElementById('apply');
+  const res = searchBlind(rows.map(r => r.key));
+  solution = null; apply.style.display = 'none';
+  if (res.none) {
+    box.innerHTML = `<b>No.</b> ${res.why}. As far as multiplicity 6 goes, this set of multiplets cannot
+      be combined into a content that is blind to η — every combination leaves some charge uncancelled.`;
+    return;
+  }
+  solution = res;
+  box.innerHTML = `<b>Yes.</b> Take
+    ${res.keys.map((k, i) => `<span class="mono">${Math.abs(res.combo[i])}×(${k})</span> with η = ${res.combo[i] > 0 ? '+1' : '−1'}`).join(', ')}
+    — then <span class="mono">D<sub>total</sub> ≡ 0</span> exactly, charge by charge, in integers.
+    Every multiplet in it sees η; the content does not. The prediction F4 then reads
+    <span class="mono">M₂ = 0</span> and the brute force below will refuse to move when you flip η.`;
+  apply.style.display = '';
+});
+document.getElementById('apply').addEventListener('click', () => {
+  if (!solution) return;
+  rows = solution.keys.map((k, i) => ({ key: k, n: Math.abs(solution.combo[i]),
+                                        eta: solution.combo[i] > 0 ? 1 : -1, role: 1 }));
+  drawContent(); report();
+  document.getElementById('f6').innerHTML += '<br><b>Applied.</b> Read F4 above: the prediction and the winding sum both say zero.';
+});
+document.getElementById('export').addEventListener('click', () => {
+  const CM = contentMoments(rows), P = predict(rows), m = measure(rows);
+  const out = {
+    tool: 'eta-meter', model: 'SU(4) gauge-Higgs on T^2/Z_2',
+    content: rows.map(r => ({ dynkin: r.key, dim: DATA.reps[r.key].dim, n: r.n, eta: r.eta,
+                              role: r.role > 0 ? 'matter' : 'gauge',
+                              box: DATA.reps[r.key].sides, zeta: DATA.reps[r.key].zeta,
+                              blind: !!DATA.reps[r.key].blind })),
+    moments: { M0: CM.M0, M2: CM.M2, M4: CM.M4 },
+    effective_box: boxFromMoments(CM.M0, CM.M2, CM.M4),
+    lattice_constants: { L1: LODD[0], L2: LODD[1], KMAX },
+    eta_splitting: { predicted: { d11: P.dHxx, d22: P.dHyy, d12: P.dHxy },
+                     measured: { d11: m[0], d22: m[1], d12: m[2] },
+                     hessian_step: 0.002 },
+    vacuum: VAC ? { a1: VAC[0], a2: VAC[1] } : null,
+    provenance: { partIII: '10.5281/zenodo.21438226', partIV: '10.5281/zenodo.21463000',
+                  partV: '10.5281/zenodo.21727095',
+                  labels: 'F1-F3 verified (Part IV, exhaustive, not proved); F5 theorem (Part V, Lean 4); '
+                        + 'F4 derived here and checked against the winding sum on this page' },
+    permalink: location.origin + location.pathname + '#c=' +
+               rows.map(r => `${r.key}*${r.role > 0 ? r.n : -r.n}${r.eta < 0 ? ':-1' : ''}`).join(';'),
+  };
+  const txt = JSON.stringify(out, null, 2);
+  navigator.clipboard.writeText(txt).then(
+    () => document.getElementById('f6').insertAdjacentHTML('beforeend', '<br><b>Copied</b> — content, moments, prediction, measurement and provenance.'),
+    () => { const w = window.open(); w.document.write('<pre>' + txt.replace(/</g, '&lt;') + '</pre>'); });
+});
+for (const [id, out, f] of [['nw', 'nwv', v => v], ['fr', 'frv', v => (v / 100).toFixed(2)]])
+  document.getElementById(id).addEventListener('input', e =>
+    document.getElementById(out).textContent = f(+e.target.value));
+addEventListener('resize', () => { if (SP && SP.length) { drawMap(SP); drawSurface(); } paintMap(); paintSurface(); });
+
+/* the self-check: the page's own claim, run at load on AHMN's content */
+(function selfcheck() {
+  const el = document.getElementById('selfcheck');
+  const ahmn = [{ key: '4,0,0', n: 3, eta: 1, role: 1 }, { key: '1,0,1', n: 1, eta: 1, role: -1 }];
+  const P = predict(ahmn), m = measure(ahmn);
+  const rel = Math.max(Math.abs(P.dHxx - m[0]) / Math.abs(m[0]), Math.abs(P.dHyy - m[1]) / Math.abs(m[1]));
+  const ok = rel < 0.005 && Math.abs(m[2]) < 1e-6;
+  el.className = 'chip ' + (ok ? 'thm' : 'bad');
+  el.textContent = ok ? `self-check ok — closed form matches the winding sum to ${(100 * rel).toFixed(3)} %`
+                      : `SELF-CHECK FAILED — closed form off by ${(100 * rel).toFixed(2)} %`;
+})();
+
+function fromHash() {
+  let h = decodeURIComponent(location.hash.slice(1)).trim();
+  if (h.startsWith('c=')) h = h.slice(2); else if (h !== 'ahmn') return false;
+  if (h === 'ahmn' || !h) { rows = [{ key: '4,0,0', n: 3, eta: 1, role: 1 }, { key: '1,0,1', n: 1, eta: 1, role: -1 }]; return true; }
+  const out = [];
+  for (const part of h.split(';')) {
+    const m = part.match(/^(\d+,\d+,\d+)\*(-?\d+)(?::(-?1))?$/);
+    if (!m || !DATA.reps[m[1]]) continue;
+    out.push({ key: m[1], n: Math.abs(+m[2]) || 1, role: (+m[2]) < 0 ? -1 : 1, eta: m[3] ? +m[3] : 1 });
+  }
+  if (!out.length) return false;
+  rows = out; return true;
+}
+if (!fromHash()) rows = [{ key: '4,0,0', n: 3, eta: 1, role: 1 }, { key: '1,0,1', n: 1, eta: 1, role: -1 }];
+drawCat(); drawContent(); report();
+addEventListener('hashchange', () => { if (fromHash()) { drawContent(); report(); } });
+</script>
+</body>
+</html>
