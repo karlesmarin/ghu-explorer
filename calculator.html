@@ -73,6 +73,7 @@ tbody tr:hover{background:#f7fafc}
 .verdict b{display:block;font-size:15px;margin-bottom:2px}
 .verdict span{font-size:13px;color:var(--ink2)}
 canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);display:block}
+.pair{display:grid;gap:10px}@media(min-width:560px){.pair{grid-template-columns:1fr 1fr}}
 .legend{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--ink2);margin-top:8px;
         flex-wrap:wrap}
 .swatch{display:inline-block;width:52px;height:9px;border-radius:3px;vertical-align:middle;
@@ -197,7 +198,7 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
     <h2>4 · The landscape</h2>
     <canvas id="cut" width="520" height="210"></canvas>
     <p class="note" style="margin:7px 0 12px">The potential along a line through the vacuum (&alpha;&#8322; varying, &alpha;&#8321; fixed at its value there). <b>The well is the vacuum.</b> If the curve has no well, this content does not break the symmetry.</p>
-    <canvas id="map" width="520" height="520"></canvas>
+    <div class="pair"><canvas id="map" width="420" height="420"></canvas><canvas id="flow" width="420" height="420"></canvas></div>
     <div class="legend">
       <span><span class="swatch"></span> low → high</span>
       <span>✕ vacuum</span>
@@ -381,7 +382,7 @@ function report() {
   const stats = document.getElementById('stats'), vb = document.getElementById('verdictbox');
   if (!sp.length) {
     stats.innerHTML = '<div class="empty" style="grid-column:1/-1">Nothing to compute yet.</div>';
-    vb.innerHTML = ''; drawMap(null); drawCut(null); pre(); return;
+    vb.innerHTML = ''; drawMap(null); drawFlow(null); drawCut(null); pre(); return;
   }
   const [a1, a2, v0] = minimise(sp);
   const [hxx, hyy, hxy] = hessian(sp, a1, a2);
@@ -415,7 +416,7 @@ function report() {
       <span>Curvature at α = 0: eigenvalues ${fmt(o2, 2)} and ${fmt(o1, 2)}.
       ${breaks ? 'The vacuum above is where it goes.'
                : 'A lower minimum elsewhere is still possible; the criterion is local.'}</span></div>`;
-  drawMap(sp, a1, a2); drawCut(sp, a1, a2); pre();
+  drawMap(sp, a1, a2); drawFlow(sp, a1, a2); drawCut(sp, a1, a2); pre();
 }
 
 /* one sentence, three cases, and no clever ternary: a broken one took the whole page down once */
@@ -450,6 +451,49 @@ function pre() {
     <p class="note">The half-domain reduction α₂ ∈ [0,½] used in the literature is <b>not</b> legal for
       every representation: Part III shows it inverts exactly on the class able to host the Standard
       Model. This page always scans the full period.</p>`;
+}
+
+/* ---------- where it rolls: the same field, with no contours to read ---------------------- */
+function drawFlow(sp, a1, a2) {
+  const c = document.getElementById('flow'), g = c.getContext('2d'), W = c.width;
+  g.fillStyle = '#fbfcfd'; g.fillRect(0, 0, W, W);
+  if (!sp) return;
+  const h = 0.004, grad = (x, y) => [(V(sp, x + h, y) - V(sp, x - h, y)) / (2 * h),
+                                     (V(sp, x, y + h) - V(sp, x, y - h)) / (2 * h)];
+  const wrap = t => t - Math.floor(t);
+  let gmax = 1e-9;
+  for (let i = 0; i <= 12; i++) for (let j = 0; j <= 12; j++) {
+    const [u, v] = grad(i / 12, j / 12); gmax = Math.max(gmax, Math.hypot(u, v));
+  }
+  const S = 22;                                   // seeds: a square net of starting points
+  for (let i = 0; i < S; i++) for (let j = 0; j < S; j++) {
+    let x = (i + 0.5) / S, y = (j + 0.5) / S;
+    const pts = [[x, y]];
+    for (let k = 0; k < 60; k++) {                // roll downhill, in small steps
+      const [u, v] = grad(x, y), n = Math.hypot(u, v) / gmax;
+      if (n < 1e-4) break;
+      x = wrap(x - 0.012 * u / (gmax * Math.max(n, .05)));
+      y = wrap(y - 0.012 * v / (gmax * Math.max(n, .05)));
+      pts.push([x, y]);
+    }
+    g.lineWidth = 1.1; g.lineCap = 'round';
+    for (let k = 1; k < pts.length; k++) {
+      const [x0, y0] = pts[k - 1], [x1, y1] = pts[k];
+      if (Math.abs(x1 - x0) > .5 || Math.abs(y1 - y0) > .5) continue;   // do not draw the wrap
+      g.strokeStyle = `rgba(27,111,140,${0.10 + 0.5 * k / pts.length})`;
+      g.beginPath(); g.moveTo(x0 * W, (1 - y0) * W); g.lineTo(x1 * W, (1 - y1) * W); g.stroke();
+    }
+    const [ex, ey] = pts[pts.length - 1];         // where it ended up
+    g.fillStyle = 'rgba(27,111,140,.55)';
+    g.beginPath(); g.arc(ex * W, (1 - ey) * W, 1.6, 0, 7); g.fill();
+  }
+  const X = a1 * W, Y = (1 - a2) * W;
+  for (const [col, w] of [['rgba(255,255,255,.95)', 5], ['#B5530F', 2.4]]) {
+    g.strokeStyle = col; g.lineWidth = w; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(X - 8, Y - 8); g.lineTo(X + 8, Y + 8);
+    g.moveTo(X + 8, Y - 8); g.lineTo(X - 8, Y + 8); g.stroke();
+  }
+  g.strokeStyle = 'rgba(0,0,0,.18)'; g.lineWidth = 1; g.strokeRect(.5, .5, W - 1, W - 1);
 }
 
 /* ---------- the cut: one curve, which anybody can read ---------------------------------- */
