@@ -112,6 +112,11 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
 .sheet td.exp{font-size:12.5px;color:var(--ink2)}
 .sheet td.st{width:1%;text-align:right;white-space:nowrap}
 .st .chip{font-size:9.5px;padding:3px 7px}
+
+.i{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;border:1px solid #c3dce6;color:var(--blue);background:var(--blue-l);font:600 9.5px/1 var(--mono);cursor:help;vertical-align:.12em;margin-left:4px;user-select:none}
+.i:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.gloss dt{font:600 13px/1.5 var(--mono);color:var(--ink);margin-top:9px}
+.gloss dd{margin:2px 0 0;font-size:12.5px;color:var(--ink2)}
 </style>
 </head>
 <body>
@@ -135,7 +140,7 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
 <div class="grid two">
 
   <section class="card">
-    <h2>1 · The catalogue</h2>
+    <h2>1 · The catalogue <span class="i" title="Every SU(4) multiplet with a+b+c <= 7 and dimension <= 3000, listed by its Dynkin labels (a,b,c). The partition is lambda = (a+b+c, b+c, c, 0).">i</span></h2>
     <div class="toolbar">
       <input type="search" id="q" placeholder="Dynkin labels, dimension…  e.g. 4 0 0  or  35">
       <select id="filter">
@@ -149,9 +154,9 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
         <thead><tr>
           <th data-k="key">(a,b,c)</th>
           <th data-k="dim" class="num">dim</th>
-          <th data-k="sides">box (p,q,r)</th>
-          <th data-k="zeta" class="num">ζ</th>
-          <th data-k="blind">η</th>
+          <th data-k="sides">box (p,q,r) <span class="i" title="Part IV: the coset character is, up to a sign, a product of exactly three SU(2) characters with these indices, read off the 2-quotient of the partition. Blind multiplets have no box.">i</span></th>
+          <th data-k="zeta" class="num">ζ <span class="i" title="The global sign of that closed form. It is Part IV's parity index; it makes every coefficient of the coset half point the same way.">i</span></th>
+          <th data-k="blind">η <span class="i" title="Whether this multiplet can see the boundary-condition sign eta = eta0*eta1. Blind means D = 0 identically: flipping eta changes nothing measurable. Part V, machine-checked in Lean 4.">i</span></th>
           <th class="no"></th>
         </tr></thead>
         <tbody id="catbody"></tbody>
@@ -166,7 +171,7 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
   </section>
 
   <section class="card">
-    <h2>2 · Your matter content</h2>
+    <h2>2 · Your matter content <span class="i" title="The bulk fields of your model. n is the multiplicity; eta is the boundary sign of that multiplet; role says whether it enters as matter (+) or as the gauge sector (-), which carries the antiperiodic twist.">i</span></h2>
     <div class="toolbar">
       <button id="loadAhmn">load AHMN 2312.08608</button>
       <button id="clear">clear</button>
@@ -188,14 +193,14 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
 </div>
 
 <section style="margin-top:18px">
-  <h2>3 · What comes out</h2>
+  <h2>3 · What comes out <span class="i" title="Everything below is computed from the two Schur specialisations of the content you built. Each row says whether it is a theorem, a verified identity, or measured against AHMN.">i</span></h2>
   <div class="res" id="stats"></div>
   <div id="verdictbox" style="margin-top:12px"></div>
 </section>
 
 <div class="grid two" style="margin-top:18px">
   <section class="card">
-    <h2>4 · The landscape</h2>
+    <h2>4 · The landscape <span class="i" title="The one-loop Wilson-line potential over the torus of Higgs vacua. alpha1 and alpha2 are the two Wilson-line phases; the Higgs IS that phase in gauge-Higgs unification.">i</span></h2>
     <canvas id="cut" width="520" height="210"></canvas>
     <p class="note" style="margin:7px 0 12px">The potential along a line through the vacuum (&alpha;&#8322; varying, &alpha;&#8321; fixed at its value there). <b>The well is the vacuum.</b> If the curve has no well, this content does not break the symmetry.</p>
     <div class="pair"><canvas id="map" width="420" height="420"></canvas><canvas id="flow" width="420" height="420"></canvas></div>
@@ -219,6 +224,38 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
     <h2>5 · Before you compute anything</h2>
     <div id="pre"></div>
   </section>
+</div>
+
+
+<div class="sheet gloss" style="margin-top:18px">
+  <h3>Glossary &mdash; every symbol on this page, in one place</h3>
+  <div style="padding:6px 16px 16px">
+  <dl>
+    <dt>&alpha; = (&alpha;&#8321;, &alpha;&#8322;)</dt>
+    <dd>The two Wilson-line phases. In gauge&ndash;Higgs unification the Higgs <em>is</em> this phase, so
+        the potential over &alpha; is the Higgs potential, and its minimum is the vacuum.</dd>
+    <dt>&Sigma;<sub>&lambda;</sub> and D<sub>&lambda;</sub></dt>
+    <dd>The two halves. &Sigma; is a graded <em>dimension</em>: its coefficients are non-negative and it
+        can never cancel. D is an <em>index</em>: differences of multiplicities, so it can vanish. Even
+        windings carry &Sigma;, odd windings carry D.</dd>
+    <dt>&eta; = &eta;&#8320;&eta;&#8321;</dt>
+    <dd>The boundary-condition sign a multiplet carries, &plusmn;1. It multiplies the coset half and
+        nothing else &mdash; which is why some multiplets cannot feel it at all.</dd>
+    <dt>blind</dt>
+    <dd>D<sub>&lambda;</sub> &equiv; 0. The boundary condition has no consequence any measurement of this
+        Higgs sector can see. Classified and counted in closed form, machine-checked in Lean&nbsp;4.</dd>
+    <dt>box (p,q,r) and &zeta;</dt>
+    <dd>Part IV's closed form: D<sub>&lambda;</sub> = &zeta;&thinsp;&chi;<sub>p</sub>&chi;<sub>q</sub>&chi;<sub>r</sub>,
+        the three indices read off the 2-quotient of the partition. This is what makes the potential
+        computable without enumerating a Kaluza&ndash;Klein spectrum.</dd>
+    <dt>matter / gauge</dt>
+    <dd>How the multiplet enters the loop: matter with a plus sign, the gauge and ghost sector with a
+        minus and with the antiperiodic twist that exchanges the two mode counts.</dd>
+    <dt>A<sub>q</sub>, B<sub>q</sub></dt>
+    <dd>Mode counts at charge q of each orbifold parity. A+B = &Sigma; and A&minus;B = D; the field
+        writes the same pair as {A + B(&minus;1)^k&#8322;}.</dd>
+  </dl>
+  </div>
 </div>
 
 <div class="foot">
