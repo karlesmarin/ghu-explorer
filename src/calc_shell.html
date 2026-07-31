@@ -76,8 +76,6 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
 .pair{display:grid;gap:10px}@media(min-width:560px){.pair{grid-template-columns:1fr 1fr}}
 .legend{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--ink2);margin-top:8px;
         flex-wrap:wrap}
-.swatch{display:inline-block;width:52px;height:9px;border-radius:3px;vertical-align:middle;
-        background:linear-gradient(90deg,#2c5f8a,#7fb2cc,#f5f0e6,#e0a06a,#a83c14)}
 .note{font-size:12.5px;color:var(--ink2)}
 .foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2)}
 .foot b{color:var(--ink)}
@@ -96,6 +94,9 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
 
 .sitenav{display:flex;align-items:center;gap:4px;margin:0 0 16px;padding:5px;border:1px solid #dfe6ec;border-radius:10px;background:#fff;font-size:13.5px;flex-wrap:wrap}
 .sitenav a{display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:7px;text-decoration:none;color:#4a5b6a;font-weight:600}
+.sitenav a i{font-style:normal;font-weight:400;font-size:12px;color:#7d8c99}
+.sitenav a.here i{color:#cfe4ec}
+@media(max-width:900px){.sitenav a i{display:none}}
 .sitenav a b{display:grid;place-items:center;width:19px;height:19px;border-radius:5px;background:#eef3f6;color:#7d8c99;font:600 11px/1 ui-monospace,monospace}
 .sitenav a:hover{background:#f5f8fa;color:#12546b}
 .sitenav a.here{background:#1B6F8C;color:#fff}.sitenav a.here b{background:#ffffff33;color:#fff}
@@ -113,6 +114,65 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
 .sheet td.st{width:1%;text-align:right;white-space:nowrap}
 .st .chip{font-size:9.5px;padding:3px 7px}
 
+#map,#cut{cursor:crosshair;touch-action:none}
+#surf{cursor:grab;touch-action:none}
+#surf:active{cursor:grabbing}
+.panel{position:relative;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.panel.dark{border-color:#0c161d;background:#0c161d}
+.panel canvas{border:none;border-radius:0}
+.plab{position:absolute;top:7px;right:9px;z-index:1;font:600 9.5px/1 var(--mono);letter-spacing:.07em;
+      text-transform:uppercase;color:var(--ink3);background:rgba(255,255,255,.82);
+      border:1px solid var(--line);border-radius:99px;padding:4px 8px;pointer-events:none}
+.panel.dark .plab{color:#9fb7c4;background:rgba(12,22,29,.72);border-color:#22333f}
+.demoline{display:flex;align-items:center;gap:9px;margin:0 0 10px;padding:9px 13px;border-radius:9px;
+          background:linear-gradient(90deg,#12546b,#1B6F8C);color:#fff;font-size:13.5px;line-height:1.45;
+          box-shadow:0 1px 0 rgba(18,84,107,.25)}
+.how{border:1px solid var(--line);border-radius:11px;background:linear-gradient(180deg,#fff,#f7fafc);
+     padding:14px 16px;margin:0 0 18px}
+.how ol{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+@media(min-width:820px){.how ol{grid-template-columns:repeat(4,1fr);gap:14px}}
+.how li{display:flex;gap:9px;align-items:flex-start;font-size:12.8px;line-height:1.45;color:var(--ink2)}
+.how li > b{flex:none;display:grid;place-items:center;width:19px;height:19px;border-radius:6px;
+            background:var(--blue-l);color:var(--blue-d);font:700 11px/1 var(--mono);margin-top:1px}
+.how li span b{color:var(--ink)}
+.how li i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--blue-d)}
+.how button{margin-top:12px}
+.keys{margin:9px 0 0;font-size:12.3px;color:var(--ink2)}
+.keys b{font:600 11px/1 var(--mono);background:#f0f4f7;border:1px solid var(--line);border-radius:5px;
+        padding:3px 6px;color:var(--ink);margin-right:3px}
+.keys span{white-space:nowrap;margin-right:14px;display:inline-block}
+.pmode{position:absolute;top:7px;left:9px;z-index:1;display:flex;gap:2px;padding:2px;border-radius:99px;
+       background:rgba(12,22,29,.72);border:1px solid #22333f}
+.pmode button{font:600 9.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;
+              border:none;border-radius:99px;background:none;color:#9fb7c4}
+.pmode button:hover{color:#dbe8ef}
+.pmode button.on{background:#1B6F8C;color:#fff}
+.demoline[hidden]{display:none}
+.demoline b{font:650 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+            background:rgba(255,255,255,.18);padding:5px 7px;border-radius:99px;white-space:nowrap}
+.legend .cb{display:flex;align-items:center;gap:8px}
+.legend .cb canvas{width:130px;height:10px;border:none;border-radius:3px}
+.legend .cb i{font-style:normal;font:11px var(--mono);color:var(--ink3)}
+.legend .cb b{color:var(--ink2);font-weight:600}
+.read{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);
+      border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:7px 0 0}
+.read > div{background:#fff;padding:8px 10px}
+.read .k{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);font-weight:650;
+         margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.read .v{font:600 15px/1.2 var(--mono);letter-spacing:-.01em;white-space:nowrap}
+.read .v.dim{color:var(--ink3)}
+.read .s{font-size:11px;line-height:1.35;color:var(--ink3);margin-top:5px}
+.explain{margin-top:10px;padding:12px 14px;border:1px solid var(--line);border-left:3px solid var(--blue);
+         border-radius:0 9px 9px 0;background:#f7fafc;font-size:13px;line-height:1.55;color:var(--ink2)}
+.explain b{color:var(--ink)}
+.explain .mono{font-size:12.5px}
+.explain p{margin:0 0 7px}
+.explain p:last-child{margin:0}
+.readhead{display:flex;align-items:baseline;gap:9px;margin:13px 0 0;font-size:12.5px;color:var(--ink2);
+          flex-wrap:wrap}
+.readhead > b{font:650 11px/1.5 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--rust)}
+.readhead span{flex:1;min-width:200px}
+
 .i{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;border:1px solid #c3dce6;color:var(--blue);background:var(--blue-l);font:600 9.5px/1 var(--mono);cursor:help;vertical-align:.12em;margin-left:4px;user-select:none}
 .i:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
 .gloss dt{font:600 13px/1.5 var(--mono);color:var(--ink);margin-top:9px}
@@ -122,7 +182,7 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
 <body>
 <div class="wrap">
 
-<nav class="sitenav" aria-label="tools"><a href="index.html" data-p="explorer"><b>1</b> Selection rule</a><a href="calculator.html" data-p="calc" class="here"><b>2</b> Model calculator</a><span class="navnote">SU(4) gauge&ndash;Higgs on T&sup2;/&#8484;&#8322; &middot; Parts III&ndash;V</span></nav>
+<nav class="sitenav" aria-label="tools"><a href="index.html" data-p="explorer"><b>1</b> Selection rule <i>&mdash; which &alpha;-domain is legal</i></a><a href="calculator.html" data-p="calc" class="here"><b>2</b> Model calculator <i>&mdash; a content in, the Higgs out</i></a><a href="predictor.html" data-p="predict"><b>3</b> &eta;-meter <i>&mdash; predict without computing, then let it roll</i></a><span class="navnote">SU(4) gauge&ndash;Higgs on T&sup2;/&#8484;&#8322; &middot; Parts III&ndash;V</span></nav>
 <header>
   <h1>Orbifold Model Calculator
     <small>Six-dimensional <span class="mono">SU(4)</span> gauge–Higgs unification on <span class="mono">T²/Z₂</span>.
@@ -136,6 +196,20 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
     <span class="chip live" id="selfcheck">self-check: running…</span>
   </div>
 </header>
+
+<div class="how">
+  <ol>
+    <li><b>1</b><span><b>Build a content.</b> Add multiplets from the catalogue, set how many of each, matter
+        or gauge, and the boundary sign η. Or press <i>load AHMN</i> for a published model.</span></li>
+    <li><b>2</b><span><b>Read what comes out.</b> The vacuum, the two Higgs masses, the mixing and the
+        electroweak verdict — each labelled theorem, verified or measured.</span></li>
+    <li><b>3</b><span><b>Interrogate the landscape.</b> Drag any of the three panels: the reading bar
+        reports at <i>your</i> cursor. Double-click drops it there and it rolls downhill.</span></li>
+    <li><b>4</b><span><b>Flip η.</b> On a content of blind multiplets nothing may move — that is the
+        theorem, checked in front of you.</span></li>
+  </ol>
+  <button class="primary" id="demo2">▶ show me — 30 s guided tour</button>
+</div>
 
 <div class="grid two">
 
@@ -198,23 +272,46 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
   <div id="verdictbox" style="margin-top:12px"></div>
 </section>
 
-<div class="grid two" style="margin-top:18px">
+<div class="grid" style="margin-top:18px">
   <section class="card">
     <h2>4 · The landscape <span class="i" title="The one-loop Wilson-line potential over the torus of Higgs vacua. alpha1 and alpha2 are the two Wilson-line phases; the Higgs IS that phase in gauge-Higgs unification.">i</span></h2>
-    <canvas id="cut" width="520" height="210"></canvas>
-    <p class="note" style="margin:7px 0 12px">The potential along a line through the vacuum (&alpha;&#8322; varying, &alpha;&#8321; fixed at its value there). <b>The well is the vacuum.</b> If the curve has no well, this content does not break the symmetry.</p>
-    <div class="pair"><canvas id="map" width="420" height="420"></canvas><canvas id="flow" width="420" height="420"></canvas></div>
+    <div class="demoline" id="demoline" hidden></div>
+    <div class="pair">
+      <div class="panel"><span class="plab">plan · the torus of vacua</span>
+        <canvas id="map" width="420" height="412"></canvas></div>
+      <div class="panel dark"><span class="plab">relief · the same V, turned</span>
+        <span class="pmode" id="pmode"><button data-m="move" class="on">move α</button><button data-m="turn">turn view</button></span>
+        <canvas id="surf" width="420" height="412"></canvas></div>
+    </div>
+    <p class="keys">
+      <span><b>drag</b> move α, anywhere</span>
+      <span><b>double-click</b> drop it and watch it roll</span>
+      <span><b>turn view</b> / shift-drag rotate the relief</span>
+      <span><b>wheel</b> raise the relief</span>
+    </p>
+    <div class="readhead"><b>reading</b><span id="readwhere">&nbsp;</span></div>
+    <div class="read" id="read"></div>
+    <div class="explain" id="explain"></div>
+    <div class="panel" style="margin-top:14px"><span class="plab">cut · V along α₂ — drag</span>
+      <canvas id="cut" width="520" height="240"></canvas></div>
+    <p class="note" style="margin:7px 0 12px">The curve is the potential along the line through <b>the cursor</b> (&alpha;&#8322; varying, &alpha;&#8321; fixed at the cursor&rsquo;s value): the vertical slice of the map above. <b>The well is the vacuum.</b> If it has no well, this content does not break the symmetry.</p>
     <div class="legend">
-      <span><span class="swatch"></span> low → high</span>
+      <span class="cb"><canvas id="cbar" width="260" height="10"></canvas>
+        <i><b id="cblo">—</b> V <b id="cbhi">—</b></i></span>
       <span>✕ vacuum</span>
+      <span>○ cursor — drag any panel</span>
       <span id="etaflip"></span>
     </div>
     <p class="note" style="margin:9px 0 0">
-      The one-loop potential over the Wilson-line torus (α₁ horizontal, α₂ vertical, one period each).
+      Left, the one-loop potential over the Wilson-line torus in plan (α₁ horizontal, α₂ vertical, one
+      period each), with its isolines; right, the same V as a relief you can turn. <b>Drag any panel</b>
+      to move the cursor — the reading above is taken there, not at the vacuum — and <b>double-click</b>
+      to drop it and watch it roll downhill. On the relief, drag turns the view and the wheel raises it.
       Flip η below and watch: on a content of blind multiplets <b>nothing moves</b> — that is Theorem 1
       on the screen.
     </p>
     <div class="toolbar" style="margin-top:10px">
+      <button class="primary" id="demo">▶ show me how it works</button>
       <button id="flip">flip every η</button>
       <span class="note" id="flipnote"></span>
     </div>
@@ -324,6 +421,10 @@ function V(sp, a1, a2) {
   }
   return v;
 }
+function gradV(sp, x, y, h = 0.004) {
+  return [(V(sp, x + h, y) - V(sp, x - h, y)) / (2 * h),
+          (V(sp, x, y + h) - V(sp, x, y - h)) / (2 * h)];
+}
 function minimise(sp) {
   let best = [Infinity, 0, 0];
   for (let i = 0; i <= 60; i++) for (let j = 0; j <= 60; j++) {
@@ -342,6 +443,21 @@ function minimise(sp) {
       if (!moved) break;
     }
   }
+  // Polish. The pattern search stops one step-length short, which left |grad V| ~ 0.1 at what the
+  // page calls the vacuum -- visible now that the reading bar prints the gradient. Newton on the
+  // 2x2 Hessian, accepted only when it lowers V and stays small, makes the reported vacuum
+  // stationary in fact and not just in name.
+  for (let it = 0; it < 4; it++) {
+    const [fxx, fyy, fxy] = hessian(sp, A1, A2), [gx, gy] = gradV(sp, A1, A2);
+    const det = fxx * fyy - fxy * fxy;
+    if (!(Math.abs(det) > 1e-9)) break;
+    const dx = -(fyy * gx - fxy * gy) / det, dy = -(fxx * gy - fxy * gx) / det;
+    if (!isFinite(dx) || !isFinite(dy) || Math.hypot(dx, dy) > 0.02) break;
+    const x = A1 + dx, y = A2 + dy, v = V(sp, x, y);
+    if (!(v <= v0 + 1e-9)) break;
+    A1 = x; A2 = y; v0 = v;
+  }
+  A1 -= Math.floor(A1); A2 -= Math.floor(A2);      // keep it on the period the page draws
   return [A1, A2, v0];
 }
 function hessian(sp, a1, a2, h = 0.002) {
@@ -414,12 +530,31 @@ function add(key) {
 /* ---------- results ---------------------------------------------------------------------- */
 const fmt = (x, n = 4) => (x >= 0 ? '' : '−') + Math.abs(x).toFixed(n);
 
+/* The cursor is the point the whole right column reports on. It starts at the vacuum and the user
+   moves it: the map is not a picture of one answer, it is the control on the field itself. */
+let SP = null, VAC = null, CUR = null, GMAX = 1, ROLL = null, mapBase = null;
+const SURF = { az: -0.62, el: 0.66, n: 44, h: 0.40, s: 300, ox: 210, oy: 200 };  // the relief's camera
+const wrap01 = t => t - Math.floor(t);
+function fieldScale(sp) {                      // a gradient size to measure steps against
+  let m = 1e-9;
+  for (let i = 0; i <= 12; i++) for (let j = 0; j <= 12; j++) {
+    const [u, v] = gradV(sp, i / 12, j / 12); m = Math.max(m, Math.hypot(u, v));
+  }
+  return m;
+}
+function refresh() {                            // everything that follows the cursor, and nothing else
+  const p = CUR || VAC || [0, 0];
+  paintMap(); paintSurface(); drawCut(SP, p[0], p[1]); readout();
+}
+
 function report() {
   const sp = spectrum(rows);
   const stats = document.getElementById('stats'), vb = document.getElementById('verdictbox');
   if (!sp.length) {
     stats.innerHTML = '<div class="empty" style="grid-column:1/-1">Nothing to compute yet.</div>';
-    vb.innerHTML = ''; drawMap(null); drawFlow(null); drawCut(null); pre(); return;
+    vb.innerHTML = '';
+    SP = null; VAC = null; CUR = null; ROLL = null; ROLLS++;
+    drawMap(null); surfBase = null; refresh(); pre(); return;
   }
   const [a1, a2, v0] = minimise(sp);
   const [hxx, hyy, hxy] = hessian(sp, a1, a2);
@@ -453,8 +588,280 @@ function report() {
       <span>Curvature at α = 0: eigenvalues ${fmt(o2, 2)} and ${fmt(o1, 2)}.
       ${breaks ? 'The vacuum above is where it goes.'
                : 'A lower minimum elsewhere is still possible; the criterion is local.'}</span></div>`;
-  drawMap(sp, a1, a2); drawFlow(sp, a1, a2); drawCut(sp, a1, a2); pre();
+  SP = sp; VAC = [a1, a2]; CUR = [a1, a2]; ROLL = null; ROLLS++; GMAX = fieldScale(sp);
+  drawMap(sp); drawSurface(); refresh(); pre();
 }
+
+/* ---------- the cursor: drag to read the field, double-click to drop it and watch ---------- */
+function readout() {
+  const el = document.getElementById('read'), where = document.getElementById('readwhere'),
+        exp = document.getElementById('explain');
+  const cell = (k, v, s, dim) => `<div><div class="k">${k}</div><div class="v${dim ? ' dim' : ''}">${v}</div>` +
+                                 `<div class="s">${s}</div></div>`;
+  if (!SP) {                                    // the bar never empties: it says what it is waiting for
+    where.innerHTML = 'compute a content, then drag on the map — this bar reads the field wherever you put the cursor.';
+    el.innerHTML =
+      cell('α₁, α₂', '—', 'where the cursor is on the torus', true) +
+      cell('V', '—', 'the height of the potential there', true) +
+      cell('masses², light / heavy', '—', 'how sharply V curves', true) +
+      cell('mixing |m₁₂|/m₁₁', '—', 'how much the two directions mix', true) +
+      cell('|∇V|', '—', 'the slope — zero only at a stationary point', true);
+    exp.innerHTML = '<p>Build a content above and this box will read the numbers back to you in words.</p>';
+    return;
+  }
+  const [x, y] = CUR;
+  const v = V(SP, x, y);
+  const [hxx, hyy, hxy] = hessian(SP, x, y);
+  const [e1, e2] = eig(hxx, hyy, hxy);
+  const gn = Math.hypot(...gradV(SP, x, y));
+  const [vx, vy] = VAC, v0 = V(SP, vx, vy);
+  const atVac = Math.abs(x - vx) < 5e-4 && Math.abs(y - vy) < 5e-4;
+  where.innerHTML = atVac
+    ? 'at the <b>vacuum</b>. Drag any panel to read anywhere else; double-click drops it there and it rolls.'
+    : `<b>${fmt(Math.hypot(x - vx, y - vy), 3)}</b> away from the vacuum, in units of one period.`;
+  el.innerHTML =
+    cell('α₁, α₂', `${fmt(x, 3)}, ${fmt(y, 3)}`, 'the Wilson line — in this model, the Higgs field itself') +
+    cell('V', fmt(v, 2), atVac ? 'the deepest point of the whole torus'
+                               : `${fmt(v - v0, 2)} above the vacuum`) +
+    cell(atVac ? 'masses², light / heavy' : 'curvature, low / high', `${fmt(e2, 2)} / ${fmt(e1, 2)}`,
+         atVac ? 'the two neutral Higgs states, squared' : 'not masses here — see below') +
+    cell('mixing |m₁₂|/m₁₁', Math.abs(hxx) > 1e-9 ? fmt(Math.abs(hxy / hxx), 4) : '—',
+         'off-diagonal over diagonal; the sign is a convention') +
+    cell('|∇V|', gn >= 0.01 ? fmt(gn, 3) : gn.toExponential(1),
+         atVac ? 'zero: nothing pushes the field from here' : 'not zero: the field would move');
+  exp.innerHTML = explain(x, y, v, v0, hxx, hyy, hxy, e1, e2, gn, atVac);
+}
+
+/* What the numbers MEAN, in words, recomputed wherever the cursor is. Written for someone who has
+   the physics but not this page, and it never calls a curvature a mass away from a minimum. */
+function explain(x, y, v, v0, hxx, hyy, hxy, e1, e2, gn, atVac) {
+  const shape = e2 > 0 && e1 > 0 ? 'curves upward in both directions — a bowl'
+              : e1 < 0 && e2 < 0 ? 'curves downward in both directions — a hilltop'
+              : 'curves up one way and down the other — a saddle, a mountain pass';
+  const P = [];
+  if (atVac) {
+    P.push(`<b>You are at the vacuum</b>: the lowest point of V on the whole torus, at
+      <span class="mono">α = (${fmt(x, 3)}, ${fmt(y, 3)})</span>. The Wilson line <i>is</i> the Higgs field
+      here, so this α is the Higgs vacuum expectation value, and the numbers to its right are what the
+      model predicts a measurement would find.`);
+    P.push(`Because <span class="mono">∇V = 0</span> and the surface ${shape}, the two curvatures
+      <b>are</b> the squared masses of the two neutral Higgs states:
+      <span class="mono">${fmt(e2, 2)}</span> light and <span class="mono">${fmt(e1, 2)}</span> heavy, in the
+      units V is written in. Their ratio <b>${e2 > 0 ? fmt(Math.sqrt(e1 / e2), 4) : '—'}</b> is the number
+      to quote: it is an invariant, free of the normalisation and of any convention.`);
+    P.push(`The mixing <span class="mono">|m₁₂|/m₁₁ = ${fmt(Math.abs(hxy / hxx), 4)}</span> says how much the
+      two Wilson-line directions talk to each other. Only its magnitude is physical — flipping the
+      orientation of α₂ flips its sign and changes nothing measurable.`);
+  } else {
+    P.push(`<b>You are not at a vacuum.</b> V here is <span class="mono">${fmt(v, 2)}</span>,
+      <b>${fmt(v - v0, 2)}</b> above the minimum, and the slope <span class="mono">|∇V| =
+      ${gn >= 0.01 ? fmt(gn, 2) : gn.toExponential(1)}</span> is not zero: a Higgs field placed here would
+      not stay. Double-click to drop it and watch where it goes.`);
+    P.push(`Locally the potential ${shape}. Those two numbers are curvatures, <b>not masses</b> — a mass²
+      is the curvature <i>at a stationary point</i>, and this is not one. Read them as the shape of the
+      landscape you are standing on.`);
+  }
+  P.push(`<span class="mono">V</span> is a one-loop sum over windings of the torus: only <i>differences</i>
+    of V carry meaning, never its absolute value. Every number here comes from the two Schur
+    specialisations of your content — no Kaluza–Klein tower was enumerated to get them.`);
+  return P.map(t => `<p>${t}</p>`).join('');
+}
+
+let ROLLS = 0;                                  // any new content, drag or roll cancels the previous one
+function rollFrom(x, y) {
+  if (!SP) return;
+  const id = ++ROLLS;
+  ROLL = { pts: [[x, y]] };
+  let px = x, py = y, steps = 0;
+  (function step() {
+    if (id !== ROLLS) return;
+    for (let k = 0; k < 4 && steps < 700; k++, steps++) {
+      const [u, v] = gradV(SP, px, py), n = Math.hypot(u, v);
+      if (n < 1e-4 * GMAX) { steps = 700; break; }        // it has settled: stop, do not jitter
+      const s = 0.006 * Math.min(1, Math.max(n / GMAX, 0.04));
+      px = wrap01(px - s * u / n); py = wrap01(py - s * v / n);
+      ROLL.pts.push([px, py]);
+    }
+    CUR = [px, py];
+    refresh();
+    if (steps < 700 && id === ROLLS) requestAnimationFrame(step);
+  })();
+}
+
+const mapEl = document.getElementById('map'), surfEl = document.getElementById('surf'),
+      cutEl = document.getElementById('cut');
+/* a canvas is drawn in its own logical units but displayed scaled: one place converts, and it
+   accounts for the padding the axes live in, so the corner of the FIELD is alpha = (0,0). */
+function localXY(el, e, w, h) {
+  const b = el.getBoundingClientRect();
+  return [(e.clientX - b.left) / b.width * w, (e.clientY - b.top) / b.height * h];
+}
+function mapPoint(e) {
+  const [px, py] = localXY(mapEl, e, MAPW, MAPH);
+  return [Math.min(Math.max((px - PAD.l) / FW, 0), 1),
+          Math.min(Math.max(1 - (py - PAD.t) / FH, 0), 1)];
+}
+function cutPoint(e) {                          // dragging the curve moves alpha2 along the cut
+  const w = cutEl.getBoundingClientRect().width;
+  const [px] = localXY(cutEl, e, w, CUTH);
+  return Math.min(Math.max((px - CP.l) / (w - CP.l - CP.r), 0), 1);
+}
+let pending = null, raf = 0;
+function queue(p) {                             // one repaint per frame, however fast the mouse moves
+  pending = p;
+  if (raf) return;
+  raf = requestAnimationFrame(() => { raf = 0; if (pending) { CUR = pending; pending = null; refresh(); } });
+}
+function grab(e, el) {                          // taking the cursor by hand stops any roll
+  if (!SP || e.button !== 0 || !e.isPrimary) return false;
+  if (DEMO.on) stopDemo();                      // and the hand always wins over the demo
+  ROLLS++; ROLL = null;
+  try { el.setPointerCapture(e.pointerId); } catch (_) {}
+  e.preventDefault();
+  return true;
+}
+let dragMap = false, dragCut = false, dragSurf = false, spin = null;
+mapEl.addEventListener('pointerdown', e => { if (!grab(e, mapEl)) return; dragMap = true; queue(mapPoint(e)); });
+mapEl.addEventListener('pointermove', e => { if (dragMap) queue(mapPoint(e)); });
+mapEl.addEventListener('dblclick', e => { if (!SP) return; const [x, y] = mapPoint(e); rollFrom(x, y); e.preventDefault(); });
+
+cutEl.addEventListener('pointerdown', e => { if (!grab(e, cutEl)) return; dragCut = true;
+                                             queue([(CUR || VAC)[0], cutPoint(e)]); });
+cutEl.addEventListener('pointermove', e => { if (dragCut) queue([(CUR || VAC)[0], cutPoint(e)]); });
+cutEl.addEventListener('dblclick', e => { if (!SP) return; rollFrom((CUR || VAC)[0], cutPoint(e)); e.preventDefault(); });
+
+/* The relief is a control, not a picture: dragging it moves alpha like the map does, and the
+   reading follows. Turning the view is the other mode (or shift-drag), because a panel you can
+   only look at was the complaint that produced this. */
+const VIEW0 = { az: SURF.az, el: SURF.el };
+let MODE = 'move';
+function respin() { drawSurface(); paintSurface(); }
+/* pick the point of the surface under the mouse: nearest mesh vertex in screen space, and among
+   near ones the one closest to the viewer, so a hidden far slope never steals the cursor */
+function pickSurface(px, py) {
+  if (!mapVals) return null;
+  const n = SURF.n;
+  let near = null, any = null;
+  for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) {
+    const x = i / (n - 1), y = j / (n - 1);
+    const [X, Y, d] = projS(x, y, surfHeight(x, y));
+    const r = (X - px) * (X - px) + (Y - py) * (Y - py);
+    if (!any || r < any.r) any = { x, y, r };
+    if (r > 484) continue;                       // within 22 px
+    if (!near || d > near.d) near = { x, y, d, r };
+  }
+  const p = near || any;
+  return p ? [p.x, p.y] : null;
+}
+surfEl.addEventListener('pointerdown', e => {
+  if (!SP || e.button !== 0 || !e.isPrimary) return;
+  if (DEMO.on) stopDemo();
+  const [px, py] = localXY(surfEl, e, MAPW, MAPH);
+  try { surfEl.setPointerCapture(e.pointerId); } catch (_) {}
+  e.preventDefault();
+  if (MODE === 'turn' || e.shiftKey) { spin = { px, py, az: SURF.az, el: SURF.el }; return; }
+  ROLLS++; ROLL = null; dragSurf = true;
+  const p = pickSurface(px, py); if (p) queue(p);
+});
+surfEl.addEventListener('pointermove', e => {
+  const [px, py] = localXY(surfEl, e, MAPW, MAPH);
+  if (spin) {
+    SURF.az = spin.az + (px - spin.px) * 0.011;
+    SURF.el = Math.min(Math.max(spin.el + (py - spin.py) * 0.006, 0.12), 1.35);
+    if (!raf) { raf = requestAnimationFrame(() => { raf = 0; respin(); }); }
+  } else if (dragSurf) {
+    const p = pickSurface(px, py); if (p) queue(p);
+  }
+});
+document.getElementById('pmode').addEventListener('click', e => {
+  const b = e.target.closest('[data-m]'); if (!b) return;
+  MODE = b.dataset.m;
+  document.querySelectorAll('#pmode button').forEach(x => x.classList.toggle('on', x === b));
+  surfEl.style.cursor = MODE === 'turn' ? 'grab' : 'crosshair';
+});
+surfEl.addEventListener('dblclick', e => { SURF.az = VIEW0.az; SURF.el = VIEW0.el; respin(); e.preventDefault(); });
+surfEl.addEventListener('wheel', e => {
+  if (!SP) return;
+  SURF.h = Math.min(Math.max(SURF.h + (e.deltaY > 0 ? -0.04 : 0.04), 0.12), 0.9);   // relief scale
+  e.preventDefault(); respin();
+}, { passive: false });
+addEventListener('pointerup', () => { dragMap = dragCut = dragSurf = false; spin = null; });
+addEventListener('pointercancel', () => { dragMap = dragCut = dragSurf = false; spin = null; });
+
+/* ---------- the demo: the page explaining itself, with the page's own controls ------------ */
+const DEMO = { on: false, id: 0 };
+const demoBtn = document.getElementById('demo'), demoLine = document.getElementById('demoline');
+function say(step, text) {
+  demoLine.hidden = !text;
+  demoLine.innerHTML = text ? `<b>${step}</b><span>${text}</span>` : '';
+}
+const hold = ms => new Promise(r => setTimeout(r, ms));
+function glide(to, ms, id) {                    // walk the cursor there, so the eye can follow it
+  return new Promise(done => {
+    const from = (CUR || VAC).slice(), t0 = performance.now();
+    (function frame(t) {
+      if (id !== DEMO.id) return done();
+      const u = Math.min((t - t0) / ms, 1), e = u < .5 ? 2 * u * u : 1 - 2 * (1 - u) * (1 - u);
+      CUR = [from[0] + (to[0] - from[0]) * e, from[1] + (to[1] - from[1]) * e];
+      refresh();
+      u < 1 ? requestAnimationFrame(frame) : done();
+    })(t0);
+  });
+}
+function turn(daz, ms, id) {
+  return new Promise(done => {
+    const az0 = SURF.az, t0 = performance.now();
+    (function frame(t) {
+      if (id !== DEMO.id) return done();
+      const u = Math.min((t - t0) / ms, 1);
+      SURF.az = az0 + daz * (u < .5 ? 2 * u * u : 1 - 2 * (1 - u) * (1 - u));
+      drawSurface(); paintSurface();
+      u < 1 ? requestAnimationFrame(frame) : done();
+    })(t0);
+  });
+}
+const demoBtn2 = document.getElementById('demo2');
+function demoLabel(t) { demoBtn.textContent = t; demoBtn2.textContent = t === '■ stop' ? '■ stop' : '▶ show me — 30 s guided tour'; }
+function stopDemo() { DEMO.on = false; DEMO.id++; say('', ''); demoLabel('▶ show me how it works'); }
+async function runDemo() {
+  if (DEMO.on) return stopDemo();
+  DEMO.on = true; const id = ++DEMO.id;
+  demoLabel('■ stop');
+  document.querySelector('.pair').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const alive = () => DEMO.on && id === DEMO.id;
+  const step = async (n, text, ms) => { if (!alive()) return false; say(n, text); await hold(ms); return alive(); };
+
+  rows = [{ key: '4,0,0', n: 3, eta: 1, role: 1 }, { key: '1,0,1', n: 1, eta: 1, role: -1 }];
+  drawContent(); report();
+  if (!await step('1 / 6', 'A matter content goes in — here AHMN’s: three <b>35</b>s of matter and the gauge <b>15</b>. Everything below is computed from it, with no Kaluza–Klein spectrum enumerated.', 3800)) return;
+  if (!await step('2 / 6', 'The map is the one-loop potential over the whole torus of Wilson lines; the relief is the same V, turned. <b>✕ is the vacuum</b> — the minimum the engine found.', 3800)) return;
+
+  say('3 / 6', 'Drag anywhere on any panel and the reading bar reports <b>at the cursor</b>, not at the vacuum. Watch it move.');
+  await glide([0.16, 0.72], 1500, id); if (!alive()) return;
+  await hold(900);                    if (!alive()) return;
+  await glide([0.80, 0.62], 1600, id); if (!alive()) return;
+  if (!await step('4 / 6', 'Off the vacuum <span class="mono">|∇V| ≠ 0</span>, so the bar stops calling those two numbers masses: they are curvatures. Masses² are that column read <b>at a minimum</b>.', 4200)) return;
+
+  say('5 / 6', 'Double-click drops the cursor there and it rolls downhill — the same gradient the map draws, on the relief as well.');
+  rollFrom(0.88, 0.88); await hold(4200); if (!alive()) return;
+  await turn(1.9, 2600, id);              if (!alive()) return;
+
+  say('6 / 6', 'Now flip η. This content <b>sees</b> it, so the landscape moves. On a content of blind multiplets nothing would move at all — that is Theorem 1, on the screen.');
+  await hold(1500); if (!alive()) return;
+  rows.forEach(r => r.eta = -r.eta); drawContent(); report(); await hold(3000); if (!alive()) return;
+  rows.forEach(r => r.eta = -r.eta); drawContent(); report(); await hold(1800); if (!alive()) return;
+  say('done', 'Back at the vacuum. Build your own content above, or send this one as a link: <span class="mono">calculator.html#c=4,0,0*3;1,0,1*-1</span>');
+  await hold(5000);
+  if (alive()) stopDemo();
+}
+demoBtn.addEventListener('click', runDemo);
+demoBtn2.addEventListener('click', runDemo);
+
+let rsz = 0;                                    // the panels are sized from the layout, so follow it
+addEventListener('resize', () => {
+  clearTimeout(rsz);
+  rsz = setTimeout(() => { if (SP) { drawMap(SP); drawSurface(); } refresh(); }, 160);
+});
 
 /* one sentence, three cases, and no clever ternary: a broken one took the whole page down once */
 function etaSentence(rows, blind, sees) {
@@ -490,104 +897,399 @@ function pre() {
       Model. This page always scans the full period.</p>`;
 }
 
-/* ---------- where it rolls: the same field, with no contours to read ---------------------- */
-function drawFlow(sp, a1, a2) {
-  const c = document.getElementById('flow'), g = c.getContext('2d'), W = c.width;
-  g.fillStyle = '#fbfcfd'; g.fillRect(0, 0, W, W);
-  if (!sp) return;
-  const h = 0.004, grad = (x, y) => [(V(sp, x + h, y) - V(sp, x - h, y)) / (2 * h),
-                                     (V(sp, x, y + h) - V(sp, x, y - h)) / (2 * h)];
-  const wrap = t => t - Math.floor(t);
-  let gmax = 1e-9;
-  for (let i = 0; i <= 12; i++) for (let j = 0; j <= 12; j++) {
-    const [u, v] = grad(i / 12, j / 12); gmax = Math.max(gmax, Math.hypot(u, v));
+/* ---------- the panels: one geometry, one grammar ----------------------------------------
+   Every panel is a padded field with the same axes, drawn at device resolution. The field is a
+   square in [0,1]^2; PAD is the margin the ticks live in, and fx/fy are the only two functions
+   that turn an alpha into a pixel. Nothing else may do that arithmetic. ------------------- */
+const PAD = { l: 34, r: 11, t: 11, b: 26 }, CUTH = 240;
+let MAPW = 420, MAPH = 412, FW = 375, FH = 375;  // the CURRENT panel geometry, in CSS pixels
+const fx = t => PAD.l + t * FW, fy = t => PAD.t + (1 - t) * FH;
+
+/* A canvas drawn in fixed logical units and stretched by CSS scales its type with it: at full
+   width the labels came out at double size, which is what "amateur" looks like. So the logical
+   size IS the element's own size, the backing store is that times the device ratio, and 10px
+   type is 10px on any screen. Panels are square in alpha; the cut keeps a fixed height. */
+function fitCanvas(c, fixedH) {
+  const w = Math.max(260, Math.round(c.getBoundingClientRect().width || 420));
+  const h = fixedH || Math.round(w - PAD.l - PAD.r + PAD.t + PAD.b);
+  c.style.height = h + 'px';
+  const d = Math.min(window.devicePixelRatio || 1, 2);
+  if (c.width !== Math.round(w * d) || c.height !== Math.round(h * d)) {
+    c.width = Math.round(w * d); c.height = Math.round(h * d);
   }
-  const S = 22;                                   // seeds: a square net of starting points
-  for (let i = 0; i < S; i++) for (let j = 0; j < S; j++) {
-    let x = (i + 0.5) / S, y = (j + 0.5) / S;
-    const pts = [[x, y]];
-    for (let k = 0; k < 60; k++) {                // roll downhill, in small steps
-      const [u, v] = grad(x, y), n = Math.hypot(u, v) / gmax;
-      if (n < 1e-4) break;
-      x = wrap(x - 0.012 * u / (gmax * Math.max(n, .05)));
-      y = wrap(y - 0.012 * v / (gmax * Math.max(n, .05)));
-      pts.push([x, y]);
+  const g = c.getContext('2d');
+  g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h);
+  return [g, w, h, d];
+}
+function panelGeom(c) {                          // map and relief share one geometry, always
+  const [g, w, h, d] = fitCanvas(c);
+  MAPW = w; MAPH = h; FW = w - PAD.l - PAD.r; FH = h - PAD.t - PAD.b;
+  return [g, d];
+}
+function offscreen(d) {                          // a base image at the current panel geometry
+  const c = document.createElement('canvas');
+  c.width = Math.round(MAPW * d); c.height = Math.round(MAPH * d);
+  const g = c.getContext('2d'); g.setTransform(d, 0, 0, d, 0, 0);
+  return [c, g];
+}
+const TICKS = [0, .25, .5, .75, 1], TLAB = { 0: '0', 0.5: '½', 1: '1' };
+function axes(g, dark) {
+  g.font = '10px ui-monospace,monospace';
+  g.textBaseline = 'middle';
+  for (const t of TICKS) {
+    const X = fx(t), Y = fy(t);
+    g.strokeStyle = dark ? 'rgba(255,255,255,.30)' : 'rgba(22,32,42,.28)'; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(X, PAD.t + FH); g.lineTo(X, PAD.t + FH + 4);
+    g.moveTo(PAD.l - 4, Y); g.lineTo(PAD.l, Y); g.stroke();
+    if (TLAB[t]) {
+      g.fillStyle = '#7d8c99'; g.textAlign = 'center';
+      g.fillText(TLAB[t], X, PAD.t + FH + 13);
+      g.textAlign = 'right'; g.fillText(TLAB[t], PAD.l - 7, Y);
     }
-    g.lineWidth = 1.1; g.lineCap = 'round';
-    for (let k = 1; k < pts.length; k++) {
-      const [x0, y0] = pts[k - 1], [x1, y1] = pts[k];
-      if (Math.abs(x1 - x0) > .5 || Math.abs(y1 - y0) > .5) continue;   // do not draw the wrap
-      g.strokeStyle = `rgba(27,111,140,${0.10 + 0.5 * k / pts.length})`;
-      g.beginPath(); g.moveTo(x0 * W, (1 - y0) * W); g.lineTo(x1 * W, (1 - y1) * W); g.stroke();
+  }
+  g.textAlign = 'left'; g.fillStyle = '#9fb0bd'; g.font = '10px ui-monospace,monospace';
+  g.fillText('α₁ →', PAD.l + FW - 30, PAD.t + FH + 13);
+  g.save(); g.translate(11, PAD.t + 4); g.rotate(-Math.PI / 2);
+  g.textAlign = 'right'; g.fillText('← α₂', 0, 0); g.restore();
+  g.strokeStyle = dark ? 'rgba(255,255,255,.16)' : 'rgba(22,32,42,.18)'; g.lineWidth = 1;
+  g.strokeRect(PAD.l + .5, PAD.t + .5, FW - 1, FH - 1);
+}
+function marker(g, x, y, kind) {                 // ✕ = the vacuum, ○ = the cursor. Nothing else.
+  const X = fx(x), Y = fy(y);
+  if (kind === 'vac') {
+    for (const [col, w] of [['rgba(255,255,255,.92)', 5], ['#16202a', 2]]) {
+      g.strokeStyle = col; g.lineWidth = w; g.lineCap = 'round';
+      g.beginPath(); g.moveTo(X - 7, Y - 7); g.lineTo(X + 7, Y + 7);
+      g.moveTo(X + 7, Y - 7); g.lineTo(X - 7, Y + 7); g.stroke();
     }
-    const [ex, ey] = pts[pts.length - 1];         // where it ended up
-    g.fillStyle = 'rgba(27,111,140,.55)';
-    g.beginPath(); g.arc(ex * W, (1 - ey) * W, 1.6, 0, 7); g.fill();
+  } else {
+    g.save(); g.beginPath(); g.rect(PAD.l, PAD.t, FW, FH); g.clip();
+    g.strokeStyle = 'rgba(255,255,255,.45)'; g.lineWidth = 1; g.setLineDash([2, 4]);
+    g.beginPath(); g.moveTo(X, PAD.t); g.lineTo(X, PAD.t + FH);
+    g.moveTo(PAD.l, Y); g.lineTo(PAD.l + FW, Y); g.stroke(); g.setLineDash([]);
+    g.restore();
+    g.beginPath(); g.arc(X, Y, 6.5, 0, 7);
+    g.strokeStyle = 'rgba(255,255,255,.95)'; g.lineWidth = 3.4; g.stroke();
+    g.strokeStyle = '#B5530F'; g.lineWidth = 1.9; g.stroke();
   }
-  const X = a1 * W, Y = (1 - a2) * W;
-  for (const [col, w] of [['rgba(255,255,255,.95)', 5], ['#B5530F', 2.4]]) {
-    g.strokeStyle = col; g.lineWidth = w; g.lineCap = 'round';
-    g.beginPath(); g.moveTo(X - 8, Y - 8); g.lineTo(X + 8, Y + 8);
-    g.moveTo(X + 8, Y - 8); g.lineTo(X - 8, Y + 8); g.stroke();
-  }
-  g.strokeStyle = 'rgba(0,0,0,.18)'; g.lineWidth = 1; g.strokeRect(.5, .5, W - 1, W - 1);
 }
 
-/* ---------- the cut: one curve, which anybody can read ---------------------------------- */
+/* marching squares on the cached grid: the isolines are what turn a heat map into a chart ---- */
+function isoline(vals, n, lev, seg) {
+  const p = (i, j) => [fx(i / (n - 1)), fy(j / (n - 1))];
+  for (let j = 0; j < n - 1; j++) for (let i = 0; i < n - 1; i++) {
+    const a = vals[j * n + i], b = vals[j * n + i + 1], c = vals[(j + 1) * n + i + 1], d = vals[(j + 1) * n + i];
+    const idx = (a > lev ? 1 : 0) | (b > lev ? 2 : 0) | (c > lev ? 4 : 0) | (d > lev ? 8 : 0);
+    if (idx === 0 || idx === 15) continue;
+    const f = (u, v) => (lev - u) / ((v - u) || 1e-12);
+    const E = { B: p(i + f(a, b), j), R: p(i + 1, j + f(b, c)), T: p(i + f(d, c), j + 1), L: p(i, j + f(a, d)) };
+    const CASES = { 1: 'BL', 2: 'BR', 3: 'LR', 4: 'RT', 5: 'BR|LT', 6: 'BT', 7: 'LT', 8: 'LT',
+                    9: 'BT', 10: 'BL|RT', 11: 'RT', 12: 'LR', 13: 'BR', 14: 'BL' };
+    for (const s of CASES[idx].split('|')) seg(E[s[0]], E[s[1]]);
+  }
+}
+
+/* ---------- the same potential as a relief: the 2D map is the plan, this is the elevation ---
+   It is built from the grid the map already computed, so it costs no winding sums at all --
+   which is why the old streamline panel, that spent about 1e8 of them and lagged seconds behind
+   everything else, is gone rather than optimised. Drag rotates; the cursor stands on it. ---- */
+let surfBase = null;
+function projRaw(x, y, h) {                        // orthographic, on the unit square, h in [0,1]
+  const cx = x - .5, cy = y - .5;
+  const ca = Math.cos(SURF.az), sa = Math.sin(SURF.az);
+  const X = cx * ca - cy * sa, Y = cx * sa + cy * ca;
+  return [X, Y * Math.sin(SURF.el) - (h - .5) * SURF.h, Y];   // third = depth, for the painter
+}
+function projS(x, y, h) {
+  const [u, v, d] = projRaw(x, y, h);
+  return [SURF.ox + u * SURF.s, SURF.oy + v * SURF.s, d];
+}
+/* the view is FITTED to the mesh, not guessed: turn it or raise it and it still fills the panel */
+function fitView(Hm, n) {
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) {
+    const [u, v] = projRaw(i / (n - 1), j / (n - 1), Hm[j * n + i]);
+    if (u < x0) x0 = u; if (u > x1) x1 = u; if (v < y0) y0 = v; if (v > y1) y1 = v;
+  }
+  SURF.s = Math.min(FW / ((x1 - x0) || 1), FH / ((y1 - y0) || 1)) * 0.93;
+  SURF.ox = PAD.l + FW / 2 - (x0 + x1) / 2 * SURF.s;
+  SURF.oy = PAD.t + FH / 2 - (y0 + y1) / 2 * SURF.s;
+}
+function surfHeight(x, y) {                        // bilinear on the cached grid, in [0,1]
+  if (!mapVals) return .5;
+  const n = mapN, u = Math.min(Math.max(x, 0), 1) * (n - 1), v = Math.min(Math.max(y, 0), 1) * (n - 1);
+  const i = Math.min(Math.floor(u), n - 2), j = Math.min(Math.floor(v), n - 2), s = u - i, t = v - j;
+  const q = (a, b) => mapVals[b * n + a];
+  const z = q(i, j) * (1 - s) * (1 - t) + q(i + 1, j) * s * (1 - t) + q(i, j + 1) * (1 - s) * t + q(i + 1, j + 1) * s * t;
+  return (z - mapLo) / ((mapHi - mapLo) || 1);
+}
+function drawSurface() {
+  const [, d] = panelGeom(document.getElementById('surf'));
+  const [base, g] = offscreen(d); surfBase = base;
+  g.fillStyle = '#0c161d'; g.fillRect(0, 0, MAPW, MAPH);
+  if (!mapVals) return;
+  const n = SURF.n, H = new Float64Array(n * n);
+  for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) H[j * n + i] = surfHeight(i / (n - 1), j / (n - 1));
+  fitView(H, n);
+
+  for (const t of [0, .25, .5, .75, 1]) {          // the floor, so the torus is still legible
+    const A = projS(t, 0, 0), B = projS(t, 1, 0), C = projS(0, t, 0), D = projS(1, t, 0);
+    g.strokeStyle = 'rgba(255,255,255,.09)'; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(A[0], A[1]); g.lineTo(B[0], B[1]);
+    g.moveTo(C[0], C[1]); g.lineTo(D[0], D[1]); g.stroke();
+  }
+  const quads = [];
+  for (let j = 0; j < n - 1; j++) for (let i = 0; i < n - 1; i++) {
+    const h00 = H[j * n + i], h10 = H[j * n + i + 1], h11 = H[(j + 1) * n + i + 1], h01 = H[(j + 1) * n + i];
+    const p00 = projS(i / (n - 1), j / (n - 1), h00), p10 = projS((i + 1) / (n - 1), j / (n - 1), h10),
+          p11 = projS((i + 1) / (n - 1), (j + 1) / (n - 1), h11), p01 = projS(i / (n - 1), (j + 1) / (n - 1), h01);
+    const hm = (h00 + h10 + h11 + h01) / 4;
+    const nx = (h00 + h01 - h10 - h11) * (n - 1) * SURF.h / 2, ny = (h00 + h10 - h01 - h11) * (n - 1) * SURF.h / 2;
+    const len = Math.hypot(nx, ny, 1), lam = Math.max(0.15, (0.55 * nx + 0.35 * ny + 0.9) / (len * 1.35));
+    quads.push([Math.min(p00[2], p10[2], p11[2], p01[2]), p00, p10, p11, p01, hm, lam,
+                [h00, h10, h11, h01]]);
+  }
+  quads.sort((a, b) => a[0] - b[0]);               // painter: far edge first
+  const LEV = [];                                  // the map's isolines, draped on the relief
+  for (let k = 1; k <= 11; k++) LEV.push(k / 12);
+  for (const q of quads) {
+    const [, a, b, c, e, hm, lam, hs, ij] = q;
+    const col = ramp(hm), m = col.match(/\d+/g);
+    g.fillStyle = `rgb(${Math.round(m[0] * lam)},${Math.round(m[1] * lam)},${Math.round(m[2] * lam)})`;
+    g.strokeStyle = g.fillStyle; g.lineWidth = .6;  // hairline stroke closes the seams between quads
+    g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.lineTo(c[0], c[1]); g.lineTo(e[0], e[1]);
+    g.closePath(); g.fill(); g.stroke();
+    // the contour is stroked immediately after ITS OWN quad, so the painter occludes it exactly
+    const lo4 = Math.min(...hs), hi4 = Math.max(...hs);
+    for (const lev of LEV) {
+      if (lev <= lo4 || lev >= hi4) continue;
+      const P = [[a, hs[0], b, hs[1]], [b, hs[1], c, hs[2]], [c, hs[2], e, hs[3]], [e, hs[3], a, hs[0]]];
+      const cut = [];
+      for (const [p0, h0, p1, h1] of P) {
+        if ((h0 - lev) * (h1 - lev) >= 0) continue;
+        const t = (lev - h0) / (h1 - h0);
+        cut.push([p0[0] + (p1[0] - p0[0]) * t, p0[1] + (p1[1] - p0[1]) * t]);
+      }
+      if (cut.length < 2) continue;
+      g.strokeStyle = 'rgba(255,255,255,.30)'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(cut[0][0], cut[0][1]); g.lineTo(cut[1][0], cut[1][1]); g.stroke();
+    }
+  }
+
+  // the two axis labels go on the floor edges NEAREST the viewer, and after the mesh, or the
+  // relief itself hides them the moment you turn it
+  const edges = [[[.5, 0], 'α₁'], [[.5, 1], 'α₁'], [[0, .5], 'α₂'], [[1, .5], 'α₂']]
+    .map(([p, s]) => ({ s, p, q: projS(p[0], p[1], 0) }))
+    .sort((a, b) => b.q[1] - a.q[1]);
+  const centre = projS(.5, .5, 0), shown = new Set();
+  g.font = '600 10px ui-monospace,monospace'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  for (const e of edges) {
+    if (shown.has(e.s)) continue;
+    shown.add(e.s);
+    const dx = e.q[0] - centre[0], dy = e.q[1] - centre[1], L = Math.hypot(dx, dy) || 1;
+    const X = e.q[0] + dx / L * 15, Y = e.q[1] + dy / L * 15;
+    g.lineWidth = 3; g.strokeStyle = 'rgba(12,22,29,.85)'; g.strokeText(e.s, X, Y);
+    g.fillStyle = 'rgba(190,210,222,.95)'; g.fillText(e.s, X, Y);
+  }
+  g.fillStyle = '#7d8c99'; g.font = '10px ui-monospace,monospace'; g.textAlign = 'left';
+  g.fillText('V(α₁, α₂) — drag to turn, wheel to raise, double-click to reset', PAD.l, MAPH - 9);
+}
+function stick(g, x, y, col, cross) {              // a pin standing on the surface at (x, y)
+  const h = surfHeight(x, y), top = projS(x, y, h), foot = projS(x, y, 0);
+  g.strokeStyle = 'rgba(255,255,255,.35)'; g.setLineDash([2, 3]); g.lineWidth = 1;
+  g.beginPath(); g.moveTo(foot[0], foot[1]); g.lineTo(top[0], top[1]); g.stroke(); g.setLineDash([]);
+  if (cross) {
+    for (const [c2, w] of [['rgba(255,255,255,.9)', 4.5], [col, 2]]) {
+      g.strokeStyle = c2; g.lineWidth = w; g.lineCap = 'round';
+      g.beginPath(); g.moveTo(top[0] - 6, top[1] - 6); g.lineTo(top[0] + 6, top[1] + 6);
+      g.moveTo(top[0] + 6, top[1] - 6); g.lineTo(top[0] - 6, top[1] + 6); g.stroke();
+    }
+  } else {
+    g.beginPath(); g.arc(top[0], top[1], 5, 0, 7);
+    g.fillStyle = col; g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 1.8; g.stroke();
+  }
+}
+/* the slice the cut chart draws, raised into the relief: same curve, seen edge-on */
+function curtain(g, a1) {
+  const N = 60, top = [];
+  for (let i = 0; i <= N; i++) { const y = i / N; top.push(projS(a1, y, surfHeight(a1, y))); }
+  g.beginPath();
+  g.moveTo(top[0][0], top[0][1]);
+  for (const p of top) g.lineTo(p[0], p[1]);
+  for (let i = N; i >= 0; i--) { const f = projS(a1, i / N, 0); g.lineTo(f[0], f[1]); }
+  g.closePath();
+  g.fillStyle = 'rgba(181,83,15,.20)'; g.fill();
+  g.beginPath(); top.forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1]));
+  g.strokeStyle = 'rgba(255,196,140,.85)'; g.lineWidth = 1.6; g.stroke();
+}
+function paintSurface() {
+  const [g] = panelGeom(document.getElementById('surf'));
+  if (!surfBase || !SP) { g.fillStyle = '#0c161d'; g.fillRect(0, 0, MAPW, MAPH); return; }
+  g.drawImage(surfBase, 0, 0, MAPW, MAPH);
+  if (ROLL && ROLL.pts.length > 1) {               // the ball, rolling on the relief itself
+    g.strokeStyle = 'rgba(255,196,140,.95)'; g.lineWidth = 2; g.lineJoin = 'round'; g.beginPath();
+    let lift = true;
+    for (let k = 1; k < ROLL.pts.length; k++) {
+      const [x0, y0] = ROLL.pts[k - 1], [x1, y1] = ROLL.pts[k];
+      if (Math.abs(x1 - x0) > .5 || Math.abs(y1 - y0) > .5) { lift = true; continue; }
+      const A = projS(x0, y0, surfHeight(x0, y0)), B = projS(x1, y1, surfHeight(x1, y1));
+      if (lift) { g.moveTo(A[0], A[1]); lift = false; }
+      g.lineTo(B[0], B[1]);
+    }
+    g.stroke();
+  }
+  if (CUR) curtain(g, CUR[0]);                     // the 1D cut, standing in the 3D view
+  if (VAC) stick(g, VAC[0], VAC[1], '#16202a', true);
+  if (CUR) stick(g, CUR[0], CUR[1], '#B5530F', false);
+}
+
+/* ---------- the cut: one curve, which anybody can read; it follows the cursor ------------- */
+const CP = { l: 46, r: 14, t: 16, b: 26 };
 function drawCut(sp, a1, a2) {
-  const c = document.getElementById('cut'), g = c.getContext('2d'), W = c.width, H = c.height;
-  g.clearRect(0, 0, W, H);
+  const [g, W, H] = fitCanvas(document.getElementById('cut'), CUTH);
+  const iw = W - CP.l - CP.r, ih = H - CP.t - CP.b;
   g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
-  if (!sp) return;
-  const N = 240, xs = [], ys = [];
+  const frame = () => { g.strokeStyle = '#e6edf2'; g.lineWidth = 1;
+                        g.strokeRect(CP.l + .5, CP.t + .5, iw - 1, ih - 1); };
+  if (!sp) { frame(); return; }
+  const N = 260, ys = [];
   let lo = Infinity, hi = -Infinity;
-  for (let i = 0; i <= N; i++) { const y = i / N, v = V(sp, a1, y);
-    xs.push(y); ys.push(v); if (v < lo) lo = v; if (v > hi) hi = v; }
-  const pad = 26, sx = t => pad + t * (W - 2 * pad), sy = v => H - pad - (v - lo) / ((hi - lo) || 1) * (H - 2 * pad);
-  g.strokeStyle = '#e6edf2'; g.lineWidth = 1;                       // the zero line, if it is in range
-  if (lo < 0 && hi > 0) { g.beginPath(); g.moveTo(pad, sy(0)); g.lineTo(W - pad, sy(0)); g.stroke();
-    g.fillStyle = '#9fb0bd'; g.font = '10px ui-monospace,monospace'; g.fillText('V = 0', W - pad - 34, sy(0) - 4); }
-  g.strokeStyle = '#1B6F8C'; g.lineWidth = 2.2; g.beginPath();
-  xs.forEach((x, i) => i ? g.lineTo(sx(x), sy(ys[i])) : g.moveTo(sx(x), sy(ys[i]))); g.stroke();
-  const X = sx(a2), Y = sy(V(sp, a1, a2));                          // the vacuum, on the curve
-  g.strokeStyle = '#B5530F'; g.setLineDash([3, 3]); g.lineWidth = 1;
-  g.beginPath(); g.moveTo(X, Y); g.lineTo(X, H - pad); g.stroke(); g.setLineDash([]);
-  g.fillStyle = '#B5530F'; g.beginPath(); g.arc(X, Y, 4.5, 0, 7); g.fill();
-  g.fillStyle = '#4a5b6a'; g.font = '11px ui-monospace,monospace';
-  g.fillText('vacuum  a2 = ' + a2.toFixed(3), Math.min(X + 8, W - 130), Math.max(Y - 8, 14));
-  g.fillText('a2 = 0', pad - 6, H - 9); g.fillText('1', W - pad - 4, H - 9);
-  g.strokeStyle = '#dfe6ec'; g.strokeRect(.5, .5, W - 1, H - 1);
+  for (let i = 0; i <= N; i++) { const v = V(sp, a1, i / N);
+    ys.push(v); if (v < lo) lo = v; if (v > hi) hi = v; }
+  const span = (hi - lo) || 1, pad = span * 0.08;
+  const YLO = lo - pad, YHI = hi + pad;
+  const sx = t => CP.l + t * iw, sy = v => CP.t + ih - (v - YLO) / (YHI - YLO) * ih;
+
+  g.strokeStyle = '#f0f4f7'; g.lineWidth = 1;                       // recessive grid, four lines
+  g.font = '10px ui-monospace,monospace'; g.textBaseline = 'middle'; g.textAlign = 'right';
+  for (let i = 0; i <= 3; i++) {
+    const v = YLO + (YHI - YLO) * i / 3, Y = Math.round(sy(v)) + .5;
+    g.beginPath(); g.moveTo(CP.l, Y); g.lineTo(CP.l + iw, Y); g.stroke();
+    g.fillStyle = '#9fb0bd'; g.fillText(v.toFixed(1), CP.l - 7, Y);
+  }
+  if (YLO < 0 && YHI > 0) {                                         // the zero line, if it is in range
+    g.strokeStyle = '#d7e0e7'; g.setLineDash([4, 3]);
+    g.beginPath(); g.moveTo(CP.l, sy(0)); g.lineTo(CP.l + iw, sy(0)); g.stroke(); g.setLineDash([]);
+  }
+  const fill = g.createLinearGradient(0, CP.t, 0, CP.t + ih);       // area under the curve
+  fill.addColorStop(0, 'rgba(27,111,140,.16)'); fill.addColorStop(1, 'rgba(27,111,140,.02)');
+  g.beginPath(); g.moveTo(sx(0), CP.t + ih);
+  ys.forEach((v, i) => g.lineTo(sx(i / N), sy(v)));
+  g.lineTo(sx(1), CP.t + ih); g.closePath(); g.fillStyle = fill; g.fill();
+  g.strokeStyle = '#1B6F8C'; g.lineWidth = 2.2; g.lineJoin = 'round'; g.beginPath();
+  ys.forEach((v, i) => i ? g.lineTo(sx(i / N), sy(v)) : g.moveTo(sx(0), sy(v))); g.stroke();
+
+  const onVac = VAC && Math.abs(a1 - VAC[0]) < 5e-4;
+  if (onVac && Math.abs(a2 - VAC[1]) > 5e-4) {                      // the vacuum sits on this line too
+    const XV = sx(VAC[1]), YV = sy(V(sp, a1, VAC[1]));
+    g.strokeStyle = '#16202a'; g.lineWidth = 1.4; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(XV - 4, YV - 4); g.lineTo(XV + 4, YV + 4);
+    g.moveTo(XV + 4, YV - 4); g.lineTo(XV - 4, YV + 4); g.stroke();
+  }
+  const X = sx(a2), Y = sy(V(sp, a1, a2));                          // the cursor, on the curve
+  g.strokeStyle = 'rgba(181,83,15,.55)'; g.setLineDash([3, 3]); g.lineWidth = 1;
+  g.beginPath(); g.moveTo(X, CP.t); g.lineTo(X, CP.t + ih); g.stroke(); g.setLineDash([]);
+  g.beginPath(); g.arc(X, Y, 4.6, 0, 7);
+  g.fillStyle = '#B5530F'; g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 1.8; g.stroke();
+
+  const atVac = VAC && onVac && Math.abs(a2 - VAC[1]) < 5e-4;
+  const lab = (atVac ? 'vacuum  α₂ = ' : 'cursor  α₂ = ') + a2.toFixed(3);
+  g.font = '600 11px ui-monospace,monospace'; g.textAlign = 'left';
+  const tw = g.measureText(lab).width, lx = X + 9 + tw > CP.l + iw ? X - 9 - tw : X + 9;
+  g.fillStyle = atVac ? '#16202a' : '#B5530F'; g.fillText(lab, lx, Math.max(Y - 11, CP.t + 8));
+  g.font = '10px ui-monospace,monospace'; g.fillStyle = '#9fb0bd';
+  g.textAlign = 'left';  g.fillText('V  ·  cut at α₁ = ' + a1.toFixed(3), CP.l, 8);
+  g.textAlign = 'center'; g.fillText('α₂ = 0', CP.l, H - 9);
+  g.fillText('½', CP.l + iw / 2, H - 9); g.fillText('1', CP.l + iw, H - 9);
+  frame();
 }
 
-/* ---------- the map ---------------------------------------------------------------------- */
-function drawMap(sp, a1, a2) {
-  const c = document.getElementById('map'), g = c.getContext('2d'), W = c.width;
-  g.clearRect(0, 0, W, W);
-  if (!sp) { g.fillStyle = '#f5f8fa'; g.fillRect(0, 0, W, W); return; }
+/* ---------- the map: the field is computed once, everything else rides on top -------------- */
+let mapVals = null, mapN = 0, mapLo = 0, mapHi = 1;
+function drawMap(sp) {
+  const [, d] = panelGeom(document.getElementById('map'));
+  if (!sp) { mapBase = null; mapVals = null; return; }
   const n = GRID, vals = new Float64Array(n * n);
   let lo = Infinity, hi = -Infinity;
   for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
     const v = V(sp, i / (n - 1), j / (n - 1));
     vals[j * n + i] = v; if (v < lo) lo = v; if (v > hi) hi = v;
   }
-  const px = W / n;
-  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+  mapVals = vals; mapN = n; mapLo = lo; mapHi = hi;
+
+  const cell = document.createElement('canvas');   // the field at grid resolution...
+  cell.width = cell.height = n;
+  const cg = cell.getContext('2d'), img = cg.createImageData(n, n);
+  for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) {
     const t = hi > lo ? (vals[j * n + i] - lo) / (hi - lo) : .5;
-    g.fillStyle = ramp(t);
-    g.fillRect(Math.floor(i * px), Math.floor((n - 1 - j) * px), Math.ceil(px), Math.ceil(px));
+    const c = ramp(t).match(/\d+/g), o = ((n - 1 - j) * n + i) * 4;
+    img.data[o] = +c[0]; img.data[o + 1] = +c[1]; img.data[o + 2] = +c[2]; img.data[o + 3] = 255;
   }
-  if (a1 !== undefined) {
-    const X = a1 * W, Y = (1 - a2) * W;
-    for (const [col, w] of [['rgba(255,255,255,.9)', 5], ['#16202a', 2]]) {
-      g.strokeStyle = col; g.lineWidth = w; g.lineCap = 'round';
-      g.beginPath(); g.moveTo(X - 8, Y - 8); g.lineTo(X + 8, Y + 8);
-      g.moveTo(X + 8, Y - 8); g.lineTo(X - 8, Y + 8); g.stroke();
-    }
+  cg.putImageData(img, 0, 0);
+
+  const [base, g] = offscreen(d); mapBase = base;  // ...resampled smoothly into the field box
+  g.fillStyle = '#fff'; g.fillRect(0, 0, MAPW, MAPH);
+  g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
+  g.drawImage(cell, PAD.l, PAD.t, FW, FH);
+
+  g.save(); g.beginPath(); g.rect(PAD.l, PAD.t, FW, FH); g.clip();
+  g.lineWidth = 1;                                 // isolines: this is what makes it a chart
+  for (let k = 1; k <= 11; k++) {
+    const lev = lo + (hi - lo) * k / 12;
+    g.strokeStyle = k % 3 === 0 ? 'rgba(255,255,255,.42)' : 'rgba(255,255,255,.20)';
+    g.beginPath();
+    isoline(vals, n, lev, (A, B) => { g.moveTo(A[0], A[1]); g.lineTo(B[0], B[1]); });
+    g.stroke();
   }
-  g.strokeStyle = 'rgba(0,0,0,.18)'; g.lineWidth = 1; g.strokeRect(.5, .5, W - 1, W - 1);
+  g.restore();
+  axes(g, false);
+  colorbar(lo, hi);
 }
+function colorbar(lo, hi) {
+  const c = document.getElementById('cbar'); if (!c) return;
+  const [g, W, H] = fitCanvas(c, 10);
+  for (let i = 0; i < W; i++) { g.fillStyle = ramp(i / (W - 1)); g.fillRect(i, 0, 1, H); }
+  g.strokeStyle = 'rgba(22,32,42,.22)'; g.lineWidth = 1; g.strokeRect(.5, .5, W - 1, H - 1);
+  document.getElementById('cblo').textContent = lo.toFixed(1);
+  document.getElementById('cbhi').textContent = hi.toFixed(1);
+}
+function rollPath(g, col) {
+  if (!(ROLL && ROLL.pts.length > 1)) return;
+  g.strokeStyle = col; g.lineWidth = 2; g.lineJoin = 'round'; g.lineCap = 'round';
+  g.beginPath();
+  let lift = true;
+  for (let k = 1; k < ROLL.pts.length; k++) {
+    const [x0, y0] = ROLL.pts[k - 1], [x1, y1] = ROLL.pts[k];
+    if (Math.abs(x1 - x0) > .5 || Math.abs(y1 - y0) > .5) { lift = true; continue; }   // not the wrap
+    if (lift) { g.moveTo(fx(x0), fy(y0)); lift = false; }
+    g.lineTo(fx(x1), fy(y1));
+  }
+  g.stroke();
+  const [sx0, sy0] = ROLL.pts[0];                  // where it was dropped
+  g.strokeStyle = 'rgba(255,255,255,.9)'; g.lineWidth = 2;
+  g.beginPath(); g.arc(fx(sx0), fy(sy0), 3.5, 0, 7); g.stroke();
+}
+function paintMap() {
+  const [g] = panelGeom(document.getElementById('map'));
+  if (!mapBase) {
+    g.fillStyle = '#fff'; g.fillRect(0, 0, MAPW, MAPH);
+    g.fillStyle = '#f2f6f9'; g.fillRect(PAD.l, PAD.t, FW, FH); axes(g, false); return;
+  }
+  g.drawImage(mapBase, 0, 0, MAPW, MAPH);
+  if (CUR && mapVals) {                            // the level set the cursor is standing on
+    g.save(); g.beginPath(); g.rect(PAD.l, PAD.t, FW, FH); g.clip();
+    g.strokeStyle = 'rgba(255,255,255,.95)'; g.lineWidth = 1.6; g.beginPath();
+    isoline(mapVals, mapN, V(SP, CUR[0], CUR[1]), (A, B) => { g.moveTo(A[0], A[1]); g.lineTo(B[0], B[1]); });
+    g.stroke(); g.restore();
+  }
+  rollPath(g, 'rgba(181,83,15,.9)');
+  if (VAC) marker(g, VAC[0], VAC[1], 'vac');
+  if (CUR) marker(g, CUR[0], CUR[1], 'cur');
+}
+/* sequential, one hue family, dark = the well: magnitude is never a rainbow */
 function ramp(t) {
-  const stops = [[44, 95, 138], [127, 178, 204], [245, 240, 230], [224, 160, 106], [168, 60, 20]];
+  const stops = [[10, 26, 38], [17, 62, 88], [27, 111, 140], [92, 168, 189], [175, 214, 219],
+                 [235, 232, 214], [224, 160, 106]];
   const x = Math.max(0, Math.min(1, t)) * (stops.length - 1), i = Math.min(Math.floor(x), stops.length - 2);
   const f = x - i, a = stops[i], b = stops[i + 1];
   return `rgb(${a.map((v, k) => Math.round(v + f * (b[k] - v))).join(',')})`;
