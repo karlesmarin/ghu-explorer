@@ -1301,14 +1301,31 @@ surfEl.addEventListener('wheel', e => {
    and not the depth. In η-difference mode a tile is V(η) − V(−η): blind multiplets have nothing to
    draw, and that emptiness is the theorem. ---------------------------------------------------- */
 const AN = 26;                                   // tile resolution: small on purpose, this is a map
+/* A tile is a thumbnail, so it is summed over a shorter lattice: |k| <= 4 instead of 10, which is
+   80 windings instead of 440 and weights that fall as |k|^-6, so the shape is the same and the
+   whole atlas draws in a couple of seconds instead of a minute. The numbers under the tiles are
+   NOT computed from this -- they come from the closed form, exactly. */
+const TLATT = (() => {
+  const L = [];
+  for (let k1 = -4; k1 <= 4; k1++) for (let k2 = -4; k2 <= 4; k2++)
+    if (k1 || k2) L.push([k1, k2, Math.pow(k1 * k1 + k2 * k2, -3), k2 & 1]);
+  return L;
+})();
 function tileField(key, mode) {
-  const rows1 = [{ key, n: 1, eta: 1, role: 1 }];
-  const sp = spectrum(rows1), spm = spectrum([{ key, n: 1, eta: -1, role: 1 }]);
+  const sp = spectrum([{ key, n: 1, eta: 1, role: 1 }]);
   const v = new Float64Array(AN * AN);
   let lo = Infinity, hi = -Infinity;
   for (let i = 0; i < AN; i++) for (let j = 0; j < AN; j++) {
     const x = i / (AN - 1), y = j / (AN - 1);
-    const t = mode === 'D' ? V(sp, x, y) - V(spm, x, y) : V(sp, x, y);
+    let t = 0;
+    for (const [k1, k2, w, odd] of TLATT) {
+      if (mode === 'D' && !odd) continue;       // eta flips the odd windings; the rest cancels
+      const th = k1 * x + k2 * y;
+      let s = 0;
+      for (const [q, cE, cO] of sp) s += (odd ? cO : cE) * Math.cos(2 * Math.PI * q * th);
+      t += w * s;
+    }
+    if (mode === 'D') t *= 2;                   // V(eta) - V(-eta) is twice the odd half
     v[j * AN + i] = t; if (t < lo) lo = t; if (t > hi) hi = t;
   }
   return { v, lo, hi };
@@ -1361,7 +1378,8 @@ function drawAtlas() {
         : 'M₂ ' + momentsOfBox(r.sides, r.zeta)[1];
       i++;
     }
-    if (i < tiles.length) requestAnimationFrame(chunk);
+    if (i < tiles.length) { note.textContent = `drawing ${i} of ${tiles.length} landscapes…`;
+                            requestAnimationFrame(chunk); }
     else note.innerHTML = mode === 'D'
       ? `${flat} of ${tiles.length} tiles came out <b>empty</b>: those are exactly the multiplets η cannot
          touch. The tiles marked <i>η shifts V by a constant</i> are blank too and are <b>not</b> blind —
