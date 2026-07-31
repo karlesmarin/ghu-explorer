@@ -195,6 +195,8 @@ canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);dis
 <div class="grid two" style="margin-top:18px">
   <section class="card">
     <h2>4 · The landscape</h2>
+    <canvas id="cut" width="520" height="210"></canvas>
+    <p class="note" style="margin:7px 0 12px">The potential along a line through the vacuum (&alpha;&#8322; varying, &alpha;&#8321; fixed at its value there). <b>The well is the vacuum.</b> If the curve has no well, this content does not break the symmetry.</p>
     <canvas id="map" width="520" height="520"></canvas>
     <div class="legend">
       <span><span class="swatch"></span> low → high</span>
@@ -379,7 +381,7 @@ function report() {
   const stats = document.getElementById('stats'), vb = document.getElementById('verdictbox');
   if (!sp.length) {
     stats.innerHTML = '<div class="empty" style="grid-column:1/-1">Nothing to compute yet.</div>';
-    vb.innerHTML = ''; drawMap(null); pre(); return;
+    vb.innerHTML = ''; drawMap(null); drawCut(null); pre(); return;
   }
   const [a1, a2, v0] = minimise(sp);
   const [hxx, hyy, hxy] = hessian(sp, a1, a2);
@@ -413,7 +415,7 @@ function report() {
       <span>Curvature at α = 0: eigenvalues ${fmt(o2, 2)} and ${fmt(o1, 2)}.
       ${breaks ? 'The vacuum above is where it goes.'
                : 'A lower minimum elsewhere is still possible; the criterion is local.'}</span></div>`;
-  drawMap(sp, a1, a2); pre();
+  drawMap(sp, a1, a2); drawCut(sp, a1, a2); pre();
 }
 
 /* one sentence, three cases, and no clever ternary: a broken one took the whole page down once */
@@ -448,6 +450,32 @@ function pre() {
     <p class="note">The half-domain reduction α₂ ∈ [0,½] used in the literature is <b>not</b> legal for
       every representation: Part III shows it inverts exactly on the class able to host the Standard
       Model. This page always scans the full period.</p>`;
+}
+
+/* ---------- the cut: one curve, which anybody can read ---------------------------------- */
+function drawCut(sp, a1, a2) {
+  const c = document.getElementById('cut'), g = c.getContext('2d'), W = c.width, H = c.height;
+  g.clearRect(0, 0, W, H);
+  g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+  if (!sp) return;
+  const N = 240, xs = [], ys = [];
+  let lo = Infinity, hi = -Infinity;
+  for (let i = 0; i <= N; i++) { const y = i / N, v = V(sp, a1, y);
+    xs.push(y); ys.push(v); if (v < lo) lo = v; if (v > hi) hi = v; }
+  const pad = 26, sx = t => pad + t * (W - 2 * pad), sy = v => H - pad - (v - lo) / ((hi - lo) || 1) * (H - 2 * pad);
+  g.strokeStyle = '#e6edf2'; g.lineWidth = 1;                       // the zero line, if it is in range
+  if (lo < 0 && hi > 0) { g.beginPath(); g.moveTo(pad, sy(0)); g.lineTo(W - pad, sy(0)); g.stroke();
+    g.fillStyle = '#9fb0bd'; g.font = '10px ui-monospace,monospace'; g.fillText('V = 0', W - pad - 34, sy(0) - 4); }
+  g.strokeStyle = '#1B6F8C'; g.lineWidth = 2.2; g.beginPath();
+  xs.forEach((x, i) => i ? g.lineTo(sx(x), sy(ys[i])) : g.moveTo(sx(x), sy(ys[i]))); g.stroke();
+  const X = sx(a2), Y = sy(V(sp, a1, a2));                          // the vacuum, on the curve
+  g.strokeStyle = '#B5530F'; g.setLineDash([3, 3]); g.lineWidth = 1;
+  g.beginPath(); g.moveTo(X, Y); g.lineTo(X, H - pad); g.stroke(); g.setLineDash([]);
+  g.fillStyle = '#B5530F'; g.beginPath(); g.arc(X, Y, 4.5, 0, 7); g.fill();
+  g.fillStyle = '#4a5b6a'; g.font = '11px ui-monospace,monospace';
+  g.fillText('vacuum  a2 = ' + a2.toFixed(3), Math.min(X + 8, W - 130), Math.max(Y - 8, 14));
+  g.fillText('a2 = 0', pad - 6, H - 9); g.fillText('1', W - pad - 4, H - 9);
+  g.strokeStyle = '#dfe6ec'; g.strokeRect(.5, .5, W - 1, H - 1);
 }
 
 /* ---------- the map ---------------------------------------------------------------------- */
