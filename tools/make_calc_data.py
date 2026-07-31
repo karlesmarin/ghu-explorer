@@ -46,18 +46,60 @@ def blind_by_criterion(lam):
            (l1 % 2 == 1 and l2 % 2 == 1 and l3 % 2 == 0 and l2 + l3 == l1)
 
 
-def sides(lam):
-    """The three SU(2) indices of Part IV's box, from the 2-quotient of the beta set."""
-    beta = [lam[0] + 3, lam[1] + 2, lam[2] + 1, lam[3]]
-    ev = sorted([b // 2 for b in beta if b % 2 == 0], reverse=True)
-    od = sorted([b // 2 for b in beta if b % 2 == 1], reverse=True)
-    if not ev or not od:
+def chi(k):
+    """The SU(2) character of highest weight k, as its weight multiplicities."""
+    return {k - 2 * i: 1 for i in range(k + 1)}
+
+
+def convolve(*factors):
+    out = {0: 1}
+    for f in factors:
+        nxt = {}
+        for a, va in out.items():
+            for b, vb in f.items():
+                nxt[a + b] = nxt.get(a + b, 0) + va * vb
+        out = nxt
+    return out
+
+
+def box_of(D):
+    """Part IV's three indices (p,q,r) of D = zeta * chi_p * chi_q * chi_r, recovered from the
+    character by the paper's own inversion and then CHECKED against it.
+
+    The previous version of this function read a triple off the 2-quotient of the beta set and
+    nobody ever asked it to reproduce D. It does not: on the 104 non-blind rows of this catalogue
+    its triple reproduced the character in ZERO cases, while the triple below reproduces it in all
+    104. Proposition "the compression is lossless and invertible" of Part IV pins the multiset:
+    e1 = 3 M2/M0 is the sum of the Casimirs C_k = k(k+2), and |M0| = (p+1)(q+1)(r+1). We solve
+    those two conditions over the integers and then demand the convolution BE the character --
+    a triple that does not is not returned at all.
+
+    Returns (p, q, r, zeta) with p >= q >= r, or None when D is empty (a blind multiplet).
+    """
+    d = {j: v for j, v in D.items() if v}
+    if not d:
         return None
-    if len(ev) == 2:                      # the 2+2 profile
-        z = (sum(ev) - sum(od)) - 1
-        return sorted([ev[0] - ev[1], od[0] - od[1], abs(z) - 1], reverse=True)
-    nu = ev if len(ev) == 3 else od       # the 3+1 profile
-    return sorted([nu[0] - nu[1], nu[1] - nu[2], nu[0] - nu[2] + 1], reverse=True)
+    M0 = sum(d.values())
+    M2 = sum(j * j * v for j, v in d.items())
+    if M0 == 0:
+        return None                       # would not be a single box; the catalogue has none
+    e1, rem = divmod(3 * M2, M0)
+    if rem:
+        return None
+    top = max(abs(j) for j in d)          # p+q+r, the support of the convolution
+    for p in range(top + 1):
+        for q in range(p + 1):
+            for r in range(q + 1):
+                if (p + 1) * (q + 1) * (r + 1) != abs(M0):
+                    continue
+                if p * (p + 2) + q * (q + 2) + r * (r + 2) != e1:
+                    continue
+                prod = convolve(chi(p), chi(q), chi(r))
+                for zeta in (1, -1):
+                    if all(d.get(k, 0) == zeta * prod.get(k, 0)
+                           for k in set(d) | set(prod)):
+                        return (p, q, r, zeta)
+    return None
 
 
 def main():
@@ -81,10 +123,19 @@ def main():
                 if blind != blind_by_criterion(lam):
                     bad.append("(%d,%d,%d): character says %s, criterion says %s"
                                % (a, b, c, blind, blind_by_criterion(lam)))
+                box = None if blind else box_of(D)
+                if not blind and box is None:
+                    bad.append("(%d,%d,%d): no (p,q,r) reproduces D -- Part IV's closed form "
+                               "fails on this row" % (a, b, c))
+                # the moments of the coset index, straight from the character. The predictor page
+                # computes these from the BOX alone (Part IV) and is checked against these numbers,
+                # so they are the truth column of that comparison and must not be derived from it.
+                mom = [sum(j ** e * v for j, v in D.items()) for e in (0, 2, 4)]
                 reps["%d,%d,%d" % (a, b, c)] = {
                     "dim": dim, "modes": modes, "blind": blind,
-                    "sides": None if blind else sides(lam),
-                    "zeta": 0 if blind else (1 if max(D.items())[1] > 0 else -1),
+                    "sides": None if box is None else list(box[:3]),
+                    "zeta": 0 if box is None else box[3],
+                    "m": mom,
                 }
     if bad:
         sys.exit("FATAL: catalogue disagrees with Proposition 1 on %d rows:\n  %s"

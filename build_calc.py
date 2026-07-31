@@ -56,6 +56,47 @@ near(Math.abs(hxy / hxx), 0.1690, 0.01, "mass matrix |m12|/m11");
 const [e1, e2] = eig(hxx, hyy, hxy);
 near(Math.sqrt(e1 / e2), 1.2046, 0.01, "Higgs mass ratio");
 
+// 1b. AWAY from the vacuum. The reading bar now reports V and the curvature wherever the cursor
+//     is, so one anchored point is no longer enough: these four are what the Python engine of
+//     Part V (part_v/ghu_potential.py, run at GHU_KMAX=10 to match this page's truncation) gives
+//     for the same content. Two independent implementations, or one of them is lying.
+const OFF = [
+  [0.2500, 0.7500,   0.1944845338,  1309.925862,  756.306419,  -95.167423],
+  [0.1000, 0.4000,  45.2796583322, -1764.040372,  106.095743, -183.519976],
+  [0.8000, 0.6200, -24.6852263527,   493.423289,  226.626207, -107.162018],
+  [0.4378, 0.2990, -25.7317930658,   777.785555,  961.095062,  131.251349],
+];
+for (const [x, y, v, hxx0, hyy0, hxy0] of OFF) {
+  near(V(sp, x, y), v, 1e-6, "V at (" + x + ", " + y + ")");
+  const [a, b, c] = hessian(sp, x, y);
+  near(a, hxx0, 2e-3 * Math.abs(hxx0) + 1e-3, "Vxx at (" + x + ", " + y + ")");
+  near(b, hyy0, 2e-3 * Math.abs(hyy0) + 1e-3, "Vyy at (" + x + ", " + y + ")");
+  near(c, hxy0, 2e-3 * Math.abs(hxy0) + 1e-3, "Vxy at (" + x + ", " + y + ")");
+}
+
+// 1c. THE BOX. The page prints (p,q,r) and calls it Part IV's closed form, so the page must be
+//     able to show that it is: chi_p * chi_q * chi_r, times zeta, has to BE the coset index
+//     D = A - B, charge by charge. Nothing checked this before, and the triple the catalogue
+//     carried failed it on every single row.
+const chi = k => { const m = new Map(); for (let i = 0; i <= k; i++) m.set(k - 2 * i, 1); return m; };
+const convo = (...fs) => fs.reduce((acc, f) => {
+  const out = new Map();
+  for (const [a, va] of acc) for (const [b, vb] of f) out.set(a + b, (out.get(a + b) || 0) + va * vb);
+  return out;
+}, new Map([[0, 1]]));
+let boxbad = 0, boxok = 0;
+for (const [key, r] of Object.entries(DATA.reps)) {
+  if (r.blind) continue;
+  const [p, q, s] = r.sides, prod = convo(chi(p), chi(q), chi(s));
+  const D = new Map(r.modes.map(([charge, A, B]) => [2 * charge, A - B]));
+  let ok = true;                                  // both directions: no missing and no spurious weight
+  for (const [j, d] of D) if (r.zeta * (prod.get(j) || 0) !== d) ok = false;
+  for (const [j, v] of prod) if (j > 0 && r.zeta * v !== (D.get(j) || 0)) ok = false;
+  ok ? boxok++ : (boxbad++, boxbad <= 3 && console.log("  FAIL  box wrong on (" + key + "): " + r.sides));
+}
+if (boxbad) { fail++; console.log("  FAIL  Part IV's closed form fails on " + boxbad + " of " + (boxok + boxbad) + " sighted rows"); }
+else console.log("  ok    zeta*chi_p*chi_q*chi_r reproduces D on all " + boxok + " sighted multiplets");
+
 // 2. the theorem, as the page advertises it: on a content of blind multiplets the boundary sign
 //    cannot move ONE number. Not "moves little" -- cannot move.
 const blind = Object.keys(DATA.reps).filter(k => DATA.reps[k].blind).slice(0, 6);
