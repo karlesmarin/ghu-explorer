@@ -79,6 +79,9 @@ canvas#pot{touch-action:none;cursor:grab}
 
 .sitenav{display:flex;align-items:center;gap:4px;margin:0 0 16px;padding:5px;border:1px solid #dfe6ec;border-radius:10px;background:#fff;font-size:13.5px;flex-wrap:wrap}
 .sitenav a{display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:7px;text-decoration:none;color:#4a5b6a;font-weight:600}
+.sitenav a i{font-style:normal;font-weight:400;font-size:12px;color:#7d8c99}
+.sitenav a.here i{color:#cfe4ec}
+@media(max-width:900px){.sitenav a i{display:none}}
 .sitenav a b{display:grid;place-items:center;width:19px;height:19px;border-radius:5px;background:#eef3f6;color:#7d8c99;font:600 11px/1 ui-monospace,monospace}
 .sitenav a:hover{background:#f5f8fa;color:#12546b}
 .sitenav a.here{background:#1B6F8C;color:#fff}.sitenav a.here b{background:#ffffff33;color:#fff}
@@ -87,7 +90,7 @@ canvas#pot{touch-action:none;cursor:grab}
 </style>
 
 <div class="wrap">
-<nav class="sitenav" aria-label="tools"><a href="index.html" data-p="explorer" class="here"><b>1</b> Selection rule</a><a href="calculator.html" data-p="calc"><b>2</b> Model calculator</a><span class="navnote">SU(4) gauge&ndash;Higgs on T&sup2;/&#8484;&#8322; &middot; Parts III&ndash;V</span></nav>
+<nav class="sitenav" aria-label="tools"><a href="index.html" data-p="explorer" class="here"><b>1</b> Selection rule <i>&mdash; which &alpha;-domain is legal</i></a><a href="calculator.html" data-p="calc"><b>2</b> Model calculator <i>&mdash; a content in, the Higgs out</i></a><a href="predictor.html" data-p="predict"><b>3</b> &eta;-meter <i>&mdash; predict without computing, then let it roll</i></a><span class="navnote">SU(4) gauge&ndash;Higgs on T&sup2;/&#8484;&#8322; &middot; Parts III&ndash;V</span></nav>
 <header>
   <div class="brand">
     <div class="kick">Orbifold explorer &middot; SU(4) gauge&ndash;Higgs on T&sup2;/&#8484;&#8322;</div>
@@ -208,13 +211,17 @@ canvas#pot{touch-action:none;cursor:grab}
     multiplication by the central element &minus;<b>1</b> of <i>Z</i>(SU(4)). A representation answers
     with the scalar (&minus;1)<sup>a+2b+3c</sup>, so the harmonics carrying the opposite sign are
     identically absent &mdash; not suppressed, absent.</p>
-  <p>Built from <strong>Part III</strong> of a four-paper series &middot;
+  <p>Built from <strong>Part III</strong> of the series &middot;
     <a href="https://doi.org/10.5281/zenodo.21438226">10.5281/zenodo.21438226</a>
-    (concept DOI &mdash; always the current version, now&nbsp;v5) &middot;
+    (concept DOI &mdash; always the current version) &middot;
     <a href="https://github.com/karlesmarin/centre-parity-selection">scripts &amp; Lean certificate</a>.</p>
   <p>The closed form shown in the &ldquo;compression&rdquo; panel is <strong>Part IV</strong> &middot;
     <a href="https://doi.org/10.5281/zenodo.21463000">10.5281/zenodo.21463000</a> &middot;
-    <a href="https://github.com/karlesmarin/schur-nonidentity-o4">schur-nonidentity-o4</a>
+    <a href="https://github.com/karlesmarin/schur-nonidentity-o4">schur-nonidentity-o4</a>.</p>
+  <p>Which multiplets the boundary sign cannot touch at all is <strong>Part V</strong> &middot;
+    <a href="https://doi.org/10.5281/zenodo.21727095">10.5281/zenodo.21727095</a> &middot;
+    <a href="https://github.com/karlesmarin/higgs-blind-class">higgs-blind-class</a> &mdash; it is what
+    tools <a href="calculator.html">2</a> and <a href="predictor.html">3</a> are built on
     &middot; Carles Mar&iacute;n, with Claude (Anthropic) as AI research assistant.</p>
 </footer>
 </div>
