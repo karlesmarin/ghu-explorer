@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Orbifold Model Calculator — 6D SU(4) gauge–Higgs on T²/Z₂</title>
+<meta name="description" content="Type a matter content, get the one-loop Wilson-line potential, its vacuum, the Higgs mass matrix and the electroweak verdict. No Kaluza-Klein spectrum to enumerate.">
+<style>
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+     font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:22px 20px 64px}
+h1{font-size:25px;margin:0 0 4px;letter-spacing:-.015em}
+h1 small{display:block;font-size:15px;font-weight:400;color:var(--ink2);margin-top:5px;letter-spacing:0}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:0 0 12px;font-weight:650}
+h3{font-size:13px;margin:0 0 8px;color:var(--ink2);font-weight:650}
+a{color:var(--blue)}
+header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.live{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+.grid{display:grid;gap:18px}
+@media(min-width:1000px){.two{grid-template-columns:1.05fr .95fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:16px 17px}
+.card.tight{padding:13px 15px}
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+input[type=search],select{font:14px/1 inherit;padding:7px 9px;border:1px solid var(--line);
+     border-radius:7px;background:#fff;color:var(--ink)}
+input[type=search]{flex:1;min-width:120px}
+button{font:600 13px/1 inherit;padding:7px 11px;border-radius:7px;border:1px solid var(--line);
+       background:#fff;color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--blue);color:var(--blue-d)}
+button.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+button.primary:hover{background:var(--blue-d)}
+button.ghost{border:none;background:none;color:var(--ink3);padding:4px 6px}
+button.ghost:hover{color:var(--rust)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap;
+   position:sticky;top:0;background:var(--card);cursor:pointer;user-select:none}
+th.no{cursor:default}
+td{padding:6px 8px;border-bottom:1px solid #f0f4f7;vertical-align:middle}
+tbody tr:hover{background:#f7fafc}
+.num{font-family:var(--mono);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.scroll{max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.tag{font:600 10.5px/1 var(--mono);padding:3px 6px;border-radius:5px;letter-spacing:.03em}
+.tag.blind{background:var(--rust-l);color:var(--rust)}
+.tag.sees{background:var(--blue-l);color:var(--blue-d)}
+.res{display:block}
+.stat{border:1px solid var(--line);border-radius:10px;padding:12px 13px;background:#fff}
+.stat .k{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);
+         font-weight:650;margin-bottom:6px}
+.stat .v{font:600 21px/1.15 var(--mono);letter-spacing:-.02em}
+.stat .s{font-size:12px;color:var(--ink2);margin-top:5px}
+.verdict{border-left:4px solid var(--line);padding:11px 14px;border-radius:0 9px 9px 0;background:#fff}
+.verdict.breaks{border-color:var(--green);background:var(--green-l)}
+.verdict.stable{border-color:var(--rust);background:var(--rust-l)}
+.verdict b{display:block;font-size:15px;margin-bottom:2px}
+.verdict span{font-size:13px;color:var(--ink2)}
+canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);display:block}
+.legend{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--ink2);margin-top:8px;
+        flex-wrap:wrap}
+.swatch{display:inline-block;width:52px;height:9px;border-radius:3px;vertical-align:middle;
+        background:linear-gradient(90deg,#2c5f8a,#7fb2cc,#f5f0e6,#e0a06a,#a83c14)}
+.note{font-size:12.5px;color:var(--ink2)}
+.foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2)}
+.foot b{color:var(--ink)}
+.mono{font-family:var(--mono)}
+.eq{font-family:var(--mono);font-size:12.5px;background:#f5f8fa;border:1px solid var(--line);
+    border-radius:7px;padding:9px 11px;overflow-x:auto;white-space:pre;color:var(--ink2)}
+.mm{display:inline-grid;grid-template-columns:auto auto;gap:2px 14px;font-family:var(--mono);
+    font-size:13px;border-left:2px solid var(--line);border-right:2px solid var(--line);padding:5px 9px}
+.rowin{width:46px;font:13px var(--mono);padding:4px 5px;border:1px solid var(--line);border-radius:5px;
+       text-align:right}
+.eta{font:600 12px var(--mono);padding:4px 8px;border-radius:6px;border:1px solid var(--line);
+     background:#fff;cursor:pointer;min-width:34px}
+.eta.plus{color:var(--blue-d);border-color:#c3dce6;background:var(--blue-l)}
+.eta.minus{color:var(--rust);border-color:#eccfb8;background:var(--rust-l)}
+.empty{color:var(--ink3);font-size:13px;padding:16px 8px;text-align:center}
+
+.sitenav{display:flex;align-items:center;gap:4px;margin:0 0 16px;padding:5px;border:1px solid #dfe6ec;border-radius:10px;background:#fff;font-size:13.5px;flex-wrap:wrap}
+.sitenav a{display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:7px;text-decoration:none;color:#4a5b6a;font-weight:600}
+.sitenav a b{display:grid;place-items:center;width:19px;height:19px;border-radius:5px;background:#eef3f6;color:#7d8c99;font:600 11px/1 ui-monospace,monospace}
+.sitenav a:hover{background:#f5f8fa;color:#12546b}
+.sitenav a.here{background:#1B6F8C;color:#fff}.sitenav a.here b{background:#ffffff33;color:#fff}
+.navnote{margin-left:auto;padding-right:9px;color:#7d8c99;font-size:12px}
+@media(max-width:640px){.navnote{display:none}}
+
+.sheet{border:1px solid var(--line);border-radius:11px;background:#fff;overflow:hidden;margin-bottom:12px}
+.sheet > h3{margin:0;padding:10px 14px;background:#f6f9fb;border-bottom:1px solid var(--line);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2)}
+.sheet table{width:100%;border-collapse:collapse}
+.sheet td{padding:10px 14px;border-bottom:1px solid #f0f4f7;vertical-align:baseline}
+.sheet tr:last-child td{border-bottom:none}
+.sheet td.lab{width:26%;color:var(--ink2);font-size:13px;font-weight:600;white-space:nowrap}
+.sheet td.val{width:20%;font:600 17px/1.2 var(--mono);white-space:nowrap}
+.sheet td.exp{font-size:12.5px;color:var(--ink2)}
+.sheet td.st{width:1%;text-align:right;white-space:nowrap}
+.st .chip{font-size:9.5px;padding:3px 7px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="sitenav" aria-label="tools"><a href="index.html" data-p="explorer"><b>1</b> Selection rule</a><a href="calculator.html" data-p="calc" class="here"><b>2</b> Model calculator</a><span class="navnote">SU(4) gauge&ndash;Higgs on T&sup2;/&#8484;&#8322; &middot; Parts III&ndash;V</span></nav>
+<header>
+  <h1>Orbifold Model Calculator
+    <small>Six-dimensional <span class="mono">SU(4)</span> gauge–Higgs unification on <span class="mono">T²/Z₂</span>.
+    Type a matter content; read the one-loop Wilson-line potential, its vacuum, the Higgs mass matrix
+    and what the boundary condition can and cannot do. <b>No Kaluza–Klein spectrum is enumerated.</b></small>
+  </h1>
+  <div class="chips" id="chips">
+    <span class="chip thm">theorem · Lean 4 — blindness &amp; census</span>
+    <span class="chip ver">verified — Part IV closed form</span>
+    <span class="chip mea">measured vs AHMN</span>
+    <span class="chip live" id="selfcheck">self-check: running…</span>
+  </div>
+</header>
+
+<div class="grid two">
+
+  <section class="card">
+    <h2>1 · The catalogue</h2>
+    <div class="toolbar">
+      <input type="search" id="q" placeholder="Dynkin labels, dimension…  e.g. 4 0 0  or  35">
+      <select id="filter">
+        <option value="all">all multiplets</option>
+        <option value="sees">sees η only</option>
+        <option value="blind">blind to η only</option>
+      </select>
+    </div>
+    <div class="scroll">
+      <table id="cat">
+        <thead><tr>
+          <th data-k="key">(a,b,c)</th>
+          <th data-k="dim" class="num">dim</th>
+          <th data-k="sides">box (p,q,r)</th>
+          <th data-k="zeta" class="num">ζ</th>
+          <th data-k="blind">η</th>
+          <th class="no"></th>
+        </tr></thead>
+        <tbody id="catbody"></tbody>
+      </table>
+    </div>
+    <p class="note" style="margin:10px 0 0">
+      <b>η</b> is the boundary-condition sign <span class="mono">η = η₀η₁</span>. A multiplet marked
+      <span class="tag blind">blind</span> has <span class="mono">D<sub>λ</sub> ≡ 0</span>: the boundary condition has no
+      consequence any measurement of this Higgs sector can see. That classification is a theorem,
+      machine-checked in Lean 4.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>2 · Your matter content</h2>
+    <div class="toolbar">
+      <button id="loadAhmn">load AHMN 2312.08608</button>
+      <button id="clear">clear</button>
+      <span style="flex:1"></span>
+      <button class="primary" id="run">compute</button>
+    </div>
+    <table>
+      <thead><tr>
+        <th class="no">multiplet</th><th class="no num">dim</th><th class="no num">n</th>
+        <th class="no">η</th><th class="no">role</th><th class="no"></th>
+      </tr></thead>
+      <tbody id="content"></tbody>
+    </table>
+    <div class="empty" id="empty">Pick multiplets from the catalogue, or load AHMN's content.</div>
+    <div class="eq" style="margin-top:12px">V(α) = Σ<sub>k≠0</sub> |k|⁻⁶ Σ<sub>q</sub> [A<sub>q</sub> + B<sub>q</sub>(−1)^k₂] cos(2πq·kα)
+  A<sub>q</sub>+B<sub>q</sub> = Σ<sub>λ</sub>   A<sub>q</sub>−B<sub>q</sub> = D<sub>λ</sub>   ← the two halves</div>
+  </section>
+
+</div>
+
+<section style="margin-top:18px">
+  <h2>3 · What comes out</h2>
+  <div class="res" id="stats"></div>
+  <div id="verdictbox" style="margin-top:12px"></div>
+</section>
+
+<div class="grid two" style="margin-top:18px">
+  <section class="card">
+    <h2>4 · The landscape</h2>
+    <canvas id="map" width="520" height="520"></canvas>
+    <div class="legend">
+      <span><span class="swatch"></span> low → high</span>
+      <span>✕ vacuum</span>
+      <span id="etaflip"></span>
+    </div>
+    <p class="note" style="margin:9px 0 0">
+      The one-loop potential over the Wilson-line torus (α₁ horizontal, α₂ vertical, one period each).
+      Flip η below and watch: on a content of blind multiplets <b>nothing moves</b> — that is Theorem 1
+      on the screen.
+    </p>
+    <div class="toolbar" style="margin-top:10px">
+      <button id="flip">flip every η</button>
+      <span class="note" id="flipnote"></span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>5 · Before you compute anything</h2>
+    <div id="pre"></div>
+  </section>
+</div>
+
+<div class="foot">
+  <p><b>What each label means.</b>
+  <span class="chip thm" style="text-transform:none">theorem</span> proved, and machine-checked in Lean 4:
+  which multiplets are blind to η, the count of them, and the census of boundary-condition classes.
+  <span class="chip ver" style="text-transform:none">verified</span> Part IV's closed form for
+  <span class="mono">D<sub>λ</sub></span>, on which the mode counts rest — exhaustively checked, <b>not proved</b>.
+  <span class="chip mea" style="text-transform:none">measured</span> the vacuum, the masses and the mixing:
+  the engine reproduces AHMN's published vacuum exactly and their published mass matrix to 0.1 %, and
+  that single published case is the whole of its validation.</p>
+
+  <p><b>What this does not do.</b> It says what <i>a model</i> predicts, not what nature does — in this
+  model the Higgs comes out light, as AHMN themselves report. A closed form for the potential is not a
+  closed form for the mass: the mass lives at the true minimum, found here numerically. The <i>sign</i> of
+  the off-diagonal mass, and hence of the mixing angle, is a convention — the potential is invariant
+  under α → −α, so only invariants are reported. Everything assumes boundary conditions that can be
+  simultaneously diagonalised.</p>
+
+  <p><b>Papers.</b>
+  Part III <a href="https://doi.org/10.5281/zenodo.21438226">10.5281/zenodo.21438226</a> ·
+  Part IV <a href="https://doi.org/10.5281/zenodo.21463000">10.5281/zenodo.21463000</a> ·
+  Part V <a href="https://doi.org/10.5281/zenodo.21727095">10.5281/zenodo.21727095</a> ·
+  code <a href="https://github.com/karlesmarin/higgs-blind-class">higgs-blind-class</a>.
+  Carles Marín Muñoz, independent researcher, with Claude (Anthropic) as AI research assistant.
+  Apache 2.0. Nothing you type leaves this page.</p>
+</div>
+
+</div>
+<script>
+const DATA = {"adjoint":"1,1,0","maxdim":3000,"maxsum":7,"note":"Part V options table. modes = [charge, A, B]; A+B(-1)^k2 is AHMN's coefficient. blind = the boundary sign is invisible on this multiplet (Part V, Lean-checked). Generated by make_calc_data.py from the verified characters; do not hand-edit.","reps":{"0,0,0":{"blind":false,"dim":1,"modes":[],"sides":[1,1,0],"zeta":1},"0,0,1":{"blind":false,"dim":4,"modes":[[0.5,0,1]],"sides":[3,1,1],"zeta":-1},"0,0,2":{"blind":false,"dim":10,"modes":[[0.5,1,1],[1.0,1,0]],"sides":[2,1,1],"zeta":1},"0,0,3":{"blind":false,"dim":20,"modes":[[0.5,1,3],[1.0,1,1],[1.5,0,1]],"sides":[4,2,1],"zeta":-1},"0,0,4":{"blind":false,"dim":35,"modes":[[0.5,3,3],[1.0,3,1],[1.5,1,1],[2.0,1,0]],"sides":[3,2,1],"zeta":1},"0,0,5":{"blind":false,"dim":56,"modes":[[0.5,3,6],[1.0,3,3],[1.5,1,3],[2.0,1,1],[2.5,0,1]],"sides":[5,3,1],"zeta":-1},"0,0,6":{"blind":false,"dim":84,"modes":[[0.5,6,6],[1.0,6,3],[1.5,3,3],[2.0,3,1],[2.5,1,1],[3.0,1,0]],"sides":[4,3,1],"zeta":1},"0,0,7":{"blind":false,"dim":120,"modes":[[0.5,6,10],[1.0,6,6],[1.5,3,6],[2.0,3,3],[2.5,1,3],[3.0,1,1],[3.5,0,1]],"sides":[6,4,1],"zeta":-1},"0,1,0":{"blind":true,"dim":6,"modes":[[0.5,1,1]],"sides":null,"zeta":0},"0,1,1":{"blind":false,"dim":20,"modes":[[0.5,3,2],[1.0,1,1]],"sides":[3,1,1],"zeta":1},"0,1,2":{"blind":false,"dim":45,"modes":[[0.5,5,5],[1.0,2,3],[1.5,1,1]],"sides":[3,1,0],"zeta":-1},"0,1,3":{"blind":false,"dim":84,"modes":[[0.5,9,7],[1.0,5,5],[1.5,3,2],[2.0,1,1]],"sides":[4,2,1],"zeta":1},"0,1,4":{"blind":false,"dim":140,"modes":[[0.5,12,12],[1.0,7,9],[1.5,5,5],[2.0,2,3],[2.5,1,1]],"sides":[4,1,1],"zeta":-1},"0,1,5":{"blind":false,"dim":216,"modes":[[0.5,18,15],[1.0,12,12],[1.5,9,7],[2.0,5,5],[2.5,3,2],[3.0,1,1]],"sides":[5,3,1],"zeta":1},"0,1,6":{"blind":false,"dim":315,"modes":[[0.5,22,22],[1.0,15,18],[1.5,12,12],[2.0,7,9],[2.5,5,5],[3.0,2,3],[3.5,1,1]],"sides":[5,2,1],"zeta":-1},"0,2,0":{"blind":false,"dim":20,"modes":[[0.5,2,2],[1.0,2,1]],"sides":[2,2,0],"zeta":1},"0,2,1":{"blind":false,"dim":60,"modes":[[0.5,5,7],[1.0,4,4],[1.5,1,2]],"sides":[4,2,1],"zeta":-1},"0,2,2":{"blind":false,"dim":126,"modes":[[0.5,11,11],[1.0,10,7],[1.5,4,4],[2.0,2,1]],"sides":[3,2,1],"zeta":1},"0,2,3":{"blind":false,"dim":224,"modes":[[0.5,16,20],[1.0,14,14],[1.5,7,10],[2.0,4,4],[2.5,1,2]],"sides":[5,2,2],"zeta":-1},"0,2,4":{"blind":false,"dim":360,"modes":[[0.5,26,26],[1.0,24,19],[1.5,14,14],[2.0,10,7],[2.5,4,4],[3.0,2,1]],"sides":[4,2,2],"zeta":1},"0,2,5":{"blind":false,"dim":540,"modes":[[0.5,33,39],[1.0,30,30],[1.5,19,24],[2.0,14,14],[2.5,7,10],[3.0,4,4],[3.5,1,2]],"sides":[6,3,2],"zeta":-1},"0,3,0":{"blind":true,"dim":50,"modes":[[0.5,5,5],[1.0,3,3],[1.5,2,2]],"sides":null,"zeta":0},"0,3,1":{"blind":false,"dim":140,"modes":[[0.5,13,11],[1.0,9,9],[1.5,6,5],[2.0,2,2]],"sides":[4,2,1],"zeta":1},"0,3,2":{"blind":false,"dim":280,"modes":[[0.5,22,22],[1.0,16,18],[1.5,12,12],[2.0,5,6],[2.5,2,2]],"sides":[4,2,0],"zeta":-1},"0,3,3":{"blind":false,"dim":480,"modes":[[0.5,36,32],[1.0,28,28],[1.5,22,19],[2.0,12,12],[2.5,6,5],[3.0,2,2]],"sides":[5,2,2],"zeta":1},"0,3,4":{"blind":false,"dim":750,"modes":[[0.5,49,49],[1.0,39,43],[1.5,32,32],[2.0,19,22],[2.5,12,12],[3.0,5,6],[3.5,2,2]],"sides":[5,2,1],"zeta":-1},"0,4,0":{"blind":false,"dim":105,"modes":[[0.5,8,8],[1.0,8,6],[1.5,4,4],[2.0,3,2]],"sides":[3,3,0],"zeta":1},"0,4,1":{"blind":false,"dim":280,"modes":[[0.5,19,22],[1.0,17,17],[1.5,11,13],[2.0,7,7],[2.5,2,3]],"sides":[5,3,1],"zeta":-1},"0,4,2":{"blind":false,"dim":540,"modes":[[0.5,36,36],[1.0,34,29],[1.5,23,23],[2.0,17,14],[2.5,7,7],[3.0,3,2]],"sides":[4,3,1],"zeta":1},"0,4,3":{"blind":false,"dim":900,"modes":[[0.5,53,59],[1.0,49,49],[1.5,36,41],[2.0,27,27],[2.5,14,17],[3.0,7,7],[3.5,2,3]],"sides":[6,3,2],"zeta":-1},"0,5,0":{"blind":true,"dim":196,"modes":[[0.5,14,14],[1.0,11,11],[1.5,9,9],[2.0,5,5],[2.5,3,3]],"sides":null,"zeta":0},"0,5,1":{"blind":false,"dim":504,"modes":[[0.5,34,31],[1.0,28,28],[1.5,23,21],[2.0,15,15],[2.5,9,8],[3.0,3,3]],"sides":[5,3,1],"zeta":1},"0,5,2":{"blind":false,"dim":945,"modes":[[0.5,57,57],[1.0,48,51],[1.5,41,41],[2.0,28,30],[2.5,19,19],[3.0,8,9],[3.5,3,3]],"sides":[5,3,0],"zeta":-1},"0,6,0":{"blind":false,"dim":336,"modes":[[0.5,20,20],[1.0,20,17],[1.5,14,14],[2.0,12,10],[2.5,6,6],[3.0,4,3]],"sides":[4,4,0],"zeta":1},"0,6,1":{"blind":false,"dim":840,"modes":[[0.5,46,50],[1.0,43,43],[1.5,34,37],[2.0,27,27],[2.5,17,19],[3.0,10,10],[3.5,3,4]],"sides":[6,4,1],"zeta":-1},"0,7,0":{"blind":true,"dim":540,"modes":[[0.5,30,30],[1.0,26,26],[1.5,23,23],[2.0,17,17],[2.5,13,13],[3.0,7,7],[3.5,4,4]],"sides":null,"zeta":0},"1,0,0":{"blind":false,"dim":4,"modes":[[0.5,1,0]],"sides":[3,1,1],"zeta":1},"1,0,1":{"blind":false,"dim":15,"modes":[[0.5,2,2],[1.0,0,1]],"sides":[2,1,1],"zeta":-1},"1,0,2":{"blind":false,"dim":36,"modes":[[0.5,5,3],[1.0,2,2],[1.5,1,0]],"sides":[4,2,1],"zeta":1},"1,0,3":{"blind":false,"dim":70,"modes":[[0.5,7,7],[1.0,3,5],[1.5,2,2],[2.0,0,1]],"sides":[3,2,1],"zeta":-1},"1,0,4":{"blind":false,"dim":120,"modes":[[0.5,12,9],[1.0,7,7],[1.5,5,3],[2.0,2,2],[2.5,1,0]],"sides":[5,3,1],"zeta":1},"1,0,5":{"blind":false,"dim":189,"modes":[[0.5,15,15],[1.0,9,12],[1.5,7,7],[2.0,3,5],[2.5,2,2],[3.0,0,1]],"sides":[4,3,1],"zeta":-1},"1,0,6":{"blind":false,"dim":280,"modes":[[0.5,22,18],[1.0,15,15],[1.5,12,9],[2.0,7,7],[2.5,5,3],[3.0,2,2],[3.5,1,0]],"sides":[6,4,1],"zeta":1},"1,1,0":{"blind":false,"dim":20,"modes":[[0.5,3,2],[1.0,1,1]],"sides":[3,1,1],"zeta":1},"1,1,1":{"blind":true,"dim":64,"modes":[[0.5,7,7],[1.0,4,4],[1.5,1,1]],"sides":null,"zeta":0},"1,1,2":{"blind":false,"dim":140,"modes":[[0.5,14,13],[1.0,9,9],[1.5,4,4],[2.0,1,1]],"sides":[3,1,1],"zeta":1},"1,1,3":{"blind":true,"dim":256,"modes":[[0.5,22,22],[1.0,16,16],[1.5,9,9],[2.0,4,4],[2.5,1,1]],"sides":null,"zeta":0},"1,1,4":{"blind":false,"dim":420,"modes":[[0.5,33,32],[1.0,25,25],[1.5,16,16],[2.0,9,9],[2.5,4,4],[3.0,1,1]],"sides":[3,1,1],"zeta":1},"1,1,5":{"blind":true,"dim":640,"modes":[[0.5,45,45],[1.0,36,36],[1.5,25,25],[2.0,16,16],[2.5,9,9],[3.0,4,4],[3.5,1,1]],"sides":null,"zeta":0},"1,2,0":{"blind":false,"dim":60,"modes":[[0.5,7,5],[1.0,4,4],[1.5,2,1]],"sides":[4,2,1],"zeta":1},"1,2,1":{"blind":false,"dim":175,"modes":[[0.5,16,16],[1.0,11,12],[1.5,6,6],[2.0,1,2]],"sides":[4,1,1],"zeta":-1},"1,2,2":{"blind":false,"dim":360,"modes":[[0.5,31,28],[1.0,23,23],[1.5,15,13],[2.0,6,6],[2.5,2,1]],"sides":[5,3,1],"zeta":1},"1,2,3":{"blind":false,"dim":630,"modes":[[0.5,47,47],[1.0,37,39],[1.5,26,26],[2.0,13,15],[2.5,6,6],[3.0,1,2]],"sides":[5,2,1],"zeta":-1},"1,2,4":{"blind":false,"dim":1000,"modes":[[0.5,70,66],[1.0,57,57],[1.5,43,40],[2.0,26,26],[2.5,15,13],[3.0,6,6],[3.5,2,1]],"sides":[6,4,1],"zeta":1},"1,3,0":{"blind":false,"dim":140,"modes":[[0.5,13,11],[1.0,9,9],[1.5,6,5],[2.0,2,2]],"sides":[4,2,1],"zeta":1},"1,3,1":{"blind":true,"dim":384,"modes":[[0.5,30,30],[1.0,24,24],[1.5,16,16],[2.0,8,8],[2.5,2,2]],"sides":null,"zeta":0},"1,3,2":{"blind":false,"dim":756,"modes":[[0.5,55,53],[1.0,45,45],[1.5,33,32],[2.0,19,19],[2.5,8,8],[3.0,2,2]],"sides":[4,2,1],"zeta":1},"1,3,3":{"blind":true,"dim":1280,"modes":[[0.5,84,84],[1.0,72,72],[1.5,55,55],[2.0,36,36],[2.5,19,19],[3.0,8,8],[3.5,2,2]],"sides":null,"zeta":0},"1,4,0":{"blind":false,"dim":280,"modes":[[0.5,22,19],[1.0,17,17],[1.5,13,11],[2.0,7,7],[2.5,3,2]],"sides":[5,3,1],"zeta":1},"1,4,1":{"blind":false,"dim":735,"modes":[[0.5,50,50],[1.0,42,43],[1.5,32,32],[2.0,20,21],[2.5,10,10],[3.0,2,3]],"sides":[6,1,1],"zeta":-1},"1,4,2":{"blind":false,"dim":1400,"modes":[[0.5,90,86],[1.0,77,77],[1.5,62,59],[2.0,42,42],[2.5,25,23],[3.0,10,10],[3.5,3,2]],"sides":[6,4,1],"zeta":1},"1,5,0":{"blind":false,"dim":504,"modes":[[0.5,34,31],[1.0,28,28],[1.5,23,21],[2.0,15,15],[2.5,9,8],[3.0,3,3]],"sides":[5,3,1],"zeta":1},"1,5,1":{"blind":true,"dim":1280,"modes":[[0.5,77,77],[1.0,68,68],[1.5,55,55],[2.0,40,40],[2.5,25,25],[3.0,12,12],[3.5,3,3]],"sides":null,"zeta":0},"1,6,0":{"blind":false,"dim":840,"modes":[[0.5,50,46],[1.0,43,43],[1.5,37,34],[2.0,27,27],[2.5,19,17],[3.0,10,10],[3.5,4,3]],"sides":[6,4,1],"zeta":1},"2,0,0":{"blind":false,"dim":10,"modes":[[0.5,1,1],[1.0,1,0]],"sides":[2,1,1],"zeta":1},"2,0,1":{"blind":false,"dim":36,"modes":[[0.5,3,5],[1.0,2,2],[1.5,0,1]],"sides":[4,2,1],"zeta":-1},"2,0,2":{"blind":false,"dim":84,"modes":[[0.5,8,8],[1.0,7,4],[1.5,2,2],[2.0,1,0]],"sides":[2,2,2],"zeta":1},"2,0,3":{"blind":false,"dim":160,"modes":[[0.5,12,16],[1.0,10,10],[1.5,4,7],[2.0,2,2],[2.5,0,1]],"sides":[5,2,2],"zeta":-1},"2,0,4":{"blind":false,"dim":270,"modes":[[0.5,21,21],[1.0,19,14],[1.5,10,10],[2.0,7,4],[2.5,2,2],[3.0,1,0]],"sides":[3,3,2],"zeta":1},"2,0,5":{"blind":false,"dim":420,"modes":[[0.5,27,33],[1.0,24,24],[1.5,14,19],[2.0,10,10],[2.5,4,7],[3.0,2,2],[3.5,0,1]],"sides":[6,3,2],"zeta":-1},"2,1,0":{"blind":false,"dim":45,"modes":[[0.5,5,5],[1.0,3,2],[1.5,1,1]],"sides":[3,1,0],"zeta":1},"2,1,1":{"blind":false,"dim":140,"modes":[[0.5,14,13],[1.0,9,9],[1.5,4,4],[2.0,1,1]],"sides":[3,1,1],"zeta":1},"2,1,2":{"blind":true,"dim":300,"modes":[[0.5,26,26],[1.0,19,19],[1.5,11,11],[2.0,4,4],[2.5,1,1]],"sides":null,"zeta":0},"2,1,3":{"blind":false,"dim":540,"modes":[[0.5,43,41],[1.0,33,33],[1.5,22,21],[2.0,11,11],[2.5,4,4],[3.0,1,1]],"sides":[4,2,1],"zeta":1},"2,1,4":{"blind":false,"dim":875,"modes":[[0.5,62,62],[1.0,50,51],[1.5,36,36],[2.0,21,22],[2.5,11,11],[3.0,4,4],[3.5,1,1]],"sides":[5,1,0],"zeta":-1},"2,2,0":{"blind":false,"dim":126,"modes":[[0.5,11,11],[1.0,10,7],[1.5,4,4],[2.0,2,1]],"sides":[3,2,1],"zeta":1},"2,2,1":{"blind":false,"dim":360,"modes":[[0.5,28,31],[1.0,23,23],[1.5,13,15],[2.0,6,6],[2.5,1,2]],"sides":[5,3,1],"zeta":-1},"2,2,2":{"blind":false,"dim":729,"modes":[[0.5,54,54],[1.0,48,42],[1.5,30,30],[2.0,18,15],[2.5,6,6],[3.0,2,1]],"sides":[3,3,2],"zeta":1},"2,2,3":{"blind":false,"dim":1260,"modes":[[0.5,83,89],[1.0,73,73],[1.5,51,56],[2.0,33,33],[2.5,15,18],[3.0,6,6],[3.5,1,2]],"sides":[6,3,2],"zeta":-1},"2,3,0":{"blind":false,"dim":280,"modes":[[0.5,22,22],[1.0,18,16],[1.5,12,12],[2.0,6,5],[2.5,2,2]],"sides":[4,2,0],"zeta":1},"2,3,1":{"blind":false,"dim":756,"modes":[[0.5,55,53],[1.0,45,45],[1.5,33,32],[2.0,19,19],[2.5,8,8],[3.0,2,2]],"sides":[4,2,1],"zeta":1},"2,3,2":{"blind":true,"dim":1470,"modes":[[0.5,97,97],[1.0,83,83],[1.5,64,64],[2.0,41,41],[2.5,22,22],[3.0,8,8],[3.5,2,2]],"sides":null,"zeta":0},"2,4,0":{"blind":false,"dim":540,"modes":[[0.5,36,36],[1.0,34,29],[1.5,23,23],[2.0,17,14],[2.5,7,7],[3.0,3,2]],"sides":[4,3,1],"zeta":1},"2,4,1":{"blind":false,"dim":1400,"modes":[[0.5,86,90],[1.0,77,77],[1.5,59,62],[2.0,42,42],[2.5,23,25],[3.0,10,10],[3.5,2,3]],"sides":[6,4,1],"zeta":-1},"2,5,0":{"blind":false,"dim":945,"modes":[[0.5,57,57],[1.0,51,48],[1.5,41,41],[2.0,30,28],[2.5,19,19],[3.0,9,8],[3.5,3,3]],"sides":[5,3,0],"zeta":1},"3,0,0":{"blind":false,"dim":20,"modes":[[0.5,3,1],[1.0,1,1],[1.5,1,0]],"sides":[4,2,1],"zeta":1},"3,0,1":{"blind":false,"dim":70,"modes":[[0.5,7,7],[1.0,3,5],[1.5,2,2],[2.0,0,1]],"sides":[3,2,1],"zeta":-1},"3,0,2":{"blind":false,"dim":160,"modes":[[0.5,16,12],[1.0,10,10],[1.5,7,4],[2.0,2,2],[2.5,1,0]],"sides":[5,2,2],"zeta":1},"3,0,3":{"blind":false,"dim":300,"modes":[[0.5,24,24],[1.0,16,20],[1.5,12,12],[2.0,4,7],[2.5,2,2],[3.0,0,1]],"sides":[4,2,2],"zeta":-1},"3,0,4":{"blind":false,"dim":500,"modes":[[0.5,39,33],[1.0,29,29],[1.5,23,18],[2.0,12,12],[2.5,7,4],[3.0,2,2],[3.5,1,0]],"sides":[6,3,2],"zeta":1},"3,1,0":{"blind":false,"dim":84,"modes":[[0.5,9,7],[1.0,5,5],[1.5,3,2],[2.0,1,1]],"sides":[4,2,1],"zeta":1},"3,1,1":{"blind":true,"dim":256,"modes":[[0.5,22,22],[1.0,16,16],[1.5,9,9],[2.0,4,4],[2.5,1,1]],"sides":null,"zeta":0},"3,1,2":{"blind":false,"dim":540,"modes":[[0.5,43,41],[1.0,33,33],[1.5,22,21],[2.0,11,11],[2.5,4,4],[3.0,1,1]],"sides":[4,2,1],"zeta":1},"3,1,3":{"blind":true,"dim":960,"modes":[[0.5,68,68],[1.0,56,56],[1.5,40,40],[2.0,24,24],[2.5,11,11],[3.0,4,4],[3.5,1,1]],"sides":null,"zeta":0},"3,2,0":{"blind":false,"dim":224,"modes":[[0.5,20,16],[1.0,14,14],[1.5,10,7],[2.0,4,4],[2.5,2,1]],"sides":[5,2,2],"zeta":1},"3,2,1":{"blind":false,"dim":630,"modes":[[0.5,47,47],[1.0,37,39],[1.5,26,26],[2.0,13,15],[2.5,6,6],[3.0,1,2]],"sides":[5,2,1],"zeta":-1},"3,2,2":{"blind":false,"dim":1260,"modes":[[0.5,89,83],[1.0,73,73],[1.5,56,51],[2.0,33,33],[2.5,18,15],[3.0,6,6],[3.5,2,1]],"sides":[6,3,2],"zeta":1},"3,3,0":{"blind":false,"dim":480,"modes":[[0.5,36,32],[1.0,28,28],[1.5,22,19],[2.0,12,12],[2.5,6,5],[3.0,2,2]],"sides":[5,2,2],"zeta":1},"3,3,1":{"blind":true,"dim":1280,"modes":[[0.5,84,84],[1.0,72,72],[1.5,55,55],[2.0,36,36],[2.5,19,19],[3.0,8,8],[3.5,2,2]],"sides":null,"zeta":0},"3,4,0":{"blind":false,"dim":900,"modes":[[0.5,59,53],[1.0,49,49],[1.5,41,36],[2.0,27,27],[2.5,17,14],[3.0,7,7],[3.5,3,2]],"sides":[6,3,2],"zeta":1},"4,0,0":{"blind":false,"dim":35,"modes":[[0.5,3,3],[1.0,3,1],[1.5,1,1],[2.0,1,0]],"sides":[3,2,1],"zeta":1},"4,0,1":{"blind":false,"dim":120,"modes":[[0.5,9,12],[1.0,7,7],[1.5,3,5],[2.0,2,2],[2.5,0,1]],"sides":[5,3,1],"zeta":-1},"4,0,2":{"blind":false,"dim":270,"modes":[[0.5,21,21],[1.0,19,14],[1.5,10,10],[2.0,7,4],[2.5,2,2],[3.0,1,0]],"sides":[3,3,2],"zeta":1},"4,0,3":{"blind":false,"dim":500,"modes":[[0.5,33,39],[1.0,29,29],[1.5,18,23],[2.0,12,12],[2.5,4,7],[3.0,2,2],[3.5,0,1]],"sides":[6,3,2],"zeta":-1},"4,1,0":{"blind":false,"dim":140,"modes":[[0.5,12,12],[1.0,9,7],[1.5,5,5],[2.0,3,2],[2.5,1,1]],"sides":[4,1,1],"zeta":1},"4,1,1":{"blind":false,"dim":420,"modes":[[0.5,33,32],[1.0,25,25],[1.5,16,16],[2.0,9,9],[2.5,4,4],[3.0,1,1]],"sides":[3,1,1],"zeta":1},"4,1,2":{"blind":false,"dim":875,"modes":[[0.5,62,62],[1.0,51,50],[1.5,36,36],[2.0,22,21],[2.5,11,11],[3.0,4,4],[3.5,1,1]],"sides":[5,1,0],"zeta":1},"4,2,0":{"blind":false,"dim":360,"modes":[[0.5,26,26],[1.0,24,19],[1.5,14,14],[2.0,10,7],[2.5,4,4],[3.0,2,1]],"sides":[4,2,2],"zeta":1},"4,2,1":{"blind":false,"dim":1000,"modes":[[0.5,66,70],[1.0,57,57],[1.5,40,43],[2.0,26,26],[2.5,13,15],[3.0,6,6],[3.5,1,2]],"sides":[6,4,1],"zeta":-1},"4,3,0":{"blind":false,"dim":750,"modes":[[0.5,49,49],[1.0,43,39],[1.5,32,32],[2.0,22,19],[2.5,12,12],[3.0,6,5],[3.5,2,2]],"sides":[5,2,1],"zeta":1},"5,0,0":{"blind":false,"dim":56,"modes":[[0.5,6,3],[1.0,3,3],[1.5,3,1],[2.0,1,1],[2.5,1,0]],"sides":[5,3,1],"zeta":1},"5,0,1":{"blind":false,"dim":189,"modes":[[0.5,15,15],[1.0,9,12],[1.5,7,7],[2.0,3,5],[2.5,2,2],[3.0,0,1]],"sides":[4,3,1],"zeta":-1},"5,0,2":{"blind":false,"dim":420,"modes":[[0.5,33,27],[1.0,24,24],[1.5,19,14],[2.0,10,10],[2.5,7,4],[3.0,2,2],[3.5,1,0]],"sides":[6,3,2],"zeta":1},"5,1,0":{"blind":false,"dim":216,"modes":[[0.5,18,15],[1.0,12,12],[1.5,9,7],[2.0,5,5],[2.5,3,2],[3.0,1,1]],"sides":[5,3,1],"zeta":1},"5,1,1":{"blind":true,"dim":640,"modes":[[0.5,45,45],[1.0,36,36],[1.5,25,25],[2.0,16,16],[2.5,9,9],[3.0,4,4],[3.5,1,1]],"sides":null,"zeta":0},"5,2,0":{"blind":false,"dim":540,"modes":[[0.5,39,33],[1.0,30,30],[1.5,24,19],[2.0,14,14],[2.5,10,7],[3.0,4,4],[3.5,2,1]],"sides":[6,3,2],"zeta":1},"6,0,0":{"blind":false,"dim":84,"modes":[[0.5,6,6],[1.0,6,3],[1.5,3,3],[2.0,3,1],[2.5,1,1],[3.0,1,0]],"sides":[4,3,1],"zeta":1},"6,0,1":{"blind":false,"dim":280,"modes":[[0.5,18,22],[1.0,15,15],[1.5,9,12],[2.0,7,7],[2.5,3,5],[3.0,2,2],[3.5,0,1]],"sides":[6,4,1],"zeta":-1},"6,1,0":{"blind":false,"dim":315,"modes":[[0.5,22,22],[1.0,18,15],[1.5,12,12],[2.0,9,7],[2.5,5,5],[3.0,3,2],[3.5,1,1]],"sides":[5,2,1],"zeta":1},"7,0,0":{"blind":false,"dim":120,"modes":[[0.5,10,6],[1.0,6,6],[1.5,6,3],[2.0,3,3],[2.5,3,1],[3.0,1,1],[3.5,1,0]],"sides":[6,4,1],"zeta":1}}};
+const KMAX = 10, GRID = 72;
+
+/* ---------- the engine: the same two halves the paper is about ---------------------------- */
+const LATT = [];
+for (let k1 = -KMAX; k1 <= KMAX; k1++)
+  for (let k2 = -KMAX; k2 <= KMAX; k2++)
+    if (k1 || k2) LATT.push([k1, k2, Math.pow(k1 * k1 + k2 * k2, -3), k2 & 1]);
+
+/* content row: {key, n, eta, role}  role: +1 matter, -1 gauge (carries the antiperiodic twist) */
+function spectrum(rows) {
+  const acc = new Map();                       // charge -> [coefEven, coefOdd]
+  for (const r of rows) {
+    const rep = DATA.reps[r.key]; if (!rep) continue;
+    for (const [q, A, B] of rep.modes) {
+      const a = r.role > 0 ? A : B, b = r.role > 0 ? B : A;   // the gauge sector's A<->B twist
+      const w = r.n * r.role;
+      const cur = acc.get(q) || [0, 0];
+      // eta multiplies the COSET half and nothing else -- that is the whole theorem, and
+      // writing it as (a + eta*b) instead put eta on the identity half too, which made the
+      // potential of a BLIND multiplet move. The node test caught it; this is the fix.
+      cur[0] += w * (a + b);                   // even windings: Sigma, a graded dimension
+      cur[1] += w * r.eta * (a - b);           // odd  windings: eta * D, an index
+      acc.set(q, cur);
+    }
+  }
+  return [...acc.entries()].map(([q, c]) => [q, c[0], c[1]]).filter(x => x[1] || x[2]);
+}
+function V(sp, a1, a2) {
+  let v = 0;
+  for (const [k1, k2, w, odd] of LATT) {
+    const th = k1 * a1 + k2 * a2;
+    let s = 0;
+    for (const [q, cE, cO] of sp) s += (odd ? cO : cE) * Math.cos(2 * Math.PI * q * th);
+    v += w * s;
+  }
+  return v;
+}
+function minimise(sp) {
+  let best = [Infinity, 0, 0];
+  for (let i = 0; i <= 60; i++) for (let j = 0; j <= 60; j++) {
+    const a1 = i / 60, a2 = j / 60, v = V(sp, a1, a2);
+    if (v < best[0]) best = [v, a1, a2];
+  }
+  let [v0, A1, A2] = best;
+  for (const st of [0.008, 0.002, 0.0005]) {
+    for (let it = 0; it < 60; it++) {
+      let moved = false;
+      for (const d1 of [-st, 0, st]) for (const d2 of [-st, 0, st]) {
+        const x = Math.min(Math.max(A1 + d1, 0), 1), y = Math.min(Math.max(A2 + d2, 0), 1);
+        const v = V(sp, x, y);
+        if (v < v0 - 1e-12) { v0 = v; A1 = x; A2 = y; moved = true; }
+      }
+      if (!moved) break;
+    }
+  }
+  return [A1, A2, v0];
+}
+function hessian(sp, a1, a2, h = 0.002) {
+  const f = (x, y) => V(sp, x, y);
+  const fxx = (f(a1 + h, a2) - 2 * f(a1, a2) + f(a1 - h, a2)) / (h * h);
+  const fyy = (f(a1, a2 + h) - 2 * f(a1, a2) + f(a1, a2 - h)) / (h * h);
+  const fxy = (f(a1 + h, a2 + h) - f(a1 + h, a2 - h) - f(a1 - h, a2 + h) + f(a1 - h, a2 - h)) / (4 * h * h);
+  return [fxx, fyy, fxy];
+}
+function eig(xx, yy, xy) {
+  const tr = xx + yy, det = xx * yy - xy * xy, d = Math.sqrt(Math.max(tr * tr / 4 - det, 0));
+  return [tr / 2 + d, tr / 2 - d];
+}
+
+/* ---------- the catalogue --------------------------------------------------------------- */
+const KEYS = Object.keys(DATA.reps).sort((a, b) => DATA.reps[a].dim - DATA.reps[b].dim);
+let sortKey = 'dim', sortDir = 1, rows = [];
+
+function catRows() {
+  const q = document.getElementById('q').value.trim().toLowerCase().replace(/[(),]/g, ' ');
+  const f = document.getElementById('filter').value;
+  let ks = KEYS.filter(k => {
+    const r = DATA.reps[k];
+    if (f === 'blind' && !r.blind) return false;
+    if (f === 'sees' && r.blind) return false;
+    if (!q) return true;
+    const hay = (k.replace(/,/g, ' ') + ' ' + r.dim + ' ' + (r.sides || []).join(' ')).toLowerCase();
+    return q.split(/\s+/).every(t => hay.includes(t));
+  });
+  const val = k => sortKey === 'key' ? k : sortKey === 'sides'
+    ? (DATA.reps[k].sides || [0]).reduce((a, b) => a + b, 0)
+    : DATA.reps[k][sortKey];
+  ks.sort((a, b) => { const x = val(a), y = val(b); return (x > y ? 1 : x < y ? -1 : 0) * sortDir; });
+  return ks;
+}
+function drawCat() {
+  const tb = document.getElementById('catbody');
+  tb.innerHTML = catRows().map(k => {
+    const r = DATA.reps[k];
+    return `<tr><td class="mono">(${k})</td><td class="num">${r.dim}</td>` +
+      `<td class="mono" style="font-size:12px">${r.sides ? '(' + r.sides.join(',') + ')' : '—'}</td>` +
+      `<td class="num">${r.blind ? '—' : (r.zeta > 0 ? '+1' : '−1')}</td>` +
+      `<td>${r.blind ? '<span class="tag blind">blind</span>' : '<span class="tag sees">sees</span>'}</td>` +
+      `<td style="text-align:right"><button class="ghost" data-add="${k}">+ add</button></td></tr>`;
+  }).join('');
+}
+
+/* ---------- the content ------------------------------------------------------------------ */
+function drawContent() {
+  const tb = document.getElementById('content');
+  document.getElementById('empty').style.display = rows.length ? 'none' : 'block';
+  tb.innerHTML = rows.map((r, i) => {
+    const rep = DATA.reps[r.key];
+    return `<tr><td class="mono">(${r.key})${rep.blind ? ' <span class="tag blind">blind</span>' : ''}</td>` +
+      `<td class="num">${rep.dim}</td>` +
+      `<td class="num"><input class="rowin" type="number" min="1" max="99" value="${r.n}" data-n="${i}"></td>` +
+      `<td><button class="eta ${r.eta > 0 ? 'plus' : 'minus'}" data-eta="${i}">${r.eta > 0 ? '+1' : '−1'}</button></td>` +
+      `<td><select data-role="${i}" style="font-size:12.5px;padding:4px 6px">` +
+      `<option value="1"${r.role > 0 ? ' selected' : ''}>matter</option>` +
+      `<option value="-1"${r.role < 0 ? ' selected' : ''}>gauge</option></select></td>` +
+      `<td style="text-align:right"><button class="ghost" data-del="${i}">remove</button></td></tr>`;
+  }).join('');
+}
+function add(key) {
+  if (rows.some(r => r.key === key)) return;
+  rows.push({ key, n: 1, eta: 1, role: 1 });
+  drawContent();
+}
+
+/* ---------- results ---------------------------------------------------------------------- */
+const fmt = (x, n = 4) => (x >= 0 ? '' : '−') + Math.abs(x).toFixed(n);
+
+function report() {
+  const sp = spectrum(rows);
+  const stats = document.getElementById('stats'), vb = document.getElementById('verdictbox');
+  if (!sp.length) {
+    stats.innerHTML = '<div class="empty" style="grid-column:1/-1">Nothing to compute yet.</div>';
+    vb.innerHTML = ''; drawMap(null); pre(); return;
+  }
+  const [a1, a2, v0] = minimise(sp);
+  const [hxx, hyy, hxy] = hessian(sp, a1, a2);
+  const [e1, e2] = eig(hxx, hyy, hxy);
+  const [oxx, oyy, oxy] = hessian(sp, 0, 0);
+  const [o1, o2] = eig(oxx, oyy, oxy);
+  const breaks = o2 < 0;
+
+  const sheet = (title, rows) => `<div class="sheet"><h3>${title}</h3><table>` +
+    rows.map(r => `<tr><td class="lab">${r[0]}</td><td class="val">${r[1]}</td>` +
+                  `<td class="exp">${r[2]}</td><td class="st">${r[3] || ''}</td></tr>`).join('') +
+    `</table></div>`;
+  const CHM = '<span class="chip mea">measured</span>';
+  stats.innerHTML =
+    sheet('The vacuum &mdash; where this content sits', [
+      ['Wilson line &alpha;', `${fmt(a1,3)},&nbsp;${fmt(a2,3)}`,
+       'The minimum of V over the full torus. The images &plusmn;&alpha; are the same vacuum.', CHM],
+      ['V at the minimum', fmt(v0,2),
+       'In units of the winding sum; only differences of V carry meaning.', CHM]]) +
+    sheet('The Higgs sector at that vacuum', [
+      ['masses&sup2;, light / heavy', `${fmt(e2,2)}&nbsp;/&nbsp;${fmt(e1,2)}`,
+       'Eigenvalues of the curvature of V &mdash; the two neutral Higgs states.', CHM],
+      ['mass ratio', e2 > 0 ? fmt(Math.sqrt(e1/e2),4) : '&mdash;',
+       'Heavier over lighter, an invariant: no convention enters it.', CHM],
+      ['mixing |m&#8321;&#8322;|/m&#8321;&#8321;', fmt(Math.abs(hxy/hxx),4),
+       'Magnitude only &mdash; the sign is fixed by the orientation of &alpha;&#8322;, a convention.', CHM]]);
+
+  vb.innerHTML = `<div class="verdict ${breaks ? 'breaks' : 'stable'}">
+      <b>${breaks ? 'The origin is unstable — this content breaks the electroweak symmetry.'
+                  : 'The origin is stable — this content does not break it there.'}</b>
+      <span>Curvature at α = 0: eigenvalues ${fmt(o2, 2)} and ${fmt(o1, 2)}.
+      ${breaks ? 'The vacuum above is where it goes.'
+               : 'A lower minimum elsewhere is still possible; the criterion is local.'}</span></div>`;
+  drawMap(sp, a1, a2); pre();
+}
+
+/* one sentence, three cases, and no clever ternary: a broken one took the whole page down once */
+function etaSentence(rows, blind, sees) {
+  if (!rows.length) return 'Add multiplets to see this.';
+  if (!blind.length)
+    return `Every one of the ${rows.length} multiplets here <b>sees η</b>: the boundary sign moves
+            the potential, and the landscape below moves with it.`;
+  const which = blind.map(r => '(' + r.key + ')').join(', ');
+  if (!sees.length)
+    return `<b>Every multiplet here is blind: η is unobservable, whatever you set it to.</b>
+            ${which}. Flipping it cannot change one number below — that is Theorem 1.`;
+  return `<b>${blind.length} of ${rows.length}</b> multiplets are
+          <span class="tag blind">blind</span>: ${which}. For those the boundary sign is invisible;
+          the other ${sees.length} carry it, and they are the only ones η can act on.`;
+}
+
+function pre() {
+  const box = document.getElementById('pre');
+  const blind = rows.filter(r => DATA.reps[r.key].blind);
+  const sees = rows.filter(r => !DATA.reps[r.key].blind);
+  const N = 4, cls = (N + 1) * (N + 1), coset = Math.floor(cls / 2);
+  box.innerHTML = `
+    <h3>What η can do here</h3>
+    <p class="note">${etaSentence(rows, blind, sees)}</p>
+    <h3 style="margin-top:14px">Does the embedding have a coset sector at all?</h3>
+    <p class="note">For <span class="mono">SU(${N})</span> on <span class="mono">S¹/Z₂</span>, exactly
+      <b>${coset}</b> of the <b>${cls}</b> equivalence classes of boundary conditions admit one —
+      ⌊(N+1)²/2⌋, a theorem for every N, machine-checked. In the other ${cls - coset} the boundary sign is
+      invisible to <i>every</i> multiplet, for reasons that have nothing to do with matter.</p>
+    <h3 style="margin-top:14px">Where you may search</h3>
+    <p class="note">The half-domain reduction α₂ ∈ [0,½] used in the literature is <b>not</b> legal for
+      every representation: Part III shows it inverts exactly on the class able to host the Standard
+      Model. This page always scans the full period.</p>`;
+}
+
+/* ---------- the map ---------------------------------------------------------------------- */
+function drawMap(sp, a1, a2) {
+  const c = document.getElementById('map'), g = c.getContext('2d'), W = c.width;
+  g.clearRect(0, 0, W, W);
+  if (!sp) { g.fillStyle = '#f5f8fa'; g.fillRect(0, 0, W, W); return; }
+  const n = GRID, vals = new Float64Array(n * n);
+  let lo = Infinity, hi = -Infinity;
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+    const v = V(sp, i / (n - 1), j / (n - 1));
+    vals[j * n + i] = v; if (v < lo) lo = v; if (v > hi) hi = v;
+  }
+  const px = W / n;
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+    const t = hi > lo ? (vals[j * n + i] - lo) / (hi - lo) : .5;
+    g.fillStyle = ramp(t);
+    g.fillRect(Math.floor(i * px), Math.floor((n - 1 - j) * px), Math.ceil(px), Math.ceil(px));
+  }
+  if (a1 !== undefined) {
+    const X = a1 * W, Y = (1 - a2) * W;
+    for (const [col, w] of [['rgba(255,255,255,.9)', 5], ['#16202a', 2]]) {
+      g.strokeStyle = col; g.lineWidth = w; g.lineCap = 'round';
+      g.beginPath(); g.moveTo(X - 8, Y - 8); g.lineTo(X + 8, Y + 8);
+      g.moveTo(X + 8, Y - 8); g.lineTo(X - 8, Y + 8); g.stroke();
+    }
+  }
+  g.strokeStyle = 'rgba(0,0,0,.18)'; g.lineWidth = 1; g.strokeRect(.5, .5, W - 1, W - 1);
+}
+function ramp(t) {
+  const stops = [[44, 95, 138], [127, 178, 204], [245, 240, 230], [224, 160, 106], [168, 60, 20]];
+  const x = Math.max(0, Math.min(1, t)) * (stops.length - 1), i = Math.min(Math.floor(x), stops.length - 2);
+  const f = x - i, a = stops[i], b = stops[i + 1];
+  return `rgb(${a.map((v, k) => Math.round(v + f * (b[k] - v))).join(',')})`;
+}
+
+/* ---------- the self-check: the anchor travels with the instrument ------------------------ */
+function selfcheck() {
+  const el = document.getElementById('selfcheck');
+  const ahmn = [{ key: '4,0,0', n: 3, eta: 1, role: 1 }, { key: '1,0,1', n: 1, eta: 1, role: -1 }];
+  const sp = spectrum(ahmn);
+  const [a1, a2] = minimise(sp);
+  const [hxx, hyy, hxy] = hessian(sp, a1, a2);
+  const [e1, e2] = eig(hxx, hyy, hxy);
+  const dv = Math.max(Math.abs(a1 - 0.438), Math.abs(a2 - 0.299));
+  const ratio = Math.sqrt(e1 / e2), dr = Math.abs(ratio - 1.2057) / 1.2057;
+  const ok = dv <= 0.002 && dr <= 0.01;
+  el.className = 'chip ' + (ok ? 'thm' : 'bad');
+  el.textContent = ok
+    ? `self-check ok — AHMN vacuum (${a1.toFixed(3)}, ${a2.toFixed(3)}), ratio ${ratio.toFixed(4)}`
+    : `SELF-CHECK FAILED — vacuum (${a1.toFixed(3)}, ${a2.toFixed(3)}), ratio ${ratio.toFixed(4)}`;
+  el.title = 'The engine recomputes AHMN arXiv:2312.08608 at load: their published vacuum is '
+           + '(0.438, 0.299) and their published mass ratio 1.2046.';
+}
+
+/* ---------- wiring ----------------------------------------------------------------------- */
+document.getElementById('q').addEventListener('input', drawCat);
+document.getElementById('filter').addEventListener('change', drawCat);
+document.querySelectorAll('#cat thead th[data-k]').forEach(th => th.addEventListener('click', () => {
+  const k = th.dataset.k; sortDir = (k === sortKey) ? -sortDir : 1; sortKey = k; drawCat();
+}));
+document.getElementById('catbody').addEventListener('click', e => {
+  const b = e.target.closest('[data-add]'); if (b) add(b.dataset.add);
+});
+document.getElementById('content').addEventListener('click', e => {
+  const d = e.target.closest('[data-del]'), t = e.target.closest('[data-eta]');
+  if (d) { rows.splice(+d.dataset.del, 1); drawContent(); }
+  if (t) { const i = +t.dataset.eta; rows[i].eta = -rows[i].eta; drawContent(); }
+});
+document.getElementById('content').addEventListener('change', e => {
+  const n = e.target.closest('[data-n]'), r = e.target.closest('[data-role]');
+  if (n) rows[+n.dataset.n].n = Math.max(1, Math.min(99, +n.value || 1));
+  if (r) rows[+r.dataset.role].role = +r.value;
+});
+document.getElementById('run').addEventListener('click', report);
+document.getElementById('clear').addEventListener('click', () => { rows = []; drawContent(); report(); });
+document.getElementById('loadAhmn').addEventListener('click', () => {
+  rows = [{ key: '4,0,0', n: 3, eta: 1, role: 1 }, { key: '1,0,1', n: 1, eta: 1, role: -1 }];
+  drawContent(); report();
+});
+document.getElementById('flip').addEventListener('click', () => {
+  const before = rows.map(r => r.key);
+  rows.forEach(r => r.eta = -r.eta);
+  const allblind = rows.length && rows.every(r => DATA.reps[r.key].blind);
+  document.getElementById('flipnote').textContent = rows.length
+    ? (allblind ? 'every multiplet here is blind — the picture cannot move'
+                : 'the coset half flipped; watch the landscape')
+    : '';
+  drawContent(); report();
+});
+
+/* a deep link, so a content can be sent to a colleague: #ahmn, or #4,0,0*3;1,0,1*-1 */
+function fromHash(){
+  let h=decodeURIComponent(location.hash.slice(1)).trim();
+  if(h.startsWith('c=')) h=h.slice(2); else if(h!=='ahmn') return false;
+  if(!h) return false;
+  if(h==='ahmn'){ rows=[{key:'4,0,0',n:3,eta:1,role:1},{key:'1,0,1',n:1,eta:1,role:-1}]; return true; }
+  const out=[];
+  for(const part of h.split(';')){
+    const m=part.match(/^(\d+,\d+,\d+)\*(-?\d+)(?::(-?1))?$/); if(!m) continue;
+    if(!DATA.reps[m[1]]) continue;
+    out.push({key:m[1], n:Math.abs(+m[2])||1, role:(+m[2])<0?-1:1, eta:m[3]?+m[3]:1});
+  }
+  if(!out.length) return false;
+  rows=out; return true;
+}
+fromHash();
+drawCat(); drawContent(); report(); selfcheck();
+window.addEventListener('hashchange',()=>{ if(fromHash()){ drawContent(); report(); } });
+</script>
+</body>
+</html>

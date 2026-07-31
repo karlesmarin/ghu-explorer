@@ -76,9 +76,18 @@ footer a{color:var(--ink2)}
 canvas#pot{touch-action:none;cursor:grab}
 .formula{font-family:var(--serif);font-size:1.14rem;padding:.3rem 0 .55rem;color:var(--ink);letter-spacing:-.01em}
 .formula .chip{vertical-align:2px;margin-left:.4rem}
+
+.sitenav{display:flex;align-items:center;gap:4px;margin:0 0 16px;padding:5px;border:1px solid #dfe6ec;border-radius:10px;background:#fff;font-size:13.5px;flex-wrap:wrap}
+.sitenav a{display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:7px;text-decoration:none;color:#4a5b6a;font-weight:600}
+.sitenav a b{display:grid;place-items:center;width:19px;height:19px;border-radius:5px;background:#eef3f6;color:#7d8c99;font:600 11px/1 ui-monospace,monospace}
+.sitenav a:hover{background:#f5f8fa;color:#12546b}
+.sitenav a.here{background:#1B6F8C;color:#fff}.sitenav a.here b{background:#ffffff33;color:#fff}
+.navnote{margin-left:auto;padding-right:9px;color:#7d8c99;font-size:12px}
+@media(max-width:640px){.navnote{display:none}}
 </style>
 
 <div class="wrap">
+<nav class="sitenav" aria-label="tools"><a href="index.html" data-p="explorer" class="here"><b>1</b> Selection rule</a><a href="calculator.html" data-p="calc"><b>2</b> Model calculator</a><span class="navnote">SU(4) gauge&ndash;Higgs on T&sup2;/&#8484;&#8322; &middot; Parts III&ndash;V</span></nav>
 <header>
   <div class="brand">
     <div class="kick">Orbifold explorer &middot; SU(4) gauge&ndash;Higgs on T&sup2;/&#8484;&#8322;</div>
