@@ -101,7 +101,7 @@ blind control and its anti-vacuity control.
 
 Part III [10.5281/zenodo.21438226](https://doi.org/10.5281/zenodo.21438226) ·
 Part IV [10.5281/zenodo.21463000](https://doi.org/10.5281/zenodo.21463000) ·
-Part V [10.5281/zenodo.21727095](https://doi.org/10.5281/zenodo.21727095) ·
+Part V [10.5281/zenodo.21727094](https://doi.org/10.5281/zenodo.21727094) ·
 code for Part V: [higgs-blind-class](https://github.com/karlesmarin/higgs-blind-class)
 
 Honesty labels are load-bearing and must survive edits: **theorem** (blindness, the count, the

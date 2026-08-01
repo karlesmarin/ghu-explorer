@@ -148,7 +148,7 @@ Lean 4.
 - **Part IV — *Schur Functions at (1,−1,t,t⁻¹)*** (tools 2 and 3)
   → [github.com/karlesmarin/schur-nonidentity-o4](https://github.com/karlesmarin/schur-nonidentity-o4) · [Zenodo 10.5281/zenodo.21463000](https://doi.org/10.5281/zenodo.21463000)
 - **Part V — *What the Higgs Potential Cannot See*** (tools 2 and 3)
-  → [github.com/karlesmarin/higgs-blind-class](https://github.com/karlesmarin/higgs-blind-class) · [Zenodo 10.5281/zenodo.21727095](https://doi.org/10.5281/zenodo.21727095)
+  → [github.com/karlesmarin/higgs-blind-class](https://github.com/karlesmarin/higgs-blind-class) · [Zenodo 10.5281/zenodo.21727094](https://doi.org/10.5281/zenodo.21727094)
 
 ---
 
