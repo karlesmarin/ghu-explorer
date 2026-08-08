@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Hierarchy — 6D SU(7) grand gauge–Higgs unification</title>
+<meta name="description" content="Move the bulk content and watch the Wilson-line vacuum move. Once the Higgs mass is pinned the electroweak hierarchy is algebraic in two quantised moments, and no content puts 1/R5 above 10.03 TeV.">
+<style>
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+     font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:22px 20px 64px}
+h1{font-size:25px;margin:0 0 4px;letter-spacing:-.015em}
+h1 small{display:block;font-size:15px;font-weight:400;color:var(--ink2);margin-top:5px;letter-spacing:0}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:0 0 12px;font-weight:650}
+h3{font-size:13px;margin:0 0 8px;color:var(--ink2);font-weight:650}
+a{color:var(--blue)}
+header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.live{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+.grid{display:grid;gap:18px}
+@media(min-width:1000px){.two{grid-template-columns:1.05fr .95fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:16px 17px}
+.card.tight{padding:13px 15px}
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+button{font:600 13px/1 inherit;padding:7px 11px;border-radius:7px;border:1px solid var(--line);
+       background:#fff;color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--blue);color:var(--blue-d)}
+button.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+button.primary:hover{background:var(--blue-d)}
+button.ghost{border:none;background:none;color:var(--ink3);padding:4px 6px}
+button.ghost:hover{color:var(--rust)}
+button.st{width:27px;height:25px;padding:0;font-family:var(--mono);font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:6px 8px;border-bottom:1px solid #f0f4f7;vertical-align:middle}
+tbody tr.clk:hover{background:#f7fafc;cursor:pointer}
+.num{font-family:var(--mono);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.stat{border:1px solid var(--line);border-radius:10px;padding:12px 13px;background:#fff}
+.stat .k{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);
+         font-weight:650;margin-bottom:6px}
+.stat .v{font:600 21px/1.15 var(--mono);letter-spacing:-.02em}
+.stat .s{font-size:12px;color:var(--ink2);margin-top:5px}
+.verdict{border-left:4px solid var(--line);padding:11px 14px;border-radius:0 9px 9px 0;background:#fff}
+.verdict.breaks{border-color:var(--green);background:var(--green-l)}
+.verdict.stable{border-color:var(--rust);background:var(--rust-l)}
+.verdict b{display:block;font-size:15px;margin-bottom:2px}
+.verdict span{font-size:13px;color:var(--ink2)}
+canvas{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);display:block}
+.pair{display:grid;gap:10px}@media(min-width:560px){.pair{grid-template-columns:1fr 1fr}}
+.legend{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--ink2);margin-top:8px;
+        flex-wrap:wrap}
+.legend i{display:inline-block;width:13px;height:3px;border-radius:2px;margin-right:5px;
+          vertical-align:middle}
+.note{font-size:12.5px;color:var(--ink2)}
+.foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2)}
+.lead{font-size:16.5px;line-height:1.5;margin:0}
+.lead b{font-family:var(--mono);font-weight:650}
+.rowm{display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid #f0f4f7}
+.rowm:last-child{border-bottom:0}
+.rowm .nm{flex:1;font-family:var(--mono);font-size:13px}
+.rowm .ch{font-family:var(--mono);font-size:10.5px;color:var(--ink3);width:86px;text-align:right}
+.cnt{font-family:var(--mono);font-size:14px;width:24px;text-align:center;font-weight:650}
+.cnt.z{color:var(--ink3);font-weight:400}
+.bar{height:9px;border-radius:5px;background:#eef3f6;overflow:hidden;margin-top:7px}
+.bar i{display:block;height:100%;background:var(--blue);border-radius:5px;transition:width .18s}
+.bar i.over{background:var(--rust)}
+details{margin-top:12px}
+summary{cursor:pointer;font-size:13px;color:var(--blue);font-weight:600}
+details .note{margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>The Hierarchy
+    <small>4 · Move the bulk content and watch the Wilson-line vacuum move —
+    6D <span style="font-family:var(--mono)">SU(7)</span> grand gauge–Higgs unification, Part VII</small></h1>
+  <div class="chips" id="chips"></div>
+</header>
+
+<div class="card" style="margin-bottom:18px">
+  <p class="lead" id="lead">—</p>
+  <div class="note" style="margin-top:9px">
+    In gauge–Higgs unification the compactification scale is tied to the weak scale by
+    <span style="font-family:var(--mono)">α<sub>min</sub> = 2 m<sub>W</sub> R₅</span>, so the vacuum
+    of this potential <em>is</em> the electroweak hierarchy. Everything below is that one sentence,
+    made computable.
+  </div>
+</div>
+
+<div class="grid two">
+  <div>
+    <div class="card">
+      <h2>The potential, as you change the content</h2>
+      <canvas id="pot" width="720" height="330"></canvas>
+      <div class="legend">
+        <span><i style="background:var(--blue)"></i>F(α), the winding sum</span>
+        <span><i style="background:var(--rust)"></i>its minimum</span>
+        <span><i style="background:var(--amber)"></i>the closed form</span>
+        <span><i style="background:var(--ink3);height:1px"></i>the symmetric point</span>
+      </div>
+      <div class="note" style="margin-top:9px" id="potNote">—</div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h2>The bulk content</h2>
+      <div class="toolbar">
+        <button class="ghost" id="clr">clear</button>
+        <button class="ghost" id="tour">▶ show me</button>
+      </div>
+      <div id="slots"></div>
+      <div class="note" style="margin-top:9px">Each state's charge is shown with the sign of its
+      Kaluza–Klein tower: <b>+</b> periodic, <b>−</b> antiperiodic. That sign is the whole of the
+      second moment.</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>Where this content sits</h2>
+      <canvas id="map" width="720" height="330"></canvas>
+      <div class="legend">
+        <span><i style="background:var(--rust)"></i>edge of the Higgs window</span>
+        <span><i style="background:var(--green)"></i>this content</span>
+        <span><i style="background:var(--amber)"></i>the certified ceiling</span>
+      </div>
+      <div class="note" style="margin-top:9px">Once <span style="font-family:var(--mono)">m<sub>h</sub></span>
+      is pinned, <span style="font-family:var(--mono)">1/R₅</span> is an explicit function of the two
+      moments. Beyond the rust curve no content satisfies the other identity.</div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h2>The numbers</h2>
+      <div class="pair">
+        <div class="stat"><div class="k">α<sub>min</sub></div><div class="v" id="sA">—</div>
+          <div class="s" id="sAs">—</div></div>
+        <div class="stat"><div class="k">m<sub>h</sub></div><div class="v" id="sM">—</div>
+          <div class="s" id="sMs">—</div></div>
+      </div>
+      <div class="stat" style="margin-top:10px"><div class="k">1 / R₅</div>
+        <div class="v" id="sR">—</div>
+        <div class="bar"><i id="sBar" style="width:0"></i></div>
+        <div class="s" id="sRs">—</div></div>
+      <div class="verdict" id="vd" style="margin-top:12px"><b>—</b><span>—</span></div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h2>The two arithmetic laws</h2>
+      <table><tbody>
+        <tr><td>8D is odd, so D ≠ 0</td><td class="num" id="l1"></td></tr>
+        <tr><td>8D + A₄ ≡ 0 (mod 3)</td><td class="num" id="l2"></td></tr>
+      </tbody></table>
+      <div class="note" style="margin-top:9px">These are the only outputs on this page that carry
+      no normalisation: they hold for every content, at any loop order, in any scheme. A published
+      <span style="font-family:var(--mono)">(8D, A₄)</span> pair that fails one cannot come from a
+      bulk content of this model.</div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h2>The five published rows — click to load</h2>
+      <table><thead><tr><th>row</th><th class="num">8D</th><th class="num">A₄</th>
+        <th class="num">α ours</th><th class="num">α theirs</th><th class="num">1/R₅</th></tr></thead>
+        <tbody id="tb"></tbody></table>
+      <div class="note" style="margin-top:9px" id="anchorNote">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <b>Honesty labels.</b>
+  <span class="chip thm">theorem</span> the two arithmetic laws and the ceiling's structure —
+  proved, and the ceiling carries an exact rational certificate.
+  <span class="chip ver">verified</span> the closed form against direct minimisation of the same
+  potential — 272 contents, median 0.13 %; not proved.
+  <span class="chip mea">measured</span> every absolute number — α<sub>min</sub>, m<sub>h</sub>,
+  1/R₅ — which inherits the open anchor question of Part VI §7.
+  <div style="margin-top:9px">Part VI <a href="https://doi.org/10.5281/zenodo.21429144">series</a> ·
+  the potential is <span style="font-family:var(--mono)">Σ m Re Li₅(s e<sup>icπα</sup>)</span>,
+  summed here to <span id="nmax"></span> windings in your browser — nothing is precomputed.</div>
+</div>
+
+</div>
+<script>
+/* ---- data, injected by build_hierarchy.py from the Part VII engine ---- */
+const DATA = /*__DATA__*/null;
+__ENGINE__
+__UI__
+</script>
+</body>
+</html>
