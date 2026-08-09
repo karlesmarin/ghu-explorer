@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part V — What the Higgs Potential Cannot See: Bulk Matter That Cannot Help Select a Boundary Condition</title>
+<meta name="description" content="Part V of the GHU series: its record, its status, and what has moved since.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:1fr;gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../../index.html">GHU Lab</a>
+  <nav>
+    <a href="../../app/index.html">the instrument</a>
+    <a href="../../papers/index.html" aria-current="page">the series</a>
+    <a href="../../changes/index.html">changes</a>
+    <a href="../../docs/index.html">docs</a>
+    <a href="../../editions/index.html">editions</a>
+  </nav>
+</div></header>
+<main>
+<p class="sub"><a href="../index.html">&larr; the series</a></p><h1>Part V &middot; What the Higgs Potential Cannot See: Bulk Matter That Cannot Help Select a Boundary Condition</h1><div class="record"><div class="row frozen"><span class="k">version of record</span><span><a href="https://doi.org/10.5281/zenodo.21727094">10.5281/zenodo.21727094</a> &middot; v1, 2026-07-31 &middot; frozen, and it stays frozen</span></div><div class="row living"><span class="k">this page</span><span>living &middot; last updated 2026-08-08 &middot; 1 change (1 extension) &rarr; <a href="#changes">below</a></span></div></div><h2>Abstract</h2><div class="abstract"><p><strong>The one-loop Wilson-line potential of this model is one operator traced twice &mdash; a dimension and an index &mdash; and the discrete boundary-condition sign multiplies the index alone.</strong></p><p><strong>Winding parity is the O(4) component label.</strong> Part III's translation matrix U&#8326; = P&#8322;P&#8320;&#8315;&sup1; has det = &minus;1, so one trip round the compact direction applies a reflection. The even-winding half of the potential is therefore a character on the identity component of O(4) and the odd-winding half a character on the reflection coset: &Sigma;&lambda; = s&lambda;(1,1,t,t&#8315;&sup1;), a graded dimension whose coefficients are non-negative and can never cancel, and D&lambda; = s&lambda;(1,&minus;1,t,t&#8315;&sup1;), the object of Part IV, an index that can.</p><p><strong>Three published potentials, reproduced.</strong> Akamatsu, Hirose, Maru and Nago write their one-loop coefficients as {A + B(&minus;1)^k&#8322;}; that pair is exactly (&Sigma; &plusmn; D)/2, and their twelve printed numbers come out with nothing fitted, the gauge sector after the antiperiodic twist they state themselves. Haba&ndash;Yamashita (a different group, a different orbifold, a different derivation) and Kawamura, Kodaira, Kojima and Yamashita follow from the same mode counts. The dictionary is the inverse Z&#8322; transform, and it needs no adjustment because there is nothing to adjust.</p><p><strong>The theorem.</strong> Each matter multiplet carries a discrete boundary sign &mdash; in the notation Haba, Hosotani and Kawamura have used since 2004, the product &eta; = &eta;&#8320;&eta;&#8321; of the two orbifold-parity signs &mdash; and it multiplies the coset character and nothing else. Hence (&lambda;,&eta;) ~ (&lambda;*, &eta;(&minus;1)^&lambda;&#8321;) is an observational identity, and &eta; is unobservable <em>exactly</em> on Part IV's vanishing class <em>Z</em>: for those multiplets the boundary condition has no consequence any measurement of this Higgs sector can see. The blind class is counted in closed form &mdash; &lceil;(k+1)&sup2;/2&rceil; at &lambda;&#8321; = 2k+1, and never for &lambda;&#8321; even &mdash; and the count is machine-checked in Lean 4, chained to the certificate Part III already carried, so that it is a theorem about the bialternant determinant and not about a predicate chosen to be countable.</p><p><strong>The other half of the dichotomy.</strong> Invisibility has a second, disjoint cause that has nothing to do with matter: a boundary condition may have no reflection coset at all. The block pair (#{P&#8320;=+1}, #{P&#8321;=&amp;minus;1}) is a <em>complete</em> class invariant, so the classes of rank N are exactly the (N+1)&sup2; of Haba&ndash;Hosotani&ndash;Kawamura, recovered rather than assumed, and exactly &lfloor;(N+1)&sup2;/2&rfloor; of them admit a coset sector &mdash; machine-checked in Lean 4 for every N, not swept over a range.</p><p><strong>One step past a single multiplet, and it is free.</strong> If every non-blind multiplet of a matter content carries the same effective sign &eta;&#7522;&zeta;&#7522;, the content is blind if and only if every multiplet in it is: <em>collective blindness requires sign frustration</em>. That removes the structurally simple half of the degeneracy over contents and leaves the frustrated half, which is the next paper.</p><p><strong>Included:</strong> the paper in English and Spanish; two sorry-free Lean 4 certificates (the blind count and the boundary-condition census), depending only on propext, Classical.choice and Quot.sound; every script that regenerates a quoted number, with its archived output; and the gates the artifact must pass before publication &mdash; among them one that opens the papers we cite and checks our quotations and their equation numbers against them.</p><p><strong>Honesty ledger.</strong> Part IV states its closed form as <em>verified and not proved</em>, and every statement here that rests on it inherits exactly that standing; what does <em>not</em> depend on it is the criterion that identity computes, which is Part III's theorem, so the blind class, its count and its Lean certificate stand regardless. That the relation above generates <em>all</em> observational collisions is verified with 0 exceptions among 910 pairs and is not proved, and is stated as an Observation rather than as part of the theorem. That &Sigma;&lambda; alone separates a multiplet up to conjugation is verified over 969 multiplets and not proved. A claim of an earlier draft &mdash; that the coset half is the only observable in the model that sees charge conjugation &mdash; is false, is contradicted in print, and is retracted inside the paper rather than removed from it.</p><p><strong>Scope.</strong> Every statement is about a <em>model</em>: T&sup2;/Z&#8322; with U&#8325; = 1, at one loop, with boundary conditions that can be simultaneously diagonalised. The theorem is <em>per multiplet</em>. A closed form for the potential is not a closed form for the Higgs mass, which needs the true minimum; and everything that runs the machinery forwards &mdash; predicting a spectrum rather than excluding one &mdash; is deliberately held over.</p></div><div class="note"><strong>This paper is behind the model calculator, eta-meter sections of the instrument.</strong> &nbsp;<a href="../../app/index.html">Open it &rarr;</a></div><h2>Downloads</h2><dl class="dl"><dt>archive</dt><dd><a href="https://doi.org/10.5281/zenodo.21727094">Zenodo &mdash; PDF, scripts and ancillary archive</a> (concept DOI: always the latest version)</dd><dt>this version</dt><dd><a href="https://doi.org/10.5281/zenodo.21727095">10.5281/zenodo.21727095</a></dd><dt>code</dt><dd><a href="https://github.com/karlesmarin/higgs-blind-class">github.com/karlesmarin/higgs-blind-class</a></dd></dl><h2 id="changes">Changes since the record</h2><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">affects the record: no</span></div><h3>The η closed form, checked on 119 contents instead of five</h3><dl><dt>what</dt><dd><p>The closed form for the η-dependence of the Higgs mass matrix — <code>ΔH₁₁ = −2(2π)²L₁·M₂/8</code>,
+<code>ΔH₂₂ = −2(2π)²L₂·M₂/8</code>, <code>ΔH₁₂ = 0</code> — was published against five worked cases. The instrument
+runs it against the direct winding sum on all <strong>119</strong> multiplets of the catalogue: worst
+disagreement <strong>0.0162 %</strong>. On the 16 multiplets the catalogue declares blind, the closed form
+predicts exactly zero and the winding sum measures exactly zero.</p></dd><dt>why</dt><dd><p>Five cases cannot distinguish "the formula is right" from "the formula is right on the cases it
+was built on". 119 can, and the blind ones are the sharpest of the 119 because a prediction of
+exactly zero has nowhere to hide.</p></dd><dt>so</dt><dd><p>The record is unaffected — no number in Parts IV or V moves. What changes is the strength of the
+evidence behind one of them.</p><p>A trap paid for here, and it is the reason the blind cases are stated separately: 16 multiplets
+have no Part IV box, and the first sweep silently printed <code>M₂ = 0</code> for them and concluded
+"invisible to η". That was the right answer for the wrong reason — those 16 happen to be exactly
+the 16 the catalogue declares blind. On another group the same code would have lied. A missing
+datum is now an explicit <code>unknown</code>, never a zero.</p></dd><dt>check</dt><dd>open the eta-meter; the sweep runs in your browser against the winding sum</dd></dl></div>
+</main>
+<footer><div class="in">
+<p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; built with Claude (Anthropic) as assistant.<br>
+The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
+This page was generated on 2026-08-09 and reaches nothing outside itself.</p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part III — A Centre-Charge Selection Rule for the Wilson-Line Potential: The Fundamental Domain of Gauge-Higgs Unification Is Representation-Dependent</title>
+<meta name="description" content="Part III of the GHU series: its record, its status, and what has moved since.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:1fr;gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../../index.html">GHU Lab</a>
+  <nav>
+    <a href="../../app/index.html">the instrument</a>
+    <a href="../../papers/index.html" aria-current="page">the series</a>
+    <a href="../../changes/index.html">changes</a>
+    <a href="../../docs/index.html">docs</a>
+    <a href="../../editions/index.html">editions</a>
+  </nav>
+</div></header>
+<main>
+<p class="sub"><a href="../index.html">&larr; the series</a></p><h1>Part III &middot; A Centre-Charge Selection Rule for the Wilson-Line Potential: The Fundamental Domain of Gauge-Higgs Unification Is Representation-Dependent</h1><div class="record"><div class="row frozen"><span class="k">version of record</span><span><a href="https://doi.org/10.5281/zenodo.21438226">10.5281/zenodo.21438226</a> &middot; v6, 2026-07-21 &middot; frozen, and it stays frozen</span></div><div class="row living"><span class="k">this page</span><span>living &middot; last updated 2026-08-08 &middot; 2 changes (2 extensions) &rarr; <a href="#changes">below</a></span></div></div><h2>Abstract</h2><div class="abstract"><p><strong>The fundamental domain of gauge-Higgs unification is representation-dependent.</strong></p><p>Part II (DOI 10.5281/zenodo.21432627) identified its first gate &mdash; that a representation can display the Standard Model's fractional hypercharges only if its Z&#8324; centre charge a+2b+3c is odd &mdash; as the classical centre-charge congruence, and disclaimed it. This Part III shows that the disclaimed gate governs the Higgs sector, and for a reason that fits in one line: <em>advancing the Wilson line by one period is, up to a Weyl reflection, multiplication by the central element &minus;1 of Z(SU(4)) &mdash; and the centre charge is by definition how a representation responds to one.</em></p><p><strong>Centre-parity selection.</strong> The Z&#8322; reduction of the centre charge determines which Fourier sector of the Wilson-line potential is allowed to be non-zero. A representation answers the central element with the scalar (&minus;1)^(a+2b+3c), and the sector carrying the opposite sign is <em>identically empty</em> &mdash; not suppressed, absent. Matter admissibility, Kaluza&ndash;Klein twist pairing, the Fourier support of the potential and the geometry of its vacuum are four readings of that one bit. For fifty years the centre of the gauge group has been read as a restriction on matter; here it also restricts the potential.</p><p><strong>The consequence.</strong> Akamatsu, Hirose, Maru and Nago halve the Wilson-line search region to &alpha;&#8322; &isin; [0,1/2] using a hypothesis they verify by inspecting their Table 1: equal multiplicities of (m,0) and (m,1) at odd m. That hypothesis is decided by the centre charge, and it inverts on exactly the class of representations able to host the Standard Model, since Part II forces their centre charge odd while the gauge adjoint is unavoidably even. Verified directly on the potential: the 35 is period-1 in &alpha;&#8322; exactly, while every admissible representation violates it by 2&ndash;30% of its own scale. The half-domain reduction does not transfer and the full torus must be scanned. This is not an erratum for AHMN, whose field content satisfies its own hypothesis; it is a warning for everything downstream, and the failure mode is silent.</p><p><strong>An exact decoupling.</strong> The notch annihilates the fermion representation's entire contribution to the leading Kaluza&ndash;Klein order of the curvature at &alpha;&#8322;=1/2, leaving a gauge-only constant identical across all eight admissible representations. The leading order is degenerate <em>by theorem</em>, so any naturalness ranking over this class is a statement about subleading terms whether or not it is presented as one.</p><p><strong>Scope.</strong> The mechanism is neither an accident nor universal: the shift equals a central element only when the Wilson-line-neutral slots carry balanced twist signs, which for a single Wilson-line direction requires N even. A brute-force sweep gives no admissible alphabet for SU(3), SU(5), SU(7) and many for SU(4), SU(6), SU(8) &mdash; so SU(4) is the smallest group that can carry this selection rule.</p><p><strong>Included:</strong> the paper in English and Spanish; a sorry-free Lean 4 certificate of the classification theorem; the numbers behind every table and figure as CSV; every script that regenerates a quoted number; and <code>notch_preflight.py</code>, a one-parity-bit check of whether a given representation's fundamental-domain reduction is legal.</p><p><strong>Honesty ledger.</strong> The centre-charge congruence is classical and we claim none of it. The mechanism behind the vanishing theorem is classical too &mdash; {1,&minus;1,t,1/t} has determinant &minus;1, so it parametrizes the improper component of O(4), where an irreducible representation and its associate &mu;&otimes;det have opposite characters &mdash; and the determinant technique is described by Ayyer and Behrend as routine. Ours are: the principle and its four readings, the dichotomy, the explicit classification of the degenerate class with its Lean certificate, the inversion of the fundamental domain with direct verification, the decoupling corollary, the derivation of the (m,q) projection from the boundary conditions, and the SU(N) sweep. Two classical sources remain unread and are flagged as such in the paper; neither is load-bearing for the physics.</p></div><div class="note"><strong>This paper is behind the selection rule section of the instrument.</strong> &nbsp;<a href="../../app/index.html">Open it &rarr;</a></div><h2>Downloads</h2><dl class="dl"><dt>archive</dt><dd><a href="https://doi.org/10.5281/zenodo.21438226">Zenodo &mdash; PDF, scripts and ancillary archive</a> (concept DOI: always the latest version)</dd><dt>this version</dt><dd><a href="https://doi.org/10.5281/zenodo.21466370">10.5281/zenodo.21466370</a></dd><dt>code</dt><dd><a href="https://github.com/karlesmarin/centre-parity-selection">github.com/karlesmarin/centre-parity-selection</a></dd></dl><h2 id="changes">Changes since the record</h2><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">affects the record: no</span></div><h3>And the rule bites — 40 of 60 forbidden representations really lose the minimum</h3><dl><dt>what</dt><dd><p>Where the rule forbids halving the domain, halving anyway moves the minimum of the Wilson-line
+potential in <strong>40 of the 60</strong> representations tested — the worst by 45.1 % of the potential's own
+depth <code>|V|</code>. The other 20 are cases where the two domains happen to share their minimum.</p></dd><dt>why</dt><dd><p>A selection rule that never changed an answer would be a bookkeeping convention rather than a
+constraint. Nothing in Part III measured how often it matters, because the paper's question was
+<em>which</em> domain is legal, not <em>what it costs</em> to use the wrong one. The instrument can ask the
+second question cheaply, so it does.</p></dd><dt>so</dt><dd><p>The record is unaffected. This is the missing sentence about why the rule is worth stating, and
+it is now a panel rather than a claim: the numbers are recomputed in the page, over the same
+potential the calculator uses, so a reader can watch the minimum move.</p><p>One trap paid for here, recorded so nobody repeats it: the first version scanned the half-domain
+on its own grid, which gave it twice the resolution of the full-domain scan and manufactured a
+"loss" of −5.3 × 10⁻⁴ that was mesh, not physics. Two regions must be compared from one set of
+evaluations.</p></dd><dt>check</dt><dd>open the selection section and read the "does it bite" panel; it recomputes on load</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">affects the record: no</span></div><h3>The selection rule reduces to one bit</h3><dl><dt>what</dt><dd><p>Part III's admissibility test — <code>a + 2b + 3c</code> odd, or the representation degenerate — is a single
+parity: <strong>the half-domain is legal if and only if <code>a + c</code> is even.</strong> Since <code>a + 2b + 3c ≡ a + c
+(mod 2)</code>, and both branches of the degenerate case independently force <code>a + c</code> even, the second
+disjunct can never be the one that decides. Checked on all 3375 triples with <code>a, b, c ≤ 14</code>, of
+which 399 are degenerate: zero exceptions.</p></dd><dt>why</dt><dd><p>The rule was stated as a disjunction because that is how it was derived — one clause from the
+centre charge, one from the degenerate orbits. Written that way it hides that the two clauses
+never disagree. The instrument evaluates both and compares them, which is why the coincidence
+showed up at all.</p></dd><dt>so</dt><dd><p>The record is unaffected: the printed rule is correct, and this is a reduction of it, not a
+correction. Nothing in Part III depends on the disjunction being irredundant. The one-bit form is
+what the tool displays, with the disjunctive form beside it.</p></dd><dt>check</dt><dd>open the selection section; it re-runs the enumeration in your browser</dd></dl></div>
+</main>
+<footer><div class="in">
+<p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; built with Claude (Anthropic) as assistant.<br>
+The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
+This page was generated on 2026-08-09 and reaches nothing outside itself.</p>
+</div></footer>
+</body>
+</html>

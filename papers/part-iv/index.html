@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part IV — Schur Functions at (1,-1,t,t^{-1}): A Closed Form on the Non-Identity Component of O(4)</title>
+<meta name="description" content="Part IV of the GHU series: its record, its status, and what has moved since.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:1fr;gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../../index.html">GHU Lab</a>
+  <nav>
+    <a href="../../app/index.html">the instrument</a>
+    <a href="../../papers/index.html" aria-current="page">the series</a>
+    <a href="../../changes/index.html">changes</a>
+    <a href="../../docs/index.html">docs</a>
+    <a href="../../editions/index.html">editions</a>
+  </nav>
+</div></header>
+<main>
+<p class="sub"><a href="../index.html">&larr; the series</a></p><h1>Part IV &middot; Schur Functions at (1,-1,t,t^{-1}): A Closed Form on the Non-Identity Component of O(4)</h1><div class="record"><div class="row frozen"><span class="k">version of record</span><span><a href="https://doi.org/10.5281/zenodo.21463000">10.5281/zenodo.21463000</a> &middot; v4, 2026-07-30 &middot; frozen, and it stays frozen</span></div><div class="row living"><span class="k">this page</span><span>living &middot; nothing logged against this paper yet</span></div></div><h2>Abstract</h2><div class="abstract"><p><strong>For every partition with at most four rows, the Schur function s&lambda;(1,&minus;1,t,t&#8315;&sup1;) is either zero or &plusmn; a product of exactly three SU(2) characters read off the 2-quotient of &lambda; &mdash; with no hypothesis on the shape of &lambda;.</strong></p><p>Part III (concept DOI 10.5281/zenodo.21438226) classified which SU(4) representations have identically-vanishing character on the non-identity component of O(4), and exported the underlying question about symmetric functions. This Part IV answers it with a closed form, of which that vanishing classification is exactly the zero locus. The alphabet {1,&minus;1,t,t&#8315;&sup1;} is the generic semisimple element of the determinant-&minus;1 component of O(4); it sits between the reciprocal-pair factorisation programme of Ciucu&ndash;Krattenthaler and Ayyer&ndash;Behrend and the root-of-unity line of Littlewood, Prasad, Ayyer&ndash;Kumari and Karmakar, and belongs to neither. The obstruction that kept it untreated is one unstated hypothesis: the block argument needs every inversion-fixed point of the alphabet to contribute a <em>constant</em> row of the bialternant, which +1 does and &minus;1 does not. Replacing the two fixed-point rows by even/odd column indicators repairs the argument at rank one, and not at rank two, which is where we stop and say so.</p><p><strong>The actual result is a reduction, not the identity.</strong> Conditionally on the closed form, every quantity that survives Part III's leading cancellation &mdash; the whole tower of even moments of the twist-imbalance distribution &delta;(m) &mdash; factors through three integers read off the 2-quotient: &Phi; = F &compfn; Q. An arbitrarily large four-row partition is compressed to (p,q,r) with no loss of anything the physics can see, and weight enumeration is replaced by explicit polynomial formulae. The normalised moment tower lives in the invariant ring &#8474;[C&#8346;,C&#8340;,C&#8351;]^{S&#8323;} of the three SU(2) Casimirs; in particular the variance is one third of the sum of the three Casimirs.</p><p><strong>Status, stated exactly.</strong> The closed form is an <em>Observation</em>: verified exhaustively by two independent implementations on all 3060 partitions with four parts &le;14 and all 4845 with parts &le;16, with no mismatch, against the bialternant in exact integer arithmetic &mdash; and <em>not proved</em>. The zero-locus statement is a Proposition, proved independently in Part III. Everything else is graded in the paper as Proposition, Observation, Inherited, or Open, and the grades are not blurred.</p><p><strong>Honesty ledger.</strong> Several ingredients are classical and we claim none of them: that log-concavity is preserved under convolution (Hoggar 1974) and gives a unimodal spectrum (Stanley 1989); that the coefficient sequence is a threefold discrete-uniform convolution whose moments are polynomial, because cumulants of a discrete uniform are polynomial in its width and add (Neuschel; Bradley&ndash;Gupta); and that the distribution has a piecewise-polynomial closed form by inclusion&ndash;exclusion (De&nbsp;Moivre; Andr&eacute; 1876; Comtet; the object is a discrete box spline, Dahmen&ndash;Micchelli 1988). The involution character value reproduced along the way is Karmakar (arXiv:2412.17324); read in full for version 3, his Thm.&nbsp;1A <em>is</em> the first branch of the zero locus and his Thm.&nbsp;1B is the 2-quotient factorisation at t&nbsp;=&nbsp;1, so only free t is ours there. The mechanism &mdash; characters of a disconnected group on a non-identity component, that is, twining characters &mdash; is Jantzen (1977) and Kumar&ndash;Lusztig&ndash;Prasad (2009), cited from version 3 onward; the surrounding programme is Nadimpalli&ndash;Pattanayak&ndash;Prasad (arXiv:2504.14684). Ours are: the closed form itself at free t, the fixed-point-pair repair, the second branch of the zero locus, the reduction &Phi; = F &compfn; Q, and the Casimir reading of the moments. Rank two is open, and the shape of what is missing there is stated precisely enough to be attacked.</p><p><strong>Version 4 (30 July 2026).</strong> One claim is withdrawn, one is proved, and one is new. <em>Withdrawn:</em> versions 1&ndash;3 offered the rank-two partition (3,2,2,1,1,0) as a third cause of vanishing, and it is not one &mdash; written with the six parts rank two requires it is self-complementary of odd width, which is the second cause exactly; and that cause is not confined to rank one, since the folklore argument uses only that the alphabet is inversion-stable with determinant &minus;1. The dichotomy is therefore forced rather than provisional, and the reason is two lines that were available all along: two of the three factors can never vanish, so the size-three profile never does. <em>New:</em> the reduction &Phi; = F &compfn; Q is invertible in closed form &mdash; three moments return the three integers, because M&#8320;&sup2; = &prod;(C&#8342;+1) means M&#8320; is not a normalisation but carries the third symmetric function &mdash; and the sign &zeta;, which versions 1&ndash;3 could not interpret, is the sign of the parity index n&#8330; &minus; n&#8331; of the orbifold involution on V&lambda;, whose magnitude is the volume of the box: (p+1)(q+1)(r+1) = |n&#8330; &minus; n&#8331;|. The vanishing criterion is thus the statement that the orbifold projection is exactly balanced. <em>Corrections:</em> the symbol &zeta; carried two meanings between sections 3 and 5, which differ on 700 of 3060 partitions; the counts 560 = 420 + 140 are by mechanism, while the two &lambda;-shorthands split the same 560 as 420 and 240 with 100 in both; the zero-locus plate is redrawn over the range the text quotes; and one count printed since version 1 (&ldquo;0 of 105 cases&rdquo;) proved unreproducible and is restated with its range as 0 of 109.</p><p><strong>Included:</strong> the paper in English and Spanish, each with its own four plates; the figure generators; and seven verification runs with their archived output, so that every number printed in the paper can be located in a saved run rather than taken on trust. The scripts check the closed form, the sign, the index identity, the inversion, and the four counts that had no archived run before this version, each against the bialternant in exact rational arithmetic and each with a control built to fail.</p></div><div class="note"><strong>This paper is behind the model calculator, eta-meter sections of the instrument.</strong> &nbsp;<a href="../../app/index.html">Open it &rarr;</a></div><h2>Downloads</h2><dl class="dl"><dt>archive</dt><dd><a href="https://doi.org/10.5281/zenodo.21463000">Zenodo &mdash; PDF, scripts and ancillary archive</a> (concept DOI: always the latest version)</dd><dt>this version</dt><dd><a href="https://doi.org/10.5281/zenodo.21708812">10.5281/zenodo.21708812</a></dd><dt>code</dt><dd><a href="https://github.com/karlesmarin/schur-nonidentity-o4">github.com/karlesmarin/schur-nonidentity-o4</a></dd></dl><h2 id="changes">Changes since the record</h2><p class="sub">Nothing logged against this paper yet.</p>
+</main>
+<footer><div class="in">
+<p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; built with Claude (Anthropic) as assistant.<br>
+The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
+This page was generated on 2026-08-09 and reaches nothing outside itself.</p>
+</div></footer>
+</body>
+</html>

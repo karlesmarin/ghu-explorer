@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GHU Lab — an instrument for gauge-Higgs unification</title>
-<meta name="description" content="One bulk model, several computations over it, every output carrying what is known about it. Runs offline in the browser.">
+<title>Changes — GHU Lab</title>
+<meta name="description" content="What changed in the papers and the tool, when, why, and whether the frozen record moves.">
 <style>
 /* site.css — the pages around the instrument.
  *
@@ -137,76 +137,17 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
 </head>
 <body>
 <header class="top"><div class="in">
-  <a class="brand" href="index.html">GHU Lab</a>
+  <a class="brand" href="../index.html">GHU Lab</a>
   <nav>
-    <a href="app/index.html">the instrument</a>
-    <a href="papers/index.html">the series</a>
-    <a href="changes/index.html">changes</a>
-    <a href="docs/index.html">docs</a>
-    <a href="editions/index.html">editions</a>
+    <a href="../app/index.html">the instrument</a>
+    <a href="../papers/index.html">the series</a>
+    <a href="../changes/index.html" aria-current="page">changes</a>
+    <a href="../docs/index.html">docs</a>
+    <a href="../editions/index.html">editions</a>
   </nav>
 </div></header>
 <main>
-<h1>An instrument for gauge&#8209;Higgs unification, and the papers it comes from</h1>
-
-<p class="lead">Pick a model of extra&#8209;dimensional matter and this page computes what it predicts:
-which Wilson&#8209;line domain is legal, where the vacuum sits, the Higgs mass, the anomaly bill, and
-how high the compactification scale can go. It runs entirely in your browser, offline, with nothing
-to install &mdash; and every number it prints says what is known about it.</p>
-
-<div class="doors">
-  <a class="door" href="app/index.html">
-    <b>I read the paper and want to try it &rarr;</b>
-    <span>The instrument. One bulk model, five computations over it, the paper's own model
-    preloaded.</span>
-  </a>
-  <a class="door" href="papers/index.html">
-    <b>I found the tool and want to know what it is &rarr;</b>
-    <span>The series. Seven papers on six&#8209;dimensional gauge&#8209;Higgs unification, each with
-    its record, its status, and what has moved since.</span>
-  </a>
-</div>
-
-<div class="warn">
-  <b>Read this before quoting a number from here.</b>
-  Our &alpha; does not reproduce the published &alpha; of Y. Komori, N. Maru, arXiv:2503.04090, and the disagreement is <strong>not a constant</strong> &mdash; so it is not a convention that could be absorbed. Every absolute scale on this site (TeV, GeV) inherits that open question and is <strong>not citable</strong> until it closes. What escapes it entirely, because no normalisation enters them: the mass ratio, the bill in eighths, and the two arithmetic laws. The instrument states this in its own header and carries a permanent &ldquo;what this cannot tell you&rdquo; panel; the reasoning is in <a href="changes/index.html">the log</a>.
-</div>
-
-<h2>Every number carries what is known about it</h2>
-
-<p>Four words, and they are fields in the exported result card rather than decoration. This is the
-whole difference between an instrument and a demonstration.</p>
-
-<div class="tw"><table>
-<thead><tr><th style="width:112px">word</th><th>what it promises</th></tr></thead>
-<tbody>
-<tr><td><span class="chip thm">theorem</span></td>
-    <td>Proved, in a paper of the series, and the page names which one.</td></tr>
-<tr><td><span class="chip ver">verified</span></td>
-    <td>Checked against an independent computation &mdash; usually brute force over the same
-        object &mdash; but not proved.</td></tr>
-<tr><td><span class="chip mea">measured</span></td>
-    <td>Computed here, and inheriting whatever open questions its inputs carry. Every absolute
-        scale on this site is of this kind.</td></tr>
-<tr><td><span class="chip unk">unknown</span></td>
-    <td>Said out loud, with the reason, instead of a plausible number. The tool refuses to fill a
-        gap it cannot compute.</td></tr>
-</tbody>
-</table></div>
-
-<p>The fourth is the one that costs something, so it is worth saying why it is there. This project
-has retracted one of its own novelty claims before &mdash; a closed&#8209;form identity published in
-May 2026 and withdrawn in July on finding it was a corollary of Helset&ndash;Martin&ndash;Trott
-2020. The algebra was right; the claim about its standing was not. A tool that could not label its
-own output <em>unknown</em> would have no way to do that to itself.</p>
-
-<h2>The series</h2>
-<div class="tw"><table><thead><tr><th style="width:44px">part</th><th>paper</th><th style="width:118px">record</th></tr></thead><tbody><tr><td class="num">I</td><td><a href="papers/part-i/index.html">Anomaly- and Tadpole-Compatible Fermion Completion of Six-Dimensional SU(4) Gauge-Higgs Unification</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21432625">10.5281/zenodo.21432625</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">0 changes</span></td></tr><tr><td class="num">II</td><td><a href="papers/part-ii/index.html">Three Gates to a Quark Generation: An Exact Criterion for Which SU(4) Representations Contain the Standard Model</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21432627">10.5281/zenodo.21432627</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">0 changes</span></td></tr><tr><td class="num">III</td><td><a href="papers/part-iii/index.html">A Centre-Charge Selection Rule for the Wilson-Line Potential: The Fundamental Domain of Gauge-Higgs Unification Is Representation-Dependent</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21438226">10.5281/zenodo.21438226</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">2 changes</span></td></tr><tr><td class="num">IV</td><td><a href="papers/part-iv/index.html">Schur Functions at (1,-1,t,t^{-1}): A Closed Form on the Non-Identity Component of O(4)</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21463000">10.5281/zenodo.21463000</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">0 changes</span></td></tr><tr><td class="num">V</td><td><a href="papers/part-v/index.html">What the Higgs Potential Cannot See: Bulk Matter That Cannot Help Select a Boundary Condition</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21727094">10.5281/zenodo.21727094</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">1 change</span></td></tr><tr><td class="num">VI</td><td><a href="papers/part-vi/index.html">Proton Decay in SU(7) Grand Gauge-Higgs Unification: An Obstruction, Its Minimal Escapes, and the One Row of Their Table 1 That Can Pay for Them</a><br><span style="font-size:13px;color:var(--ink3)"><span style="color:var(--ink3)">not yet deposited</span></span></td><td><span class="chip ver">in press</span><br><span style="font-size:12.5px;color:var(--ink3)">2 changes</span></td></tr><tr><td class="num">VII</td><td><a href="papers/part-vii/index.html">The compactification scale of SU(7) grand gauge-Higgs unification is bounded</a><br><span style="font-size:13px;color:var(--ink3)"><span style="color:var(--ink3)">not yet deposited</span></span></td><td><span class="chip unk">draft</span><br><span style="font-size:12.5px;color:var(--ink3)">0 changes</span></td></tr></tbody></table></div>
-
-<h2>What has moved</h2>
-<p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
-whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="papers/part-v/index.html">Part V</a> &middot; affects the record: no</span></div><h3>The η closed form, checked on 119 contents instead of five</h3><dl><dt>what</dt><dd><p>The closed form for the η-dependence of the Higgs mass matrix — <code>ΔH₁₁ = −2(2π)²L₁·M₂/8</code>,
+<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-v/index.html">Part V</a> &middot; affects the record: no</span></div><h3>The η closed form, checked on 119 contents instead of five</h3><dl><dt>what</dt><dd><p>The closed form for the η-dependence of the Higgs mass matrix — <code>ΔH₁₁ = −2(2π)²L₁·M₂/8</code>,
 <code>ΔH₂₂ = −2(2π)²L₂·M₂/8</code>, <code>ΔH₁₂ = 0</code> — was published against five worked cases. The instrument
 runs it against the direct winding sum on all <strong>119</strong> multiplets of the catalogue: worst
 disagreement <strong>0.0162 %</strong>. On the 16 multiplets the catalogue declares blind, the closed form
@@ -217,7 +158,7 @@ evidence behind one of them.</p><p>A trap paid for here, and it is the reason th
 have no Part IV box, and the first sweep silently printed <code>M₂ = 0</code> for them and concluded
 "invisible to η". That was the right answer for the wrong reason — those 16 happen to be exactly
 the 16 the catalogue declares blind. On another group the same code would have lied. A missing
-datum is now an explicit <code>unknown</code>, never a zero.</p></dd><dt>check</dt><dd>open the eta-meter; the sweep runs in your browser against the winding sum</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="papers/part-vi/index.html">Part VI</a> &middot; affects the record: no</span></div><h3>Part VI §7's modified potential, recomputed</h3><dl><dt>what</dt><dd><p>Part VI says, in its own words, that the potential modified by the escape is not recomputed
+datum is now an explicit <code>unknown</code>, never a zero.</p></dd><dt>check</dt><dd>open the eta-meter; the sweep runs in your browser against the winding sum</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vi/index.html">Part VI</a> &middot; affects the record: no</span></div><h3>Part VI §7's modified potential, recomputed</h3><dl><dt>what</dt><dd><p>Part VI says, in its own words, that the potential modified by the escape is not recomputed
 there. With the Part VII kernel present in the same instrument it is: the modified potential is
 evaluated, the vacuum is re-minimised on it, and the result is displayed labelled <code>measured</code>,
 carrying the Part VI §7 anchor band and marked explicitly as going beyond what the paper claimed.</p></dd><dt>why</dt><dd><p>Part VI reached a sign, deliberately, and stopped there. The kernel that turns the sign into a
@@ -225,16 +166,43 @@ number was written for Part VII. Once both live in one instrument, refusing to r
 the first's output would be a presentation choice, not an honesty one.</p></dd><dt>so</dt><dd><p>The record is unaffected: Part VI's statement that it does not recompute remains true of Part VI.
 The site is where the recomputation lives, and it is labelled as this page's work, not the
 paper's. Every absolute number in it inherits the open question about the published α column —
-see the tool's own "what this cannot tell you" panel.</p></dd><dt>check</dt><dd>open the anomalies section; the recomputed value is labelled "measured" and carries the anchor band</dd></dl></div>
-<p><a href="changes/index.html">The whole log &rarr;</a></p>
-
-<h2>The code</h2>
-<p>The instrument is one self-contained HTML file with no external request in it, built from a
-Python and JavaScript source tree by <code>build/build_app.py</code>, which re-runs every harness
-and refuses to publish a red build. Each released paper also gets a frozen copy of the tool as it
-stood at publication &mdash; see <a href="editions/index.html">editions</a> &mdash; so a link in a
-paper keeps working even after the living instrument has been rewritten.</p>
-
+see the tool's own "what this cannot tell you" panel.</p></dd><dt>check</dt><dd>open the anomalies section; the recomputed value is labelled "measured" and carries the anchor band</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vi/index.html">Part VI</a> &middot; affects the record: no</span></div><h3>The published α column is still not reproduced — and where the residual can no longer live</h3><dl><dt>what</dt><dd><p>Our α disagrees with the α published in Table 1 of arXiv:2503.04090 on every one of the five
+rows, and <strong>not by a constant</strong>: the ratio runs 1.03× to 2.08× with no pattern in <code>8D</code>, in <code>A₄</code>
+or in the content. A constant would be a convention and could be absorbed; this cannot. Row (2)
+is the only row that agrees, and the only one whose Higgs mass lands inside the 125–127 GeV
+window — and it is the row this tool opens on, which it inherited rather than chose.</p></dd><dt>why</dt><dd><p>Everything upstream of the α column reproduces. Their §3 was rebuilt from their own
+eqs. (11)–(13) and (54) — structure constants, KK spectrum, all four branchings — and agrees;
+their eq. (67) is proved rather than sampled; their eq. (68) is rederived; their Table 1 is
+internally consistent with their own eq. (82). No rescaling reconciles the two columns: neither
+a per-representation nor a per-channel factor, and a single common coefficient on the
+antiperiodic sector fails by 18 % at best while also breaking the Higgs-mass column.</p></dd><dt>so</dt><dd><p>No absolute number on this site (TeV, GeV) is citable until this closes. The three things that
+escape it entirely — the mass ratio, the bill in eighths, and the two arithmetic laws — are
+marked as such, because no normalisation enters any of them.</p><p>Two things have moved since. A discriminating sixth row is registered <em>in advance</em> in Part VI, so
+whoever computes such a row next can read our answer off in print rather than by asking us. And
+Part VII adds a second, independent published anchor — von Gersdorff, Irges and Quirós,
+arXiv:hep-th/0204223, whose five-dimensional single-parity model on S¹/Z₂ is exactly the <code>Δ = 0</code>
+corner of our formula — and it reproduces our criterion, its three critical flavour numbers and
+one of its two published minima exactly. That does not close the gap. It relocates it: the residual is no longer free to
+sit in the potential itself.</p></dd><dt>check</dt><dd>the tool's header states the band on every page; the five rows are in the hierarchy section</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-iii/index.html">Part III</a> &middot; affects the record: no</span></div><h3>And the rule bites — 40 of 60 forbidden representations really lose the minimum</h3><dl><dt>what</dt><dd><p>Where the rule forbids halving the domain, halving anyway moves the minimum of the Wilson-line
+potential in <strong>40 of the 60</strong> representations tested — the worst by 45.1 % of the potential's own
+depth <code>|V|</code>. The other 20 are cases where the two domains happen to share their minimum.</p></dd><dt>why</dt><dd><p>A selection rule that never changed an answer would be a bookkeeping convention rather than a
+constraint. Nothing in Part III measured how often it matters, because the paper's question was
+<em>which</em> domain is legal, not <em>what it costs</em> to use the wrong one. The instrument can ask the
+second question cheaply, so it does.</p></dd><dt>so</dt><dd><p>The record is unaffected. This is the missing sentence about why the rule is worth stating, and
+it is now a panel rather than a claim: the numbers are recomputed in the page, over the same
+potential the calculator uses, so a reader can watch the minimum move.</p><p>One trap paid for here, recorded so nobody repeats it: the first version scanned the half-domain
+on its own grid, which gave it twice the resolution of the full-domain scan and manufactured a
+"loss" of −5.3 × 10⁻⁴ that was mesh, not physics. Two regions must be compared from one set of
+evaluations.</p></dd><dt>check</dt><dd>open the selection section and read the "does it bite" panel; it recomputes on load</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-iii/index.html">Part III</a> &middot; affects the record: no</span></div><h3>The selection rule reduces to one bit</h3><dl><dt>what</dt><dd><p>Part III's admissibility test — <code>a + 2b + 3c</code> odd, or the representation degenerate — is a single
+parity: <strong>the half-domain is legal if and only if <code>a + c</code> is even.</strong> Since <code>a + 2b + 3c ≡ a + c
+(mod 2)</code>, and both branches of the degenerate case independently force <code>a + c</code> even, the second
+disjunct can never be the one that decides. Checked on all 3375 triples with <code>a, b, c ≤ 14</code>, of
+which 399 are degenerate: zero exceptions.</p></dd><dt>why</dt><dd><p>The rule was stated as a disjunction because that is how it was derived — one clause from the
+centre charge, one from the degenerate orbits. Written that way it hides that the two clauses
+never disagree. The instrument evaluates both and compares them, which is why the coincidence
+showed up at all.</p></dd><dt>so</dt><dd><p>The record is unaffected: the printed rule is correct, and this is a reduction of it, not a
+correction. Nothing in Part III depends on the disjunction being irredundant. The one-bit form is
+what the tool displays, with the disjunctive form beside it.</p></dd><dt>check</dt><dd>open the selection section; it re-runs the enumeration in your browser</dd></dl></div>
 </main>
 <footer><div class="in">
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part VI — Proton Decay in SU(7) Grand Gauge-Higgs Unification: An Obstruction, Its Minimal Escapes, and the One Row of Their Table 1 That Can Pay for Them</title>
+<meta name="description" content="Part VI of the GHU series: its record, its status, and what has moved since.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:1fr;gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../../index.html">GHU Lab</a>
+  <nav>
+    <a href="../../app/index.html">the instrument</a>
+    <a href="../../papers/index.html" aria-current="page">the series</a>
+    <a href="../../changes/index.html">changes</a>
+    <a href="../../docs/index.html">docs</a>
+    <a href="../../editions/index.html">editions</a>
+  </nav>
+</div></header>
+<main>
+<p class="sub"><a href="../index.html">&larr; the series</a></p><h1>Part VI &middot; Proton Decay in SU(7) Grand Gauge-Higgs Unification: An Obstruction, Its Minimal Escapes, and the One Row of Their Table 1 That Can Pay for Them</h1><div class="record"><div class="row frozen"><span class="k">version of record</span><span><strong>not yet deposited</strong> &mdash; scheduled for 2026-08-20. No DOI exists yet, so none is printed here.</span></div><div class="row living"><span class="k">this page</span><span>living &middot; last updated 2026-08-08 &middot; 2 changes (1 extension, 1 note) &rarr; <a href="#changes">below</a></span></div></div><h2>Abstract</h2><div class="abstract"><p><strong>Komori and Maru leave proton decay to future work in one sentence. This paper takes that sentence as its question, and answers the half that follows from their own equations.</strong></p><p><strong>The obstruction.</strong> Their eqs. (43)&ndash;(47) and (76)&ndash;(79) force <em>U</em>(1)&prime; = <em>T</em><sub>3L</sub> + <em>Y</em> &minus; (<em>B</em>&minus;<em>L</em>) identically, and all four dimension-6 |&Delta;B|=1 operators carry <em>Y</em> = <em>B</em>&minus;<em>L</em> = 0. At one generation the surviving symmetry cannot forbid a single one of them.</p><p><strong>What the anomalies demand.</strong> Of six channels, three force <em>X</em><sub>Q</sub> = &minus;1/6, which is exactly <em>A</em> = 0; two cannot cancel at all and require a Standard-Model singlet of <em>U</em>(1)&prime; charge &minus;1. That singlet is <em>necessary</em> and not merely minimal, only the <strong>28</strong> supplies it, and so only rows (2) and (3) of their Table 1 can.</p><p><strong>The bill, in eighths.</strong> The curvature of the Wilson-line potential at the symmetric point is exactly <em>V</em>&Prime;(0) = &minus;&pi;&sup2;&zeta;(3)<em>D</em> with <em>D</em> an exact rational per multiplet: a <strong>48</strong><sup>(+,+)</sup> is worth exactly 0 and an <strong>84</strong><sup>(+,+)</sup> exactly 5/4. Hosting a third lepton generation costs one <strong>84</strong>, which takes case (3) from 9/8 to &minus;1/8 and loses electroweak symmetry breaking. <strong>Case (2) is the only one of the five published rows that satisfies both necessary conditions at once</strong> &mdash; within the minimal extension considered, and at the level of the one-loop curvature.</p><p><strong>The selection rule is a half-line, not a tuning.</strong> Protection fails if and only if <em>q</em><sub>&phi;</sub> = |<em>A<sub>j</sub></em>|/<em>n</em>, a countable set with a maximum. And <em>q</em><sub>&phi;</sub> = 3/2 &mdash; the charge of the <strong>84</strong>'s pure index-7 component, which every row of their table already contains &mdash; forbids all four operators to all orders in &lang;&phi;&rang;/<em>M</em>, for every half-integer brane-quark charge, with no family dependence.</p><p><strong>The instrument, and where it fails.</strong> The dimensionless invariant <em>K</em> = <em>m<sub>h</sub></em>&middot;&alpha;<sub>min</sub>/&radic;<em>F</em>&Prime; must return one number on every row of any table of this kind. We do not reproduce their &alpha;<sub>min</sub> column, and state that as an open question rather than a defect: the truncation, the transcription and every multiplicative repair are excluded <em>at one loop</em>, three independent transcription controls pass, and a sixth row is <strong>pre-registered with both candidate values</strong> so that the question does not depend on anyone answering it.</p><p>Two editions, English and Spanish. Every displayed number regenerates from the ancillary scripts and is literally greppable in the archived standard output beside them; eight gates enforce it.</p></div><div class="note"><strong>This paper is behind the anomalies &amp; proton section of the instrument.</strong> &nbsp;<a href="../../app/index.html">Open it &rarr;</a></div><h2>Downloads</h2><dl class="dl"><dt>archive</dt><dd>none yet</dd><dt>code</dt><dd>will be <code>github.com/karlesmarin/su7-proton-row</code>, created with the record. It does not exist yet, so it is not a link.</dd></dl><h2 id="changes">Changes since the record</h2><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">affects the record: no</span></div><h3>Part VI §7's modified potential, recomputed</h3><dl><dt>what</dt><dd><p>Part VI says, in its own words, that the potential modified by the escape is not recomputed
+there. With the Part VII kernel present in the same instrument it is: the modified potential is
+evaluated, the vacuum is re-minimised on it, and the result is displayed labelled <code>measured</code>,
+carrying the Part VI §7 anchor band and marked explicitly as going beyond what the paper claimed.</p></dd><dt>why</dt><dd><p>Part VI reached a sign, deliberately, and stopped there. The kernel that turns the sign into a
+number was written for Part VII. Once both live in one instrument, refusing to run the second on
+the first's output would be a presentation choice, not an honesty one.</p></dd><dt>so</dt><dd><p>The record is unaffected: Part VI's statement that it does not recompute remains true of Part VI.
+The site is where the recomputation lives, and it is labelled as this page's work, not the
+paper's. Every absolute number in it inherits the open question about the published α column —
+see the tool's own "what this cannot tell you" panel.</p></dd><dt>check</dt><dd>open the anomalies section; the recomputed value is labelled "measured" and carries the anchor band</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-08</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">affects the record: no</span></div><h3>The published α column is still not reproduced — and where the residual can no longer live</h3><dl><dt>what</dt><dd><p>Our α disagrees with the α published in Table 1 of arXiv:2503.04090 on every one of the five
+rows, and <strong>not by a constant</strong>: the ratio runs 1.03× to 2.08× with no pattern in <code>8D</code>, in <code>A₄</code>
+or in the content. A constant would be a convention and could be absorbed; this cannot. Row (2)
+is the only row that agrees, and the only one whose Higgs mass lands inside the 125–127 GeV
+window — and it is the row this tool opens on, which it inherited rather than chose.</p></dd><dt>why</dt><dd><p>Everything upstream of the α column reproduces. Their §3 was rebuilt from their own
+eqs. (11)–(13) and (54) — structure constants, KK spectrum, all four branchings — and agrees;
+their eq. (67) is proved rather than sampled; their eq. (68) is rederived; their Table 1 is
+internally consistent with their own eq. (82). No rescaling reconciles the two columns: neither
+a per-representation nor a per-channel factor, and a single common coefficient on the
+antiperiodic sector fails by 18 % at best while also breaking the Higgs-mass column.</p></dd><dt>so</dt><dd><p>No absolute number on this site (TeV, GeV) is citable until this closes. The three things that
+escape it entirely — the mass ratio, the bill in eighths, and the two arithmetic laws — are
+marked as such, because no normalisation enters any of them.</p><p>Two things have moved since. A discriminating sixth row is registered <em>in advance</em> in Part VI, so
+whoever computes such a row next can read our answer off in print rather than by asking us. And
+Part VII adds a second, independent published anchor — von Gersdorff, Irges and Quirós,
+arXiv:hep-th/0204223, whose five-dimensional single-parity model on S¹/Z₂ is exactly the <code>Δ = 0</code>
+corner of our formula — and it reproduces our criterion, its three critical flavour numbers and
+one of its two published minima exactly. That does not close the gap. It relocates it: the residual is no longer free to
+sit in the potential itself.</p></dd><dt>check</dt><dd>the tool's header states the band on every page; the five rows are in the hierarchy section</dd></dl></div>
+</main>
+<footer><div class="in">
+<p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; built with Claude (Anthropic) as assistant.<br>
+The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
+This page was generated on 2026-08-09 and reaches nothing outside itself.</p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Documentation — GHU Lab</title>
+<meta name="description" content="Conventions, glossary, how to reproduce every number without the tool, and how to cite it.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:1fr;gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../index.html">GHU Lab</a>
+  <nav>
+    <a href="../app/index.html">the instrument</a>
+    <a href="../papers/index.html">the series</a>
+    <a href="../changes/index.html">changes</a>
+    <a href="../docs/index.html" aria-current="page">docs</a>
+    <a href="../editions/index.html">editions</a>
+  </nav>
+</div></header>
+<main>
+<h1>Documentation</h1>
+<p class="lead">Everything a stranger needs to read a number off this site and know exactly what it
+means: the conventions, the vocabulary, how to reproduce it without the tool, and how to cite it.</p>
+
+<h2 id="conventions">Conventions</h2>
+
+<p>Every default the instrument fills in for you, with the source that fixes it. This table is
+generated from <code>src/kernel/model.mjs</code>, which is the only place in the code where a
+default may be declared &mdash; <strong>an unsourced default is a hidden hypothesis</strong>, so the
+record refuses to hold one. Whatever the tool fills in is also echoed into the exported result card,
+under <code>applied</code>, so a reader of the card can see which numbers you chose and which the
+tool did.</p>
+
+<div class="tw"><table><thead><tr><th>key</th><th style="width:110px">default</th><th style="width:60px">units</th><th>what fixes it</th></tr></thead><tbody><tr><td><code>conventions.m_W</code></td><td class="num">80.4</td><td>GeV</td><td>PDG, as used by arXiv:2503.04090</td></tr><tr><td><code>conventions.g4</code></td><td class="num">0.63</td><td>&mdash;</td><td>the Standard-Model su(2)_L value</td></tr><tr><td><code>conventions.mh_window</code></td><td class="num">[125.0, 127.0]</td><td>GeV</td><td>arXiv:2503.04090, Table 1</td></tr><tr><td><code>conventions.windings</code></td><td class="num">600</td><td>&mdash;</td><td>truncation of the Li_5 sum; see /docs</td></tr></tbody></table></div>
+
+<p>Two conventions are not defaults but structure, and they matter more than any of the above.</p>
+
+<ul>
+<li><strong>The Wilson-line phase.</strong> The potential is written as a function of one phase
+<code>α</code>, and the period is fixed by the group data, not assumed: a period of Wilson line is
+a central gauge transformation up to Weyl, which is what makes the fundamental domain
+representation-dependent (Part III). Whether the half-domain is legal is a computed output of the
+selection section, never a setting.</li>
+<li><strong>The winding sum.</strong> Each term of the one-loop potential is
+<code>Re Li&#8325;(s e^{i c &pi; &alpha;})</code>, summed to a truncation that is an <em>input</em>
+and not a hidden constant: the terms fall as <code>n&#8315;&#8309;</code>, so the tail is bounded by
+the truncation you choose and the page can report it. The default is 600 windings.</li>
+</ul>
+
+<h2 id="groups">The models the instrument holds</h2>
+
+<p>A group is data, not code. The kernel knows about weight lattices, parities and winding sums;
+it does not know what SU(7) is. Adding a group means adding a JSON document.</p>
+
+<div class="tw"><table><thead><tr><th>id</th><th>group</th><th>orbifold</th><th>from</th><th>opens on</th></tr></thead><tbody><tr><td><code>su4_ahmn</code></td><td>SU(4)</td><td>T2/Z2</td><td>Parts III-V of the series; the model is AHMN, arXiv:2312.08608</td><td>AHMN 2312.08608</td></tr><tr><td><code>su7_km25</code></td><td>SU(7)</td><td>S1/Z2 x S1/Z2</td><td>Y. Komori, N. Maru, arXiv:2503.04090</td><td>published row (2)</td></tr></tbody></table></div>
+
+<p>Each group opens on a named anchor in its own data file, because an instrument must not open
+empty &mdash; and because a default is a claim about typicality, each anchor carries, in the data
+file itself, a sentence saying what kind of case it is.</p>
+
+<h2 id="glossary">Glossary</h2>
+
+<dl class="dl">
+<dt>&alpha;<span class="lc"></span></dt>
+<dd>The Wilson-line phase: the vacuum expectation value of the extra-dimensional gauge field, in
+units where a period is 1. It <em>is</em> the electroweak hierarchy, because
+<code>1/R&#8325; = 2m_W/&alpha;</code>.</dd>
+
+<dt>&alpha;_min</dt>
+<dd>Where the one-loop potential is minimised. In this class of models it is an algebraic function
+of two moments of the bulk content, so it is computed rather than searched for.</dd>
+
+<dt>bulk content</dt>
+<dd>The list of representations living in the extra dimensions, each with its orbifold parities and
+a multiplicity. It is the input to everything on this site.</dd>
+
+<dt>D, A&#8324;</dt>
+<dd>The second and fourth moments of the content, weighted by Wilson-line charge. <code>8D</code> is
+always an <em>odd</em> integer, so the curvature at the symmetric point can never vanish and the
+electroweak verdict is always well defined.</dd>
+
+<dt>parities</dt>
+<dd>The signs a multiplet picks up at the orbifold fixed points, written <code>(+,+)</code>,
+<code>(+,&minus;)</code> and so on. They decide which components survive with a massless mode.</dd>
+
+<dt>&eta;<span class="lc"></span> (eta)</dt>
+<dd>The boundary-condition sign <code>&eta; = &eta;&#8320;&eta;&#8321;</code>. Part V shows it rides
+on an index alone, so it is invisible to the Higgs potential exactly on Part IV's vanishing
+class.</dd>
+
+<dt>the anchor</dt>
+<dd>A published computation the instrument recomputes at load and shows as a chip, so the tool
+declares whether it currently reproduces an outside number before it shows you any of its own.</dd>
+
+<dt>the bill in eighths</dt>
+<dd>The cost of an escape from the proton-decay obstruction, measured in the quantum of
+<code>D</code>. It is a ratio of integers, so no normalisation enters it.</dd>
+
+<dt>the ceiling</dt>
+<dd>An upper bound on <code>1/R&#8325;</code> that holds for <em>arbitrary</em> bulk content,
+obtained as an integer program whose relaxation has a two-variable dual, enumerated exactly in
+rationals.</dd>
+</dl>
+
+<h2 id="reproduce">How to reproduce any of it without this tool</h2>
+
+<p>Nothing here needs the page. Each section's mathematics exists twice: once in the kernel the
+browser runs, and once in a Python or Sage script shipped with the paper it comes from, written
+independently. Where the two are compared, that is what the <span class="chip ver">verified</span>
+chip means.</p>
+
+<ol>
+<li><strong>The papers' own scripts.</strong> Every released paper carries an ancillary archive on
+Zenodo with the scripts that produce its numbers, and they run without this repository.</li>
+<li><strong>The instrument, offline.</strong> Save <a href="../app/index.html">the app</a> to disk
+and open it. It is one file with no external request in it; the build refuses to ship one that has
+any &mdash; no <code>fetch</code>, no dynamic <code>import</code>, no <code>new Worker</code>, no
+<code>&lt;script src&gt;</code>, no <code>http(s)</code> asset.</li>
+<li><strong>The harnesses.</strong> <code>python build/build_app.py</code> rebuilds the page and
+then re-runs every check outside it, in node, against numbers produced elsewhere. A red build is
+not publishable, and the build says so rather than warning.</li>
+</ol>
+
+<h2 id="cite">How to cite</h2>
+
+<p><strong>Cite the paper, not the page.</strong> The papers have DOIs and are immutable; this site
+is living and says so on every paper page. If you need to cite the state of the tool as you used
+it, cite the frozen <a href="../editions/index.html">edition</a> archived with the paper, which is
+byte-identical to the copy on Zenodo.</p>
+
+<ul><li><strong>Part I</strong> &mdash; <code>doi:10.5281/zenodo.21432625</code></li><li><strong>Part II</strong> &mdash; <code>doi:10.5281/zenodo.21432627</code></li><li><strong>Part III</strong> &mdash; <code>doi:10.5281/zenodo.21438226</code></li><li><strong>Part IV</strong> &mdash; <code>doi:10.5281/zenodo.21463000</code></li><li><strong>Part V</strong> &mdash; <code>doi:10.5281/zenodo.21727094</code></li><li><strong>Part VI</strong> &mdash; <span style="color:var(--ink3)">no record yet; do not cite</span></li><li><strong>Part VII</strong> &mdash; <span style="color:var(--ink3)">no record yet; do not cite</span></li></ul>
+
+</main>
+<footer><div class="in">
+<p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; built with Claude (Anthropic) as assistant.<br>
+The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
+This page was generated on 2026-08-09 and reaches nothing outside itself.</p>
+</div></footer>
+</body>
+</html>
