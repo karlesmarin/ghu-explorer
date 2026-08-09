@@ -1,14 +1,21 @@
 # Handoff — where the tools stand, 2026-08-01
 
+> **Superseded, 2026-08-09, and kept as the record of a line that closed.** Everything below
+> describes the three SU(4) pages of July 2026. They are now frozen under `tools-2026-07/`,
+> reproduced byte for byte by the builders named here, and the root serves the site of the
+> series instead. What the repository holds today is in [`README.md`](README.md); the
+> instrument that replaced these three is `app/index.html`. The build commands below still
+> run and still pass — only their output path moved, and it is corrected in place.
+
 Carles Marín + Claude (AI assistant). **Read this first; everything below is on disk, nothing
 depends on anyone remembering it.**
 
 ## State: three tools, all green
 
 ```
-python build.py          # 1 · Selection rule    -> index.html      + node test
-python build_calc.py     # 2 · Model calculator  -> calculator.html + node test
-python build_predict.py  # 3 · eta-meter         -> predictor.html  + node test
+python build.py          # 1 · Selection rule    -> tools-2026-07/index.html      + node test
+python build_calc.py     # 2 · Model calculator  -> tools-2026-07/calculator.html + node test
+python build_predict.py  # 3 · eta-meter         -> tools-2026-07/predictor.html  + node test
 ```
 
 **All three must pass before anything else.** They do not just build: each extracts its own maths
