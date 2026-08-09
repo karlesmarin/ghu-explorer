@@ -19,7 +19,12 @@ HERE = pathlib.Path(__file__).resolve().parent
 SRC = HERE / "src" / "predict_shell.html"
 CALC = HERE / "src" / "calc_shell.html"
 DATA = HERE / "tools" / "calc_data.json"
-OUT = HERE / "predictor.html"
+# WHERE THIS WRITES.  Until the site took the root, this built straight onto `/index.html`.
+# The root is now the home page of the series, and five published Zenodo records point at it,
+# so a builder aimed there is a loaded gun: one run and the site is gone.  The July pages live
+# under tools-2026-07/ and that is where their builders write.  Running one must reproduce the
+# carried page byte for byte -- if it does not, the carried page is not what this source makes.
+OUT = HERE / "tools-2026-07" / "predictor.html"
 
 
 def block(text, start, end):

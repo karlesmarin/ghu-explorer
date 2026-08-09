@@ -7,7 +7,12 @@ import json, pathlib, subprocess, sys, re
 HERE = pathlib.Path(__file__).resolve().parent
 SRC  = HERE / "src" / "shell.html"
 DATA = HERE / "tools" / "su4_data.json"          # regenerate with tools/make_tool_data.sage
-OUT  = HERE / "index.html"
+# WHERE THIS WRITES.  Until the site took the root, this built straight onto `/index.html`.
+# The root is now the home page of the series, and five published Zenodo records point at it,
+# so a builder aimed there is a loaded gun: one run and the site is gone.  The July pages live
+# under tools-2026-07/ and that is where their builders write.  Running one must reproduce the
+# carried page byte for byte -- if it does not, the carried page is not what this source makes.
+OUT  = HERE / "tools-2026-07" / "index.html"
 
 blob = DATA.read_text(encoding="utf-8")
 html = SRC.read_text(encoding="utf-8")
