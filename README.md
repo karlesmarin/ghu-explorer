@@ -103,6 +103,33 @@ multiplet goes blank, which is Part V's theorem seen without reading a number.
 precomputed, and nothing is asserted without a label saying what kind of claim it is. A
 `measured` chip means exactly that, and it inherits the anchor caveat above.
 
+## ✅ Validation — run it yourself
+
+The page ships with its own falsification. From a clone of this repository:
+
+```
+node tests/run.mjs        # node >= 18, no dependencies
+```
+
+It opens `app/index.html`, pulls the engine out of the shipped file, evaluates it in a bare node
+scope with no DOM, and compares what it computes — moments, `W`, the closed form, the direct
+global minimum, `m_h`, and the vacuum verdict — against
+[`tests/reference_models.json`](tests/reference_models.json), whose numbers come from the
+**Python** engine of Part VII (`amin_closed_form.py`, which itself extracts the term tables from
+Part VI's `su7_anchor_mh.py`). Two implementations, one set of numbers; 67 checks.
+
+The suite is written to be capable of failing, and one row is there because it did. The content
+`7(+,+) + 48(+,−) + 84(+,+)` has **W > 0** — so the endpoint criterion `F(1) > F(0)` passes — and
+its small-α branch at 0.0848 is **not** the deepest point of `F`, which sits at 0.5660. Until
+2026-08-26 the page called that a true vacuum under a `theorem` label; the verdict now has two
+halves, an endpoint one (theorem, about W) and a global one (verified, by minimising the same
+`F`), and `tests/run.mjs` fails on the old behaviour. The change is logged in
+[changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
+
+What the suite does **not** cover: the absolute-scale question above. Our α and the published α
+disagree by 1.03× to 2.08×, and no test can settle that — it is an open problem, stated as one,
+not a bug hiding behind a passing check.
+
 ## 🗄️ The July 2026 tools
 
 Five published Zenodo records link to the host these pages were served from. A URL in a published
