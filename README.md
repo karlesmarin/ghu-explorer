@@ -16,6 +16,7 @@ carries three things:
 | 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | eleven sections, three models, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
+| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, the sixteen harnesses and the gates |
 
 ## 🔬 The instrument
 
@@ -125,6 +126,11 @@ its small-α branch at 0.0848 is **not** the deepest point of `F`, which sits at
 halves, an endpoint one (theorem, about W) and a global one (verified, by minimising the same
 `F`), and `tests/run.mjs` fails on the old behaviour. The change is logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
+
+The rest of the validation — sixteen harnesses, 923 checks, the site gate that runs each of its
+own checks again against a site broken on purpose, and `drive.mjs`, which puts a **real mouse**
+through the panels — lives in the source tree, [`karlesmarin/ghu-lab`](https://github.com/karlesmarin/ghu-lab),
+together with the builders that produce this page and refuse to publish a red build.
 
 What the suite does **not** cover: the absolute-scale question above. Our α and the published α
 disagree by 1.03× to 2.08×, and no test can settle that — it is an open problem, stated as one,
