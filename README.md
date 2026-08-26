@@ -13,13 +13,14 @@ carries three things:
 
 | | |
 |---|---|
-| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | eight sections, `app/index.html` |
+| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | nine sections, three models, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
 
 ## 🔬 The instrument
 
-Eight sections over one model. Change the matter content once and every section recomputes.
+Nine sections over three models — SU(7) on S¹/Z₂ × S¹/Z₂, SU(4) on T²/Z₂, and Haba–Yamashita's
+5D SU(3) on S¹/Z₂. Change a matter content once and every section of its family recomputes.
 
 | | | |
 |---|---|---|
@@ -31,6 +32,7 @@ Eight sections over one model. Change the matter content once and every section 
 | 6 | **Selection rule** · Parts II–III | which α-domain you may legally search — and Part II's three gates: which (a,b,c) can hold a quark generation, with the closed count N = (b+1)(a+c+1)/2 and the minimality of the 60 recovered live |
 | 7 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
 | 8 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
+| 9 | **Five dimensions** · Haba–Yamashita 2004 | their own 5D SU(3) model, with the thing their paper calls the hard part and leaves undone — the vacuum — located in the browser; six numbers in, α_min and the KK spectrum out, everything in units of 1/R |
 
 **What you can find with it.** Type a content and the hierarchy section answers in one sentence
 — *this content puts the compactification scale here, with this Higgs mass* — and then tells you
@@ -66,6 +68,15 @@ g₄ ≈ 0.6, one would need g₄ = 1.87, and one is not even at a minimum of it
 potential. The comb card puts a candidate KK resonance on the arithmetic teeth, each rung cut at
 its own certified ceiling — counting the teeth beyond the ceilings, every mass would land
 somewhere, and a screen that cannot fail screens nothing.
+
+The five-dimensions section is the first with no stake in the series: Haba & Yamashita's 2004
+model, exactly as published, with its vacuum located — their summary calls analysing the vacuum
+structure the hard part, and their paper never computes a minimum. Type six bulk counts and the
+page returns α_min (checked against direct minimisation on the same render), the KK spectrum at
+the vacuum, and three one-press facts: pure gauge never breaks the symmetry (D = −9), marginality
+is three multiplets away (8D = 0 exactly), and the potential is blind to (ΔN_f, ΔN_s) = (1, 2) —
+Part V's blind class in a second model. In this whole 5D class 8D is even: the odd rung the SU(7)
+ceiling stands on needs the sixth dimension.
 
 The η-meter opens with the answer in one sentence — *flip η and this Higgs gets lighter, by this
 much* — computed from **one integer** with no winding summed, next to the brute-force Hessian
