@@ -13,22 +13,23 @@ carries three things:
 
 | | |
 |---|---|
-| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | six sections, `app/index.html` |
+| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | seven sections, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
 
 ## 🔬 The instrument
 
-Six sections over one model. Change the matter content once and every section recomputes.
+Seven sections over one model. Change the matter content once and every section recomputes.
 
 | | | |
 |---|---|---|
 | 1 | **Hierarchy** · Part VII | the compactification scale, the Higgs mass, and how far the content sits below the ceiling no bulk content can exceed |
-| 2 | **Anomalies & proton** · Part VI | what each multiplet contributes to the bill in eighths, the ladder of odd eighths, and what the escape costs |
-| 3 | **Escape from proton decay** · Part VI | the escape constructed: type a brane content — rungs, X_Q, q_φ — and get the six channels, the 64-triple rung cube in 3-D, the fourteen assignments, the selection rule and the bill |
-| 4 | **Selection rule** · Part III | which α-domain you may legally search |
-| 5 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
-| 6 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
+| 2 | **Same potential?** · Part VII | hold two contents up to Theorem 3: same five coordinates ⟺ identically the same one-loop potential — with the kernel relations as buttons and both potentials drawn |
+| 3 | **Anomalies & proton** · Part VI | what each multiplet contributes to the bill in eighths, the ladder of odd eighths, and what the escape costs |
+| 4 | **Escape from proton decay** · Part VI | the escape constructed: type a brane content — rungs, X_Q, q_φ — and get the six channels, the 64-triple rung cube in 3-D, the fourteen assignments, the selection rule and the bill |
+| 5 | **Selection rule** · Part III | which α-domain you may legally search |
+| 6 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
+| 7 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
 
 **What you can find with it.** Type a content and the hierarchy section answers in one sentence
 — *this content puts the compactification scale here, with this Higgs mass* — and then tells you
@@ -49,6 +50,13 @@ Its rung cube draws Part VI's central obstruction as geometry — the 64 rung tr
 the family-universal diagonal where protection dies — and states a fact the enumeration pins:
 every assignment that protects the proton can also cancel all six channels, so protection never
 costs an anomaly.
+
+The same-potential section opens on Part VII's Theorem 3 already earning its keep: the model
+beside a *different* multiset — its canonical representative on five types — with all five
+coordinates equal, the dashed potential riding exactly on the solid one, and the three kernel
+relations as buttons that rewrite one content into the other without moving a single invariant.
+Degenerate contents are in print and were called an accident; the kernel says they are a
+subspace.
 
 The η-meter opens with the answer in one sentence — *flip η and this Higgs gets lighter, by this
 much* — computed from **one integer** with no winding summed, next to the brute-force Hessian
