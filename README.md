@@ -46,7 +46,10 @@ The anomalies section prices every multiplet's contribution to `8D` as signed ba
 ladder of odd eighths with `8D = 0` marked as **the rung that does not exist** — the odd-eighths
 theorem as a picture. Then it runs the proton-decay escape on each published row, reporting what
 it costs and whether the row can pay, and asks the same question of the **whole SU(7) lattice**
-rather than of five rows.
+rather than of five rows. Its wedge panel then holds the headline to a harder standard: reweight
+every 28 and every 84 and the verdict "row (2) is the unique row" survives on a drawn **region**
+of repair space — every repair the anchor programme ever fitted lands inside, and the largest
+repair the α column asks for turns out to be identically invisible to it.
 
 The escape section then constructs the escape itself, in exact rational arithmetic: type a brane
 content and the six anomaly channels, the fourteen assignments and the selection rule recompute.
