@@ -150,7 +150,37 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-08-26</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vii/index.html">Part VII</a> &middot; affects the record: no</span></div><h3>The instrument stood on the draft; it now stands on the published paper</h3><dl><dt>what</dt><dd><p>The hierarchy and anomalies sections were closed on the 9 August draft of Part VII, whose
+<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-08-26</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vii/index.html">Part VII</a> &middot; affects the record: no</span></div><h3>A true vacuum needs more than W &gt; 0 — and three smaller things an outside audit found</h3><dl><dt>what</dt><dd><p>An outside audit of the deployed source found four things, and every one of them is real.
+<strong>First and largest:</strong> the instrument wrote <code>true: W &amp;gt; 0</code> and labelled it a theorem about "the
+true vacuum". [8]'s criterion — and Part VII's own sentence, "W &gt; 0 sufficient for the
+electroweak point to be the deeper one" — says only that α = 0 is deeper than the *other
+symmetric point*, α = 1. It says nothing about a deeper minimum elsewhere in (0, 1). The
+auditor built a counterexample from this page's own tables: <strong>7(+,+) + 48(+,−) + 84(+,+)</strong> has
+D = 5/8, W = 5/2, a small-α branch at 0.0848 with F = −0.626 — and F = −1.698 at α = 0.566.
+The page called it a true vacuum. Reproduced here to every digit. The verdict now has two
+halves with their own standing: the symmetric-point half stays the theorem it is (necessary,
+never a tie); the deepest-point half is <strong>measured</strong>, by minimising the same F directly on
+(0, 1] on every render — which is exactly what the sweep already did and counted as <code>notGlobal</code>,
+without the single-model verdict ever consulting it. <code>vacuum.true</code> is now the conjunction.
+<strong>Second:</strong> the sweep's "largest α their Table 1 reaches" was 0.0836 — <em>our</em> α on their rows —
+when their printed maximum is <strong>0.081</strong>. The regime boundary stays on our axis, because that
+is the axis the closed form is evaluated on, but both numbers are now carried and the sentence
+says which is which. <strong>Third:</strong> the SU(4) calculator minimised over the whole torus and then
+reported <code>searched: [0, ½]</code> whenever the selection rule allowed the halving — a true answer
+with a false provenance. <code>minimise()</code> now receives the licensed domain, and what is reported is
+what ran. <strong>Fourth:</strong> <code>validate()</code> accepted a parity list of any length; <code>termTable</code> reads two.
+It now demands exactly two.</p></dd><dt>why</dt><dd><p>The first is the class of error this whole instrument exists to refuse — a necessary condition
+shipped as a sufficient one, under the wrong chip. The page knew the distinction (the sweep's
+<code>notGlobal</code> count is the same fact) and did not apply it to itself: two instruments that agree
+on a definition and disagree on where it is used. The other three are provenance drifting from
+computation — a label naming the wrong number, a report naming the wrong domain, a check that
+did not check.</p></dd><dt>so</dt><dd><p>The frozen record is untouched: the paper's sentence is the modest one, its true-vacuum level
+9.22 TeV is a maximum over a class its witness was checked to belong to on the exact potential,
+and no printed number moves. What moves is the instrument's verdict on contents like the
+counterexample, the wording of the regime boundary, the provenance of the SU(4) minimum, and
+one validation. Each has a harness check that fails on the old behaviour. The audit that found
+them read the source, not the page — which is the second time today that reading the artifact
+found what the artifact's own tests had not.</p></dd><dt>check</dt><dd>load 7(+,+) + 48(+,−) + 84(+,+) in the hierarchy section — W = 5/2 &gt; 0 and the verdict now reads "a false vacuum W alone cannot see", with the deeper minimum at α = 0.566 named; _test_hierarchy.mjs pins it, the printed 0.081, the searched domain and the parity check</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-26</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vii/index.html">Part VII</a> &middot; affects the record: no</span></div><h3>The instrument stood on the draft; it now stands on the published paper</h3><dl><dt>what</dt><dd><p>The hierarchy and anomalies sections were closed on the 9 August draft of Part VII, whose
 ceiling was the relaxation's <strong>10.03 TeV</strong>, called certified and drawn as one point. The paper
 as deposited on 24 August keeps that number as the bound the dual proves and adds three levels
 below it: <strong>10.01 TeV</strong> attained at (A₄, 8D) = (212, 1) once the lattice is lifted — the
