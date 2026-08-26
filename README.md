@@ -13,13 +13,13 @@ carries three things:
 
 | | |
 |---|---|
-| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | nine sections, three models, `app/index.html` |
+| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | ten sections, three models, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
 
 ## 🔬 The instrument
 
-Nine sections over three models — SU(7) on S¹/Z₂ × S¹/Z₂, SU(4) on T²/Z₂, and Haba–Yamashita's
+Ten sections over three models — SU(7) on S¹/Z₂ × S¹/Z₂, SU(4) on T²/Z₂, and Haba–Yamashita's
 5D SU(3) on S¹/Z₂. Change a matter content once and every section of its family recomputes.
 
 | | | |
@@ -29,10 +29,11 @@ Nine sections over three models — SU(7) on S¹/Z₂ × S¹/Z₂, SU(4) on T²/
 | 3 | **Anomalies & proton** · Part VI | what each multiplet contributes to the bill in eighths, the ladder of odd eighths, and what the escape costs |
 | 4 | **Escape from proton decay** · Part VI | the escape constructed: type a brane content — rungs, X_Q, q_φ — and get the six channels, the 64-triple rung cube in 3-D, the fourteen assignments, the selection rule and the bill |
 | 5 | **Screen a table** · Parts VI–VII | three tests on someone else's published row, none recomputing their model: the mod-6 law on two integers, the K invariant (what g₄ the row implies), and the arithmetic comb the KK scale must sit on |
-| 6 | **Selection rule** · Parts II–III | which α-domain you may legally search — and Part II's three gates: which (a,b,c) can hold a quark generation, with the closed count N = (b+1)(a+c+1)/2 and the minimality of the 60 recovered live |
-| 7 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
-| 8 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
-| 9 | **Five dimensions** · Haba–Yamashita 2004 | their own 5D SU(3) model, with the thing their paper calls the hard part and leaves undone — the vacuum — located in the browser; six numbers in, α_min and the KK spectrum out, everything in units of 1/R |
+| 6 | **Collider** · Part VII | which state a dijet search bounds: the wide coloron with no free parameter (√2·g_s saturated, Γ/M = 2α_s), the whole tower as one form factor whose poles are the resonances, the distortion drawn as a draggable relief over (M_jj, χ) — the measurement's own binning — and the ratio table at the recast's own bins, at the model's scale or any 1/R₅ you type |
+| 7 | **Selection rule** · Parts II–III | which α-domain you may legally search — and Part II's three gates: which (a,b,c) can hold a quark generation, with the closed count N = (b+1)(a+c+1)/2 and the minimality of the 60 recovered live |
+| 8 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
+| 9 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
+| 10 | **Five dimensions** · Haba–Yamashita 2004 | their own 5D SU(3) model, with the thing their paper calls the hard part and leaves undone — the vacuum — located in the browser; six numbers in, α_min and the KK spectrum out, everything in units of 1/R |
 
 **What you can find with it.** Type a content and the hierarchy section answers in one sentence
 — *this content puts the compactification scale here, with this Higgs mass* — and then tells you
@@ -68,6 +69,16 @@ g₄ ≈ 0.6, one would need g₄ = 1.87, and one is not even at a minimum of it
 potential. The comb card puts a candidate KK resonance on the arithmetic teeth, each rung cut at
 its own certified ceiling — counting the teeth beyond the ceilings, every mass would land
 somewhere, and a screen that cannot fail screens nothing.
+
+The collider section turns the bound into an object: the one coloured state a dijet search can
+see, with **no free parameter anywhere** — coupling saturated at √2·g_s by the localisation
+itself, width fixed at 2α_s — so a recast needs no coupling scan. The whole tower collapses into
+one analytic form factor whose poles *are* the resonances, drawn as a draggable relief over
+(M_jj, χ), the plane CMS bins its angular measurement in; a ratio table at the recast's own bins
+comes out at the model's scale or at any 1/R₅ you type. The Δχ² verdict at the per-rung teeth is
+quoted from the published record — 12.0 at the top tooth against a threshold of 3.84, the escape
+branch beyond a thousand — and the margin behind it is the integrality of 8D: halve the quantum
+and the conclusion changes sign.
 
 The five-dimensions section is the first with no stake in the series: Haba & Yamashita's 2004
 model, exactly as published, with its vacuum located — their summary calls analysing the vacuum
