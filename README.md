@@ -28,7 +28,7 @@ Eight sections over one model. Change the matter content once and every section 
 | 3 | **Anomalies & proton** · Part VI | what each multiplet contributes to the bill in eighths, the ladder of odd eighths, and what the escape costs |
 | 4 | **Escape from proton decay** · Part VI | the escape constructed: type a brane content — rungs, X_Q, q_φ — and get the six channels, the 64-triple rung cube in 3-D, the fourteen assignments, the selection rule and the bill |
 | 5 | **Screen a table** · Parts VI–VII | three tests on someone else's published row, none recomputing their model: the mod-6 law on two integers, the K invariant (what g₄ the row implies), and the arithmetic comb the KK scale must sit on |
-| 6 | **Selection rule** · Part III | which α-domain you may legally search |
+| 6 | **Selection rule** · Parts II–III | which α-domain you may legally search — and Part II's three gates: which (a,b,c) can hold a quark generation, with the closed count N = (b+1)(a+c+1)/2 and the minimality of the 60 recovered live |
 | 7 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
 | 8 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
 
