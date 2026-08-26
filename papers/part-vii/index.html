@@ -6,7 +6,7 @@
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNycgZmlsbD0nIzE2MjAyYScvPjxnIHN0cm9rZT0nIzVmYjZkNCcgc3Ryb2tlLXdpZHRoPScyLjYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgZmlsbD0nbm9uZSc+PHBhdGggZD0nTTggOWgxNicvPjxwYXRoIGQ9J004IDE2aDMuNU0yMC41IDE2SDI0Jy8+PHBhdGggZD0nTTggMjNoMTYnLz48L2c+PC9zdmc+">
 <!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
      picture the series is about, and the page still reaches nothing outside itself. -->
-<title>Part VII — The compactification scale of SU(7) grand gauge-Higgs unification is bounded</title>
+<title>Part VII — An Upper Bound on the Compactification Scale of SU(7) Grand Gauge-Higgs Unification, and the Dijet Angular Distribution That Tests It</title>
 <meta name="description" content="Part VII of the GHU series: its record, its status, and what has moved since.">
 <style>
 /* site.css — the pages around the instrument.
@@ -150,40 +150,52 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<p class="sub"><a href="../index.html">&larr; the series</a></p><h1>Part VII &middot; The compactification scale of SU(7) grand gauge-Higgs unification is bounded</h1><div class="record"><div class="row frozen"><span class="k">version of record</span><span><a href="https://doi.org/10.5281/zenodo.22087251">10.5281/zenodo.22087251</a> &middot; v1, 2026-08-24 &middot; frozen, and it stays frozen</span></div><div class="row living"><span class="k">this page</span><span>living &middot; nothing logged against this paper yet</span></div></div><h2>What it says</h2><div class="abstract"><p><em>This is a summary written for this page, not the paper's abstract; the wording is ours
-rather than the archive's. The record of reference is
-<a href="https://doi.org/10.5281/zenodo.22087251">10.5281/zenodo.22087251</a> &mdash; that is
-the concept DOI, which always resolves to the current version.</em></p>
+<p class="sub"><a href="../index.html">&larr; the series</a></p><h1>Part VII &middot; An Upper Bound on the Compactification Scale of SU(7) Grand Gauge-Higgs Unification, and the Dijet Angular Distribution That Tests It</h1><div class="record"><div class="row frozen"><span class="k">version of record</span><span><a href="https://doi.org/10.5281/zenodo.22087251">10.5281/zenodo.22087251</a> &middot; v1, 2026-08-24 &middot; frozen, and it stays frozen</span></div><div class="row living"><span class="k">this page</span><span>living &middot; last updated 2026-08-26 &middot; 1 change (1 note) &rarr; <a href="#changes">below</a></span></div></div><h2>Abstract</h2><div class="abstract"><p><strong>In gauge-Higgs unification the Higgs <em>is</em> the Wilson-line phase, so the electroweak hierarchy is a minimum of a potential rather than a ratio of scales. Part VI computed the curvature of that vacuum for the SU(7) model of Komori and Maru (arXiv:2503.04090) and reached a sign. This paper computes the vacuum itself &mdash; and then asks how large the compactification scale can be over arbitrary multiplicities of the representations they put in the bulk. The answer is finite, and a collider recast of CMS&rsquo;s dijet angular distribution approaches the same scale from below, so the two calculations cross.</strong></p>
 
-<p>In gauge&#8209;Higgs unification the compactification scale is tied to the weak scale by
-<code>&alpha;_min = 2 m_W R&#8325;</code>, so the Wilson&#8209;line vacuum <strong>is</strong> the
-electroweak hierarchy. Part VI computed the one&#8209;loop curvature of that vacuum for the SU(7)
-model of arXiv:2503.04090 and reached a <em>sign</em>. Part VII computes the vacuum itself.</p>
+<p><strong>One ladder, three rungs.</strong> Expanding the one-loop effective potential about the symmetric point produces a single identity read at <em>p</em> = 5, 3, 1: the value, the curvature and the fourth moment are the same formula at three values of one index. At <em>p</em> = 1 the antiperiodic halves cancel their pole into a finite ln&nbsp;2 while the periodic pole survives as the <em>x</em><sup>4</sup>ln&nbsp;<em>x</em> branch point &mdash; which is why the answer cannot be a polynomial, where the finite-temperature theory at an even index has Gross&ndash;Pisarski&ndash;Yaffe&rsquo;s exact quartic.</p>
 
-<p>Expanding the potential about the symmetric point produces one ladder, indexed by
-<code>p = 5 &minus; 2k</code>, whose <em>k</em>-th rung pairs the 2<em>k</em>-th moment of the bulk
-content against <code>&zeta;(p)</code>. Solving the stationarity condition gives
-<code>&alpha;_min</code> as an algebraic function of two moments, and the same expansion gives the
-Higgs mass &mdash; so both columns of their Table 1 follow from the moments with no minimisation
-anywhere.</p>
+<p><strong>The hierarchy in closed form.</strong> Solving stationarity gives &alpha;<sub>min</sub> in a Lambert-<em>W</em> form in three moments, <em>x</em>&sup2; = &minus;<em>d</em>/<em>W</em>(&minus;<em>d</em>e<sup>&minus;<em>b</em></sup>) &mdash; not an algebraic root, since it carries ln&nbsp;<em>x</em>, but solved rather than iterated, with the two branches the minimum and the maximum and the fold at zero Higgs mass. Median error 0.13&nbsp;% over 272 contents against numerical minimisation of the same potential. The logarithm and the third moment cancel identically at the stationary point, so <em>both</em> columns of their Table&nbsp;1 become functions of two moments with no minimisation anywhere.</p>
 
-<p>The moments are quantised: <code>8D</code> is an odd integer, and
-<code>8D &equiv; 2A&#8324; + 3 (mod 6)</code>. Maximising <code>1/R&#8325;</code> is therefore an
-integer program over a rational cone, whose relaxation has a two&#8209;variable dual with
-enumerable vertices &mdash; giving <strong>an upper bound on the compactification scale that holds
-for arbitrary bulk content</strong>, attained at the quantum <code>D = 1/8</code>. Since the
-Kaluza&#8209;Klein excitations of the gauge bosons sit at <code>1/R&#8325;</code>, the class is
-bounded above and therefore falsifiable in one machine.</p>
+<p><strong>The arithmetic of the content.</strong> The moments are quantised: 8<em>D</em> &equiv; 2<em>A</em><sub>4</sub> + 3 (mod 6), because <em>c</em><sup>4</sup> &equiv; <em>c</em>&sup2; (mod 3). What holds whatever the gauge sector contributes is the <em>matter</em> half &mdash; every bulk multiplet moves 8<em>D</em> &minus; 2<em>A</em><sub>4</sub> by a multiple of six &mdash; while the residue belongs to the gauge base point. Whether the same argument also makes 8<em>D</em> <em>odd</em> is a separate question, and it is the one open input of this paper.</p>
 
-<p>Scope, and the paper states it throughout: one loop, flat space, a free Kaluza&#8209;Klein
-tower, a single Wilson phase, and <strong>every absolute number inherits Part VI's open question
-about the published &alpha; column</strong>.</p></div><div class="note"><strong>This paper is behind the hierarchy section of the instrument.</strong> &nbsp;<a href="../../app/index.html">Open it &rarr;</a></div><h2>Downloads</h2><dl class="dl"><dt>archive</dt><dd>none yet</dd><dt>code</dt><dd>none yet</dd></dl><h2 id="changes">Changes since the record</h2><p class="sub">Nothing logged against this paper yet.</p>
+<p><strong>The ceiling.</strong> Maximising the compactification scale is an integer program over a rational cone, closed by an exact two-variable dual whose vertices are enumerated in rational arithmetic: 1/<em>R</em><sub>5</sub> &le; 10.03&nbsp;TeV for arbitrary bulk content. Writing the third moment in the basis {1, ln&nbsp;2, ln&nbsp;3} lifts the content to a four-dimensional lattice, where the relaxation&rsquo;s vertex turns out empty and the bound sharpens to 10.01&nbsp;TeV <em>attained</em>. Put on the exact potential, however, that content is a <em>false vacuum</em>. Requiring the electroweak point to be the true minimum is the orbifold stability criterion of Cacciapaglia, Cossu and Deandrea, whose arithmetic is theirs; summed over a content it is a fourth <em>linear</em> functional, and what is new is only that a linear functional fits inside the integer program. With it imposed the bound is <strong>9.22&nbsp;TeV</strong> on the three-rung algebraic surface, and 9.09&nbsp;TeV at the Higgs mass the world actually has.</p>
+
+<p><strong>Five coordinates, and they are complete.</strong> Two bulk contents have the same one-loop potential, as a function of the phase, if and only if they agree on five integer invariants. That is proved by two kernels meeting, computed by routes sharing no arithmetic, and it explains a gap the earlier work had left open between a certificate and an enumeration.</p>
+
+<p><strong>Which state a collider would bound.</strong> Read off their three parity matrices and nothing else: every colour-changing gauge boson is odd under the small-circle parity, so its tower starts at 1/<em>R</em><sub>6</sub> and its wavefunction <em>vanishes</em> at the fixed point where that same paper localises the quarks &mdash; which answers, for the gauge channel, the rapid proton decay their conclusions flag and leave to future work. What survives at the brane acts through a colour-<em>octet</em> operator in the dijet <em>angular</em> distribution, so published contact-interaction limits, stated for a colour-singlet operator, do not directly apply to it; the data behind them do constrain it, which is what the recast does. Carried through CMS&rsquo;s unfolded distribution, 77&times;77 covariance and NNLO baseline gives a nominal sensitivity of 1/<em>R</em><sub>5</sub> &gt; 10.86&nbsp;TeV. <strong>It is deliberately not called an exclusion</strong>: a Gaussian &chi;&sup2; over unfolded data is not a detector-level CL<sub>s</sub>, and the paper measures that gap rather than waving at it &mdash; aimed at their own published limit the machinery returns 17.5 against 17&nbsp;TeV and 29.5 against 37.</p>
+
+<p><strong>The one condition, and it is not hidden.</strong> The chain passes through one coefficient this paper does not derive from the product-orbifold geometry: the gauge weight of eq.&nbsp;(68) of arXiv:2503.04090. Theorem&nbsp;1 carries its hypothesis <em>in its own statement</em>, and a red note on the front page says so. A parity-resolved covariant count of the same orbit, done here, gives a different split &mdash; shown to be independent of the gauge parameter, with the ghosts&rsquo; boundary conditions derived from the orbifold action on the gauge parameter rather than assumed. <strong>So the fork is not symmetric, and the paper says so: its own machinery points at the branch where that hypothesis is not met.</strong> Both branches are costed in a table, and no number is quoted without saying which branch it lives on. Between the two seeds considered, and on the three-rung surface, 9.22&nbsp;TeV remains the conservative bound: the ambiguity does not open a route to larger scales, it closes one.</p>
+
+<p><strong>Reproducibility.</strong> Every displayed number regenerates from the ancillary scripts, whose standard output is archived beside them; the ledger cites the script for each entry rather than the number alone, so a reader who disagrees with a claim can re-run the thing that made it. Fifteen gates guard the two editions, and one of them executes every cited script and diffs it against its archive: 70 of 70 executable scripts reproduce byte for byte. Two claims the earlier drafts made are corrected in place and left visible rather than removed.</p></div><div class="note"><strong>This paper is behind the hierarchy section of the instrument.</strong> &nbsp;<a href="../../app/index.html">Open it &rarr;</a></div><h2>Downloads</h2><dl class="dl"><dt>archive</dt><dd><a href="https://doi.org/10.5281/zenodo.22087251">Zenodo &mdash; PDF, scripts and ancillary archive</a> (concept DOI: always the latest version)</dd><dt>this version</dt><dd><a href="https://doi.org/10.5281/zenodo.22087252">10.5281/zenodo.22087252</a></dd><dt>code</dt><dd><a href="https://github.com/karlesmarin/su7-compactification-bound">github.com/karlesmarin/su7-compactification-bound</a></dd></dl><h2 id="changes">Changes since the record</h2><div class="entry"><div class="hd"><span class="dt">2026-08-26</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">affects the record: no</span></div><h3>The instrument stood on the draft; it now stands on the published paper</h3><dl><dt>what</dt><dd><p>The hierarchy and anomalies sections were closed on the 9 August draft of Part VII, whose
+ceiling was the relaxation's <strong>10.03 TeV</strong>, called certified and drawn as one point. The paper
+as deposited on 24 August keeps that number as the bound the dual proves and adds three levels
+below it: <strong>10.01 TeV</strong> attained at (A₄, 8D) = (212, 1) once the lattice is lifted — the
+relaxation's own vertex (215, 1) is empty — <strong>9.22 TeV</strong> once the electroweak point must be the
+true vacuum, and <strong>9.09 TeV</strong> at the Higgs mass the Higgs actually has. The content that attains
+10.01 sits in a false vacuum: the potential is deeper at the other symmetric point by 316. The
+instrument had no way to see that, because it did not compute W.</p><p>It now does. Every content carries <code>W = Σ_{c odd} m(−s)</code>, <code>F(1) − F(0) = (31/16) ζ(5) W</code> exactly,
+and a verdict — the numbers at a stationary point in a false vacuum are still shown, labelled.
+The ceiling a content is measured against is 9.22 TeV, and the four levels are a table with what
+each one bounds. Theorem 1 (8D odd) is now stated as the paper states it, <strong>conditional on the
+gauge seed</strong>: a switch lets the model stand on the candidate parity-resolved split of §13, under
+which 8D is even, A₄ half-integral, the relaxation ceiling drops to 7.38 TeV at 8D = 2, and
+Theorem 2 and the 2W theorem survive untouched. The five complete invariants (A₄, 8D, 2U, V, 2W)
+are computed in the kernel and checked, generator by generator, against <code>lattice_lift.py</code>.</p></dd><dt>why</dt><dd><p>A page that says "certified ceiling 10.03 TeV" over a content in a false vacuum is showing a
+number the paper it advertises has since qualified. Publishing a part did not update the
+instrument built on its draft — the same failure that left the series pages saying "not yet
+deposited" for five days after Part VI was deposited, and it was found by auditing the whole
+site against the papers rather than the part that had just moved.</p></dd><dt>so</dt><dd><p>The record is unaffected: nothing in the frozen Part VII depends on this page. Two things in the
+instrument were wrong and are corrected — the single ceiling, and Theorem 1 stated without its
+hypothesis — and one thing was missing, the stability functional, which is [8]'s criterion and
+not ours. And one bug of the shell surfaced while photographing the seed switch: a page opened
+with a permalink rendered nothing at all, so every deep link the tool had ever handed out was
+dead. Fixed in the same commit; the harness now opens one.</p></dd><dt>check</dt><dd>open the hierarchy section — the four levels of the ceiling, the other-symmetric-point panel, and the gauge-seed switch; _test_hierarchy.mjs checks each against the archived runs of the paper</dd></dl></div>
 </main>
 <footer><div class="in">
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
-This page was generated on 2026-08-09 and reaches nothing outside itself.</p>
+This page was generated on 2026-08-26 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>
