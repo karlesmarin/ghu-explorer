@@ -13,13 +13,13 @@ carries three things:
 
 | | |
 |---|---|
-| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | seven sections, `app/index.html` |
+| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | eight sections, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
 
 ## 🔬 The instrument
 
-Seven sections over one model. Change the matter content once and every section recomputes.
+Eight sections over one model. Change the matter content once and every section recomputes.
 
 | | | |
 |---|---|---|
@@ -27,9 +27,10 @@ Seven sections over one model. Change the matter content once and every section 
 | 2 | **Same potential?** · Part VII | hold two contents up to Theorem 3: same five coordinates ⟺ identically the same one-loop potential — with the kernel relations as buttons and both potentials drawn |
 | 3 | **Anomalies & proton** · Part VI | what each multiplet contributes to the bill in eighths, the ladder of odd eighths, and what the escape costs |
 | 4 | **Escape from proton decay** · Part VI | the escape constructed: type a brane content — rungs, X_Q, q_φ — and get the six channels, the 64-triple rung cube in 3-D, the fourteen assignments, the selection rule and the bill |
-| 5 | **Selection rule** · Part III | which α-domain you may legally search |
-| 6 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
-| 7 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
+| 5 | **Screen a table** · Parts VI–VII | three tests on someone else's published row, none recomputing their model: the mod-6 law on two integers, the K invariant (what g₄ the row implies), and the arithmetic comb the KK scale must sit on |
+| 6 | **Selection rule** · Part III | which α-domain you may legally search |
+| 7 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
+| 8 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
 
 **What you can find with it.** Type a content and the hierarchy section answers in one sentence
 — *this content puts the compactification scale here, with this Higgs mass* — and then tells you
@@ -57,6 +58,14 @@ coordinates equal, the dashed potential riding exactly on the solid one, and the
 relations as buttons that rewrite one content into the other without moving a single invariant.
 Degenerate contents are in print and were called an accident; the kernel says they are a
 subspace.
+
+The screen section runs three tests on a published row without recomputing its model. On the
+five rows of the paper this series audits, the K invariant — the same 2.2456·g₄ for every row of
+every content, blind to the normalisation — already speaks: three rows are consistent near
+g₄ ≈ 0.6, one would need g₄ = 1.87, and one is not even at a minimum of its own content's
+potential. The comb card puts a candidate KK resonance on the arithmetic teeth, each rung cut at
+its own certified ceiling — counting the teeth beyond the ceilings, every mass would land
+somewhere, and a screen that cannot fail screens nothing.
 
 The η-meter opens with the answer in one sentence — *flip η and this Higgs gets lighter, by this
 much* — computed from **one integer** with no winding summed, next to the brute-force Hessian
