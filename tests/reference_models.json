@@ -6,7 +6,7 @@
   "K": 1.4147431890898428,
   "note": "alpha is the Wilson-line phase; F is the one-loop potential summed over windings; 8D and A4 are the two quantised moments"
  },
- "produced_by": "ghu-lab/build/make_reference.py against E:\\proyectos\\Curiosity\\research\\smeft_formalization\\part_vii\\amin_closed_form.py",
+ "produced_by": "ghu-lab/build/make_reference.py against research/smeft_formalization/part_vii/amin_closed_form.py",
  "rows": [
   {
    "name": "published row (1)",
