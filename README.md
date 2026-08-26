@@ -13,21 +13,22 @@ carries three things:
 
 | | |
 |---|---|
-| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | five sections, `app/index.html` |
+| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | six sections, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
 
 ## 🔬 The instrument
 
-Five sections over one model. Change the matter content once and every section recomputes.
+Six sections over one model. Change the matter content once and every section recomputes.
 
 | | | |
 |---|---|---|
 | 1 | **Hierarchy** · Part VII | the compactification scale, the Higgs mass, and how far the content sits below the ceiling no bulk content can exceed |
 | 2 | **Anomalies & proton** · Part VI | what each multiplet contributes to the bill in eighths, the ladder of odd eighths, and what the escape costs |
-| 3 | **Selection rule** · Part III | which α-domain you may legally search |
-| 4 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
-| 5 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
+| 3 | **Escape from proton decay** · Part VI | the escape constructed: type a brane content — rungs, X_Q, q_φ — and get the six channels, the 64-triple rung cube in 3-D, the fourteen assignments, the selection rule and the bill |
+| 4 | **Selection rule** · Part III | which α-domain you may legally search |
+| 5 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
+| 6 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
 
 **What you can find with it.** Type a content and the hierarchy section answers in one sentence
 — *this content puts the compactification scale here, with this Higgs mass* — and then tells you
@@ -41,6 +42,13 @@ ladder of odd eighths with `8D = 0` marked as **the rung that does not exist** �
 theorem as a picture. Then it runs the proton-decay escape on each published row, reporting what
 it costs and whether the row can pay, and asks the same question of the **whole SU(7) lattice**
 rather than of five rows.
+
+The escape section then constructs the escape itself, in exact rational arithmetic: type a brane
+content and the six anomaly channels, the fourteen assignments and the selection rule recompute.
+Its rung cube draws Part VI's central obstruction as geometry — the 64 rung triples in 3-D, with
+the family-universal diagonal where protection dies — and states a fact the enumeration pins:
+every assignment that protects the proton can also cancel all six channels, so protection never
+costs an anomaly.
 
 The η-meter opens with the answer in one sentence — *flip η and this Higgs gets lighter, by this
 much* — computed from **one integer** with no winding summed, next to the brute-force Hessian
