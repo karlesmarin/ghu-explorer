@@ -150,8 +150,40 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-08-26</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vii/index.html">Part VII</a> &middot; affects the record: no</span></div><h3>A true vacuum needs more than W &gt; 0 — and three smaller things an outside audit found</h3><dl><dt>what</dt><dd><p>An outside audit of the deployed source found four things, and every one of them is real.
-<strong>First and largest:</strong> the instrument wrote <code>true: W &amp;gt; 0</code> and labelled it a theorem about "the
+<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-08-27</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vii/index.html">Part VII</a> &middot; affects the record: no</span></div><h3>A verdict can have no subject — the true-vacuum flag was a boolean where three answers were needed</h3><dl><dt>what</dt><dd><p>A second outside audit read the corrected source and found the correction's own edge. The
+verdict had become <code>true: symmetricOK &amp;&amp; deepest !== false</code> — right whenever there was
+something to test, and wrong whenever there was not. <code>deepest</code> is <code>null</code> on every content that
+never reaches the minimiser, and in this language <code>null !== false</code> is <code>true</code>. So a content with
+<strong>no electroweak breaking</strong> and W &gt; 0 exported <code>alpha_min: no electroweak breaking</code> next to
+<code>vacuum.true: true</code>. The auditor built it from this page's own coordinates: <strong>2 × 7(+,+)</strong>,
+where the gauge seed gives 8D = −27, 2W = −3 and each 7(+,+) adds 8D = −6, 2W = +2, so
+8D = −39 &lt; 0 and 2W = +1 &gt; 0. Reproduced here to every digit, and the Python engine of Part VII
+now produces that row into <code>tests/reference_models.json</code> so a reader can check the null against
+an implementation that shares no line of code with the page. The screen was never wrong — it
+said "But D ≤ 0, so there is no interior minimum for it to be the vacuum of" — but the screen
+is not what a third party reads. <code>vacuum.true</code> is now one of <code>{true, false, null}</code> beside a
+named <code>state</code>: <code>true-vacuum</code>, <code>false-vacuum</code>, <code>no-electroweak-breaking</code>, <code>no-branch-located</code>,
+<code>undetermined</code>. Null is not a verdict, and it no longer pretends to be one.</p><p>The same audit asked for the globality half to stop resting on a <strong>positional</strong> tolerance —
+it decided the branch was the deepest point if <code>|α_global − α_closed| &lt; 0.02</code> <em>or</em> the gap in F
+was negligible. The closed form is an expansion, accurate to 0.71 % under the largest α of
+their Table 1 and to 20 % out at α = 0.229, so a fixed window in α is a guess about how wide a
+basin is. It is gone. The closed form now only <strong>locates</strong> the basin: <code>localMin</code> walks downhill
+from it to the minimum it is about, <code>numericMin</code> finds the deepest point with no bracket at
+all, and the verdict is F against F at two numerically refined minima. On their five rows the
+two points coincide to better than 10⁻⁶; on the 2026-08-26 counterexample they are 0.0839 and
+0.5660, and F is lower at the second by 1.07.</p></dd><dt>why</dt><dd><p>The first is the honesty floor read at the wrong layer. The instrument had learned that a
+necessary condition is not a sufficient one, wrote the two halves, and then joined them with an
+operator that cannot tell "no" from "not asked" — a three-valued question answered in a
+two-valued type. The second is the same instinct as the first correction, applied one level
+deeper: a tolerance in α is a claim about the potential's shape, made where a comparison of two
+computed depths was available for the same cost.</p></dd><dt>so</dt><dd><p>No printed number moves and the frozen record is untouched: every published row has a branch,
+and on all five the refined branch minimum <em>is</em> the global one. What moves is what the
+instrument exports about contents that break nothing — and the standard the globality half is
+held to. Both are pinned: <code>_test_hierarchy.mjs</code> fails on the old boolean and on a <code>localMin</code>
+that returns its input, and the shipped <code>tests/run.mjs</code> now checks that a reference row with no
+electroweak point makes the page claim neither vacuum. Fired both on purpose before believing
+them.</p></dd><dt>check</dt><dd>load 2 × 7(+,+) in the hierarchy section — 8D = −39 &lt; 0 with 2W = +1 &gt; 0, so there is no electroweak breaking at all; the exported card now reads <code>state: no-electroweak-breaking</code> and <code>true: null</code> where it used to read <code>true: true</code>. <code>tests/run.mjs</code>, which ships with the page, pins it against the Python engine, and the globality half no longer rests on any positional tolerance</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-26</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vii/index.html">Part VII</a> &middot; affects the record: no</span></div><h3>A true vacuum needs more than W &gt; 0 — and three smaller things an outside audit found</h3><dl><dt>what</dt><dd><p>An outside audit of the deployed source found four things, and every one of them is real.
+<strong>First and largest:</strong> the instrument wrote <code>true: W &gt; 0</code> and labelled it a theorem about "the
 true vacuum". [8]'s criterion — and Part VII's own sentence, "W &gt; 0 sufficient for the
 electroweak point to be the deeper one" — says only that α = 0 is deeper than the *other
 symmetric point*, α = 1. It says nothing about a deeper minimum elsewhere in (0, 1). The
@@ -279,7 +311,7 @@ what the tool displays, with the disjunctive form beside it.</p></dd><dt>check</
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
-This page was generated on 2026-08-26 and reaches nothing outside itself.</p>
+This page was generated on 2026-08-27 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>

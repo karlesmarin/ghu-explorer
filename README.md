@@ -118,17 +118,28 @@ scope with no DOM, and compares what it computes — moments, `W`, the closed fo
 global minimum, `m_h`, and the vacuum verdict — against
 [`tests/reference_models.json`](tests/reference_models.json), whose numbers come from the
 **Python** engine of Part VII (`amin_closed_form.py`, which itself extracts the term tables from
-Part VI's `su7_anchor_mh.py`). Two implementations, one set of numbers; 67 checks.
+Part VI's `su7_anchor_mh.py`). Two implementations, one set of numbers; 78 checks.
 
 The suite is written to be capable of failing, and one row is there because it did. The content
 `7(+,+) + 48(+,−) + 84(+,+)` has **W > 0** — so the endpoint criterion `F(1) > F(0)` passes — and
 its small-α branch at 0.0848 is **not** the deepest point of `F`, which sits at 0.5660. Until
 2026-08-26 the page called that a true vacuum under a `theorem` label; the verdict now has two
 halves, an endpoint one (theorem, about W) and a global one (verified, by minimising the same
-`F`), and `tests/run.mjs` fails on the old behaviour. The change is logged in
+`F`), and `tests/run.mjs` fails on the old behaviour.
+
+A second audit, on 2026-08-27, read the corrected code and found the correction's own edge:
+the verdict was the conjunction `symmetricOK && deepest !== false`, and `deepest` is `null`
+whenever nothing was measured — so a content with **no electroweak breaking at all** and
+`W > 0` exported `vacuum.true: true`. The content is `2 × 7(+,+)`, where the gauge seed's
+`8D = −27, 2W = −3` and each `7(+,+)` adds `8D = −6, 2W = +2`, giving `8D = −39 < 0` with
+`2W = +1 > 0`; it is now a row of the reference file, so the Python engine confirms it
+independently. `vacuum.true` is ternary — `true`, `false`, `null` — beside a named `state`,
+and null is not a verdict. In the same pass the global half stopped resting on a positional
+tolerance in α: the closed form now only locates the basin, and the decision is `F` against
+`F` at two numerically refined minima. Both changes are logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
 
-The rest of the validation — seventeen harnesses, 1 084 checks, the site gate that runs each of its
+The rest of the validation — seventeen harnesses, 1 109 checks, the site gate that runs each of its
 own checks again against a site broken on purpose, and `drive.mjs`, which puts a **real mouse**
 through the panels — lives in the source tree, [`karlesmarin/ghu-lab`](https://github.com/karlesmarin/ghu-lab),
 together with the builders that produce this page and refuse to publish a red build.
