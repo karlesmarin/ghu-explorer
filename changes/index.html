@@ -150,7 +150,40 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-08-27</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vii/index.html">Part VII</a> &middot; affects the record: no</span></div><h3>A verdict can have no subject — the true-vacuum flag was a boolean where three answers were needed</h3><dl><dt>what</dt><dd><p>A second outside audit read the corrected source and found the correction's own edge. The
+<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-viii/index.html">Part VIII</a> &middot; affects the record: no</span></div><h3>Part VIII enters the instrument — the map backwards, the clusters, and the census</h3><dl><dt>what</dt><dd><p>Part VII maximises <code>1/R₅</code> over the lattice of bulk contents and publishes a <strong>ceiling</strong>. Part
+VIII runs the same map <strong>backwards</strong>: given a target box in the two observables the closed form
+predicts, it returns a bulk content or a <strong>named certificate</strong> that none exists. The instrument
+had the ceiling and none of the inverse. It has both now, in two sections that sit next to
+Hierarchy because they are the same map read the other way.</p><p><strong>Design a scale</strong> does the deciding. Type a scale — or click the axis — and the page walks the
+rungs, issuing one of five certificates where nothing sits: <code>floor</code> (identity (II) asking for an
+A₄ below the <em>empty</em> content, which non-negative multiplicities forbid), <code>cone</code>, <code>congruence</code>,
+<code>dual</code> (an exact rational Farkas pair) and <code>exhaustion</code> (the rung is finite and was enumerated).
+Two more things are reported and are explicitly <strong>not</strong> certificates: <code>rung</code>, which excludes the
+rung and not the target, and <code>budget</code>, which means the enumeration was stopped. A design is only
+a design once the <strong>exact potential</strong> agrees that the electroweak point is the deepest place on
+(0, 1] — <code>W &gt; 0</code> compares the two symmetric points and nothing else.</p><p><strong>Count a rung</strong> does the counting. A dynamic programme over the two partial moments gives
+<code>N(A₄, 8D)</code> for every A₄ at once, in about twenty milliseconds, where the enumerator that built
+the same contents one by one took twenty-five minutes and ran out of budget below 5 TeV. The
+four rung totals — 69 022 464 contents — land exactly on what that enumerator built, by an
+algorithm that shares nothing with it. The section also proves and checks the recurrence
+<code>N(A₄, 8D+6) = N(A₄, 8D) − P</code>, which is why the four counting curves superpose, and reads the
+fibre of the measured-mass point with Part VII's completeness theorem: 81 contents there share
+all five coordinates, so they are not 81 models that agree — they are 81 ways to build one
+potential, one of 19 multiplets and one of 198.</p></dd><dt>why</dt><dd><p>A ceiling is a bound; the inverse direction reports a <strong>set</strong>, and the set is not what the
+bound suggests. The clusters the instrument now draws are <strong>finite point sets</strong> — rung one is
+35 values of <code>1/R₅</code>, about 31.5 GeV apart — and between the rung-three and rung-one clusters
+there are <strong>2682 GeV</strong> with nothing in them, forty-five times the widest gap <em>inside</em> either
+cluster. A finite set is disconnected for free; a macroscopic stretch closed by an exact
+rational certificate is not.</p><p>Nothing in the record moves: this is Part VIII arriving in the instrument, not a correction to
+anything already deposited.</p></dd><dt>so</dt><dd><p>Nothing to redo, and three defects paid for on the way — all of them in this page's own code,
+all now guarded. The first drawing
+painted each cluster as a <strong>bar</strong>, which is the misreading the paper warns against; it is a comb
+now, computed here. The point sweep then hit a <strong>budget cap</strong> on rung three and printed 54
+points as though they were 65, with no mention of the cut — the cap is derived from the same
+threshold that chose the rung, and a deliberately capped sweep is now part of the harness. And
+the fibre panel picked its class by <strong>size</strong>, which on this rung gives 86 and not the paper's
+81: two classes there have a single 2W, and the one the paper means is the one at the measured
+Higgs mass. Each class is one potential, so it has one scale, and that is what selects it.</p></dd><dt>check</dt><dd>open <strong>Design a scale</strong>, press <em>resolve the clusters into their points</em>, and read the note: rung 8D = 1 is 35 points and not an interval, 31.46 GeV apart on average, widest interior gap 59.44 GeV — so the certified gap is 45× that, computed on the page. Then type 7.5 into the target and press <em>design it</em>: <code>floor</code>, one rung, a proved no-go. Then 9.0: a content of eight multiplets at 9008 GeV, verified on the exact potential. In <strong>Count a rung</strong>, press <em>build the table</em>: the four rung totals land on the enumerator's own 69 022 464 contents, counted by a dynamic programme in about twenty milliseconds.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-27</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="../papers/part-vii/index.html">Part VII</a> &middot; affects the record: no</span></div><h3>A verdict can have no subject — the true-vacuum flag was a boolean where three answers were needed</h3><dl><dt>what</dt><dd><p>A second outside audit read the corrected source and found the correction's own edge. The
 verdict had become <code>true: symmetricOK &amp;&amp; deepest !== false</code> — right whenever there was
 something to test, and wrong whenever there was not. <code>deepest</code> is <code>null</code> on every content that
 never reaches the minimiser, and in this language <code>null !== false</code> is <code>true</code>. So a content with
@@ -311,7 +344,7 @@ what the tool displays, with the disjunctive form beside it.</p></dd><dt>check</
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
-This page was generated on 2026-08-27 and reaches nothing outside itself.</p>
+This page was generated on 2026-08-29 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>

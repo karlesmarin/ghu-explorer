@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNycgZmlsbD0nIzE2MjAyYScvPjxnIHN0cm9rZT0nIzVmYjZkNCcgc3Ryb2tlLXdpZHRoPScyLjYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgZmlsbD0nbm9uZSc+PHBhdGggZD0nTTggOWgxNicvPjxwYXRoIGQ9J004IDE2aDMuNU0yMC41IDE2SDI0Jy8+PHBhdGggZD0nTTggMjNoMTYnLz48L2c+PC9zdmc+">
+<!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
+     picture the series is about, and the page still reaches nothing outside itself. -->
+<title>Part VIII — A Certified 2.68 TeV Gap in the Closed-Form Map of the Compactification Scale in SU(7) Grand Gauge-Higgs Unification, and the Invariant Its Two Observables Cannot See</title>
+<meta name="description" content="Part VIII of the GHU series: its record, its status, and what has moved since.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:1fr;gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../../index.html">GHU Lab</a>
+  <nav>
+    <a href="../../app/index.html">the instrument</a>
+    <a href="../../papers/index.html" aria-current="page">the series</a>
+    <a href="../../changes/index.html">changes</a>
+    <a href="../../docs/index.html">docs</a>
+    <a href="../../editions/index.html">editions</a>
+  </nav>
+</div></header>
+<main>
+<p class="sub"><a href="../index.html">&larr; the series</a></p><h1>Part VIII &middot; A Certified 2.68 TeV Gap in the Closed-Form Map of the Compactification Scale in SU(7) Grand Gauge-Higgs Unification, and the Invariant Its Two Observables Cannot See</h1><div class="record"><div class="row frozen"><span class="k">version of record</span><span><a href="https://doi.org/10.5281/zenodo.22159036">10.5281/zenodo.22159036</a> &middot; v1, 2026-08-29 &middot; frozen, and it stays frozen</span></div><div class="row living"><span class="k">this page</span><span>living &middot; last updated 2026-08-29 &middot; 1 change (1 extension) &rarr; <a href="#changes">below</a></span></div></div><h2>Abstract</h2><div class="abstract"><p><strong>A ceiling answers &ldquo;how high can it go&rdquo;. Running the same map backwards answers &ldquo;give me a content at this scale, or show me there is none&rdquo; &mdash; and the second question has an answer the first cannot see.</strong></p><p>Part VII converts the one-loop Wilson potential of the SU(7) model of Komori and Maru (arXiv:2503.04090) into an integer programme over the bulk-content lattice and certifies 1/R&#8325; &le; 10.03 TeV with an exact rational dual. That is an <em>extremal</em> statement, and it has no use for a lower end. This paper runs the map the other way. Given a target box in the two observables the closed form predicts, 1/R&#8325; and m<sub>h</sub>, it either exhibits a bulk content or returns a certificate <em>with a name</em> that none exists &mdash; cone, congruence, an exact rational Farkas pair, a finite exhaustion, or a <em>floor</em>: the inverse map can ask for an A&#8324; below that of the empty content, which non-negative multiplicities forbid.</p><p><strong>What comes out is not an interval.</strong> A content fixes its two observables outright, with no continuous parameter left, so the image of any finite part of the lattice is a finite set of <em>points</em>. On the published gauge seed they fall into one cluster per rung of the quantised curvature &mdash; 35 points spanning [8897.5, 9967] GeV at 8D = 1, 65 spanning [5258, 6215] at 8D = 3 &mdash; and between the top of one and the bottom of the other there is <strong>nothing at all over 2682 GeV</strong>, forty-five times the widest gap inside either cluster. That stretch is closed above by rational dual certificates and below by an enumeration, not observed by a search. At the measured Higgs mass what is left is a single point, 1/R&#8325; = 8967.5 GeV, on which 81 distinct contents coincide &mdash; a single one-loop potential built 81 ways, the smallest of 19 multiplets and the largest of 198.</p><p><strong>And the map does not determine everything.</strong> Two bulk contents share both closed-form observables exactly and disagree about the vacuum, so W &mdash; the invariant whose sign can rule the electroweak point <em>out</em> &mdash; is not a function of the two numbers the model is fitted to. On the untruncated one-loop potential that pair parts by 3.8 MeV in m<sub>h</sub>, a factor of 29 under the quoted 1&sigma; experimental uncertainty.</p><p><strong>Scope, stated rather than implied.</strong> Every emptiness statement here, the hole included, is a statement about the <em>closed form</em> the two identities define, not yet about the untruncated model: turning it into one needs a uniform remainder bound carried through the certificate, which is open and is said to be open. Unless a number is labelled <em>exact</em>, every 1/R&#8325; and m<sub>h</sub> displayed is a closed-form value; the content at every cluster end and every delivered design is re-minimised on the exact potential, which throughout means the untruncated one-loop Li&#8325; potential and not an all-orders effective one. Where the enumerator runs out of its declared budget the verdict printed is <em>undecided</em>, not a no-go that has not been earned.</p><p>Both editions, English and Spanish, carry the same equations, numbers and labels. Every number regenerates from the ancillary scripts, whose stdout is archived beside them, and the stdout of each of the eight gates that were green is archived with them.</p></div><div class="note"><strong>This paper is behind the design a scale, count a rung sections of the instrument.</strong> &nbsp;<a href="../../app/index.html">Open it &rarr;</a></div><h2>Downloads</h2><dl class="dl"><dt>archive</dt><dd><a href="https://doi.org/10.5281/zenodo.22159036">Zenodo &mdash; PDF, scripts and ancillary archive</a> (concept DOI: always the latest version)</dd><dt>this version</dt><dd><a href="https://doi.org/10.5281/zenodo.22159037">10.5281/zenodo.22159037</a></dd><dt>code</dt><dd><a href="https://github.com/karlesmarin/su7-certified-gap">github.com/karlesmarin/su7-certified-gap</a></dd></dl><h2 id="changes">Changes since the record</h2><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">affects the record: no</span></div><h3>Part VIII enters the instrument — the map backwards, the clusters, and the census</h3><dl><dt>what</dt><dd><p>Part VII maximises <code>1/R₅</code> over the lattice of bulk contents and publishes a <strong>ceiling</strong>. Part
+VIII runs the same map <strong>backwards</strong>: given a target box in the two observables the closed form
+predicts, it returns a bulk content or a <strong>named certificate</strong> that none exists. The instrument
+had the ceiling and none of the inverse. It has both now, in two sections that sit next to
+Hierarchy because they are the same map read the other way.</p><p><strong>Design a scale</strong> does the deciding. Type a scale — or click the axis — and the page walks the
+rungs, issuing one of five certificates where nothing sits: <code>floor</code> (identity (II) asking for an
+A₄ below the <em>empty</em> content, which non-negative multiplicities forbid), <code>cone</code>, <code>congruence</code>,
+<code>dual</code> (an exact rational Farkas pair) and <code>exhaustion</code> (the rung is finite and was enumerated).
+Two more things are reported and are explicitly <strong>not</strong> certificates: <code>rung</code>, which excludes the
+rung and not the target, and <code>budget</code>, which means the enumeration was stopped. A design is only
+a design once the <strong>exact potential</strong> agrees that the electroweak point is the deepest place on
+(0, 1] — <code>W &gt; 0</code> compares the two symmetric points and nothing else.</p><p><strong>Count a rung</strong> does the counting. A dynamic programme over the two partial moments gives
+<code>N(A₄, 8D)</code> for every A₄ at once, in about twenty milliseconds, where the enumerator that built
+the same contents one by one took twenty-five minutes and ran out of budget below 5 TeV. The
+four rung totals — 69 022 464 contents — land exactly on what that enumerator built, by an
+algorithm that shares nothing with it. The section also proves and checks the recurrence
+<code>N(A₄, 8D+6) = N(A₄, 8D) − P</code>, which is why the four counting curves superpose, and reads the
+fibre of the measured-mass point with Part VII's completeness theorem: 81 contents there share
+all five coordinates, so they are not 81 models that agree — they are 81 ways to build one
+potential, one of 19 multiplets and one of 198.</p></dd><dt>why</dt><dd><p>A ceiling is a bound; the inverse direction reports a <strong>set</strong>, and the set is not what the
+bound suggests. The clusters the instrument now draws are <strong>finite point sets</strong> — rung one is
+35 values of <code>1/R₅</code>, about 31.5 GeV apart — and between the rung-three and rung-one clusters
+there are <strong>2682 GeV</strong> with nothing in them, forty-five times the widest gap <em>inside</em> either
+cluster. A finite set is disconnected for free; a macroscopic stretch closed by an exact
+rational certificate is not.</p><p>Nothing in the record moves: this is Part VIII arriving in the instrument, not a correction to
+anything already deposited.</p></dd><dt>so</dt><dd><p>Nothing to redo, and three defects paid for on the way — all of them in this page's own code,
+all now guarded. The first drawing
+painted each cluster as a <strong>bar</strong>, which is the misreading the paper warns against; it is a comb
+now, computed here. The point sweep then hit a <strong>budget cap</strong> on rung three and printed 54
+points as though they were 65, with no mention of the cut — the cap is derived from the same
+threshold that chose the rung, and a deliberately capped sweep is now part of the harness. And
+the fibre panel picked its class by <strong>size</strong>, which on this rung gives 86 and not the paper's
+81: two classes there have a single 2W, and the one the paper means is the one at the measured
+Higgs mass. Each class is one potential, so it has one scale, and that is what selects it.</p></dd><dt>check</dt><dd>open <strong>Design a scale</strong>, press <em>resolve the clusters into their points</em>, and read the note: rung 8D = 1 is 35 points and not an interval, 31.46 GeV apart on average, widest interior gap 59.44 GeV — so the certified gap is 45× that, computed on the page. Then type 7.5 into the target and press <em>design it</em>: <code>floor</code>, one rung, a proved no-go. Then 9.0: a content of eight multiplets at 9008 GeV, verified on the exact potential. In <strong>Count a rung</strong>, press <em>build the table</em>: the four rung totals land on the enumerator's own 69 022 464 contents, counted by a dynamic programme in about twenty milliseconds.</dd></dl></div>
+</main>
+<footer><div class="in">
+<p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; built with Claude (Anthropic) as assistant.<br>
+The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
+This page was generated on 2026-08-29 and reaches nothing outside itself.</p>
+</div></footer>
+</body>
+</html>
