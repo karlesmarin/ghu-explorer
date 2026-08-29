@@ -210,7 +210,43 @@ every render of the page. Two constructions that share no code, one object.</p><
 fundamentals, the minimum sits at θ = 1 — an <strong>end</strong> of the fundamental domain, which is the
 other symmetric point and not a broken vacuum. The panel now says so, and names the boundary
 condition it belongs to: the gauge-equivalent one a single class move away. Three sections of
-this instrument meet at that sentence.</p></dd><dt>check</dt><dd>open <strong>4D spectrum</strong> and press <em>load their §4.3 SU(6) with four fundamentals</em>. The massless content comes out as 13 gauge bosons — the dimension of SU(3)×SU(2)×U(1)² — plus 4 scalars, all of them from A_y, plus <strong>4 left-handed against 8 right-handed</strong> Weyl fermions: a chiral 4D theory. The eigenvalue families on the right are the object Haba–Yamashita print, and the panel below them re-derives the potential from the spectrum on this render and reports the gap: 0.0e+0.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The anomaly ledger — the bill a chiral spectrum runs up, channel by channel</h3><dl><dt>what</dt><dd><p>A chiral four-dimensional spectrum is inconsistent unless its gauge anomalies cancel. That is the
+this instrument meet at that sentence.</p></dd><dt>check</dt><dd>open <strong>4D spectrum</strong> and press <em>load their §4.3 SU(6) with four fundamentals</em>. The massless content comes out as 13 gauge bosons — the dimension of SU(3)×SU(2)×U(1)² — plus 4 scalars, all of them from A_y, plus <strong>4 left-handed against 8 right-handed</strong> Weyl fermions: a chiral 4D theory. The eigenvalue families on the right are the object Haba–Yamashita print, and the panel below them re-derives the potential from the spectrum on this render and reports the gap: 0.0e+0.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The scan — the four panels chained, and the model-building loop closes</h3><dl><dt>what</dt><dd><p>The other four panels answer a question about <strong>one</strong> model — the builder gives the potential and
+its vacuum, the 4D spectrum says what is massless and whether it is chiral, Anomalies says what
+that content owes, and Boundary conditions says which of these theories are the same theory. A
+model builder uses all four on one model and then types the next one. Nothing walked the space.</p><p>This does: every boundary condition of SU(N) on S¹/Z₂ crossed with every bulk content up to a
+chosen size, through a chain of filters ordered <strong>cheapest first</strong>, so the only expensive one —
+minimising the potential — runs on the fewest candidates. And a survivor <strong>loads into the
+builder</strong>, which is the same shared model the other panels read, so the sweep hands over a
+candidate instead of ending in a list.</p></dd><dt>why</dt><dd><p>Because the funnel is the answer, not the survivors. <em>"Three models survive"</em> says nothing
+without <em>"out of how many, and where the others died"</em>, so every stage reports what it kept.</p><p>And because the headline is a <strong>pair</strong> of numbers. Twenty-four surviving boundary conditions that
+are sixteen theories will be read as twenty-four results by anyone who does not know to quotient,
+so both counts are printed side by side, always, and every row carries its class with the repeats
+greyed and marked ↺. The sweep walks boundary conditions rather than classes on purpose: the
+apparent unbroken group is <strong>not</strong> a class invariant — <code>[2,0,0,3]</code>'s own class shows three
+different ones — so one representative per class would be picking an answer rather than
+computing one.</p></dd><dt>so</dt><dd><p>Four things the harness caught, and one of them is the honesty floor.</p><p><em>A default that filtered.</em> <code>needHiggs</code> defaulted to <code>"any"</code>, which reads as <strong>don't care</strong> and
+means <strong>must have one</strong>: it discarded two thirds of the space while stage zero went on printing
+the full denominator. The sweep was lying about its own denominator.</p><p><em>An undecided vacuum reported as a no.</em> The minimiser handles one Wilson-line phase and two; with
+three or more it returns nothing, and those models were being filtered out <strong>together with</strong> the
+ones whose minimum genuinely sits at a symmetric point. Three buckets now — breaks, symmetric,
+undecided — and the undecided are counted on the page, as is anything the budget cut off before
+it was ever minimised.</p><p><em><code>Showing 40 of 24</code>.</em> The list decided which rows were the first of their class inside a <em>second</em>
+pass, by which time the first pass had already seen every class, so every survivor was listed
+twice. That is section code, which no module harness reaches — <code>build/drive.mjs</code> now drives the
+panel and checks that the count it prints is arithmetic that holds.</p><p><em>A filter that is always empty is a bug wearing a result's coat.</em> Two of the four returned nothing
+over the whole space at first sight. Each is now exhibited keeping something on its own — and the
+<strong>conjunction</strong> being empty turned out to be the real physics. On SU(5) the four filters leave 36
+pairs and every one of them is a pure <strong>adjoint</strong> content with no massless scalar at all, which is
+the anomaly module's theorem read backwards: the adjoint is real, so at two multiplets it is the
+only bulk that settles its own bill. Ask for a Higgs as well and SU(5) empties completely; ask for
+a <em>colourless</em> one and it dies one stage earlier, for a reason that fits on a line — a 3 and a 2
+already use up all of SU(5), so no block of size 1 is left to pair with the doublet. One rank
+higher, all five filters at once leave survivors, so the zero is about SU(5) and not about a stuck
+gate.</p><p>What the panel refuses to say is on it: the group it filters on is the one you <strong>write</strong>, not the
+one you get, since the physical symmetry is the one at the minimum and that is the expensive
+question the last filter only samples. Bulk Dirac fermions only, no brane fields — so *"the bulk
+pays its own anomaly"<em> reads as </em>"needs no brane fermion to be consistent"*, a far stronger demand
+than consistency, and failing it excludes nothing.</p></dd><dt>check</dt><dd>open <strong>Scan</strong>, tick all four filters, press <em>run the sweep</em>. On SU(6) with one bulk multiplet: 672 pairs in, 192 left by the group, 48 by the anomaly ledger, 24 by the vacuum — and the verdict reads <em>24 pairs, but <strong>16</strong> theories</em>, because boundary conditions related by [p,q,r,s] ~ [p−1,q+1,r+1,s−1] are the same theory in different coordinates. Press <strong>load</strong> on any row and the builder is holding that model; the 4D spectrum and Anomalies panels then read it. Then turn every filter off: the funnel must return the whole space unchanged, because a default that filters would make the sweep lie about its own denominator.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The anomaly ledger — the bill a chiral spectrum runs up, channel by channel</h3><dl><dt>what</dt><dd><p>A chiral four-dimensional spectrum is inconsistent unless its gauge anomalies cancel. That is the
 first gate a model has to pass; it has to be checked channel by channel; and it is where an
 arithmetic slip hides best. This computes it for any 5D SU(N) boundary condition and bulk
 content: every channel the unbroken group has —  [SU(n)]³, U(1)×[SU(n)]², U(1)³, U(1)×[grav]² —
