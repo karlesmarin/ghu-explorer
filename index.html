@@ -243,40 +243,33 @@ instead.</p><p>Collaterally, a real defect in this repository's own build, laten
 is cp1252, which has five unmapped bytes, and a harness printing an omega killed the capture —
 <code>stdout</code> came back <strong>None with returncode 0</strong>. Had that landed one line later, a red harness
 could have been reported green. It decodes UTF-8 explicitly now and refuses a build where the
-capture came back empty.</p></dd><dt>check</dt><dd>open <strong>Boundary conditions</strong>. SU(5) with [2, 0, 0, 3] looks like SU(3)×SU(2)×U(1); the class table beside it shows [1, 1, 1, 2] and [0, 2, 2, 1] in the same class, looking like SU(2)×U(1)³ and SU(2)×SU(2)×U(1)². Three apparent symmetries, one theory. The counting table computes the orbits at every N from 1 to 12 and they come out 4, 9, 16, 25, 36, … = (N+1)². Then press <strong>T²/Z₃</strong> and watch the answer change: the same invariant is no longer complete, and almost every boundary condition is alone in its class.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="papers/part-viii/index.html">Part VIII</a> &middot; affects the record: no</span></div><h3>Part VIII enters the instrument — the map backwards, the clusters, and the census</h3><dl><dt>what</dt><dd><p>Part VII maximises <code>1/R₅</code> over the lattice of bulk contents and publishes a <strong>ceiling</strong>. Part
-VIII runs the same map <strong>backwards</strong>: given a target box in the two observables the closed form
-predicts, it returns a bulk content or a <strong>named certificate</strong> that none exists. The instrument
-had the ceiling and none of the inverse. It has both now, in two sections that sit next to
-Hierarchy because they are the same map read the other way.</p><p><strong>Design a scale</strong> does the deciding. Type a scale — or click the axis — and the page walks the
-rungs, issuing one of five certificates where nothing sits: <code>floor</code> (identity (II) asking for an
-A₄ below the <em>empty</em> content, which non-negative multiplicities forbid), <code>cone</code>, <code>congruence</code>,
-<code>dual</code> (an exact rational Farkas pair) and <code>exhaustion</code> (the rung is finite and was enumerated).
-Two more things are reported and are explicitly <strong>not</strong> certificates: <code>rung</code>, which excludes the
-rung and not the target, and <code>budget</code>, which means the enumeration was stopped. A design is only
-a design once the <strong>exact potential</strong> agrees that the electroweak point is the deepest place on
-(0, 1] — <code>W &gt; 0</code> compares the two symmetric points and nothing else.</p><p><strong>Count a rung</strong> does the counting. A dynamic programme over the two partial moments gives
-<code>N(A₄, 8D)</code> for every A₄ at once, in about twenty milliseconds, where the enumerator that built
-the same contents one by one took twenty-five minutes and ran out of budget below 5 TeV. The
-four rung totals — 69 022 464 contents — land exactly on what that enumerator built, by an
-algorithm that shares nothing with it. The section also proves and checks the recurrence
-<code>N(A₄, 8D+6) = N(A₄, 8D) − P</code>, which is why the four counting curves superpose, and reads the
-fibre of the measured-mass point with Part VII's completeness theorem: 81 contents there share
-all five coordinates, so they are not 81 models that agree — they are 81 ways to build one
-potential, one of 19 multiplets and one of 198.</p></dd><dt>why</dt><dd><p>A ceiling is a bound; the inverse direction reports a <strong>set</strong>, and the set is not what the
-bound suggests. The clusters the instrument now draws are <strong>finite point sets</strong> — rung one is
-35 values of <code>1/R₅</code>, about 31.5 GeV apart — and between the rung-three and rung-one clusters
-there are <strong>2682 GeV</strong> with nothing in them, forty-five times the widest gap <em>inside</em> either
-cluster. A finite set is disconnected for free; a macroscopic stretch closed by an exact
-rational certificate is not.</p><p>Nothing in the record moves: this is Part VIII arriving in the instrument, not a correction to
-anything already deposited.</p></dd><dt>so</dt><dd><p>Nothing to redo, and three defects paid for on the way — all of them in this page's own code,
-all now guarded. The first drawing
-painted each cluster as a <strong>bar</strong>, which is the misreading the paper warns against; it is a comb
-now, computed here. The point sweep then hit a <strong>budget cap</strong> on rung three and printed 54
-points as though they were 65, with no mention of the cut — the cap is derived from the same
-threshold that chose the rung, and a deliberately capped sweep is now part of the harness. And
-the fibre panel picked its class by <strong>size</strong>, which on this rung gives 86 and not the paper's
-81: two classes there have a single 2W, and the one the paper means is the one at the measured
-Higgs mass. Each class is one potential, so it has one scale, and that is what selects it.</p></dd><dt>check</dt><dd>open <strong>Design a scale</strong>, press <em>resolve the clusters into their points</em>, and read the note: rung 8D = 1 is 35 points and not an interval, 31.46 GeV apart on average, widest interior gap 59.44 GeV — so the certified gap is 45× that, computed on the page. Then type 7.5 into the target and press <em>design it</em>: <code>floor</code>, one rung, a proved no-go. Then 9.0: a content of eight multiplets at 9008 GeV, verified on the exact potential. In <strong>Count a rung</strong>, press <em>build the table</em>: the four rung totals land on the enumerator's own 69 022 464 contents, counted by a dynamic programme in about twenty milliseconds.</dd></dl></div>
+capture came back empty.</p></dd><dt>check</dt><dd>open <strong>Boundary conditions</strong>. SU(5) with [2, 0, 0, 3] looks like SU(3)×SU(2)×U(1); the class table beside it shows [1, 1, 1, 2] and [0, 2, 2, 1] in the same class, looking like SU(2)×U(1)³ and SU(2)×SU(2)×U(1)². Three apparent symmetries, one theory. The counting table computes the orbits at every N from 1 to 12 and they come out 4, 9, 16, 25, 36, … = (N+1)². Then press <strong>T²/Z₃</strong> and watch the answer change: the same invariant is no longer complete, and almost every boundary condition is alone in its class.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the model contains — the 4D spectrum of any 5D SU(N) boundary condition</h3><dl><dt>what</dt><dd><p>The SU(N) builder gives the potential and the vacuum; the boundary-conditions section says which
+boundary conditions are the same theory. Neither says what the theory <strong>has</strong>. This does: the
+four-dimensional fields of any 5D SU(N) model on S¹/Z₂, massless and towered, with their quantum
+numbers under the unbroken group. It is Table 1 of every paper in this corner of the field.</p><p>One rule does all of it — Haba–Yamashita eq. (3.5): the mode expansion is fixed by the pair of Z₂
+parities a state carries, and only <strong>(+,+)</strong> has a zero mode. Two riders carry the physics.
+<strong>A_y has the opposite parity to A_μ</strong>, so the massless vectors are the unbroken group and the
+massless scalars are exactly where the vectors are not — which is where the Higgs candidates
+live. And <strong>a Dirac fermion's two chiralities carry opposite parities</strong>, because the orbifold
+condition carries a γ₅: at most one of them can be (+,+), so a massless 4D fermion here is
+automatically <strong>chiral</strong>. That is the whole reason for orbifolding, and the panel says whether
+this particular boundary condition delivers it.</p><p>The section takes no model of its own: it shares the builder's, so changing the boundary
+condition or the bulk in either panel moves both.</p></dd><dt>why</dt><dd><p>Because "what does this theory contain" is the first question of model building and the
+instrument could not answer it. And because the answer is not where a reader expects: the
+massless content follows from the <strong>parities</strong>, not from evaluating a Kaluza-Klein family at
+n = 0 — a (+,+) state expands in cos and has a zero mode, a (−,−) state expands in sin and has
+none. A tower drawn the second way puts states at zero mass that are not there, so this panel
+publishes the <strong>families</strong> — a multiplicity, an offset and a charge, which is what the sources
+print — and computes the massless content separately. What it does not do, it says.</p></dd><dt>so</dt><dd><p>Two things fell out that were not the point and are worth more than it.</p><p><strong>The spectrum and the potential are the same data.</strong> A cosine in the potential is a pair of
+states in the spectrum: <code>m·cos(nπ(c·θ − d))</code> is two states at charge ±c/2, with d = 1 the
+half-integer tower. So summing cos(2πnQ) over the states must reproduce the potential's own
+bracket — the potential counts each ± pair once and the states count both, so the factor is
+exactly 2. Asserted, not assumed, and checked on 96 cases in the harness at 5·10⁻¹⁵ and again on
+every render of the page. Two constructions that share no code, one object.</p><p><strong>And the deepest point is not always a vacuum.</strong> On their own §4.3 SU(6) with four
+fundamentals, the minimum sits at θ = 1 — an <strong>end</strong> of the fundamental domain, which is the
+other symmetric point and not a broken vacuum. The panel now says so, and names the boundary
+condition it belongs to: the gauge-equivalent one a single class move away. Three sections of
+this instrument meet at that sentence.</p></dd><dt>check</dt><dd>open <strong>4D spectrum</strong> and press <em>load their §4.3 SU(6) with four fundamentals</em>. The massless content comes out as 13 gauge bosons — the dimension of SU(3)×SU(2)×U(1)² — plus 4 scalars, all of them from A_y, plus <strong>4 left-handed against 8 right-handed</strong> Weyl fermions: a chiral 4D theory. The eigenvalue families on the right are the object Haba–Yamashita print, and the panel below them re-derives the potential from the spectrum on this render and reports the gap: 0.0e+0.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
