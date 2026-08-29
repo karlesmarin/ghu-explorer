@@ -242,39 +242,31 @@ points as though they were 65, with no mention of the cut — the cap is derived
 threshold that chose the rung, and a deliberately capped sweep is now part of the harness. And
 the fibre panel picked its class by <strong>size</strong>, which on this rung gives 86 and not the paper's
 81: two classes there have a single 2W, and the one the paper means is the one at the measured
-Higgs mass. Each class is one potential, so it has one scale, and that is what selects it.</p></dd><dt>check</dt><dd>open <strong>Design a scale</strong>, press <em>resolve the clusters into their points</em>, and read the note: rung 8D = 1 is 35 points and not an interval, 31.46 GeV apart on average, widest interior gap 59.44 GeV — so the certified gap is 45× that, computed on the page. Then type 7.5 into the target and press <em>design it</em>: <code>floor</code>, one rung, a proved no-go. Then 9.0: a content of eight multiplets at 9008 GeV, verified on the exact potential. In <strong>Count a rung</strong>, press <em>build the table</em>: the four rung totals land on the enumerator's own 69 022 464 contents, counted by a dynamic programme in about twenty milliseconds.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-27</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto"><a href="papers/part-vii/index.html">Part VII</a> &middot; affects the record: no</span></div><h3>A verdict can have no subject — the true-vacuum flag was a boolean where three answers were needed</h3><dl><dt>what</dt><dd><p>A second outside audit read the corrected source and found the correction's own edge. The
-verdict had become <code>true: symmetricOK &amp;&amp; deepest !== false</code> — right whenever there was
-something to test, and wrong whenever there was not. <code>deepest</code> is <code>null</code> on every content that
-never reaches the minimiser, and in this language <code>null !== false</code> is <code>true</code>. So a content with
-<strong>no electroweak breaking</strong> and W &gt; 0 exported <code>alpha_min: no electroweak breaking</code> next to
-<code>vacuum.true: true</code>. The auditor built it from this page's own coordinates: <strong>2 × 7(+,+)</strong>,
-where the gauge seed gives 8D = −27, 2W = −3 and each 7(+,+) adds 8D = −6, 2W = +2, so
-8D = −39 &lt; 0 and 2W = +1 &gt; 0. Reproduced here to every digit, and the Python engine of Part VII
-now produces that row into <code>tests/reference_models.json</code> so a reader can check the null against
-an implementation that shares no line of code with the page. The screen was never wrong — it
-said "But D ≤ 0, so there is no interior minimum for it to be the vacuum of" — but the screen
-is not what a third party reads. <code>vacuum.true</code> is now one of <code>{true, false, null}</code> beside a
-named <code>state</code>: <code>true-vacuum</code>, <code>false-vacuum</code>, <code>no-electroweak-breaking</code>, <code>no-branch-located</code>,
-<code>undetermined</code>. Null is not a verdict, and it no longer pretends to be one.</p><p>The same audit asked for the globality half to stop resting on a <strong>positional</strong> tolerance —
-it decided the branch was the deepest point if <code>|α_global − α_closed| &lt; 0.02</code> <em>or</em> the gap in F
-was negligible. The closed form is an expansion, accurate to 0.71 % under the largest α of
-their Table 1 and to 20 % out at α = 0.229, so a fixed window in α is a guess about how wide a
-basin is. It is gone. The closed form now only <strong>locates</strong> the basin: <code>localMin</code> walks downhill
-from it to the minimum it is about, <code>numericMin</code> finds the deepest point with no bracket at
-all, and the verdict is F against F at two numerically refined minima. On their five rows the
-two points coincide to better than 10⁻⁶; on the 2026-08-26 counterexample they are 0.0839 and
-0.5660, and F is lower at the second by 1.07.</p></dd><dt>why</dt><dd><p>The first is the honesty floor read at the wrong layer. The instrument had learned that a
-necessary condition is not a sufficient one, wrote the two halves, and then joined them with an
-operator that cannot tell "no" from "not asked" — a three-valued question answered in a
-two-valued type. The second is the same instinct as the first correction, applied one level
-deeper: a tolerance in α is a claim about the potential's shape, made where a comparison of two
-computed depths was available for the same cost.</p></dd><dt>so</dt><dd><p>No printed number moves and the frozen record is untouched: every published row has a branch,
-and on all five the refined branch minimum <em>is</em> the global one. What moves is what the
-instrument exports about contents that break nothing — and the standard the globality half is
-held to. Both are pinned: <code>_test_hierarchy.mjs</code> fails on the old boolean and on a <code>localMin</code>
-that returns its input, and the shipped <code>tests/run.mjs</code> now checks that a reference row with no
-electroweak point makes the page claim neither vacuum. Fired both on purpose before believing
-them.</p></dd><dt>check</dt><dd>load 2 × 7(+,+) in the hierarchy section — 8D = −39 &lt; 0 with 2W = +1 &gt; 0, so there is no electroweak breaking at all; the exported card now reads <code>state: no-electroweak-breaking</code> and <code>true: null</code> where it used to read <code>true: true</code>. <code>tests/run.mjs</code>, which ships with the page, pins it against the Python engine, and the globality half no longer rests on any positional tolerance</dd></dl></div>
+Higgs mass. Each class is one potential, so it has one scale, and that is what selects it.</p></dd><dt>check</dt><dd>open <strong>Design a scale</strong>, press <em>resolve the clusters into their points</em>, and read the note: rung 8D = 1 is 35 points and not an interval, 31.46 GeV apart on average, widest interior gap 59.44 GeV — so the certified gap is 45× that, computed on the page. Then type 7.5 into the target and press <em>design it</em>: <code>floor</code>, one rung, a proved no-go. Then 9.0: a content of eight multiplets at 9008 GeV, verified on the exact potential. In <strong>Count a rung</strong>, press <em>build the table</em>: the four rung totals land on the enumerator's own 69 022 464 contents, counted by a dynamic programme in about twenty milliseconds.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A builder for any 5D SU(N) on S¹/Z₂ — the model becomes the input, not the subject</h3><dl><dt>what</dt><dd><p>Every section of this instrument until now answers a question about a model somebody already
+wrote down — theirs or ours. This one takes the model as <strong>input</strong>. Type a boundary condition
+(four block sizes, which is what simultaneously diagonal orbifold parities are) and a bulk
+content, and it returns the one-loop Wilson-line effective potential of <strong>any</strong> 5D SU(N) gauge
+theory on S¹/Z₂, with the unbroken subgroup, the number of Wilson-line degrees of freedom, the
+potential written out term by term, and where its minimum is.</p><p>It is Haba &amp; Yamashita's general formula, <em>JHEP</em> <strong>05</strong> (2004) 059, §5 — the machine every
+model in this corner of the field is built on. The instrument already had one instance of it,
+their SU(3) case; this is the formula.</p></dd><dt>why</dt><dd><p>Two things follow, and the second is the one that matters.</p><p>First, a reader with a model of their own no longer has to redo the group theory by hand to get
+the object they need before they can do anything else. It is a form.</p><p>Second, <strong>when the model has one Wilson-line phase the terms are the (m, s, c) triples the rest
+of this instrument runs on</strong>. So the closed form of Part VII, its five complete invariants and
+its stability criterion apply to somebody else's SU(6) as readily as to the SU(7) they were
+written for — and the page says which of those are theorems about the shape (they travel) and
+which are theorems about the SU(7) lattice (they do not, and become measurements you can check).
+The panel prints both, and reports the arithmetic laws failing for SU(6) as the measurement it
+is rather than hiding it.</p></dd><dt>so</dt><dd><p>One correction to the printed formula, and two overclaims of our own caught before they shipped.</p><p>The coefficients written (n₊₊ − n₋₋) and (n₊₋ − n₋₊) in eqs. (5.9), (5.10) and (5.17)–(5.20)
+must be <strong>absolute values</strong>: they count leftover rows. Two of the paper's own worked examples
+say so — §3's SU(3) has n₊₊ = 1 &lt; n₋₋ = 2 and the printed formula flips the sign of its
+eq. (3.10); §4.3's SU(6) does the same to eq. (4.29) — and so does an invariance the formula
+must have, since the gauge field cannot tell (P, P′) from (−P, −P′) and that swap exchanges the
+blocks in pairs. The harness checks all four examples verbatim, checks the invariance, and
+checks that the <em>signed</em> reading fails: a correction nobody can see fail is not a correction.</p><p>Ours: the vacuum panel first announced "the Hosotani mechanism" for a minimum sitting at
+<strong>a = 1</strong>, which is not a broken vacuum but the <em>other symmetric point</em> — the two ends of the
+fundamental domain are exactly the pair Part VII's criterion compares. Three verdicts now, and
+the criterion by name. And the two normalisations differ by the paper's ½, which is now stated
+in the panel and asserted in the harness rather than left to be rediscovered.</p></dd><dt>check</dt><dd>open <strong>SU(N) builder</strong>, press the <strong>§4.3 · SU(6), P ≠ P′</strong> preset and give it four fundamental Dirac fermions. The page writes the potential — <code>10cos(nπa) − 18cos(nπ(a−1)) − 3cos(nπ2a)</code> — locates the deepest point at a = 1 and says what that is: an <em>end</em> of the fundamental domain, so the other symmetric point is the deeper one and nothing is broken by the Wilson line. Part VII's own criterion, F(1) − F(0) = (31/16)ζ(5)W, is quoted beside it and agrees. Nothing about SU(6) is in any data file: the whole thing is built from four block sizes.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>

@@ -13,14 +13,14 @@ carries three things:
 
 | | |
 |---|---|
-| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | fourteen sections, three models, `app/index.html` |
+| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | fifteen sections over three models — and a builder for models nobody has written yet, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
-| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, the nineteen harnesses and the gates |
+| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, the twenty harnesses and the gates |
 
 ## 🔬 The instrument
 
-Fourteen sections over three models — SU(7) on S¹/Z₂ × S¹/Z₂, SU(4) on T²/Z₂, and
+Fourteen sections over three published models — and one that takes the model as input — SU(7) on S¹/Z₂ × S¹/Z₂, SU(4) on T²/Z₂, and
 Haba–Yamashita's 5D SU(3) on S¹/Z₂. Change a matter content once and every section of its
 family recomputes.
 
@@ -40,6 +40,7 @@ family recomputes.
 | 11 | **Model calculator** · Parts IV–V | a matter content in, the Higgs out |
 | 12 | **η-meter** · Parts IV–V | what the boundary sign does, in closed form — then the field released on the potential |
 | 13 | **Five dimensions** · Haba–Yamashita 2004 | their own 5D SU(3) model, with the thing their paper calls the hard part and leaves undone — the vacuum — located in the browser; six numbers in, α_min and the KK spectrum out, everything in units of 1/R |
+| 14 | **SU(N) builder** · Haba–Yamashita 2004 §5 | **the model is the input.** Type a boundary condition — four block sizes, which is what simultaneously diagonal orbifold parities are — and a bulk content, and get the one-loop Wilson-line potential of *any* 5D SU(N) on S¹/Z₂: the unbroken subgroup, how many Higgs degrees of freedom survive, the potential written term by term, and where its minimum is. Every equation of all four worked examples in the source paper is checked against it. And when the model has one Wilson-line phase the terms are the same (m, s, c) triples the SU(7) sections run on, so Part VII's closed form and its five complete invariants apply to somebody else's model — with the page saying which of our results travel to another group and which become measurements you can check |
 
 **What you can find with it.** Type a content and the hierarchy section answers in one sentence
 — *this content puts the compactification scale here, with this Higgs mass* — and then tells you
@@ -141,7 +142,7 @@ tolerance in α: the closed form now only locates the basin, and the decision is
 `F` at two numerically refined minima. Both changes are logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
 
-The rest of the validation — nineteen harnesses, 1 244 checks, the site gate that runs each of its
+The rest of the validation — twenty harnesses, 1 290 checks, the site gate that runs each of its
 own checks again against a site broken on purpose, and `drive.mjs`, which puts a **real mouse**
 through the panels — lives in the source tree, [`karlesmarin/ghu-lab`](https://github.com/karlesmarin/ghu-lab),
 together with the builders that produce this page and refuse to publish a red build.
