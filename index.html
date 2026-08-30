@@ -209,7 +209,32 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A model leaves as LaTeX — the potential, the table with its status column, and the bibliography</h3><dl><dt>what</dt><dd><p>The header gains <strong>⇩ LaTeX</strong> beside <strong>⇩ card</strong>. It writes the model out in the form that goes
+<div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>What the page says in their absence — a page number, a framing, a button that was in the wrong places</h3><dl><dt>what</dt><dd><p>Four changes, and the first is the one that matters.</p><p><strong>The page no longer asserts, in the authors' absence, more than we are willing to say to their
+faces.</strong> On 30 August a letter went to Akamatsu, Hirose, Maru and Nago about arXiv:2603.05857,
+and it says that which of their two published minima belongs with which value of <code>c</code> is something
+we could not settle from their text. This page had been saying something firmer — that the
+1.4 TeV was their equation with α₂ <em>dropped</em>. Both numbers are still here, computed and not
+quoted; what has gone is the diagnosis. The row measures their equation, and the open question is
+named as open.</p><p><strong>A page number that was wrong.</strong> The sentence quoted is on <strong>p. 21</strong>, not p. 22. Our own two
+scripts disagreed with each other about where eq. (5.19) sits, and both misplaced the sentence;
+measuring by the printed page number settled it. A page reference is the one part of a quotation
+a reader can check without any work.</p><p><strong>The ⇩ LaTeX button appears only where it can export what is on screen.</strong> A section that
+declares <code>holds()</code> is showing its own model, so unless it also implements <code>texExport</code> the button
+would produce a correct file about a <em>different</em> one. On five sections it now simply is not
+there, and pressing it there anyway writes nothing.</p><p><strong>And the demonstration exports its own dial</strong>, which is the section where a reader would most
+want it: the model, the free tower and the roots with a brane term, with the potential marked
+<code>unknown</code> and the reason given — with a brane term it is an integral over those roots, not a sum
+of cosines this export could carry.</p></dd><dt>why</dt><dd><p>A permalink also had to survive being sent. The state separator was <code>|</code>, which travels in an
+e-mail as <code>%7C</code>; Gmail re-encodes that and wraps the whole address in a <code>google.com/url</code>
+redirect with tracking parameters. It resolves correctly and it looks like surveillance. The
+separator is a comma now — every value is a number, so there is no ambiguity — and the pipe is
+still decoded, because links carrying it have already been sent.</p></dd><dt>so</dt><dd><p>Two of these were found by pressing buttons rather than by running assertions, and one was found
+by the assertions being wrong.</p><p>The two-file export was writing both downloads in the same tick, which is how a page asks a
+browser for permission to grab files; the second is now staggered by half a second.</p><p>And a harness lesson worth more than the fix. The driver stubbed
+<code>HTMLAnchorElement.prototype.click</code> to capture a download — and the rail's entries are <code>&lt;a&gt;</code>
+elements. Every later navigation silently did nothing, so six checks measured whatever section
+the page was already sitting on and reported a defect that was not there. A stub installed for
+one check must be put back before the next; the driver now asserts that it was.</p></dd><dt>check</dt><dd>open <strong>Brane kinetic terms</strong>. Step 4 now cites p. 21 for the authors' sentence, reports what eq. (5.19) gives at each of their two minima, and says that which minimum belongs with which c is an open question put to the authors. Press <strong>⇩ LaTeX</strong>: the dial's own model comes out. Then switch to <strong>Boundary conditions</strong> or <strong>The literature</strong> — the button is not there, because on those it would write a file about a different model.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A model leaves as LaTeX — the potential, the table with its status column, and the bibliography</h3><dl><dt>what</dt><dd><p>The header gains <strong>⇩ LaTeX</strong> beside <strong>⇩ card</strong>. It writes the model out in the form that goes
 into a paper: the effective potential as a displayed equation, the results as a table, and the
 sources as a companion <code>.bib</code>.</p><p>It is the same object the card button already exports — <code>card.mjs</code> builds it once, and <code>toText</code>,
 the JSON and now <code>latex.mjs</code> are three renderings of it. A number in someone's paper is the
@@ -236,30 +261,7 @@ family is built on was typed into seven files, and all seven named the wrong vol
 <strong>JHEP 02 (2004) 059</strong>, DOI <code>10.1088/1126-6708/2004/02/059</code> — arXiv's journal-ref, the ADS
 bibcode and INSPIRE agree, and one of the seven copies was displayed on the page. There is one
 copy now, in <code>src/kernel/cite.mjs</code>, and a gate that sweeps the tree and fails the build if any
-file prints a volume the registry disagrees with.</p></dd><dt>check</dt><dd>open <strong>SU(N) builder</strong>, press the <strong>§4.3 · SU(6), P ≠ P′</strong> preset, and press <strong>⇩ LaTeX</strong> in the header. Two files come out: a <code>.tex</code> whose equation is <code>V_eff = (C/2) Σ n⁻⁵ [−2cos(nπa) − 18cos(nπ(a−1)) − 3cos(2nπa)]</code> and whose table carries a <em>status</em> column with <code>scale</code> marked UNKNOWN and its reason printed; and a <code>.bib</code> with the INSPIRE-keyed entry for the formula it rests on. The pair compiles: <code>pdflatex</code> on the standalone form gives one page, no overfull boxes.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A census of the literature — and its finding is an absence</h3><dl><dt>what</dt><dd><p>To compare two gauge–Higgs models you need three things from each: the bulk <strong>content</strong>, the
-<strong>minimum</strong> of the Wilson-line potential, and a <strong>mass</strong>. There is no dataset that gives it —
-HEPData is experimental, and the tables of this field live inside PDFs and nowhere else.</p><p>So this section is curation, not calculation, and it keeps two halves apart on the page.
-<strong>Measured</strong>: every paper in the corpus swept for the signals its text carries — complete,
-reproducible, and worth exactly what a keyword sweep is worth, which is that it turns a corpus
-into a shortlist. <strong>Read</strong>: the rows the census actually asserts, each naming the page or
-equation somebody looked at.</p><p>Conflating the two would make a grep look like a literature review. The page shows the count of
-both, and the gap: the six papers the sweep shortlisted that nobody has opened are listed <strong>by
-name</strong>, because a to-do you can see is honest where an omission is not.</p></dd><dt>why</dt><dd><p>The finding is the absence. Of <strong>84</strong> distinct papers, <strong>11</strong> print all three legs anywhere in
-their text, and of the eight read in full, three carry a usable row. There is no table of
-gauge–Higgs models because the field does not publish one — and mostly does not publish the rows
-such a table would be made of.</p><p>Which is also the answer to a question this instrument keeps being asked: why is every absolute
-number here labelled <code>measured</code> rather than compared against the literature? Because there is
-almost nothing to compare against. The one row our engine reproduces end to end is AHMN's 2023
-model, and it does so exactly — their published minimum, their ratio, their 303 GeV.</p></dd><dt>so</dt><dd><p>A second number came out of the sweep that was not what it was built to find, and it is the more
-useful of the two: <strong>73 of the 84 PDFs — 87% — lose glyphs to text extraction.</strong></p><p>That is not a quirk of one paper. It is the normal case in an equation-heavy corpus, and it is
-why this project spent 2026-08-30 proving a correct published formula wrong: the text layer of
-Haba–Yamashita's paper had silently eaten two absolute-value bars. <code>pdf_glyph_audit.py</code> exists
-because of that day; this census says how often the condition it detects is present.</p><p>So a paper the sweep could not read is a <strong>third state</strong> on this page, with its own count — 28 of
-them — and never folded into "publishes nothing". That would be the sweep reporting its own
-blind spot as a property of the literature, and with 87% of the corpus in that condition it would
-be a large report of nothing. <code>_test_census_lit.mjs</code> holds the line: no unreadable paper may
-reach the shortlist, no curated row may exist without a page reference, and the arithmetic of the
-denominator — duplicate filenames included, one of which was found — has to close.</p></dd><dt>check</dt><dd>open <strong>The literature</strong>. Of 84 distinct papers in the corpus, <strong>11</strong> print all three legs of the triple a comparison needs — content, minimum, mass — and <strong>8</strong> have been read and are asserted with a page or an equation. Search the table, or switch it to <em>no published minimum</em>. The six papers the sweep shortlisted and nobody has opened are listed by name.</dd></dl></div>
+file prints a volume the registry disagrees with.</p></dd><dt>check</dt><dd>open <strong>SU(N) builder</strong>, press the <strong>§4.3 · SU(6), P ≠ P′</strong> preset, and press <strong>⇩ LaTeX</strong> in the header. Two files come out: a <code>.tex</code> whose equation is <code>V_eff = (C/2) Σ n⁻⁵ [−2cos(nπa) − 18cos(nπ(a−1)) − 3cos(2nπa)]</code> and whose table carries a <em>status</em> column with <code>scale</code> marked UNKNOWN and its reason printed; and a <code>.bib</code> with the INSPIRE-keyed entry for the formula it rests on. The pair compiles: <code>pdflatex</code> on the standalone form gives one page, no overfull boxes.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
