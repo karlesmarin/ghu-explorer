@@ -150,7 +150,96 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Which boundary conditions are the same theory — the equivalence classes, on S¹/Z₂ and T²/Z₃</h3><dl><dt>what</dt><dd><p>Putting a gauge theory on an orbifold means <strong>choosing</strong> boundary conditions at the fixed
+<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A model leaves as LaTeX — the potential, the table with its status column, and the bibliography</h3><dl><dt>what</dt><dd><p>The header gains <strong>⇩ LaTeX</strong> beside <strong>⇩ card</strong>. It writes the model out in the form that goes
+into a paper: the effective potential as a displayed equation, the results as a table, and the
+sources as a companion <code>.bib</code>.</p><p>It is the same object the card button already exports — <code>card.mjs</code> builds it once, and <code>toText</code>,
+the JSON and now <code>latex.mjs</code> are three renderings of it. A number in someone's paper is the
+number the card carries, or the whole status apparatus is decoration.</p><p>Two details that are the point rather than the trim. The <strong>status column is a column</strong>: every row
+says <code>theorem</code>, <code>verified</code>, <code>measured</code> or <code>unknown</code>, and an <code>unknown</code> prints its reason in the
+table instead of leaving a blank cell. And the <strong>bibliography travels with the numbers</strong>, keyed
+the way INSPIRE keys it, so a reader who lifts a potential out of this page does not have to go
+and find the citation for the formula it came from — and so that citing it is the default rather
+than an act of virtue.</p></dd><dt>why</dt><dd><p>The builder could already write a reader's potential on screen. What they had to do next was
+retype it, and retyping is where a sign goes missing.</p><p>The transport is the hard part, and it is the same hard part that cost this project a day
+earlier today. Every string here is full of Unicode — <code>α</code>, <code>A₄</code>, <code>n⁺₊</code>, and U+2212, which looks
+exactly like a hyphen and is not — and <code>pdflatex</code> takes none of it. So <code>tex()</code> maps what it knows
+and <strong>throws</strong> on what it does not: an export that cannot be typeset fails loudly here rather
+than quietly in the reader's build. <code>_test_latex.mjs</code> pushes every string in <code>data/</code> and in the
+citation registry through it.</p></dd><dt>so</dt><dd><p>Three defects were found by things other than the harness, and each is worth naming.</p><p><strong><code>pdflatex</code> found one by refusing to build.</strong> Three <code>.bib</code> titles carried bare maths —
+<code>S^1/Z_2</code> — which is <code>Missing $ inserted</code> in the <em>reader's</em> document. Delimited now, and the
+harness rejects a bare caret in any registry field.</p><p><strong>The compiled PDF found the second by looking wrong.</strong> BibTeX entries placed in the <code>.tex</code> are
+not comments: LaTeX ate the braces and typeset them as a paragraph of prose in the middle of the
+page. The entries went to a companion <code>.bib</code>, and the <code>.tex</code> carries a pointer.</p><p><strong><code>build/drive.mjs</code> found the third by pressing the button.</strong> The SU(N) builder declares
+<code>holds()</code> — it carries its own model, not the family's — so the export was pairing this
+section's potential with the <em>shell's</em> card: two models in one file, presented as one. The
+section exports its own card now, and the driver asserts the file names one model.</p><p>And a fourth, which was ours all along: the reference for the paper this instrument's whole 5D
+family is built on was typed into seven files, and all seven named the wrong volume. It is
+<strong>JHEP 02 (2004) 059</strong>, DOI <code>10.1088/1126-6708/2004/02/059</code> — arXiv's journal-ref, the ADS
+bibcode and INSPIRE agree, and one of the seven copies was displayed on the page. There is one
+copy now, in <code>src/kernel/cite.mjs</code>, and a gate that sweeps the tree and fails the build if any
+file prints a volume the registry disagrees with.</p></dd><dt>check</dt><dd>open <strong>SU(N) builder</strong>, press the <strong>§4.3 · SU(6), P ≠ P′</strong> preset, and press <strong>⇩ LaTeX</strong> in the header. Two files come out: a <code>.tex</code> whose equation is <code>V_eff = (C/2) Σ n⁻⁵ [−2cos(nπa) − 18cos(nπ(a−1)) − 3cos(2nπa)]</code> and whose table carries a <em>status</em> column with <code>scale</code> marked UNKNOWN and its reason printed; and a <code>.bib</code> with the INSPIRE-keyed entry for the formula it rests on. The pair compiles: <code>pdflatex</code> on the standalone form gives one page, no overfull boxes.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-withdrawal" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">withdrawal</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>The absolute value was already there — we withdraw a correction we had no business making</h3><dl><dt>what</dt><dd><p>On 29 August this instrument shipped, in the source of <code>sun5d.mjs</code>, in its harness and in a
+changelog entry, the claim that the two coefficients of Haba &amp; Yamashita's general formula —
+eqs. (5.9), (5.10) and (5.17)–(5.20) of <em>JHEP</em> <strong>05</strong> (2004) 059, <code>hep-ph/0401185</code> — were printed
+as plain differences <code>(n₊₊ − n₋₋)</code> and <code>(n₊₋ − n₋₊)</code>, and that an absolute value had to be
+restored for their own worked examples to come out.</p><p><strong>That is false.</strong> All six equations print the coefficients with absolute-value bars, on the
+page. Nothing was missing. The paper is right and we were wrong, and since we said it in public
+we withdraw it in public.</p></dd><dt>why</dt><dd><p>The bars are set in <strong>CMEX10</strong>, TeX's extensible-delimiter font, and in that PDF its glyphs map
+to <strong>U+000C</strong>. Every text extraction drops them without a word: <code>pdftotext</code> does, and so does
+PyMuPDF, in every mode it offers. We had moved to PyMuPDF precisely because we knew <code>pdftotext</code>
+loses ligatures; the failure was one level below that.</p><p>What makes this kind of loss different from a lost ligature is that <strong>it leaves no wreckage</strong>. A
+missing <code>fi</code> turns <em>unification</em> into <em>unication</em> and you see it. A missing pair of bars turns
+<code>|n₊₊ − n₋₋|</code> into <code>(n₊₊ − n₋₋)</code>, which is a well-formed expression, reads as an ordinary
+formula, and is a different formula. There is nothing to notice, so nobody goes back to the page.
+This one sat in our notes for three weeks and in this instrument for one day.</p><p>Nor did the machinery help. Seventeen of the paper's published potentials were reproduced, two
+decoy readings were killed, and an exact invariance was swept over 710 boundary conditions — all
+of it working, all of it pointing at a premise nobody had checked against the page. A harness
+measures consistency with its input. If the input is mutilated it will certify the mutilation,
+and do it with confidence.</p></dd><dt>so</dt><dd><p><strong>Nothing the instrument computes changes.</strong> <code>sun5d.mjs</code> has always used <code>|n₊₊ − n₋₋|</code>, which is
+what the paper says, so every potential, minimum, spectrum, anomaly bill and sweep result stands
+exactly as it was. The harness still checks that the bars-dropped reading fails — that check is
+worth more now than before, because it is a guard against the extraction bug itself: it is
+precisely the wrong formula a tool will hand you.</p><p>Three things changed, and all three are text. The header of <code>sun5d.mjs</code> carries the retraction
+where the claim was. The harness says what it is guarding against. The 29 August entry has its
+third paragraph struck, pointing here.</p><p>A letter to the authors had been drafted on the false premise. It was not sent, and it will not
+be. What survives of that day is a tool: <code>pdf_glyph_audit.py</code>, which lists the pages of a PDF
+carrying glyphs the text layer cannot render, and which on this paper flags pages 4, 5, 14, 15,
+16 and 17 — its §3 and its §5 entire. Run it before quoting a formula.</p></dd><dt>check</dt><dd>open <strong>SU(N) builder</strong>, press the <strong>§4.3 · SU(6), P ≠ P′</strong> preset with no bulk content. The gauge potential reads <code>−3cos(2nπa) − 6cos(nπa) − 18cos(nπ(a−1))</code>, which is <code>−3 ×</code> Haba &amp; Yamashita's own eq. (4.29) — the equation their paper prints. Every number this instrument has ever shown for a 5D SU(N) model is unchanged; what changes is a sentence we wrote about their paper.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Brane kinetic terms — the tower when the masses stop being n/R, and a demonstration you can send</h3><dl><dt>what</dt><dd><p>A brane-localized kinetic term is an extra kinetic term sitting <strong>on the orbifold's fixed
+points</strong>. With one, the Kaluza–Klein masses stop being <code>n/R</code>: they become the roots of a
+transcendental equation, the sum over the tower diverges and needs regulating, and the potential
+has to be built from the roots rather than written down. <code>src/kernel/blkt.mjs</code> does that, and a
+new section demonstrates it.</p><p>Four steps. The mass equation drawn, with the <strong>poles</strong> marked — because at <code>c = 0</code> the poles
+<em>are</em> the spectrum, and watching the roots slide off them is the mechanism rather than a
+description of it. The same thing read as a spectrum, with the drift. <strong>The check.</strong> And what it
+buys, in the authors' own numbers.</p><p>It is the live route, not a curiosity. Akamatsu, Hirose, Maru and Nago's 2023 model sits at
+about 303 GeV, too low to be viable; their 2026 paper turns brane terms on and lifts it. We had
+measured the alternative — the whole symmetric-rank ladder of their 2023 paper — and its best
+point is 464 GeV. They were right to change route, and until now this instrument could not
+follow them there.</p></dd><dt>why</dt><dd><p>Step 3 is the reason the other three can be believed, and it is worth stating separately.</p><p>Their <strong>(3.22)</strong> is an approximation they derive on p. 10 to test their own regularization.
+Expanded for α ∼ x ≪ 1 it collapses to <code>x = m|α| / (2√(1+c))</code> — which at m = 1 is their
+<strong>(5.19)</strong> on p. 20, ten pages later. The page solves the first numerically and compares it with
+the second, live, across <code>c</code> from 0.5 to 50; the relative error runs 3×10⁻⁴ → 2×10⁻⁵ → 8×10⁻⁷
+as |α| shrinks by 4 and then 5. <strong>Falling like α² is the point</strong>: a fit that merely agreed would
+agree equally well at every α. Two of their equations, joined by our arithmetic, in the page.</p><p>The kernel's own controls are harder still. As <code>c → 0</code> the roots must become the ordinary
+twisted tower — which is computed in closed form from the poles, so two independent objects have
+to meet. And the special functions are held to <strong>mpmath at 40 digits</strong>
+(<code>tests/blkt_reference.json</code>), not to values typed from memory.</p></dd><dt>so</dt><dd><p>Everything that could find a defect did, and each one is now a gate.</p><p><strong>The <code>c → 0</code> control found three.</strong> A plain grid <em>cannot</em> locate the roots — as <code>c</code> falls each
+root migrates to a pole and sits a distance of order <code>c</code> from it, so root and pole land in the
+same cell; the solver brackets <em>by</em> the poles now. <code>blktFreeTower</code> was rounding to 1e-9 to
+de-duplicate, which capped how close the search could get. And the real one: <strong>catastrophic
+cancellation</strong> — <code>cos(a) − cos(θ)</code> near a pole is <code>−1 + 5×10⁻¹⁸</code>, which rounds to exactly <code>−1</code>,
+so the denominator was exactly zero and the whole <code>α = 0</code> sector went missing. That is the
+symmetric point, which is the sector the physics is about. It uses
+<code>cos A − cos B = −2 sin((A+B)/2) sin((A−B)/2)</code> now, which does not cancel.</p><p><strong>mpmath found two.</strong> Our "tabulated" <code>E₁(5)</code> was wrong in the twelfth digit and the JS was the
+half that was right — a reference you wrote yourself is not a reference. And the digamma was
+shifting only to 8 before its asymptotic series, leaving 5×10⁻¹³ at small argument.</p><p><strong><code>build/drive.mjs</code> found one, and it was the number a letter would carry.</strong> The paper prints
+<strong>two</strong> minima, one per value of <code>c</code> — (0.438, 0.299) at <code>c = 0</code> in the text, (0.46, 0.30) at
+<code>c = 15</code> in the caption of Fig. 1 — and this page was reading the first at the second, giving
+1213 GeV. Their own (5.19) at their own <code>c = 15</code> minimum gives <strong>1171 GeV</strong>; the <strong>1.398 TeV</strong>
+that rounds to the "1.4 TeV" they printed is the same equation with <strong>α₂ dropped</strong>. The page
+computes all three, says which is which, and warns that the two minima are not interchangeable.</p><p>And the permalink is not a convenience. A demonstration that cannot be sent is a demonstration
+nobody sees: any section may now declare <code>encodeState</code>, so a link opens on exactly the model and
+coefficient it was left at, and a reader moves the dial themselves instead of taking a sentence
+on trust.</p></dd><dt>check</dt><dd>open <strong>Brane kinetic terms</strong> and press <strong>▶ run the demonstration</strong>. The dial walks c from 0 to 25 and each Kaluza–Klein root slides off its pole. Step 3 solves the authors' own eq. (3.22) live and lands on their eq. (5.19), ten pages later, with the error falling like α². Press <strong>🔗 link</strong> at any setting: the URL carries the dial, so the page can be sent.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Which boundary conditions are the same theory — the equivalence classes, on S¹/Z₂ and T²/Z₃</h3><dl><dt>what</dt><dd><p>Putting a gauge theory on an orbifold means <strong>choosing</strong> boundary conditions at the fixed
 points, and there are many. Some are related by a gauge transformation, so they are the same
 theory wearing different clothes: they form an equivalence class, and only the class is physics.
 This section does that quotient, on both orbifolds where the classification is settled.</p><p>On <strong>S¹/Z₂</strong> a boundary condition is a pair of Z₂ parities, so four block sizes [p, q, r, s] —
@@ -320,13 +409,15 @@ its stability criterion apply to somebody else's SU(6) as readily as to the SU(7
 written for — and the page says which of those are theorems about the shape (they travel) and
 which are theorems about the SU(7) lattice (they do not, and become measurements you can check).
 The panel prints both, and reports the arithmetic laws failing for SU(6) as the measurement it
-is rather than hiding it.</p></dd><dt>so</dt><dd><p>One correction to the printed formula, and two overclaims of our own caught before they shipped.</p><p>The coefficients written (n₊₊ − n₋₋) and (n₊₋ − n₋₊) in eqs. (5.9), (5.10) and (5.17)–(5.20)
-must be <strong>absolute values</strong>: they count leftover rows. Two of the paper's own worked examples
-say so — §3's SU(3) has n₊₊ = 1 &lt; n₋₋ = 2 and the printed formula flips the sign of its
-eq. (3.10); §4.3's SU(6) does the same to eq. (4.29) — and so does an invariance the formula
-must have, since the gauge field cannot tell (P, P′) from (−P, −P′) and that swap exchanges the
-blocks in pairs. The harness checks all four examples verbatim, checks the invariance, and
-checks that the <em>signed</em> reading fails: a correction nobody can see fail is not a correction.</p><p>Ours: the vacuum panel first announced "the Hosotani mechanism" for a minimum sitting at
+is rather than hiding it.</p></dd><dt>so</dt><dd><p>**WITHDRAWN 2026-08-30 — see <em>The absolute value was already there</em>.<strong> What stood here said the
+coefficients of eqs. (5.9), (5.10) and (5.17)–(5.20) were printed as plain differences and had to
+be corrected to absolute values. They are printed </strong>with** the bars, in all six, on the page. The
+paper is right; we were wrong. The bars are CMEX10 glyphs mapping to U+000C and every text
+extraction drops them in silence, ours included. Nothing the instrument computes changes — it
+always used the absolute value, which is what the paper says — and the harness still checks the
+bars-dropped reading fails, now as a guard against the extraction bug rather than as a correction
+to anybody. The rest of this entry stands.</p><p>And one overclaim of our own, caught before it shipped.
+Ours: the vacuum panel first announced "the Hosotani mechanism" for a minimum sitting at
 <strong>a = 1</strong>, which is not a broken vacuum but the <em>other symmetric point</em> — the two ends of the
 fundamental domain are exactly the pair Part VII's criterion compares. Three verdicts now, and
 the criterion by name. And the two normalisations differ by the paper's ½, which is now stated
@@ -491,7 +582,7 @@ what the tool displays, with the disjunctive form beside it.</p></dd><dt>check</
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
-This page was generated on 2026-08-29 and reaches nothing outside itself.</p>
+This page was generated on 2026-08-30 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>

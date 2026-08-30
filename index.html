@@ -172,7 +172,7 @@ to install &mdash; and every number it prints says what is known about it.</p>
 
 <div class="warn">
   <b>Read this before quoting a number from here.</b>
-  Our &alpha; does not reproduce the published &alpha; of N. Haba, T. Yamashita, JHEP 05 (2004) 059 (hep-ph/0401185), eq. (3.20), and the disagreement is <strong>not a constant</strong> &mdash; so it is not a convention that could be absorbed. Every absolute scale on this site (TeV, GeV) inherits that open question and is <strong>not citable</strong> until it closes. What escapes it entirely, because no normalisation enters them: the mass ratio, the bill in eighths, and the two arithmetic laws. The instrument states this in its own header and carries a permanent &ldquo;what this cannot tell you&rdquo; panel; the reasoning is in <a href="changes/index.html">the log</a>.
+  Our &alpha; does not reproduce the published &alpha; of N. Haba, T. Yamashita, JHEP 02 (2004) 059 (hep-ph/0401185), eq. (3.20), and the disagreement is <strong>not a constant</strong> &mdash; so it is not a convention that could be absorbed. Every absolute scale on this site (TeV, GeV) inherits that open question and is <strong>not citable</strong> until it closes. What escapes it entirely, because no normalisation enters them: the mass ratio, the bill in eighths, and the two arithmetic laws. The instrument states this in its own header and carries a permanent &ldquo;what this cannot tell you&rdquo; panel; the reasoning is in <a href="changes/index.html">the log</a>.
 </div>
 
 <h2>Every number carries what is known about it</h2>
@@ -209,67 +209,60 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Which boundary conditions are the same theory — the equivalence classes, on S¹/Z₂ and T²/Z₃</h3><dl><dt>what</dt><dd><p>Putting a gauge theory on an orbifold means <strong>choosing</strong> boundary conditions at the fixed
-points, and there are many. Some are related by a gauge transformation, so they are the same
-theory wearing different clothes: they form an equivalence class, and only the class is physics.
-This section does that quotient, on both orbifolds where the classification is settled.</p><p>On <strong>S¹/Z₂</strong> a boundary condition is a pair of Z₂ parities, so four block sizes [p, q, r, s] —
-the same four numbers the SU(N) builder takes. The only relation is
-[p, q, r, s] ~ [p−1, q+1, r+1, s−1]: Haba–Hosotani–Kawamura, <em>PTP</em> <strong>111</strong> (2004) 265, eq.
-(2.21), and re-derived twenty years later by Takeuchi–Inagaki (<em>PTEP</em> 2024 033B03) from the
-conservation of the trace at each fixed point alone — a geometric fact about the orbifold, using
-nothing at all about the structure of the gauge transformations. On <strong>T²/Z₃</strong> the same argument
-gives their eq. (46).</p><p>The page computes the orbits; every count on it comes out of that and none is quoted. HHK's
-n₁ = C(N+3, 3) boundary conditions, n₂ = (N−1)N(N+1)/6 relations and <strong>(N+1)² classes</strong> are
-reproduced for every N up to 14 as properties of the orbit structure. So is their §3 energetics:
-which member of a class the one-loop vacuum energy prefers, with eq. (3.27) checked term by term
-as a polynomial in the matter content.</p></dd><dt>why</dt><dd><p>Because it is the first thing a model builder needs and the easiest thing to get wrong. <strong>The
-apparent unbroken symmetry is not an invariant.</strong> SU(5)'s [2, 0, 0, 3] looks like the Standard
-Model's SU(3)×SU(2)×U(1) and [1, 1, 1, 2] looks like SU(2)×U(1)³, and they are one theory: which
-group you appear to have depends on where you are standing on the Wilson line. A survey over
-boundary conditions that does not quotient by this counts the same model over and over, and a
-claim that a particular boundary condition "gives the Standard Model gauge group" is a claim
-about a representative, not about a theory.</p><p>And the class is exactly the pair of eigenvalue spectra of the two parities — one at each fixed
-point — which is the trace that is conserved. That is why there are (N+1)² of them.</p></dd><dt>so</dt><dd><p>Two things the page says out loud rather than quietly.</p><p><strong>The comparison it refuses.</strong> The vacuum energy splits into N₀λ₀ + N_Δλ_Δ + N_v·v(½), and only
-the last is finite. N₀ does not depend on the boundary condition at all. N_Δ multiplies a
-divergent λ_Δ with no principle to fix the regularisation — but it is constant on a class, which
-is exactly why ranking members <em>within</em> a class survives and ranking classes *against each
-other* does not. So the panel ranks members and refuses to rank classes, and says why. In a
-supersymmetric theory the ambiguity cancels; that is HHK §4 and it is not implemented here.</p><p><strong>The answer that does not carry over.</strong> On T²/Z₃ the moves are 3-cycles rather than the 2×2
-swaps that would connect every matrix with the same spectra, so the spectra stay invariant but
-stop being complete: at N = 4 there are 477 classes among 495 boundary conditions. Assuming the
-one-dimensional answer generalised would have been the easy mistake, and the page measures it
-instead.</p><p>Collaterally, a real defect in this repository's own build, latent since the first commit:
-<code>build_app.py</code> decoded its harnesses' output with the machine's ANSI codepage. On Windows that
-is cp1252, which has five unmapped bytes, and a harness printing an omega killed the capture —
-<code>stdout</code> came back <strong>None with returncode 0</strong>. Had that landed one line later, a red harness
-could have been reported green. It decodes UTF-8 explicitly now and refuses a build where the
-capture came back empty.</p></dd><dt>check</dt><dd>open <strong>Boundary conditions</strong>. SU(5) with [2, 0, 0, 3] looks like SU(3)×SU(2)×U(1); the class table beside it shows [1, 1, 1, 2] and [0, 2, 2, 1] in the same class, looking like SU(2)×U(1)³ and SU(2)×SU(2)×U(1)². Three apparent symmetries, one theory. The counting table computes the orbits at every N from 1 to 12 and they come out 4, 9, 16, 25, 36, … = (N+1)². Then press <strong>T²/Z₃</strong> and watch the answer change: the same invariant is no longer complete, and almost every boundary condition is alone in its class.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-29</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the model contains — the 4D spectrum of any 5D SU(N) boundary condition</h3><dl><dt>what</dt><dd><p>The SU(N) builder gives the potential and the vacuum; the boundary-conditions section says which
-boundary conditions are the same theory. Neither says what the theory <strong>has</strong>. This does: the
-four-dimensional fields of any 5D SU(N) model on S¹/Z₂, massless and towered, with their quantum
-numbers under the unbroken group. It is Table 1 of every paper in this corner of the field.</p><p>One rule does all of it — Haba–Yamashita eq. (3.5): the mode expansion is fixed by the pair of Z₂
-parities a state carries, and only <strong>(+,+)</strong> has a zero mode. Two riders carry the physics.
-<strong>A_y has the opposite parity to A_μ</strong>, so the massless vectors are the unbroken group and the
-massless scalars are exactly where the vectors are not — which is where the Higgs candidates
-live. And <strong>a Dirac fermion's two chiralities carry opposite parities</strong>, because the orbifold
-condition carries a γ₅: at most one of them can be (+,+), so a massless 4D fermion here is
-automatically <strong>chiral</strong>. That is the whole reason for orbifolding, and the panel says whether
-this particular boundary condition delivers it.</p><p>The section takes no model of its own: it shares the builder's, so changing the boundary
-condition or the bulk in either panel moves both.</p></dd><dt>why</dt><dd><p>Because "what does this theory contain" is the first question of model building and the
-instrument could not answer it. And because the answer is not where a reader expects: the
-massless content follows from the <strong>parities</strong>, not from evaluating a Kaluza-Klein family at
-n = 0 — a (+,+) state expands in cos and has a zero mode, a (−,−) state expands in sin and has
-none. A tower drawn the second way puts states at zero mass that are not there, so this panel
-publishes the <strong>families</strong> — a multiplicity, an offset and a charge, which is what the sources
-print — and computes the massless content separately. What it does not do, it says.</p></dd><dt>so</dt><dd><p>Two things fell out that were not the point and are worth more than it.</p><p><strong>The spectrum and the potential are the same data.</strong> A cosine in the potential is a pair of
-states in the spectrum: <code>m·cos(nπ(c·θ − d))</code> is two states at charge ±c/2, with d = 1 the
-half-integer tower. So summing cos(2πnQ) over the states must reproduce the potential's own
-bracket — the potential counts each ± pair once and the states count both, so the factor is
-exactly 2. Asserted, not assumed, and checked on 96 cases in the harness at 5·10⁻¹⁵ and again on
-every render of the page. Two constructions that share no code, one object.</p><p><strong>And the deepest point is not always a vacuum.</strong> On their own §4.3 SU(6) with four
-fundamentals, the minimum sits at θ = 1 — an <strong>end</strong> of the fundamental domain, which is the
-other symmetric point and not a broken vacuum. The panel now says so, and names the boundary
-condition it belongs to: the gauge-equivalent one a single class move away. Three sections of
-this instrument meet at that sentence.</p></dd><dt>check</dt><dd>open <strong>4D spectrum</strong> and press <em>load their §4.3 SU(6) with four fundamentals</em>. The massless content comes out as 13 gauge bosons — the dimension of SU(3)×SU(2)×U(1)² — plus 4 scalars, all of them from A_y, plus <strong>4 left-handed against 8 right-handed</strong> Weyl fermions: a chiral 4D theory. The eigenvalue families on the right are the object Haba–Yamashita print, and the panel below them re-derives the potential from the spectrum on this render and reports the gap: 0.0e+0.</dd></dl></div>
+<div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A model leaves as LaTeX — the potential, the table with its status column, and the bibliography</h3><dl><dt>what</dt><dd><p>The header gains <strong>⇩ LaTeX</strong> beside <strong>⇩ card</strong>. It writes the model out in the form that goes
+into a paper: the effective potential as a displayed equation, the results as a table, and the
+sources as a companion <code>.bib</code>.</p><p>It is the same object the card button already exports — <code>card.mjs</code> builds it once, and <code>toText</code>,
+the JSON and now <code>latex.mjs</code> are three renderings of it. A number in someone's paper is the
+number the card carries, or the whole status apparatus is decoration.</p><p>Two details that are the point rather than the trim. The <strong>status column is a column</strong>: every row
+says <code>theorem</code>, <code>verified</code>, <code>measured</code> or <code>unknown</code>, and an <code>unknown</code> prints its reason in the
+table instead of leaving a blank cell. And the <strong>bibliography travels with the numbers</strong>, keyed
+the way INSPIRE keys it, so a reader who lifts a potential out of this page does not have to go
+and find the citation for the formula it came from — and so that citing it is the default rather
+than an act of virtue.</p></dd><dt>why</dt><dd><p>The builder could already write a reader's potential on screen. What they had to do next was
+retype it, and retyping is where a sign goes missing.</p><p>The transport is the hard part, and it is the same hard part that cost this project a day
+earlier today. Every string here is full of Unicode — <code>α</code>, <code>A₄</code>, <code>n⁺₊</code>, and U+2212, which looks
+exactly like a hyphen and is not — and <code>pdflatex</code> takes none of it. So <code>tex()</code> maps what it knows
+and <strong>throws</strong> on what it does not: an export that cannot be typeset fails loudly here rather
+than quietly in the reader's build. <code>_test_latex.mjs</code> pushes every string in <code>data/</code> and in the
+citation registry through it.</p></dd><dt>so</dt><dd><p>Three defects were found by things other than the harness, and each is worth naming.</p><p><strong><code>pdflatex</code> found one by refusing to build.</strong> Three <code>.bib</code> titles carried bare maths —
+<code>S^1/Z_2</code> — which is <code>Missing $ inserted</code> in the <em>reader's</em> document. Delimited now, and the
+harness rejects a bare caret in any registry field.</p><p><strong>The compiled PDF found the second by looking wrong.</strong> BibTeX entries placed in the <code>.tex</code> are
+not comments: LaTeX ate the braces and typeset them as a paragraph of prose in the middle of the
+page. The entries went to a companion <code>.bib</code>, and the <code>.tex</code> carries a pointer.</p><p><strong><code>build/drive.mjs</code> found the third by pressing the button.</strong> The SU(N) builder declares
+<code>holds()</code> — it carries its own model, not the family's — so the export was pairing this
+section's potential with the <em>shell's</em> card: two models in one file, presented as one. The
+section exports its own card now, and the driver asserts the file names one model.</p><p>And a fourth, which was ours all along: the reference for the paper this instrument's whole 5D
+family is built on was typed into seven files, and all seven named the wrong volume. It is
+<strong>JHEP 02 (2004) 059</strong>, DOI <code>10.1088/1126-6708/2004/02/059</code> — arXiv's journal-ref, the ADS
+bibcode and INSPIRE agree, and one of the seven copies was displayed on the page. There is one
+copy now, in <code>src/kernel/cite.mjs</code>, and a gate that sweeps the tree and fails the build if any
+file prints a volume the registry disagrees with.</p></dd><dt>check</dt><dd>open <strong>SU(N) builder</strong>, press the <strong>§4.3 · SU(6), P ≠ P′</strong> preset, and press <strong>⇩ LaTeX</strong> in the header. Two files come out: a <code>.tex</code> whose equation is <code>V_eff = (C/2) Σ n⁻⁵ [−2cos(nπa) − 18cos(nπ(a−1)) − 3cos(2nπa)]</code> and whose table carries a <em>status</em> column with <code>scale</code> marked UNKNOWN and its reason printed; and a <code>.bib</code> with the INSPIRE-keyed entry for the formula it rests on. The pair compiles: <code>pdflatex</code> on the standalone form gives one page, no overfull boxes.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-withdrawal" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">withdrawal</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>The absolute value was already there — we withdraw a correction we had no business making</h3><dl><dt>what</dt><dd><p>On 29 August this instrument shipped, in the source of <code>sun5d.mjs</code>, in its harness and in a
+changelog entry, the claim that the two coefficients of Haba &amp; Yamashita's general formula —
+eqs. (5.9), (5.10) and (5.17)–(5.20) of <em>JHEP</em> <strong>05</strong> (2004) 059, <code>hep-ph/0401185</code> — were printed
+as plain differences <code>(n₊₊ − n₋₋)</code> and <code>(n₊₋ − n₋₊)</code>, and that an absolute value had to be
+restored for their own worked examples to come out.</p><p><strong>That is false.</strong> All six equations print the coefficients with absolute-value bars, on the
+page. Nothing was missing. The paper is right and we were wrong, and since we said it in public
+we withdraw it in public.</p></dd><dt>why</dt><dd><p>The bars are set in <strong>CMEX10</strong>, TeX's extensible-delimiter font, and in that PDF its glyphs map
+to <strong>U+000C</strong>. Every text extraction drops them without a word: <code>pdftotext</code> does, and so does
+PyMuPDF, in every mode it offers. We had moved to PyMuPDF precisely because we knew <code>pdftotext</code>
+loses ligatures; the failure was one level below that.</p><p>What makes this kind of loss different from a lost ligature is that <strong>it leaves no wreckage</strong>. A
+missing <code>fi</code> turns <em>unification</em> into <em>unication</em> and you see it. A missing pair of bars turns
+<code>|n₊₊ − n₋₋|</code> into <code>(n₊₊ − n₋₋)</code>, which is a well-formed expression, reads as an ordinary
+formula, and is a different formula. There is nothing to notice, so nobody goes back to the page.
+This one sat in our notes for three weeks and in this instrument for one day.</p><p>Nor did the machinery help. Seventeen of the paper's published potentials were reproduced, two
+decoy readings were killed, and an exact invariance was swept over 710 boundary conditions — all
+of it working, all of it pointing at a premise nobody had checked against the page. A harness
+measures consistency with its input. If the input is mutilated it will certify the mutilation,
+and do it with confidence.</p></dd><dt>so</dt><dd><p><strong>Nothing the instrument computes changes.</strong> <code>sun5d.mjs</code> has always used <code>|n₊₊ − n₋₋|</code>, which is
+what the paper says, so every potential, minimum, spectrum, anomaly bill and sweep result stands
+exactly as it was. The harness still checks that the bars-dropped reading fails — that check is
+worth more now than before, because it is a guard against the extraction bug itself: it is
+precisely the wrong formula a tool will hand you.</p><p>Three things changed, and all three are text. The header of <code>sun5d.mjs</code> carries the retraction
+where the claim was. The harness says what it is guarding against. The 29 August entry has its
+third paragraph struck, pointing here.</p><p>A letter to the authors had been drafted on the false premise. It was not sent, and it will not
+be. What survives of that day is a tool: <code>pdf_glyph_audit.py</code>, which lists the pages of a PDF
+carrying glyphs the text layer cannot render, and which on this paper flags pages 4, 5, 14, 15,
+16 and 17 — its §3 and its §5 entire. Run it before quoting a formula.</p></dd><dt>check</dt><dd>open <strong>SU(N) builder</strong>, press the <strong>§4.3 · SU(6), P ≠ P′</strong> preset with no bulk content. The gauge potential reads <code>−3cos(2nπa) − 6cos(nπa) − 18cos(nπ(a−1))</code>, which is <code>−3 ×</code> Haba &amp; Yamashita's own eq. (4.29) — the equation their paper prints. Every number this instrument has ever shown for a 5D SU(N) model is unchanged; what changes is a sentence we wrote about their paper.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
@@ -284,7 +277,7 @@ paper keeps working even after the living instrument has been rewritten.</p>
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
-This page was generated on 2026-08-29 and reaches nothing outside itself.</p>
+This page was generated on 2026-08-30 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>
