@@ -324,7 +324,35 @@ minimum is computed at the <strong>symmetric point</strong> of the representativ
 those lines move across the class — the class relation is a shift along the Wilson line. The
 instrument does not yet compute the massless content <strong>at the minimum</strong>, which is what would turn
 the spectrum, the anomaly ledger and the apparent group into statements about the theory. That is
-a gap in the tool, and it is named on the page.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. <strong>7 of the 18 verdicts are the theory's; 11 are the frame's.</strong> Click the other member of the class in the table on the left — the same theory in different clothes — and watch the depth of the vacuum stay exactly where it is while the apparent group, the massless counts, W and the whole anomaly ledger move. The anomaly verdict reads <strong>owes</strong> here and <strong>no subject</strong> there.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>An outside audit read the deployed source, and five of its five findings were real</h3><dl><dt>what</dt><dd><p>Carles put the public source of <code>ghu-lab</code> and <code>ghu-explorer</code> in front of an outside reader on
+a gap in the tool, and it is named on the page.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. <strong>7 of the 18 verdicts are the theory's; 11 are the frame's.</strong> Click the other member of the class in the table on the left — the same theory in different clothes — and watch the depth of the vacuum stay exactly where it is while the apparent group, the massless counts, W and the whole anomaly ledger move. The anomaly verdict reads <strong>owes</strong> here and <strong>no subject</strong> there.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The masses the Wilson line gives the fermions, and the pictures made legible</h3><dl><dt>what</dt><dd><p><strong>The fermion masses.</strong> <code>src/modules/yukawa.mjs</code>: in gauge–Higgs unification the Yukawa
+coupling <em>is</em> the gauge coupling, so a Standard-Model field is a massless piece at the
+symmetric point the vacuum sits next to, and at the vacuum some of its components move off
+zero. The eigenvectors of the twisted translation are the unpaired letters (eigenvalue 0 or ½)
+and, on each rotated pair, (e_i ± i e_j)/√2 with eigenvalue ±t/2; on a tensor the eigenvalues
+add, on the adjoint they subtract, and ηη′ = − shifts every one by ½. The folded eigenvalue
+times 1/R is the mass, and the measured m_W fixes 1/R.</p><p>A vacuum eigenstate is <strong>not</strong> in general a component of one piece of the symmetric point:
+e₊e₋ on a symmetric tensor is (e_ie_i + e_je_j)/√2, half in the (+,+) piece and half in the
+(−,−) one. The first version read masses index by index, put that state in one piece, and
+failed against the tower. Every eigenstate is expanded in the index basis now and attributed
+by squared overlap; the weights sum to one over the pieces, to the piece's dimension over the
+states, and to <code>vacuum5d</code>'s massless counts — which is the control the harness runs on
+40 (boundary condition, representation, η) cases.</p><p><strong>The pictures.</strong> <code>src/view/tower3d.js</code> is one renderer for both sections: <strong>What the model
+contains</strong> draws the towers in units of 1/R, <strong>Simulator</strong> the same object in GeV with the
+measured masses as lines and the CMS coloron bound as a plane. It sizes itself to its card,
+which the first deployment did not — 720 px in a half-width column overflowed. And the help is
+in collapsible blocks: how to use the section, how to read each picture, what the assumptions
+are, all folded away until asked for.</p></dd><dt>why</dt><dd><p>Cacciapaglia–Csaki–Park, hep-ph/0510366: for a bulk fundamental with vanishing bulk mass
+"we find that m_q → m_W" (§3), and from a larger representation "at tree level m_t = 2m_W"
+(§5). Both come out here by the eigenvalues, exactly: the fundamental's paired component at
+t/2 — which is m_W when the W is a letter⊗pair vector — and the symmetric tensor's pair
+diagonal at t.</p><p>So the Yukawa problem of flat gauge–Higgs unification is a number on the page rather than a
+sentence in a review: with no bulk masses, no brane mixing and no boundary kinetic terms, a
+model predicts its charged lepton at 80.4 GeV and the τ weighs 1.777 GeV. The three
+ingredients that fix it are named and are not implemented; what is implemented is the
+tree-level answer they have to correct.</p></dd><dt>so</dt><dd><p>One more thing the readers said and is fixed: <strong>g₄ scales the Higgs mass only</strong> — m_H ∝ g₄,
+every other mass being fixed by the measured m_W — so moving the slider and watching the
+towers looked broken. The parameter card says what g₄ touches, and the predicted m_H is drawn
+in the landscape, where the slider does move it.</p></dd><dt>check</dt><dd>load SU(6) [3, 1, 2, 0] on the builder with four bulk Dirac fields — a fundamental and an antisymmetric at ηη′ = +, the same two at ηη′ = − — and open <strong>Simulator</strong> with the probe at φ = 0.03. The table <em>Fermion masses from the Wilson line</em> reads eᶜ at exactly 1.00 m_W = 80.4 GeV against τ = 1.777 GeV, L with one massless component (the neutrino) and one at m_W, and uᶜ untouched. Turn the landscape; it now fits its card at any width, and <strong>What the model contains</strong> has the same picture in units of 1/R.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>An outside audit read the deployed source, and five of its five findings were real</h3><dl><dt>what</dt><dd><p>Carles put the public source of <code>ghu-lab</code> and <code>ghu-explorer</code> in front of an outside reader on
 2026-09-03. Five findings came back and every one of them is real:</p><p>1. <strong>The permalink did not carry η or the matter/gauge role</strong>, although both are buttons in the
 calculator and both go into <code>model()</code>. A link therefore reproduced a <em>different model</em> from
 the one whose results were on screen when it was copied — silently, under a button that says

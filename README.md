@@ -4,25 +4,39 @@
 
 [![The hierarchy section of the instrument](preview_app.png)](https://karlesmarin.github.io/ghu-explorer/app/)
 
+[![The simulator, on Haba–Hosotani–Kawamura–Yamashita's own model](preview_sim.png)](https://karlesmarin.github.io/ghu-explorer/app/#s=predict)
+
+*The **Simulator** on the model of Haba–Hosotani–Kawamura–Yamashita (hep-ph/0401183, Fig. 1): their
+published vacuum a = 0.058 comes out as 0.0583, the measured W mass turns it into 1/R = 2.755 TeV,
+and the curvature of the potential gives a Higgs of 53.4 GeV against the measured 125.20 — the
+model reproduced and falsified on the same screen, with every source named.*
+
 One bulk model, several computations over it, and **every output carrying what is known about
 it** — `theorem`, `verified`, `measured` or `unknown`. One HTML file. Open it; no server, no
 install, no network. Nothing you type leaves the page, and it works from `file://`.
 
-This repository is the published home of a seven-part series on gauge–Higgs unification. It
-carries three things:
+This repository is the published home of a **nine-part series** on gauge–Higgs unification —
+ten Zenodo records, Part IX having gone out as two. It carries three things:
 
 | | |
 |---|---|
-| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | nineteen sections over three models — and tools for models nobody has written yet, `app/index.html` |
+| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | twenty-five sections over three models — and tools for models nobody has written yet, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
-| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, the twenty-four harnesses and the gates |
+| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, the thirty-four harnesses and the gates |
 
 ## 🔬 The instrument
 
-Fourteen sections over three published models — and five that take the model as input — SU(7) on S¹/Z₂ × S¹/Z₂, SU(4) on T²/Z₂, and
-Haba–Yamashita's 5D SU(3) on S¹/Z₂. Change a matter content once and every section of its
-family recomputes.
+**Twenty-five sections.** Thirteen answer about three published models — SU(7) on S¹/Z₂ × S¹/Z₂
+(Komori–Maru), SU(4) on T²/Z₂ (AHMN) and Haba–Yamashita's 5D SU(3) on S¹/Z₂ — and twelve take the
+model, the orbifold or the literature as **input**, so they answer about models nobody has
+written. Change a matter content once and every section of its family recomputes.
+
+The 5D chain runs end to end: a boundary condition → the Wilson-line potential of any SU(N) model
+→ its vacuum → the four-dimensional spectrum and the exact Kaluza–Klein towers there → the anomaly
+ledger → which of those verdicts are the **theory's** rather than the frame's → whether a full
+Standard-Model generation with SU(3)×SU(2)×U(1)_Y is inside → and finally the numbers a detector
+measures, beside the measured ones.
 
 | | | |
 |---|---|---|
@@ -45,6 +59,12 @@ family recomputes.
 | 16 | **4D spectrum** · Haba–Yamashita 2004 §3 · Haba–Hosotani–Kawamura 2004 §3 | **what the model contains.** The builder gives the potential and the vacuum; the classes say which models are the same; this says what a model *has* — the four-dimensional fields, with their quantum numbers under the unbroken group. One rule does it: the mode expansion is fixed by the pair of Z₂ parities and only (+,+) has a zero mode. So the massless vectors are the unbroken group, the massless scalars are exactly where they are not — A_y carries the opposite parity, and that is where the Higgs candidates live — and a Dirac fermion gives **one chirality**, which is the whole reason for orbifolding. It shares the builder's model, so changing either panel moves both |
 | 17 | **Anomalies** · Arkani-Hamed–Cohen–Georgi 2001 · Part VI | **what that content owes.** A chiral 4D spectrum is inconsistent unless its gauge anomalies cancel — the first gate a model has to pass, and where an arithmetic slip hides best. Every channel the unbroken group has, [SU(n)]³ and U(1)×[SU(n)]² and U(1)³ and U(1)×[grav]², with an **exact rational** coefficient, so a zero is a zero. The four-dimensional anomaly is the right object because ACG show it lives on the fixed points and cancelling it is *sufficient*; and a non-zero row is not a verdict but a **bill**, since the brane fermions every such model needs — to give the unwanted zero modes mass — pay into the same channels with the opposite sign |
 | 18 | **Scan** · the four panels, chained | **the model-building loop, closed.** The four panels above answer a question about *one* model; this one walks the space. Every boundary condition of SU(N) on S¹/Z₂ crossed with every bulk content up to a size you choose, through filters ordered **cheapest first** — the unbroken group, a Higgs doublet, chirality, the anomaly ledger, and last the vacuum — so the only expensive one runs on the fewest candidates. The **funnel** is reported stage by stage, because *“three models survive”* says nothing without *“out of how many, and where the others died”*. The headline is a **pair** of numbers: 24 surviving boundary conditions are 16 theories, since [p,q,r,s] ~ [p−1,q+1,r+1,s−1] is the same theory in different coordinates — and the sweep walks conditions rather than classes on purpose, because the apparent unbroken group is *not* a class invariant. An **undecided** vacuum is counted apart from a no. A hit **loads into the builder**, so the loop closes |
+| 19 | **One model, every verdict** · the five panels, joined | **which of its answers are about the theory at all.** Read one after another the panels above give twenty-nine numbers about one model — and most of the ones read at a symmetric point are *not properties of the model*: they move when the boundary condition is swapped for a gauge-equivalent one, which is the same theory. This page recomputes every line on **every member of the equivalence class** and tags it by what came back — *the theory*, *the frame*, or *declined*, with the reason. The tag is a measurement made on that render, and it found a false verdict on its first run: "is this model anomaly-free?" answered YES for one member and NO for another of the same theory, an empty sum passing a test it had never been given. Then the same questions **at the minimum** of the potential, where they stop moving: with P₁ → W⁻¹P₁ the massless content is a joint eigenspace, and those lines come back invariant on all 86 multi-member classes of SU(4)…SU(7) |
+| 20 | **Simulator** · HHKY 2004 · CCP 2005 · PDG · CMS | **the model, in the numbers a detector measures.** The measured W mass turns the vacuum's dimensionless angle into 1/R and every Kaluza–Klein level into GeV; the curvature of the potential gives the Higgs mass through Haba–Hosotani–Kawamura–Yamashita's own dictionary — anchored, since their published vacuum a = 0.058 and m_H R/g₄ = 0.031 come out as 0.0583 and 0.0306; the embedding's sin²θ_W sits against the one-loop running of the PDG's own inputs; the first KK level sits against CMS's full-Run-2 dijet limit on colour-octet vectors, **with the hypothesis that colour lives in the bulk written into the verdict**; and the fermion masses the Wilson line gives are read component by component — a bulk fundamental at m_W, a symmetric tensor at 2 m_W, which is the Yukawa problem of flat gauge–Higgs unification as a number rather than a sentence. Two pictures: the towers as a landscape you turn, and a mass axis read like a search reach plot. **No event is simulated**; every mark is a predicted mass or a published bound, and every measured number carries its source and the date it was read |
+| 21 | **Classify an orbifold** · Part IX-A | **the alphabet, derived.** An integer rotation matrix of rank up to eight goes in and everything comes out of it: the cone signature, the alphabet by Möbius inversion over the fixed points, the local data, the count and its degree, over SU(N), SO(N) and Sp(N) side by side. Nothing is entered. A matrix of infinite order, or one whose characteristic polynomial is not a power of the m-th cyclotomic, comes back **refused** rather than classified |
+| 22 | **Name the relations** · Part IX-B | which equivalence relation on boundary conditions the literature already owns, which move a proposed relation is, and whether a move set actually connects a class — the walk that decides it, plus the tripod result and the local/global distinction that gets misquoted |
+| 23 | **Brane kinetic terms** · Haba–Yamashita · AHMN | the tower when the Kaluza–Klein masses stop being n/R: the transcendental mass equation solved in the browser, checked against mpmath at forty digits and against the closed-form limit as the coefficient goes to zero |
+| 24 | **The literature** · curation | the reading list behind the series, measured for what each paper publishes and curated for what a person has actually read — with the shortlist of what is worth reading next, and an explicit statement of what a keyword sweep cannot see |
 
 **What you can find with it.** Type a content and the hierarchy section answers in one sentence
 — *this content puts the compactification scale here, with this Higgs mass* — and then tells you
@@ -146,9 +166,9 @@ tolerance in α: the closed form now only locates the basin, and the decision is
 `F` at two numerically refined minima. Both changes are logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
 
-The rest of the validation — twenty-four harnesses, 1 449 checks, the site gate that runs each of its
+The rest of the validation — **thirty-four harnesses, 1 737 checks**, the site gate that runs each of its
 own checks again against a site broken on purpose, and `drive.mjs`, which puts a **real mouse**
-through the panels — lives in the source tree, [`karlesmarin/ghu-lab`](https://github.com/karlesmarin/ghu-lab),
+through the panels (121 checks) — lives in the source tree, [`karlesmarin/ghu-lab`](https://github.com/karlesmarin/ghu-lab),
 together with the builders that produce this page and refuse to publish a red build.
 
 What the suite does **not** cover: the absolute-scale question above. Our α and the published α
@@ -157,7 +177,7 @@ not a bug hiding behind a passing check.
 
 ## 🗄️ The July 2026 tools
 
-Five published Zenodo records link to the host these pages were served from. A URL in a published
+Published Zenodo records link to the host these pages were served from. A URL in a published
 record is not ours to break, so the three earlier pages are carried over **byte for byte** and
 keep working:
 
@@ -210,6 +230,10 @@ SU(7): the anomaly and proton-decay bill, and the compactification scale.
   → [github.com/karlesmarin/su7-compactification-bound](https://github.com/karlesmarin/su7-compactification-bound) · [Zenodo 10.5281/zenodo.22087251](https://doi.org/10.5281/zenodo.22087251)
 - **Part VIII — *A Certified 2.68 TeV Gap in the Closed-Form Map of the Compactification Scale in SU(7) Grand Gauge-Higgs Unification, and the Invariant Its Two Observables Cannot See***
   → [github.com/karlesmarin/su7-certified-gap](https://github.com/karlesmarin/su7-certified-gap) · [Zenodo 10.5281/zenodo.22159036](https://doi.org/10.5281/zenodo.22159036)
+- **Part IX-A — *The Alphabet of Orbifold Boundary Conditions: a boundary condition is a representation, and the alphabet follows***
+  → [github.com/karlesmarin/orbifold-alphabet](https://github.com/karlesmarin/orbifold-alphabet) · [Zenodo 10.5281/zenodo.22254861](https://doi.org/10.5281/zenodo.22254861)
+- **Part IX-B — *An Affine Semigroup from Orbifold Boundary Conditions: cut, phylogenetic and hierarchical models in the unit-weight sector***
+  → [github.com/karlesmarin/orbifold-semigroup](https://github.com/karlesmarin/orbifold-semigroup) · [Zenodo 10.5281/zenodo.22254863](https://doi.org/10.5281/zenodo.22254863)
 
 Each paper has a page here saying what it claims and what it does not:
 [karlesmarin.github.io/ghu-explorer/papers/](https://karlesmarin.github.io/ghu-explorer/papers/).
