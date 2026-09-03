@@ -450,7 +450,34 @@ only — and most sections keep their DOM in helpers, so a section written that 
 against nothing and passed. It reads every function on the section now.</p><p>The licence line says Apache 2.0. The scale question the audit raises last is not a bug and is
 not new: our α disagrees with the published α by 1.03× to 2.08× and not by a constant, every TeV
 and GeV inherits that, and the page has said so in its own first paragraph since the day it
-opened.</p></dd><dt>check</dt><dd>open the <strong>Model calculator</strong>, change a representation's η and its matter/gauge role, press <strong>🔗 link</strong> and open the address in a fresh tab — the two toggles are now in the URL and come back. Then put <code>#x=%</code> in the address bar: the instrument still appears. <code>node build/drive.mjs</code> drives both, with a control leg that fails if the reset is not happening.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Against the data, with the hypothesis named</h3><dl><dt>what</dt><dd><p>The vacuum fixes m_W·R, a number with no units. One measured mass makes the whole ladder
+opened.</p></dd><dt>check</dt><dd>open the <strong>Model calculator</strong>, change a representation's η and its matter/gauge role, press <strong>🔗 link</strong> and open the address in a fresh tab — the two toggles are now in the URL and come back. Then put <code>#x=%</code> in the address bar: the instrument still appears. <code>node build/drive.mjs</code> drives both, with a control leg that fails if the reset is not happening.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>An empty model that did not survive its own link, and a label that outlived the model</h3><dl><dt>what</dt><dd><p>Two bugs from an outside review of the deployed page, both real, both about the page saying
+something that was no longer true.</p><p><strong>A cleared model did not survive its own permalink.</strong> Every family opens on its published
+anchor, so <code>clear</code> is the one edit that makes a family's parameter empty — and the encoder wrote
+nothing at all for an empty family. At the far end an omitted parameter means *leave this family
+alone*, which is what an old link written before that family existed must mean, so the anchor
+loaded at startup was left standing. You cleared the model, copied the link, opened it, and got
+the published model back, while the button's tooltip promised the whole state. A cleared family
+now writes its key with an empty value and the decoder keys on the <strong>presence</strong> of the key, not
+on its truthiness. Both meanings are kept and both are driven: an old link still opens on the
+anchor, a cleared link still opens empty.</p><p><strong>The published-model label outlived the published model.</strong> The header carries *"opening on
+&lt;row&gt; — &lt;its caveat&gt;"* while the model is untouched, and the comment beside it
+promised it disappears the moment you change anything. The signature compared the
+representation, the parities and the multiplicity — and the interface moves four more things:
+η, the role, the gauge seed and the brane. Flip any of them and a caveat about the published
+row stayed attached to numbers that were no longer its. The comparison now covers every dial a
+reader can move.</p><p>The head of the page went with them: the title still said <em>one model, every section</em> and the
+description <em>one bulk model</em>, from a build with five sections and one family.</p></dd><dt>why</dt><dd><p>Both are provenance, which is the thing this instrument claims to be careful about. A link that
+silently substitutes a different model is worse than a link that does not work; a caveat
+attached to the wrong numbers is worse than no caveat. And the title was stale because nothing
+had ever read it — <code>_test_site.py</code>'s head gate skips <code>app/index.html</code> by name, so it was the
+only prose on the page no gate had looked at.</p></dd><dt>so</dt><dd><p>The empty round trip is in <code>drive.mjs</code>, both legs of it — the cleared link comes back empty, and
+a link that names no family still opens on the anchor. The label is driven too: the seed and the
+brane each drop it, and putting the seed back brings it back. <code>_test_app.mjs</code> now reads the head
+and asserts the claim rather than a count, so it cannot go stale the next time a section is
+added. Three further items in the same review did <strong>not</strong> reproduce against the current source or
+the deployed page — the test/source contradiction, the two stale sentences in the limits panel,
+and an MIT notice — all three were fixed earlier and the review had read a cached copy; the
+repository's public remote being a commit behind is what made that possible, and it is pushed.</p></dd><dt>check</dt><dd>open <strong>Model calculator</strong>, press <em>clear</em>, copy the link, and open it in a new tab — the model comes back <strong>empty</strong>, as it was when the link was made. A link that does not name a family at all still opens on that family's published anchor. Then open <strong>Hierarchy</strong>: the header says <em>opening on published row (2)</em> with its caveat; switch the gauge seed to the candidate, or type a brane charge in <strong>Escape from proton decay</strong>, and the label goes — it is your model now.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Against the data, with the hypothesis named</h3><dl><dt>what</dt><dd><p>The vacuum fixes m_W·R, a number with no units. One measured mass makes the whole ladder
 dimensionful: 1/R = m_W / (m_W·R), and each field's first massive state follows in GeV.
 <code>src/kernel/experiment.mjs</code> holds the measured numbers the instrument uses, each with its
 source, its URL and the date it was read — m_W (PDG 2025, the LHC-TeV working-group average,
@@ -470,7 +497,34 @@ scale rather than a number.</p></dd><dt>so</dt><dd><p>What is deliberately not d
 the Higgs mass from V″, the proton-decay rate. Each needs the Standard-Model cell at the
 vacuum or a normalisation anchored to a published number, and each is listed in the HANDOFF
 as the next tool rather than approximated here. A bound applied to a state it was not set for
-is a false verdict, and the instrument would rather print one line it can defend.</p></dd><dt>check</dt><dd>open <strong>What the model contains</strong> on SU(3) with boundary condition [2, 0, 0, 1] and one bulk Dirac fundamental, at the vacuum. Under the exact tower a line reads the measured W mass, 80.3692 ± 0.0133 GeV (PDG 2025), turns m_W·R into 1/R in TeV and every first massive state into GeV, and holds the first KK level against CMS's full-Run-2 dijet limit on colour-octet vectors, 6.6 TeV — saying that the bound applies only if colour lives in the bulk. <strong>One model, every verdict</strong> carries the same two lines in a group <strong>Against the data</strong>, tagged the theory's on every class.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>What the page says in their absence — a page number, a framing, a button that was in the wrong places</h3><dl><dt>what</dt><dd><p>Four changes, and the first is the one that matters.</p><p><strong>The page no longer asserts, in the authors' absence, more than we are willing to say to their
+is a false verdict, and the instrument would rather print one line it can defend.</p></dd><dt>check</dt><dd>open <strong>What the model contains</strong> on SU(3) with boundary condition [2, 0, 0, 1] and one bulk Dirac fundamental, at the vacuum. Under the exact tower a line reads the measured W mass, 80.3692 ± 0.0133 GeV (PDG 2025), turns m_W·R into 1/R in TeV and every first massive state into GeV, and holds the first KK level against CMS's full-Run-2 dijet limit on colour-octet vectors, 6.6 TeV — saying that the bound applies only if colour lives in the bulk. <strong>One model, every verdict</strong> carries the same two lines in a group <strong>Against the data</strong>, tagged the theory's on every class.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A column cut off at the edge of a card, and the two gates that could not see it</h3><dl><dt>what</dt><dd><p>A reader reported that one table ran off the edge of its card. It was one CSS declaration, and
+it was the right declaration in the wrong place: <code>.card table{display:block;overflow-x:auto}</code>
+— the rule that lets a wide table scroll inside its card instead of widening it — lived inside
+<code>@media(max-width:959px)</code>. Above 960 px a table that did not fit simply pushed its card out, and
+the columns past the edge were <strong>gone</strong>. Eleven boxes across four sections, and on two of them
+the whole page scrolled sideways. The rule is now unconditional.</p><p>Three tables were then still asking for a horizontal drag, which is a scrollbar standing in for
+a decision: the SU(7) catalogue moved out of the two-column grid to <strong>full width</strong>, where its
+seven columns and its 560 px plot belong; the pre-registered sixth row and the T²/Z₆ census got
+shorter headers. Nothing on the page needs a sideways drag now.</p><p>Three verdict boxes were showing the <code>—</code> they were built with: the census recurrence and fibre
+until the sweep is pressed, and the relations move until one is typed. The page's own footer
+says a verdict is <em>"said out loud with its reason — never an empty cell"</em>, so each now says what
+it is waiting for. Two of them were unreachable fixes at first — the caller returned before the
+code ran, which is the same shape as the guard-in-the-caller bug this instrument has now paid
+for four times.</p></dd><dt>why</dt><dd><p>Because none of the existing gates could see any of it. The harnesses check the mathematics
+against outside computations; the smoke test checks the markup is built; <code>shoot.mjs</code> takes a
+picture — of the defect, not a complaint about it; <code>drive.mjs</code> checks the controls answer a
+mouse. A column clipped at the edge of a card passes every one of them, and a reader sees it in
+one second. Two new tools close that: <strong><code>build/layout.mjs</code></strong> walks every section at several
+widths and in every state a reader can put it in — how-to open, each help bubble open, the demo
+running — and reports anything whose content is wider than its box, telling apart a box that
+scrolls, a box that clips, and a box that truncates with an ellipsis and can give the text back.
+<strong><code>build/extremes.mjs</code></strong> drives the page through the states no gate visits — every family
+cleared, one multiplet, every slot at its ceiling, and boundary conditions at the corners of the
+block simplex — and looks for the six ways a template literal says it was handed something it
+did not expect, plus verdict boxes that decided nothing.</p></dd><dt>so</dt><dd><p>Layout: 28 findings → <strong>0 clipped, 0 boxes that need a drag</strong>. Extremes: 416 (section, state,
+width) renders came back clean. The verdict rule is now driven on the real page for all 26
+sections at once. Both tools exit non-zero, so they can be gates rather than reports; both are
+documented in the README with the rest of the build.</p></dd><dt>check</dt><dd>open <strong>Anomalies &amp; proton</strong> at any window width. The catalogue table — multiplets, contents, in window, hold host, can pay, best 1/R₅, best that pays — now sits at full width below the two columns, with all seven columns visible and the page not scrolling sideways. Then open any section and check that no verdict box shows a bare dash: the census recurrence says <em>not checked yet</em> and what to press, the relations panel says <em>nothing judged yet</em>, and clearing the model leaves the α caveat in the hierarchy panel saying it has no subject rather than vanishing.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>What the page says in their absence — a page number, a framing, a button that was in the wrong places</h3><dl><dt>what</dt><dd><p>Four changes, and the first is the one that matters.</p><p><strong>The page no longer asserts, in the authors' absence, more than we are willing to say to their
 faces.</strong> On 30 August a letter went to Akamatsu, Hirose, Maru and Nago about arXiv:2603.05857,
 and it says that which of their two published minima belongs with which value of <code>c</code> is something
 we could not settle from their text. This page had been saying something firmer — that the
