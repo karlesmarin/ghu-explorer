@@ -209,7 +209,38 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The exact tower at the vacuum, the W as the unit, and three phases without a grid</h3><dl><dt>what</dt><dd><p>Two things a model builder reads first, and neither existed here yesterday.</p><p><strong>The Kaluza–Klein spectrum at the minimum, exactly.</strong> With the constant A_y gauged away the
+<div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Who pays the anomaly bill, and what it costs</h3><dl><dt>what</dt><dd><p><code>src/modules/brane.mjs</code> puts fermions on the two fixed points and holds the choice to <strong>two</strong>
+verdicts at once: the anomaly ledger, recomputed over bulk and brane together, and Part I's
+boundary-mass gate, which says which zero modes that same matter has just given a mass. A brane
+field is a representation of the <strong>local group</strong> — the commutant of the one reflection acting
+there, S(U(n₊₊+n₊₋) × U(n₋₊+n₋₋)) at y = 0 and P₁'s at y = πR — written as a two-block frame, so
+the ledger, the U(1) generators and the charge of a piece are the routines the rest of the
+instrument already uses, on a coarser partition of the same N indices. Nothing here recomputes an
+anomaly: both columns of the bill are <code>an5LedgerOnFrame</code> on one list of pieces, once without the
+brane matter and once with it.</p><p>Three consequences the arithmetic knows and prose does not. A local representation splits into
+several pieces of the unbroken group, so you cannot add "the conjugate of that one mode" and
+stop — the partners panel lists what each candidate <strong>drags in with it</strong>. Its charge under the
+local U(1) is a free rational, which is where Part VI's forced brane charge lives, and
+<code>brSolveCharges</code> solves the channels that are linear in it exactly while reporting the cubic ones
+<strong>apart</strong>, because paying the linear channels does not make a model anomaly-free. And the two
+jobs pull apart: gauge invariance of the mass term fixes the charge to one value, the anomaly
+wants another, so the same field cannot always do both.</p></dd><dt>why</dt><dd><p>The panel next door has ended in an apology for as long as it has existed — a non-zero row is not
+a verdict, because these models carry brane fields and Komori and Maru say right after their
+eq. (76) that one introduces the 4D fermion <em>conjugate</em> to each unwanted zero mode. That is now
+a control rather than a sentence. Part I's own statement of the gate is dimension-blind and is
+used verbatim: in a fully left-handed convention a mode in r_q pairs with a localised Weyl in
+r̄₋q, and — its words — <em>"test de rango, no de conteo"</em>, so what survives is |difference| in each
+class separately, a class being the representation under every block <strong>and</strong> all its U(1) charges.</p></dd><dt>so</dt><dd><p>The control is that a paired class and its conjugate are vectorlike, so the anomaly of what
+survives must equal the anomaly of everything that entered — a rank test over class keys and an
+exact rational ledger agreeing on <strong>8 190 models</strong> of SU(3)…SU(6), which they can only do if the
+keys really are conjugate; the gate lifts something in 6 972 of them. The decoy is the same gate
+on keys that ignore the charges: it <strong>over-lifts on 89</strong> models, which is Part I's warning as a
+number, and <strong>under-lifts on 166</strong>, where a real representation carrying opposite charges makes
+one blind key its own conjugate. Not done, and said on the page: the ledger is the <strong>sum</strong> over
+the two fixed points and not the split between them; the rank test is the <strong>generic</strong> answer, so
+the surviving content is a lower bound; there is no U(1)′ beyond the local group; and the gate is
+read at the symmetric point, because the local groups do not move with the Wilson line but which
+modes are massless does.</p></dd><dt>check</dt><dd>open <strong>Brane matter</strong> and press <em>load Kawamura's SU(5)</em>. The two branes read <strong>SU(5)</strong> at y = 0 and <strong>SU(3) × SU(2) × U(1)</strong> at y = πR — the same orbifold, two different groups. The bill says <em>7 channels owing</em>. In <strong>Who can pair with a given mode</strong>, press <em>add it</em> on the first candidate: the bill goes to <strong>0 → every channel cancels</strong>, the massless count goes to <strong>0</strong>, and the chip beside it says the anomaly of what survives equals the anomaly of everything that entered. Then move that field's charge by one and the same representation lifts nothing.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The exact tower at the vacuum, the W as the unit, and three phases without a grid</h3><dl><dt>what</dt><dd><p>Two things a model builder reads first, and neither existed here yesterday.</p><p><strong>The Kaluza–Klein spectrum at the minimum, exactly.</strong> With the constant A_y gauged away the
 field is periodic up to U′ = P₁′P₀, so its modes are e^{i(n+Θ)y/R} with e^{2πiΘ} an
 eigenvalue of ρ(U′), and the orbifold identifies Θ with −Θ. A conjugate pair strictly inside is
 one tower |n + x|, n ∈ Z; an eigenvalue at 0 splits under P₀ into an even part with n ≥ 0 —
@@ -245,32 +276,7 @@ recomputes the joint counts and the eigenvalue angles of ρ(P₁′P₀) on ten 
 agree with the JavaScript. The first run disagreed 39 times, all on Sage's side: its RDF
 <code>rank()</code> counts the 10⁻¹⁶ pivots cos π and sin π leave behind, and returned a negative nullity
 for a kernel that provably holds the identity. An SVD with a stated tolerance fixed every one;
-the eigenvalues had agreed from the start.</p></dd><dt>check</dt><dd>open <strong>What the model contains</strong> on SU(3) with boundary condition [2, 0, 0, 1], one bulk Dirac fundamental and one Dirac symmetric tensor, at the vacuum. Under the families a second table, <em>The exact tower at this point</em>, gives the lightest massive vector at m·R = θ/2 and every field's first massive state in units of it — the fundamental at 1 m_W, the symmetric tensor's pair⊗pair state at 2 m_W. Then load SU(6) [1, 2, 2, 1] in <strong>One model, every verdict</strong>: three Wilson-line phases, and the depth of the vacuum is a number marked <em>restarts, not certified</em> rather than a declined line, with the minimum lines under it tagged the theory's.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The Standard-Model cell, read where it lives</h3><dl><dt>what</dt><dd><p><code>src/modules/smcell.mjs</code> asks the model builder's first question of the vacuum's massless
-content: is SU(3)×SU(2)×U(1)_Y in the unbroken group, with pieces carrying Q, uᶜ, dᶜ, L, eᶜ at
-their hypercharges? Colour is a block of size three, weak isospin a block of size two, and Y is
-solved <strong>exactly</strong>, in rationals, as a combination of the blocks' U(1) generators on the pieces
-offered as each field — Part II's counting, K − 1 unknowns against one constraint per field.
-When the fields fix Y the embedding fixes sin²θ_W = tr T₃² / (tr T₃² + tr Y²) over the
-fundamental; when they do not the page says how many directions are free. The largest
-assignment is kept and what is not found is listed as <strong>missing</strong>; the pieces outside the cell
-are listed with their (colour, weak)_Y, which is the brane's bill in the units a builder reads.</p><p>It is read at the symmetric point <strong>nearest the vacuum</strong> — each phase rounded to 0 or 1 — with
-the distance printed and the blocks the vacuum breaks named. That is physics: the vacuum's job
-is to break SU(2)×U(1)_Y to U(1)_em, so an unbroken weak block at the minimum would refuse
-every realistic model. The rounded point is a class-mate chosen by the vacuum, so the reading is
-the theory's and not the frame's, and the dossier tags it so on all 86 classes of SU(4)…SU(7).</p></dd><dt>why</dt><dd><p>Three anchors and one absence. Georgi–Glashow's direction gives 3/8 from the exact solve on
-SU(5) [3,0,0,2], on Kawamura's split [2,3,0,0] and on SU(6) [3,1,2,0] — three routes to one
-rational. SU(6) [3,1,2,0] with 6, 6′, 15, 15′ hosts the whole cell and a Higgs doublet in A_y
-with Y = ½. And on SU(5) [3,0,0,2], over all 64 two-representation bulk contents, no content
-has Q or dᶜ together with sin²θ_W = 3/8: a left-handed zero mode has P₁-twist +1, so a
-bifundamental across the two P₁ signs — Q — only ever appears as its conjugate, and the colour
-block's fundamental pieces are all left-handed, so dᶜ never does. The thirteen contents that do
-show a Q do it by bending Y to a hypercharge that is not Georgi–Glashow's, and the page prints
-that sin²θ_W beside it. The doublet of SU(2) is pseudo-real, and reading 2̄ as 2 is what lets L
-be found from the right-handed chirality.</p></dd><dt>so</dt><dd><p>The solver is made to fail on purpose: an inconsistent system returns nothing, an
-underdetermined one returns its free count, and changing eᶜ's hypercharge to 2 in the cell
-makes the anchor content stop hosting uᶜ and eᶜ together. Not done: three generations, brane
-matter to pay the bill, Yukawas, and the running of the couplings from 3/8 down to the measured
-angle — the next tools, listed in the HANDOFF.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [3, 1, 2, 0] and four bulk Dirac fields — a fundamental and an antisymmetric with ηη′ = +, and the same two with ηη′ = −. The group <strong>The Standard Model</strong> reads <em>yes, all five; Y fixed, sin²θ_W = 3/8; Higgs doublet: 1</em>, with the exotics listed as (colour, weak)_Y. Switch to SU(5) [3, 0, 0, 2] with a fundamental and an antisymmetric: <em>2 of 5 (uᶜ, eᶜ; missing Q, dᶜ, L)</em> … and L appears once the doublet is read as pseudo-real, which it is; Q and dᶜ stay missing, as the literature knows.</dd></dl></div>
+the eigenvalues had agreed from the start.</p></dd><dt>check</dt><dd>open <strong>What the model contains</strong> on SU(3) with boundary condition [2, 0, 0, 1], one bulk Dirac fundamental and one Dirac symmetric tensor, at the vacuum. Under the families a second table, <em>The exact tower at this point</em>, gives the lightest massive vector at m·R = θ/2 and every field's first massive state in units of it — the fundamental at 1 m_W, the symmetric tensor's pair⊗pair state at 2 m_W. Then load SU(6) [1, 2, 2, 1] in <strong>One model, every verdict</strong>: three Wilson-line phases, and the depth of the vacuum is a number marked <em>restarts, not certified</em> rather than a declined line, with the minimum lines under it tagged the theory's.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
