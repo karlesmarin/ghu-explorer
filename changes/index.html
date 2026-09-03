@@ -211,7 +211,43 @@ be found from the right-handed chirality.</p></dd><dt>so</dt><dd><p>The solver i
 underdetermined one returns its free count, and changing eᶜ's hypercharge to 2 in the cell
 makes the anchor content stop hosting uᶜ and eᶜ together. Not done: three generations, brane
 matter to pay the bill, Yukawas, and the running of the couplings from 3/8 down to the measured
-angle — the next tools, listed in the HANDOFF.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [3, 1, 2, 0] and four bulk Dirac fields — a fundamental and an antisymmetric with ηη′ = +, and the same two with ηη′ = −. The group <strong>The Standard Model</strong> reads <em>yes, all five; Y fixed, sin²θ_W = 3/8; Higgs doublet: 1</em>, with the exotics listed as (colour, weak)_Y. Switch to SU(5) [3, 0, 0, 2] with a fundamental and an antisymmetric: <em>2 of 5 (uᶜ, eᶜ; missing Q, dᶜ, L)</em> … and L appears once the doublet is read as pseudo-real, which it is; Q and dᶜ stay missing, as the literature knows.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The massless content at the minimum, and the three lines that stop moving</h3><dl><dt>what</dt><dd><p>Every verdict the instrument gave about a 5D SU(N) model — the apparent group, the massless
+angle — the next tools, listed in the HANDOFF.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [3, 1, 2, 0] and four bulk Dirac fields — a fundamental and an antisymmetric with ηη′ = +, and the same two with ηη′ = −. The group <strong>The Standard Model</strong> reads <em>yes, all five; Y fixed, sin²θ_W = 3/8; Higgs doublet: 1</em>, with the exotics listed as (colour, weak)_Y. Switch to SU(5) [3, 0, 0, 2] with a fundamental and an antisymmetric: <em>2 of 5 (uᶜ, eᶜ; missing Q, dᶜ, L)</em> … and L appears once the doublet is read as pseudo-real, which it is; Q and dᶜ stay missing, as the literature knows.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The simulator, anchored to HHKY 2004, and a scan of the whole space against the data</h3><dl><dt>what</dt><dd><p>Three things, chained.</p><p><strong>The running.</strong> <code>src/kernel/running.mjs</code> runs the three couplings at one loop from M_Z, with
+the MS-bar inputs of the PDG 2024 electroweak review (α̂⁻¹ = 127.930, ŝ²_Z = 0.23129,
+α_s = 0.1187, M_Z = 91.1876) carried in <code>experiment.mjs</code> with source and date. At 6.6 TeV the
+Standard Model gives sin²θ_W = 0.253; the Georgi–Glashow 3/8 is 0.122 above it, and that
+number is the bill a model's Kaluza–Klein and brane sectors must pay, printed as such.</p><p><strong>The simulator.</strong> <code>src/modules/predict.mjs</code> and the section <strong>Simulator</strong>: the model on the
+builder, at its vacuum, turned into 1/R from the measured m_W, the Higgs mass from the
+curvature through HHKY's eq. (22) — m_H² = (3g₄²/32π⁶R²)·∂²(V/C)/∂a² — with g₄ = g₂(1/R)
+and no brane kinetic terms, sin²θ_W from the cell against the running, and every field's
+tower in GeV, each beside its measured partner and its source. Two pictures: the towers as a
+landscape the reader turns, with m_W, m_h, m_t as lines and the CMS coloron bound as a plane;
+and a mass axis drawn like a search reach plot with the excluded region shaded. <strong>No event is
+simulated.</strong> The anchor is exact where it can be: HHKY's Fig. 1 content gives their a = 0.058
+as 0.0583, their m_H R/g₄ = 0.031 as 0.0306, and their eq. (20) to 10⁻⁹.</p><p><strong>The scan.</strong> <code>tools/scan_cells.mjs</code> chains every verdict — vacuum, group, cell, sin²θ_W,
+Higgs doublet, anomalies at the minimum, 1/R against CMS — over every boundary condition of
+SU(5), SU(6) and SU(7) and every bulk content of up to four fields at multiplicity one:
+42 380 models in eleven minutes. <code>tools/scan_predict.mjs</code> runs the simulator on the theories
+with a full generation and a Wilson-line W; <code>tools/scan_map.py</code> draws them against the data.
+The report, the table and the map are in <code>data/scan_2026-09-03/</code>.</p></dd><dt>why</dt><dd><p>What the scan says, and none of it was assumed:</p><p>- <strong>304 of 42 380 models host a full Standard-Model generation</strong> (4 in SU(5), 216 in SU(6),
+84 in SU(7)); 148 of them also have a Higgs doublet in A_y. Every one has both an η = + and
+an η = − field in the bulk — 304 of 304 — and every one owes at the minimum: <strong>no bulk-only
+generation with a Higgs doublet is anomaly-free without brane fermions</strong>.
+- <strong>62 theories have a full generation and a Wilson-line W.</strong> Their 1/R runs from 0.32 to
+2.11 TeV — <strong>none clears CMS's 6.6 TeV</strong> if colour is in the bulk — and their one-loop Higgs
+mass from 10 to 47 GeV, none within 10% of 125.2. Their symmetric tensor's lightest state
+sits at m_W in all 42 that have one, not at the 2m_W of the lore: the letter⊗pair component,
+not the pair⊗pair one, is the light one whenever a letter is left.
+- <strong>The embedding is not always Georgi–Glashow's.</strong> Among full cells sin²θ_W takes 3/8 (256),
+21/44 (24), 3/92 (18) and 3/20 (6); across all cells that fix Y, twelve rational values.
+- <strong>1 332 of 7 190 rows with a cell have a vacuum that breaks colour</strong> — a rotated pair inside
+the colour block — which no panel had ever reported.</p><p>So the little hierarchy of flat 5D gauge–Higgs unification is not a folklore sentence here but
+a number over the space: with at most four bulk fields at multiplicity one, the Wilson-line
+angle never falls below 0.038, and 6.6 TeV needs 0.012. That is the reason the published models
+carry large multiplicities and large representations, and the map says where to push.</p></dd><dt>so</dt><dd><p>Three anchors and three refusals. The running returns its inputs at M_Z and meets α₁ = α₂
+near 10¹³ GeV; the dictionary reproduces HHKY; the cell reproduces 3/8. The simulator refuses
+a scale at a symmetric vacuum, a Higgs mass at a non-positive curvature, and a sin²θ_W where
+the cell does not fix Y. What it does not include is said on the page: two loops, thresholds,
+brane kinetic terms, the Kaluza–Klein power law above 1/R, three generations, Yukawas.</p></dd><dt>check</dt><dd>load on the SU(N) builder SU(3) with boundary condition [1, 0, 0, 2] and the bulk of Haba–Hosotani–Kawamura–Yamashita's Fig. 1 — two adjoint Dirac fermions with ηη′ = +, eight fundamental Dirac fermions with ηη′ = −, four and two fundamental scalars with ηη′ = ±. Open <strong>Simulator</strong>: the vacuum sits at a = 0.0583 (their 0.058), 1/R = 2.755 TeV from the measured W, and m_H = 54 GeV with g₄ = g₂(1/R) — their m_H R/g₄ = 0.031 reproduced as 0.0306 — printed beside 125.20 GeV. Turn the towers; move g₄ to 1.0 and watch m_H follow. Then read <code>data/scan_2026-09-03/predictions.md</code>.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The massless content at the minimum, and the three lines that stop moving</h3><dl><dt>what</dt><dd><p>Every verdict the instrument gave about a 5D SU(N) model — the apparent group, the massless
 vectors, scalars and fermions, the whole anomaly ledger — was read at the <strong>symmetric point</strong> of
 the boundary condition on screen, θ = 0. The dossier of the same morning measured what that
 costs: eleven of eighteen lines move under a gauge-equivalent boundary condition, and the reason
