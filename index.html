@@ -245,46 +245,32 @@ recomputes the joint counts and the eigenvalue angles of ρ(P₁′P₀) on ten 
 agree with the JavaScript. The first run disagreed 39 times, all on Sage's side: its RDF
 <code>rank()</code> counts the 10⁻¹⁶ pivots cos π and sin π leave behind, and returned a negative nullity
 for a kernel that provably holds the identity. An SVD with a stated tolerance fixed every one;
-the eigenvalues had agreed from the start.</p></dd><dt>check</dt><dd>open <strong>What the model contains</strong> on SU(3) with boundary condition [2, 0, 0, 1], one bulk Dirac fundamental and one Dirac symmetric tensor, at the vacuum. Under the families a second table, <em>The exact tower at this point</em>, gives the lightest massive vector at m·R = θ/2 and every field's first massive state in units of it — the fundamental at 1 m_W, the symmetric tensor's pair⊗pair state at 2 m_W. Then load SU(6) [1, 2, 2, 1] in <strong>One model, every verdict</strong>: three Wilson-line phases, and the depth of the vacuum is a number marked <em>restarts, not certified</em> rather than a declined line, with the minimum lines under it tagged the theory's.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The massless content at the minimum, and the three lines that stop moving</h3><dl><dt>what</dt><dd><p>Every verdict the instrument gave about a 5D SU(N) model — the apparent group, the massless
-vectors, scalars and fermions, the whole anomaly ledger — was read at the <strong>symmetric point</strong> of
-the boundary condition on screen, θ = 0. The dossier of the same morning measured what that
-costs: eleven of eighteen lines move under a gauge-equivalent boundary condition, and the reason
-is that the class relation [p,q,r,s] ~ [p−1,q+1,r+1,s−1] <em>is</em> a shift of the Wilson line by one,
-so a class-mate's symmetric point is this one's other symmetric point.</p><p><code>src/modules/vacuum5d.mjs</code> reads the same three questions <strong>at the minimum</strong>. Gauge the constant
-A_y away and the reflection about y = πR becomes P₁′ = W⁻¹P₁ with W the holonomy (Hosotani;
-Haba–Hosotani–Kawamura §2). A massless four-dimensional mode is a vector fixed by both P₀ and
-P₁′ — for a unitary P₁′ the linear term of a + b·y is killed outright — so the massless content
-of a field with parities (ε₀, ε₁) is a joint eigenspace, and the unbroken group is the commutant
-of {P₀, P₁′}, which Schur names as S(∏ U(m_i)) over the irreducibles of the group they generate:
-four one-dimensional letters and one two-dimensional D(cos πt) per angle at which a pair is
-rotated. When every phase is 0 or 1 that is the parity rule applied to a <strong>class-mate</strong>, the one
-the vacuum rearranges the boundary condition into; strictly inside it is the Hosotani mechanism,
-and no member of the class has that content.</p><p>The anomaly ledger runs over that frame unchanged. <code>anomaly5d.mjs</code> is now written over a
-<em>frame</em> — a list of blocks with a size and a dimension — and the four parity letters are its
-first instance; a rotated pair is a block of dimension two, and the ledger's group theory never
-asked what a block was made of.</p><p>The dossier gains a group <strong>At the minimum</strong>: where the vacuum stands, the group, the three
-counts, the verdict and the channels owing. They are tagged by the same measurement as every
-other line, and they come back <strong>invariant on all 86 multi-member classes of SU(4)…SU(7), with
-two bulk contents</strong> — 81 classes located, 5 declined because they carry three phases or more.</p></dd><dt>why</dt><dd><p>A statement about the theory has to be read where the theory sits, and until today the
-instrument could not read there. The dossier had made the gap visible and said so on the page;
-this closes it, and the honesty card now says what remains: the scalars are tree-level flat
-directions, whether a phase sits at an end and whether two phases coincide is decided to the
-minimiser's tolerance of 10⁻⁶, and past two phases there is no located vacuum.</p></dd><dt>so</dt><dd><p>Two routes and a decoy, because the count is easy to get subtly wrong. <code>vac5Rep</code> produces the
-pieces by representation theory — letters twist into letters, D(c) into D(±c), S²D(c) = (+,+) ⊕
-D(2c² − 1), Λ²D(c) = (−,−) — and <code>vac5Direct</code> builds ρ(P₀) and ρ(P₁′) as matrices on the
-fundamental, adjoint, antisymmetric and symmetric and counts the joint eigenspace by
-elimination. <code>_test_vacuum5d.mjs</code> holds one to the other on 880 (boundary condition, θ,
-representation, twist) cases including three-phase ones; at θ = 0 and θ = 1 it holds the result
-to <code>sp5ZeroModes</code> and <code>an5Ledger</code> of the boundary condition and of its class-mate, character for
-character, on every one-phase boundary condition of SU(4)…SU(7) with three contents.</p><p>The decoy is the count a reader would reach first: read the Kaluza–Klein families at n = 0.
-For SU(2) with P = P′ = diag(+,−) at θ = 1 it gives <strong>two</strong> massless vectors; there is one,
-because W = −1 is central there and the theory is the θ = 0 theory. The per-state bookkeeping
-keeps the Cartan direction at charge zero, and at a broken vacuum that direction mixes with its
-(−,−) partner into a vector of mass θ — the Hosotani W boson. The harness requires the decoy to
-disagree.</p><p>And the enhancement is real rather than an artefact of the tolerance: SU(5) [3,0,0,2] with two
-pairs at the <em>same</em> angle leaves an SU(2) the symmetric point never had, and SU(4) [1,1,1,1]
-with an A-pair at θ and a B-pair at φ = 1 − θ leaves SU(2) too, because a B-pair's P₁ is −σ₃
-and the two irreducibles coincide there. Both are checked by the matrices.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. In the group <strong>At the minimum</strong> the unbroken group, the three massless counts and the anomaly verdict are tagged <em>the theory</em>; their symmetric-point twins two groups up are tagged <em>the frame</em>. Click the other member of the class: the symmetric-point lines move and the minimum lines do not. The first row of the group says where the vacuum stands — a class-mate, or <em>broken</em> with the angle of the rotated pair.</dd></dl></div>
+the eigenvalues had agreed from the start.</p></dd><dt>check</dt><dd>open <strong>What the model contains</strong> on SU(3) with boundary condition [2, 0, 0, 1], one bulk Dirac fundamental and one Dirac symmetric tensor, at the vacuum. Under the families a second table, <em>The exact tower at this point</em>, gives the lightest massive vector at m·R = θ/2 and every field's first massive state in units of it — the fundamental at 1 m_W, the symmetric tensor's pair⊗pair state at 2 m_W. Then load SU(6) [1, 2, 2, 1] in <strong>One model, every verdict</strong>: three Wilson-line phases, and the depth of the vacuum is a number marked <em>restarts, not certified</em> rather than a declined line, with the minimum lines under it tagged the theory's.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The Standard-Model cell, read where it lives</h3><dl><dt>what</dt><dd><p><code>src/modules/smcell.mjs</code> asks the model builder's first question of the vacuum's massless
+content: is SU(3)×SU(2)×U(1)_Y in the unbroken group, with pieces carrying Q, uᶜ, dᶜ, L, eᶜ at
+their hypercharges? Colour is a block of size three, weak isospin a block of size two, and Y is
+solved <strong>exactly</strong>, in rationals, as a combination of the blocks' U(1) generators on the pieces
+offered as each field — Part II's counting, K − 1 unknowns against one constraint per field.
+When the fields fix Y the embedding fixes sin²θ_W = tr T₃² / (tr T₃² + tr Y²) over the
+fundamental; when they do not the page says how many directions are free. The largest
+assignment is kept and what is not found is listed as <strong>missing</strong>; the pieces outside the cell
+are listed with their (colour, weak)_Y, which is the brane's bill in the units a builder reads.</p><p>It is read at the symmetric point <strong>nearest the vacuum</strong> — each phase rounded to 0 or 1 — with
+the distance printed and the blocks the vacuum breaks named. That is physics: the vacuum's job
+is to break SU(2)×U(1)_Y to U(1)_em, so an unbroken weak block at the minimum would refuse
+every realistic model. The rounded point is a class-mate chosen by the vacuum, so the reading is
+the theory's and not the frame's, and the dossier tags it so on all 86 classes of SU(4)…SU(7).</p></dd><dt>why</dt><dd><p>Three anchors and one absence. Georgi–Glashow's direction gives 3/8 from the exact solve on
+SU(5) [3,0,0,2], on Kawamura's split [2,3,0,0] and on SU(6) [3,1,2,0] — three routes to one
+rational. SU(6) [3,1,2,0] with 6, 6′, 15, 15′ hosts the whole cell and a Higgs doublet in A_y
+with Y = ½. And on SU(5) [3,0,0,2], over all 64 two-representation bulk contents, no content
+has Q or dᶜ together with sin²θ_W = 3/8: a left-handed zero mode has P₁-twist +1, so a
+bifundamental across the two P₁ signs — Q — only ever appears as its conjugate, and the colour
+block's fundamental pieces are all left-handed, so dᶜ never does. The thirteen contents that do
+show a Q do it by bending Y to a hypercharge that is not Georgi–Glashow's, and the page prints
+that sin²θ_W beside it. The doublet of SU(2) is pseudo-real, and reading 2̄ as 2 is what lets L
+be found from the right-handed chirality.</p></dd><dt>so</dt><dd><p>The solver is made to fail on purpose: an inconsistent system returns nothing, an
+underdetermined one returns its free count, and changing eᶜ's hypercharge to 2 in the cell
+makes the anchor content stop hosting uᶜ and eᶜ together. Not done: three generations, brane
+matter to pay the bill, Yukawas, and the running of the couplings from 3/8 down to the measured
+angle — the next tools, listed in the HANDOFF.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [3, 1, 2, 0] and four bulk Dirac fields — a fundamental and an antisymmetric with ηη′ = +, and the same two with ηη′ = −. The group <strong>The Standard Model</strong> reads <em>yes, all five; Y fixed, sin²θ_W = 3/8; Higgs doublet: 1</em>, with the exotics listed as (colour, weak)_Y. Switch to SU(5) [3, 0, 0, 2] with a fundamental and an antisymmetric: <em>2 of 5 (uᶜ, eᶜ; missing Q, dᶜ, L)</em> … and L appears once the doublet is read as pseudo-real, which it is; Q and dᶜ stay missing, as the literature knows.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
