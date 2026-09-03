@@ -209,59 +209,85 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>What the page says in their absence — a page number, a framing, a button that was in the wrong places</h3><dl><dt>what</dt><dd><p>Four changes, and the first is the one that matters.</p><p><strong>The page no longer asserts, in the authors' absence, more than we are willing to say to their
-faces.</strong> On 30 August a letter went to Akamatsu, Hirose, Maru and Nago about arXiv:2603.05857,
-and it says that which of their two published minima belongs with which value of <code>c</code> is something
-we could not settle from their text. This page had been saying something firmer — that the
-1.4 TeV was their equation with α₂ <em>dropped</em>. Both numbers are still here, computed and not
-quoted; what has gone is the diagnosis. The row measures their equation, and the open question is
-named as open.</p><p><strong>A page number that was wrong.</strong> The sentence quoted is on <strong>p. 21</strong>, not p. 22. Our own two
-scripts disagreed with each other about where eq. (5.19) sits, and both misplaced the sentence;
-measuring by the printed page number settled it. A page reference is the one part of a quotation
-a reader can check without any work.</p><p><strong>The ⇩ LaTeX button appears only where it can export what is on screen.</strong> A section that
-declares <code>holds()</code> is showing its own model, so unless it also implements <code>texExport</code> the button
-would produce a correct file about a <em>different</em> one. On five sections it now simply is not
-there, and pressing it there anyway writes nothing.</p><p><strong>And the demonstration exports its own dial</strong>, which is the section where a reader would most
-want it: the model, the free tower and the roots with a brane term, with the potential marked
-<code>unknown</code> and the reason given — with a brane term it is an integral over those roots, not a sum
-of cosines this export could carry.</p></dd><dt>why</dt><dd><p>A permalink also had to survive being sent. The state separator was <code>|</code>, which travels in an
-e-mail as <code>%7C</code>; Gmail re-encodes that and wraps the whole address in a <code>google.com/url</code>
-redirect with tracking parameters. It resolves correctly and it looks like surveillance. The
-separator is a comma now — every value is a number, so there is no ambiguity — and the pipe is
-still decoded, because links carrying it have already been sent.</p></dd><dt>so</dt><dd><p>Two of these were found by pressing buttons rather than by running assertions, and one was found
-by the assertions being wrong.</p><p>The two-file export was writing both downloads in the same tick, which is how a page asks a
-browser for permission to grab files; the second is now staggered by half a second.</p><p>And a harness lesson worth more than the fix. The driver stubbed
-<code>HTMLAnchorElement.prototype.click</code> to capture a download — and the rail's entries are <code>&lt;a&gt;</code>
-elements. Every later navigation silently did nothing, so six checks measured whatever section
-the page was already sitting on and reported a defect that was not there. A stub installed for
-one check must be put back before the next; the driver now asserts that it was.</p></dd><dt>check</dt><dd>open <strong>Brane kinetic terms</strong>. Step 4 now cites p. 21 for the authors' sentence, reports what eq. (5.19) gives at each of their two minima, and says that which minimum belongs with which c is an open question put to the authors. Press <strong>⇩ LaTeX</strong>: the dial's own model comes out. Then switch to <strong>Boundary conditions</strong> or <strong>The literature</strong> — the button is not there, because on those it would write a file about a different model.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-08-30</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A model leaves as LaTeX — the potential, the table with its status column, and the bibliography</h3><dl><dt>what</dt><dd><p>The header gains <strong>⇩ LaTeX</strong> beside <strong>⇩ card</strong>. It writes the model out in the form that goes
-into a paper: the effective potential as a displayed equation, the results as a table, and the
-sources as a companion <code>.bib</code>.</p><p>It is the same object the card button already exports — <code>card.mjs</code> builds it once, and <code>toText</code>,
-the JSON and now <code>latex.mjs</code> are three renderings of it. A number in someone's paper is the
-number the card carries, or the whole status apparatus is decoration.</p><p>Two details that are the point rather than the trim. The <strong>status column is a column</strong>: every row
-says <code>theorem</code>, <code>verified</code>, <code>measured</code> or <code>unknown</code>, and an <code>unknown</code> prints its reason in the
-table instead of leaving a blank cell. And the <strong>bibliography travels with the numbers</strong>, keyed
-the way INSPIRE keys it, so a reader who lifts a potential out of this page does not have to go
-and find the citation for the formula it came from — and so that citing it is the default rather
-than an act of virtue.</p></dd><dt>why</dt><dd><p>The builder could already write a reader's potential on screen. What they had to do next was
-retype it, and retyping is where a sign goes missing.</p><p>The transport is the hard part, and it is the same hard part that cost this project a day
-earlier today. Every string here is full of Unicode — <code>α</code>, <code>A₄</code>, <code>n⁺₊</code>, and U+2212, which looks
-exactly like a hyphen and is not — and <code>pdflatex</code> takes none of it. So <code>tex()</code> maps what it knows
-and <strong>throws</strong> on what it does not: an export that cannot be typeset fails loudly here rather
-than quietly in the reader's build. <code>_test_latex.mjs</code> pushes every string in <code>data/</code> and in the
-citation registry through it.</p></dd><dt>so</dt><dd><p>Three defects were found by things other than the harness, and each is worth naming.</p><p><strong><code>pdflatex</code> found one by refusing to build.</strong> Three <code>.bib</code> titles carried bare maths —
-<code>S^1/Z_2</code> — which is <code>Missing $ inserted</code> in the <em>reader's</em> document. Delimited now, and the
-harness rejects a bare caret in any registry field.</p><p><strong>The compiled PDF found the second by looking wrong.</strong> BibTeX entries placed in the <code>.tex</code> are
-not comments: LaTeX ate the braces and typeset them as a paragraph of prose in the middle of the
-page. The entries went to a companion <code>.bib</code>, and the <code>.tex</code> carries a pointer.</p><p><strong><code>build/drive.mjs</code> found the third by pressing the button.</strong> The SU(N) builder declares
-<code>holds()</code> — it carries its own model, not the family's — so the export was pairing this
-section's potential with the <em>shell's</em> card: two models in one file, presented as one. The
-section exports its own card now, and the driver asserts the file names one model.</p><p>And a fourth, which was ours all along: the reference for the paper this instrument's whole 5D
-family is built on was typed into seven files, and all seven named the wrong volume. It is
-<strong>JHEP 02 (2004) 059</strong>, DOI <code>10.1088/1126-6708/2004/02/059</code> — arXiv's journal-ref, the ADS
-bibcode and INSPIRE agree, and one of the seven copies was displayed on the page. There is one
-copy now, in <code>src/kernel/cite.mjs</code>, and a gate that sweeps the tree and fails the build if any
-file prints a volume the registry disagrees with.</p></dd><dt>check</dt><dd>open <strong>SU(N) builder</strong>, press the <strong>§4.3 · SU(6), P ≠ P′</strong> preset, and press <strong>⇩ LaTeX</strong> in the header. Two files come out: a <code>.tex</code> whose equation is <code>V_eff = (C/2) Σ n⁻⁵ [−2cos(nπa) − 18cos(nπ(a−1)) − 3cos(2nπa)]</code> and whose table carries a <em>status</em> column with <code>scale</code> marked UNKNOWN and its reason printed; and a <code>.bib</code> with the INSPIRE-keyed entry for the formula it rests on. The pair compiles: <code>pdflatex</code> on the standalone form gives one page, no overfull boxes.</dd></dl></div>
+<div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Most of what the instrument says about a model is not about the model</h3><dl><dt>what</dt><dd><p>Five sections already answer about a 5D SU(N) model on S¹/Z₂: the builder gives the Wilson-line
+potential and its vacuum, the spectrum panel the massless content, the anomaly panel the bill,
+Boundary conditions the equivalence class, and Part VII's kernel the closed form when there is a
+single phase. Read one after another they give eighteen numbers about one model.</p><p><strong>Eleven of the eighteen are not properties of the model.</strong> They change when the boundary
+condition is replaced by a gauge-equivalent one — the same theory, a different frame. This
+section recomputes every line on every member of the class and tags each by what came back:
+<em>the theory</em> if it was the same on all of them, <em>the frame</em> if two members that are one theory
+disagreed, <em>declined</em> if the computation refused and said why.</p><p>The tag is a <strong>measurement made on that render</strong>, never a list of which lines ought to be
+invariant. <code>_test_dossier.mjs</code> hands the same tagger two decoy lines whose answers are settled
+before it runs — <code>p</code>, a coordinate of the representative, and <code>p − s</code>, which the class relation
+preserves — and requires the two different tags at three values of N.</p></dd><dt>why</dt><dd><p>Seeing this needs the class from one section and the verdicts from the others at the same
+moment, so no panel could see it alone, and a reader stacking them by hand comes away with a
+page of numbers of which a majority are about where they were standing. That is the arbitrariness
+problem <code>bcclass</code> opens with, stated once about the apparent unbroken group — measured here
+across everything the instrument computes.</p><p>What survives, at N = 4…7 and over every class: the <strong>phase count</strong>, the number of terms in V,
+the <strong>depth of the vacuum</strong>, whether it sits at a symmetric point, and <strong>N_Δ</strong>. What does not:
+the apparent unbroken group, where the vacuum sits, <strong>Part VII's W</strong>, all three massless counts,
+the <strong>anomaly ledger</strong>, and <strong>N_v</strong>.</p><p>And invariant is not the same as informative, so there is a second axis and its own button. A
+line that takes one value over <em>every</em> class at this N separates no theory from any other,
+however stable it is — <code>N₀</code> is one, and so is N itself. Splitting <strong>within</strong> a class makes a line
+the frame's; taking one value <strong>between</strong> classes makes it no verdict at all.</p></dd><dt>so</dt><dd><p>It found a false verdict on its first run, which is the argument for building it. <strong>"Is this
+model anomaly-free?" came back YES for one member of a class and NO for another</strong> — the same
+theory, two answers — on 4 of the 16 multi-member classes of SU(5) and 5 of the 25 of SU(6).</p><p>The arithmetic was never wrong. The cause was an empty sum: the member with n₊₊ = 0 has no
+massless fermion for a bulk fundamental to leave, so every anomaly channel is zero and the flag
+read <code>clean</code>. <code>anomaly5d.mjs</code> now returns a <strong>verdict with three states</strong> — <em>no subject</em>,
+<em>cancels</em>, <em>owes</em> — and the section reads that instead of keeping its own copy of the condition.
+The page had always printed "No massless fermions" and had always been right; the flag under it
+had not, and the header line beside it said "every channel cancels" with no fermion in the model.</p><p>The same shape turned up twice more in the same afternoon and both are fixed the same way, by
+moving a guard out of its one caller and into the function. <code>sun5dTermTable</code> refuses two Wilson
+phases by name and was <strong>blind to zero</strong>: no term, no loop, an empty table, a clean pass — and
+Part VII's five coordinates and its stability verdict handed to a model that has no α for them to
+be about. It takes the phase count now. And this section's own separation panel was written to
+warn when its sweep belonged to another N, and then assigned the table over the top of the
+warning: the panel's own version of the failure it exists to name.</p><p>What it still cannot do is the honest headline. Every line except the depth and position of the
+minimum is computed at the <strong>symmetric point</strong> of the representative loaded, which is exactly why
+those lines move across the class — the class relation is a shift along the Wilson line. The
+instrument does not yet compute the massless content <strong>at the minimum</strong>, which is what would turn
+the spectrum, the anomaly ledger and the apparent group into statements about the theory. That is
+a gap in the tool, and it is named on the page.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. <strong>7 of the 18 verdicts are the theory's; 11 are the frame's.</strong> Click the other member of the class in the table on the left — the same theory in different clothes — and watch the depth of the vacuum stay exactly where it is while the apparent group, the massless counts, W and the whole anomaly ledger move. The anomaly verdict reads <strong>owes</strong> here and <strong>no subject</strong> there.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>An outside audit read the deployed source, and five of its five findings were real</h3><dl><dt>what</dt><dd><p>Carles put the public source of <code>ghu-lab</code> and <code>ghu-explorer</code> in front of an outside reader on
+2026-09-03. Five findings came back and every one of them is real:</p><p>1. <strong>The permalink did not carry η or the matter/gauge role</strong>, although both are buttons in the
+calculator and both go into <code>model()</code>. A link therefore reproduced a <em>different model</em> from
+the one whose results were on screen when it was copied — silently, under a button that says
+"the whole state, in the address bar". For a tool whose whole use is that a claim in a letter
+becomes something the reader checks in thirty seconds, this is the worst of the five.
+2. <strong><code>decodeURIComponent</code> ran unguarded at startup.</strong> It throws <code>URIError</code> on a lone <code>%</code>, and it
+ran before <code>render()</code>, so <code>#x=%</code> left the reader a blank page — the same symptom as the
+dead-permalink bug of 2026-08-26 arriving through a different door.
+3. <strong>The card export fired two downloads in one tick</strong>, which is exactly the pattern the LaTeX
+button had already been fixed for: Chrome raises its multiple-download prompt and, declined or
+auto-blocked, drops the second file. The <code>.bib</code> waits 500 ms and the <code>.txt</code> did not.
+4. <strong>The "what this tool cannot tell you" block had gone stale.</strong> It still said "Two models, not
+a framework" and "only the result card as JSON", both true when written and neither true since
+the SU(N) builder and the LaTeX export arrived.
+5. <strong>The site footer said the code is MIT</strong> while both <code>LICENSE</code> files say Apache 2.0.</p></dd><dt>why</dt><dd><p>The audit also says the tool is better tested than usual for its size, and it is: 1 557 checks,
+a real-mouse harness, and a build that refuses to publish red. That is precisely why these
+five matter. Four of them are in the <strong>shell</strong> and the fifth is in <strong>prose</strong>, and neither is
+where the checks were. Every harness in this repository asks whether a number is right; nothing
+asked whether the link that carries the number carries all of it.</p><p>Fixing the permalink turned up a second layer under the reported one. A link carries only what
+differs from the default — the rule the seed and the brane already follow — and <strong>the default is
+not +1</strong>: the anchor content of a group carries η = −1 and role = gauge on some slots, and this
+group does. Encoding against +1 and resetting to +1 would have lost the anchor's own values from
+an untouched model, which is the same bug one level down. Both sides now call one function,
+<code>anchorEtaRole</code>, so they cannot disagree about what an omitted marker means.</p><p>And the marker itself changed once: <code>.e+</code> becomes <code>.e%2B</code> in the address bar, which is the same
+lesson as the pipe that became a comma in the BLKT permalink. It is <code>.em</code> and <code>.ep</code> now — a
+letter naming the value, nothing a mail client can maul.</p></dd><dt>so</dt><dd><p><code>drive.mjs</code> gained the checks that were missing rather than the ones that were easy: a <strong>round
+trip through the real buttons</strong>, with a control leg that strips the markers and requires the
+anchor's own values back — so the round trip cannot pass by never resetting anything — and five
+deliberately broken hashes (<code>x=%</code>, <code>x=%E0%A4%A</code>, <code>su4_ahmn=%ZZ</code>, <code>===</code>, <code>%</code>) under one rule:
+<strong>no string a reader can put in the address bar may stop the interface appearing.</strong>
+113 checks, all green, with the console still clean.</p><p><code>_test_app.mjs</code> gained the source-level half — the guard, the two markers, the shared default,
+the staggered download — and its list of the tool's stated limits now asserts that the stale
+sentences are <strong>gone</strong>, not merely that some sentences are present. A limits block that has
+fallen behind the tool is worse than none: a reader believes it.</p><p>One more thing came out of the same file, and it was the harness looking at itself. The check
+that every id a section reaches for is an id that section creates was reading <code>render</code> and <code>init</code>
+only — and most sections keep their DOM in helpers, so a section written that way was checked
+against nothing and passed. It reads every function on the section now.</p><p>The licence line says Apache 2.0. The scale question the audit raises last is not a bug and is
+not new: our α disagrees with the published α by 1.03× to 2.08× and not by a constant, every TeV
+and GeV inherits that, and the page has said so in its own first paragraph since the day it
+opened.</p></dd><dt>check</dt><dd>open the <strong>Model calculator</strong>, change a representation's η and its matter/gauge role, press <strong>🔗 link</strong> and open the address in a fresh tab — the two toggles are now in the URL and come back. Then put <code>#x=%</code> in the address bar: the instrument still appears. <code>node build/drive.mjs</code> drives both, with a control leg that fails if the reset is not happening.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
@@ -275,7 +301,7 @@ paper keeps working even after the living instrument has been rewritten.</p>
 <footer><div class="in">
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
-The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is MIT.
+The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
 This page was generated on 2026-09-03 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
