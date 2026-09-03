@@ -209,7 +209,43 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The massless content at the minimum, and the three lines that stop moving</h3><dl><dt>what</dt><dd><p>Every verdict the instrument gave about a 5D SU(N) model — the apparent group, the massless
+<div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The exact tower at the vacuum, the W as the unit, and three phases without a grid</h3><dl><dt>what</dt><dd><p>Two things a model builder reads first, and neither existed here yesterday.</p><p><strong>The Kaluza–Klein spectrum at the minimum, exactly.</strong> With the constant A_y gauged away the
+field is periodic up to U′ = P₁′P₀, so its modes are e^{i(n+Θ)y/R} with e^{2πiΘ} an
+eigenvalue of ρ(U′), and the orbifold identifies Θ with −Θ. A conjugate pair strictly inside is
+one tower |n + x|, n ∈ Z; an eigenvalue at 0 splits under P₀ into an even part with n ≥ 0 —
+the massless states, exactly the joint invariants the previous entry counts — and an odd part
+with n ≥ 1; an eigenvalue at ½ is n + ½. The eigenvalues never need a matrix: a (+,+) or (−,−)
+letter is Θ = 0, a (+,−) or (−,+) letter is ½, a pair rotated by t is ±t/2, the adjoint takes
+differences and the tensors sums. <code>vac5Tower</code> and <code>vac5Ladder</code> in <code>vacuum5d.mjs</code>; the spectrum
+section prints the table under its families, and the dossier gains two lines — the lightest
+massive vector m·R, and each bulk field's first massive state in units of it — both invariant
+on the class like the rest of the minimum group.</p><p><strong>Three phases and more, by restarts.</strong> A grid on a 3-torus at the 2-torus's resolution is
+10⁷ evaluations and the panels were right to refuse it. <code>sun5dMinimumRestarts</code> descends from
+every symmetric corner and from a reproducible batch of random points, keeps the deepest, and
+reports how many starts reached it and how many distinct minima were seen; every line that
+reads it carries <em>restarts, not certified</em>. The dossier and the spectrum section fall back to
+it above two phases, so the five three-phase classes of SU(4)…SU(7) that declined yesterday are
+located today — and their minimum lines come back invariant like the other 81.</p></dd><dt>why</dt><dd><p>The families the spectrum section already drew are the potential's multiset and are right for
+it; at a broken vacuum they are wrong at the lowest level of the adjoint and of the symmetric
+tensor, where a Cartan direction the per-state bookkeeping keeps at charge zero has in fact
+become the W of mass t. The same mistake the previous entry's decoy makes, one level up. And
+the ratio a builder wants — the top at 2 m_W from a symmetric tensor — is a statement about
+where the W lives: in SU(3) [2,0,0,1] the W is a letter⊗pair vector at t/2 and the tensor's
+pair⊗pair state sits at t, twice it; in SU(2) the only massive vector is pair⊗pair at t, so
+the same state sits at 1 m_W. The harness pins both.</p></dd><dt>so</dt><dd><p>The tower is held to the potential by differences: summed with the degrees-of-freedom weights
+of Haba–Yamashita, Σ_n n⁻⁵ cos(2πn x) per tower reproduces <code>sun5dV</code> between any two points of
+the torus to 10⁻⁹ on five (boundary condition, content) pairs — a route that shares no code
+with the potential it lands on. The Θ = 0 split and the Θ = ½ count are held to the joint
+counts of the other three twists, which the tower did not use. And the restarts are held to
+the grid where the grid exists: 222 (boundary condition, content) cases of SU(4)…SU(6), the
+same depth to 10⁻⁹ in every one, the deepest value reached by at least ten starts in every
+one. Above two phases there is nothing to hold them to but each other, and the page says so.</p><p>And a third route for the vacuum module itself, in SageMath: <code>tools/vacuum5d_sage_control.py</code>
+rebuilds P₀, P₁′ and the four representation matrices with Sage's own linear algebra and
+recomputes the joint counts and the eigenvalue angles of ρ(P₁′P₀) on ten cases — 200 of 200
+agree with the JavaScript. The first run disagreed 39 times, all on Sage's side: its RDF
+<code>rank()</code> counts the 10⁻¹⁶ pivots cos π and sin π leave behind, and returned a negative nullity
+for a kernel that provably holds the identity. An SVD with a stated tolerance fixed every one;
+the eigenvalues had agreed from the start.</p></dd><dt>check</dt><dd>open <strong>What the model contains</strong> on SU(3) with boundary condition [2, 0, 0, 1], one bulk Dirac fundamental and one Dirac symmetric tensor, at the vacuum. Under the families a second table, <em>The exact tower at this point</em>, gives the lightest massive vector at m·R = θ/2 and every field's first massive state in units of it — the fundamental at 1 m_W, the symmetric tensor's pair⊗pair state at 2 m_W. Then load SU(6) [1, 2, 2, 1] in <strong>One model, every verdict</strong>: three Wilson-line phases, and the depth of the vacuum is a number marked <em>restarts, not certified</em> rather than a declined line, with the minimum lines under it tagged the theory's.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The massless content at the minimum, and the three lines that stop moving</h3><dl><dt>what</dt><dd><p>Every verdict the instrument gave about a 5D SU(N) model — the apparent group, the massless
 vectors, scalars and fermions, the whole anomaly ledger — was read at the <strong>symmetric point</strong> of
 the boundary condition on screen, θ = 0. The dossier of the same morning measured what that
 costs: eleven of eighteen lines move under a gauge-equivalent boundary condition, and the reason
@@ -248,45 +284,7 @@ keeps the Cartan direction at charge zero, and at a broken vacuum that direction
 disagree.</p><p>And the enhancement is real rather than an artefact of the tolerance: SU(5) [3,0,0,2] with two
 pairs at the <em>same</em> angle leaves an SU(2) the symmetric point never had, and SU(4) [1,1,1,1]
 with an A-pair at θ and a B-pair at φ = 1 − θ leaves SU(2) too, because a B-pair's P₁ is −σ₃
-and the two irreducibles coincide there. Both are checked by the matrices.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. In the group <strong>At the minimum</strong> the unbroken group, the three massless counts and the anomaly verdict are tagged <em>the theory</em>; their symmetric-point twins two groups up are tagged <em>the frame</em>. Click the other member of the class: the symmetric-point lines move and the minimum lines do not. The first row of the group says where the vacuum stands — a class-mate, or <em>broken</em> with the angle of the rotated pair.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Most of what the instrument says about a model is not about the model</h3><dl><dt>what</dt><dd><p>Five sections already answer about a 5D SU(N) model on S¹/Z₂: the builder gives the Wilson-line
-potential and its vacuum, the spectrum panel the massless content, the anomaly panel the bill,
-Boundary conditions the equivalence class, and Part VII's kernel the closed form when there is a
-single phase. Read one after another they give eighteen numbers about one model.</p><p><strong>Eleven of the eighteen are not properties of the model.</strong> They change when the boundary
-condition is replaced by a gauge-equivalent one — the same theory, a different frame. This
-section recomputes every line on every member of the class and tags each by what came back:
-<em>the theory</em> if it was the same on all of them, <em>the frame</em> if two members that are one theory
-disagreed, <em>declined</em> if the computation refused and said why.</p><p>The tag is a <strong>measurement made on that render</strong>, never a list of which lines ought to be
-invariant. <code>_test_dossier.mjs</code> hands the same tagger two decoy lines whose answers are settled
-before it runs — <code>p</code>, a coordinate of the representative, and <code>p − s</code>, which the class relation
-preserves — and requires the two different tags at three values of N.</p></dd><dt>why</dt><dd><p>Seeing this needs the class from one section and the verdicts from the others at the same
-moment, so no panel could see it alone, and a reader stacking them by hand comes away with a
-page of numbers of which a majority are about where they were standing. That is the arbitrariness
-problem <code>bcclass</code> opens with, stated once about the apparent unbroken group — measured here
-across everything the instrument computes.</p><p>What survives, at N = 4…7 and over every class: the <strong>phase count</strong>, the number of terms in V,
-the <strong>depth of the vacuum</strong>, whether it sits at a symmetric point, and <strong>N_Δ</strong>. What does not:
-the apparent unbroken group, where the vacuum sits, <strong>Part VII's W</strong>, all three massless counts,
-the <strong>anomaly ledger</strong>, and <strong>N_v</strong>.</p><p>And invariant is not the same as informative, so there is a second axis and its own button. A
-line that takes one value over <em>every</em> class at this N separates no theory from any other,
-however stable it is — <code>N₀</code> is one, and so is N itself. Splitting <strong>within</strong> a class makes a line
-the frame's; taking one value <strong>between</strong> classes makes it no verdict at all.</p></dd><dt>so</dt><dd><p>It found a false verdict on its first run, which is the argument for building it. <strong>"Is this
-model anomaly-free?" came back YES for one member of a class and NO for another</strong> — the same
-theory, two answers — on 4 of the 16 multi-member classes of SU(5) and 5 of the 25 of SU(6).</p><p>The arithmetic was never wrong. The cause was an empty sum: the member with n₊₊ = 0 has no
-massless fermion for a bulk fundamental to leave, so every anomaly channel is zero and the flag
-read <code>clean</code>. <code>anomaly5d.mjs</code> now returns a <strong>verdict with three states</strong> — <em>no subject</em>,
-<em>cancels</em>, <em>owes</em> — and the section reads that instead of keeping its own copy of the condition.
-The page had always printed "No massless fermions" and had always been right; the flag under it
-had not, and the header line beside it said "every channel cancels" with no fermion in the model.</p><p>The same shape turned up twice more in the same afternoon and both are fixed the same way, by
-moving a guard out of its one caller and into the function. <code>sun5dTermTable</code> refuses two Wilson
-phases by name and was <strong>blind to zero</strong>: no term, no loop, an empty table, a clean pass — and
-Part VII's five coordinates and its stability verdict handed to a model that has no α for them to
-be about. It takes the phase count now. And this section's own separation panel was written to
-warn when its sweep belonged to another N, and then assigned the table over the top of the
-warning: the panel's own version of the failure it exists to name.</p><p>What it still cannot do is the honest headline. Every line except the depth and position of the
-minimum is computed at the <strong>symmetric point</strong> of the representative loaded, which is exactly why
-those lines move across the class — the class relation is a shift along the Wilson line. The
-instrument does not yet compute the massless content <strong>at the minimum</strong>, which is what would turn
-the spectrum, the anomaly ledger and the apparent group into statements about the theory. That is
-a gap in the tool, and it is named on the page.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. <strong>7 of the 18 verdicts are the theory's; 11 are the frame's.</strong> Click the other member of the class in the table on the left — the same theory in different clothes — and watch the depth of the vacuum stay exactly where it is while the apparent group, the massless counts, W and the whole anomaly ledger move. The anomaly verdict reads <strong>owes</strong> here and <strong>no subject</strong> there.</dd></dl></div>
+and the two irreducibles coincide there. Both are checked by the matrices.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. In the group <strong>At the minimum</strong> the unbroken group, the three massless counts and the anomaly verdict are tagged <em>the theory</em>; their symmetric-point twins two groups up are tagged <em>the frame</em>. Click the other member of the class: the symmetric-point lines move and the minimum lines do not. The first row of the group says where the vacuum stands — a class-mate, or <em>broken</em> with the angle of the rotated pair.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
