@@ -209,7 +209,46 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Most of what the instrument says about a model is not about the model</h3><dl><dt>what</dt><dd><p>Five sections already answer about a 5D SU(N) model on S¹/Z₂: the builder gives the Wilson-line
+<div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The massless content at the minimum, and the three lines that stop moving</h3><dl><dt>what</dt><dd><p>Every verdict the instrument gave about a 5D SU(N) model — the apparent group, the massless
+vectors, scalars and fermions, the whole anomaly ledger — was read at the <strong>symmetric point</strong> of
+the boundary condition on screen, θ = 0. The dossier of the same morning measured what that
+costs: eleven of eighteen lines move under a gauge-equivalent boundary condition, and the reason
+is that the class relation [p,q,r,s] ~ [p−1,q+1,r+1,s−1] <em>is</em> a shift of the Wilson line by one,
+so a class-mate's symmetric point is this one's other symmetric point.</p><p><code>src/modules/vacuum5d.mjs</code> reads the same three questions <strong>at the minimum</strong>. Gauge the constant
+A_y away and the reflection about y = πR becomes P₁′ = W⁻¹P₁ with W the holonomy (Hosotani;
+Haba–Hosotani–Kawamura §2). A massless four-dimensional mode is a vector fixed by both P₀ and
+P₁′ — for a unitary P₁′ the linear term of a + b·y is killed outright — so the massless content
+of a field with parities (ε₀, ε₁) is a joint eigenspace, and the unbroken group is the commutant
+of {P₀, P₁′}, which Schur names as S(∏ U(m_i)) over the irreducibles of the group they generate:
+four one-dimensional letters and one two-dimensional D(cos πt) per angle at which a pair is
+rotated. When every phase is 0 or 1 that is the parity rule applied to a <strong>class-mate</strong>, the one
+the vacuum rearranges the boundary condition into; strictly inside it is the Hosotani mechanism,
+and no member of the class has that content.</p><p>The anomaly ledger runs over that frame unchanged. <code>anomaly5d.mjs</code> is now written over a
+<em>frame</em> — a list of blocks with a size and a dimension — and the four parity letters are its
+first instance; a rotated pair is a block of dimension two, and the ledger's group theory never
+asked what a block was made of.</p><p>The dossier gains a group <strong>At the minimum</strong>: where the vacuum stands, the group, the three
+counts, the verdict and the channels owing. They are tagged by the same measurement as every
+other line, and they come back <strong>invariant on all 86 multi-member classes of SU(4)…SU(7), with
+two bulk contents</strong> — 81 classes located, 5 declined because they carry three phases or more.</p></dd><dt>why</dt><dd><p>A statement about the theory has to be read where the theory sits, and until today the
+instrument could not read there. The dossier had made the gap visible and said so on the page;
+this closes it, and the honesty card now says what remains: the scalars are tree-level flat
+directions, whether a phase sits at an end and whether two phases coincide is decided to the
+minimiser's tolerance of 10⁻⁶, and past two phases there is no located vacuum.</p></dd><dt>so</dt><dd><p>Two routes and a decoy, because the count is easy to get subtly wrong. <code>vac5Rep</code> produces the
+pieces by representation theory — letters twist into letters, D(c) into D(±c), S²D(c) = (+,+) ⊕
+D(2c² − 1), Λ²D(c) = (−,−) — and <code>vac5Direct</code> builds ρ(P₀) and ρ(P₁′) as matrices on the
+fundamental, adjoint, antisymmetric and symmetric and counts the joint eigenspace by
+elimination. <code>_test_vacuum5d.mjs</code> holds one to the other on 880 (boundary condition, θ,
+representation, twist) cases including three-phase ones; at θ = 0 and θ = 1 it holds the result
+to <code>sp5ZeroModes</code> and <code>an5Ledger</code> of the boundary condition and of its class-mate, character for
+character, on every one-phase boundary condition of SU(4)…SU(7) with three contents.</p><p>The decoy is the count a reader would reach first: read the Kaluza–Klein families at n = 0.
+For SU(2) with P = P′ = diag(+,−) at θ = 1 it gives <strong>two</strong> massless vectors; there is one,
+because W = −1 is central there and the theory is the θ = 0 theory. The per-state bookkeeping
+keeps the Cartan direction at charge zero, and at a broken vacuum that direction mixes with its
+(−,−) partner into a vector of mass θ — the Hosotani W boson. The harness requires the decoy to
+disagree.</p><p>And the enhancement is real rather than an artefact of the tolerance: SU(5) [3,0,0,2] with two
+pairs at the <em>same</em> angle leaves an SU(2) the symmetric point never had, and SU(4) [1,1,1,1]
+with an A-pair at θ and a B-pair at φ = 1 − θ leaves SU(2) too, because a B-pair's P₁ is −σ₃
+and the two irreducibles coincide there. Both are checked by the matrices.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. In the group <strong>At the minimum</strong> the unbroken group, the three massless counts and the anomaly verdict are tagged <em>the theory</em>; their symmetric-point twins two groups up are tagged <em>the frame</em>. Click the other member of the class: the symmetric-point lines move and the minimum lines do not. The first row of the group says where the vacuum stands — a class-mate, or <em>broken</em> with the angle of the rotated pair.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Most of what the instrument says about a model is not about the model</h3><dl><dt>what</dt><dd><p>Five sections already answer about a 5D SU(N) model on S¹/Z₂: the builder gives the Wilson-line
 potential and its vacuum, the spectrum panel the massless content, the anomaly panel the bill,
 Boundary conditions the equivalence class, and Part VII's kernel the closed form when there is a
 single phase. Read one after another they give eighteen numbers about one model.</p><p><strong>Eleven of the eighteen are not properties of the model.</strong> They change when the boundary
@@ -247,47 +286,7 @@ minimum is computed at the <strong>symmetric point</strong> of the representativ
 those lines move across the class — the class relation is a shift along the Wilson line. The
 instrument does not yet compute the massless content <strong>at the minimum</strong>, which is what would turn
 the spectrum, the anomaly ledger and the apparent group into statements about the theory. That is
-a gap in the tool, and it is named on the page.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. <strong>7 of the 18 verdicts are the theory's; 11 are the frame's.</strong> Click the other member of the class in the table on the left — the same theory in different clothes — and watch the depth of the vacuum stay exactly where it is while the apparent group, the massless counts, W and the whole anomaly ledger move. The anomaly verdict reads <strong>owes</strong> here and <strong>no subject</strong> there.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>An outside audit read the deployed source, and five of its five findings were real</h3><dl><dt>what</dt><dd><p>Carles put the public source of <code>ghu-lab</code> and <code>ghu-explorer</code> in front of an outside reader on
-2026-09-03. Five findings came back and every one of them is real:</p><p>1. <strong>The permalink did not carry η or the matter/gauge role</strong>, although both are buttons in the
-calculator and both go into <code>model()</code>. A link therefore reproduced a <em>different model</em> from
-the one whose results were on screen when it was copied — silently, under a button that says
-"the whole state, in the address bar". For a tool whose whole use is that a claim in a letter
-becomes something the reader checks in thirty seconds, this is the worst of the five.
-2. <strong><code>decodeURIComponent</code> ran unguarded at startup.</strong> It throws <code>URIError</code> on a lone <code>%</code>, and it
-ran before <code>render()</code>, so <code>#x=%</code> left the reader a blank page — the same symptom as the
-dead-permalink bug of 2026-08-26 arriving through a different door.
-3. <strong>The card export fired two downloads in one tick</strong>, which is exactly the pattern the LaTeX
-button had already been fixed for: Chrome raises its multiple-download prompt and, declined or
-auto-blocked, drops the second file. The <code>.bib</code> waits 500 ms and the <code>.txt</code> did not.
-4. <strong>The "what this tool cannot tell you" block had gone stale.</strong> It still said "Two models, not
-a framework" and "only the result card as JSON", both true when written and neither true since
-the SU(N) builder and the LaTeX export arrived.
-5. <strong>The site footer said the code is MIT</strong> while both <code>LICENSE</code> files say Apache 2.0.</p></dd><dt>why</dt><dd><p>The audit also says the tool is better tested than usual for its size, and it is: 1 557 checks,
-a real-mouse harness, and a build that refuses to publish red. That is precisely why these
-five matter. Four of them are in the <strong>shell</strong> and the fifth is in <strong>prose</strong>, and neither is
-where the checks were. Every harness in this repository asks whether a number is right; nothing
-asked whether the link that carries the number carries all of it.</p><p>Fixing the permalink turned up a second layer under the reported one. A link carries only what
-differs from the default — the rule the seed and the brane already follow — and <strong>the default is
-not +1</strong>: the anchor content of a group carries η = −1 and role = gauge on some slots, and this
-group does. Encoding against +1 and resetting to +1 would have lost the anchor's own values from
-an untouched model, which is the same bug one level down. Both sides now call one function,
-<code>anchorEtaRole</code>, so they cannot disagree about what an omitted marker means.</p><p>And the marker itself changed once: <code>.e+</code> becomes <code>.e%2B</code> in the address bar, which is the same
-lesson as the pipe that became a comma in the BLKT permalink. It is <code>.em</code> and <code>.ep</code> now — a
-letter naming the value, nothing a mail client can maul.</p></dd><dt>so</dt><dd><p><code>drive.mjs</code> gained the checks that were missing rather than the ones that were easy: a <strong>round
-trip through the real buttons</strong>, with a control leg that strips the markers and requires the
-anchor's own values back — so the round trip cannot pass by never resetting anything — and five
-deliberately broken hashes (<code>x=%</code>, <code>x=%E0%A4%A</code>, <code>su4_ahmn=%ZZ</code>, <code>===</code>, <code>%</code>) under one rule:
-<strong>no string a reader can put in the address bar may stop the interface appearing.</strong>
-113 checks, all green, with the console still clean.</p><p><code>_test_app.mjs</code> gained the source-level half — the guard, the two markers, the shared default,
-the staggered download — and its list of the tool's stated limits now asserts that the stale
-sentences are <strong>gone</strong>, not merely that some sentences are present. A limits block that has
-fallen behind the tool is worse than none: a reader believes it.</p><p>One more thing came out of the same file, and it was the harness looking at itself. The check
-that every id a section reaches for is an id that section creates was reading <code>render</code> and <code>init</code>
-only — and most sections keep their DOM in helpers, so a section written that way was checked
-against nothing and passed. It reads every function on the section now.</p><p>The licence line says Apache 2.0. The scale question the audit raises last is not a bug and is
-not new: our α disagrees with the published α by 1.03× to 2.08× and not by a constant, every TeV
-and GeV inherits that, and the page has said so in its own first paragraph since the day it
-opened.</p></dd><dt>check</dt><dd>open the <strong>Model calculator</strong>, change a representation's η and its matter/gauge role, press <strong>🔗 link</strong> and open the address in a fresh tab — the two toggles are now in the URL and come back. Then put <code>#x=%</code> in the address bar: the instrument still appears. <code>node build/drive.mjs</code> drives both, with a control leg that fails if the reset is not happening.</dd></dl></div>
+a gap in the tool, and it is named on the page.</p></dd><dt>check</dt><dd>open <strong>One model, every verdict</strong> on SU(6) with boundary condition [1, 0, 4, 1] and one bulk Dirac fundamental. <strong>7 of the 18 verdicts are the theory's; 11 are the frame's.</strong> Click the other member of the class in the table on the left — the same theory in different clothes — and watch the depth of the vacuum stay exactly where it is while the apparent group, the massless counts, W and the whole anomaly ledger move. The anomaly verdict reads <strong>owes</strong> here and <strong>no subject</strong> there.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
