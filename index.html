@@ -209,74 +209,63 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Who pays the anomaly bill, and what it costs</h3><dl><dt>what</dt><dd><p><code>src/modules/brane.mjs</code> puts fermions on the two fixed points and holds the choice to <strong>two</strong>
-verdicts at once: the anomaly ledger, recomputed over bulk and brane together, and Part I's
-boundary-mass gate, which says which zero modes that same matter has just given a mass. A brane
-field is a representation of the <strong>local group</strong> — the commutant of the one reflection acting
-there, S(U(n₊₊+n₊₋) × U(n₋₊+n₋₋)) at y = 0 and P₁'s at y = πR — written as a two-block frame, so
-the ledger, the U(1) generators and the charge of a piece are the routines the rest of the
-instrument already uses, on a coarser partition of the same N indices. Nothing here recomputes an
-anomaly: both columns of the bill are <code>an5LedgerOnFrame</code> on one list of pieces, once without the
-brane matter and once with it.</p><p>Three consequences the arithmetic knows and prose does not. A local representation splits into
-several pieces of the unbroken group, so you cannot add "the conjugate of that one mode" and
-stop — the partners panel lists what each candidate <strong>drags in with it</strong>. Its charge under the
-local U(1) is a free rational, which is where Part VI's forced brane charge lives, and
-<code>brSolveCharges</code> solves the channels that are linear in it exactly while reporting the cubic ones
-<strong>apart</strong>, because paying the linear channels does not make a model anomaly-free. And the two
-jobs pull apart: gauge invariance of the mass term fixes the charge to one value, the anomaly
-wants another, so the same field cannot always do both.</p></dd><dt>why</dt><dd><p>The panel next door has ended in an apology for as long as it has existed — a non-zero row is not
-a verdict, because these models carry brane fields and Komori and Maru say right after their
-eq. (76) that one introduces the 4D fermion <em>conjugate</em> to each unwanted zero mode. That is now
-a control rather than a sentence. Part I's own statement of the gate is dimension-blind and is
-used verbatim: in a fully left-handed convention a mode in r_q pairs with a localised Weyl in
-r̄₋q, and — its words — <em>"test de rango, no de conteo"</em>, so what survives is |difference| in each
-class separately, a class being the representation under every block <strong>and</strong> all its U(1) charges.</p></dd><dt>so</dt><dd><p>The control is that a paired class and its conjugate are vectorlike, so the anomaly of what
-survives must equal the anomaly of everything that entered — a rank test over class keys and an
-exact rational ledger agreeing on <strong>8 190 models</strong> of SU(3)…SU(6), which they can only do if the
-keys really are conjugate; the gate lifts something in 6 972 of them. The decoy is the same gate
-on keys that ignore the charges: it <strong>over-lifts on 89</strong> models, which is Part I's warning as a
-number, and <strong>under-lifts on 166</strong>, where a real representation carrying opposite charges makes
-one blind key its own conjugate. Not done, and said on the page: the ledger is the <strong>sum</strong> over
-the two fixed points and not the split between them; the rank test is the <strong>generic</strong> answer, so
-the surviving content is a lower bound; there is no U(1)′ beyond the local group; and the gate is
-read at the symmetric point, because the local groups do not move with the Wilson line but which
-modes are massless does.</p></dd><dt>check</dt><dd>open <strong>Brane matter</strong> and press <em>load Kawamura's SU(5)</em>. The two branes read <strong>SU(5)</strong> at y = 0 and <strong>SU(3) × SU(2) × U(1)</strong> at y = πR — the same orbifold, two different groups. The bill says <em>7 channels owing</em>. In <strong>Who can pair with a given mode</strong>, press <em>add it</em> on the first candidate: the bill goes to <strong>0 → every channel cancels</strong>, the massless count goes to <strong>0</strong>, and the chip beside it says the anomaly of what survives equals the anomaly of everything that entered. Then move that field's charge by one and the same representation lifts nothing.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The exact tower at the vacuum, the W as the unit, and three phases without a grid</h3><dl><dt>what</dt><dd><p>Two things a model builder reads first, and neither existed here yesterday.</p><p><strong>The Kaluza–Klein spectrum at the minimum, exactly.</strong> With the constant A_y gauged away the
-field is periodic up to U′ = P₁′P₀, so its modes are e^{i(n+Θ)y/R} with e^{2πiΘ} an
-eigenvalue of ρ(U′), and the orbifold identifies Θ with −Θ. A conjugate pair strictly inside is
-one tower |n + x|, n ∈ Z; an eigenvalue at 0 splits under P₀ into an even part with n ≥ 0 —
-the massless states, exactly the joint invariants the previous entry counts — and an odd part
-with n ≥ 1; an eigenvalue at ½ is n + ½. The eigenvalues never need a matrix: a (+,+) or (−,−)
-letter is Θ = 0, a (+,−) or (−,+) letter is ½, a pair rotated by t is ±t/2, the adjoint takes
-differences and the tensors sums. <code>vac5Tower</code> and <code>vac5Ladder</code> in <code>vacuum5d.mjs</code>; the spectrum
-section prints the table under its families, and the dossier gains two lines — the lightest
-massive vector m·R, and each bulk field's first massive state in units of it — both invariant
-on the class like the rest of the minimum group.</p><p><strong>Three phases and more, by restarts.</strong> A grid on a 3-torus at the 2-torus's resolution is
-10⁷ evaluations and the panels were right to refuse it. <code>sun5dMinimumRestarts</code> descends from
-every symmetric corner and from a reproducible batch of random points, keeps the deepest, and
-reports how many starts reached it and how many distinct minima were seen; every line that
-reads it carries <em>restarts, not certified</em>. The dossier and the spectrum section fall back to
-it above two phases, so the five three-phase classes of SU(4)…SU(7) that declined yesterday are
-located today — and their minimum lines come back invariant like the other 81.</p></dd><dt>why</dt><dd><p>The families the spectrum section already drew are the potential's multiset and are right for
-it; at a broken vacuum they are wrong at the lowest level of the adjoint and of the symmetric
-tensor, where a Cartan direction the per-state bookkeeping keeps at charge zero has in fact
-become the W of mass t. The same mistake the previous entry's decoy makes, one level up. And
-the ratio a builder wants — the top at 2 m_W from a symmetric tensor — is a statement about
-where the W lives: in SU(3) [2,0,0,1] the W is a letter⊗pair vector at t/2 and the tensor's
-pair⊗pair state sits at t, twice it; in SU(2) the only massive vector is pair⊗pair at t, so
-the same state sits at 1 m_W. The harness pins both.</p></dd><dt>so</dt><dd><p>The tower is held to the potential by differences: summed with the degrees-of-freedom weights
-of Haba–Yamashita, Σ_n n⁻⁵ cos(2πn x) per tower reproduces <code>sun5dV</code> between any two points of
-the torus to 10⁻⁹ on five (boundary condition, content) pairs — a route that shares no code
-with the potential it lands on. The Θ = 0 split and the Θ = ½ count are held to the joint
-counts of the other three twists, which the tower did not use. And the restarts are held to
-the grid where the grid exists: 222 (boundary condition, content) cases of SU(4)…SU(6), the
-same depth to 10⁻⁹ in every one, the deepest value reached by at least ten starts in every
-one. Above two phases there is nothing to hold them to but each other, and the page says so.</p><p>And a third route for the vacuum module itself, in SageMath: <code>tools/vacuum5d_sage_control.py</code>
-rebuilds P₀, P₁′ and the four representation matrices with Sage's own linear algebra and
-recomputes the joint counts and the eigenvalue angles of ρ(P₁′P₀) on ten cases — 200 of 200
-agree with the JavaScript. The first run disagreed 39 times, all on Sage's side: its RDF
-<code>rank()</code> counts the 10⁻¹⁶ pivots cos π and sin π leave behind, and returned a negative nullity
-for a kernel that provably holds the identity. An SVD with a stated tolerance fixed every one;
-the eigenvalues had agreed from the start.</p></dd><dt>check</dt><dd>open <strong>What the model contains</strong> on SU(3) with boundary condition [2, 0, 0, 1], one bulk Dirac fundamental and one Dirac symmetric tensor, at the vacuum. Under the families a second table, <em>The exact tower at this point</em>, gives the lightest massive vector at m·R = θ/2 and every field's first massive state in units of it — the fundamental at 1 m_W, the symmetric tensor's pair⊗pair state at 2 m_W. Then load SU(6) [1, 2, 2, 1] in <strong>One model, every verdict</strong>: three Wilson-line phases, and the depth of the vacuum is a number marked <em>restarts, not certified</em> rather than a declined line, with the minimum lines under it tagged the theory's.</dd></dl></div>
+<div class="entry"><div class="hd"><span class="dt">2026-09-04</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page kept after you left a section, and the gate that counts it</h3><dl><dt>what</dt><dd><p>Twenty-four console errors, all of one kind, and none of them belonged to the section that was
+on screen. <code>init</code> runs on every mount of a section and <code>render</code> on every change of the model, and
+four different places registered a listener on <code>window</code> inside one of the two and never removed
+it. Each copy kept a canvas the shell had already replaced with the next section's markup, so a
+later resize redrew a picture that was no longer in the document.</p><p>The one that threw was the simulator's, and it is the clearest statement of the mistake: it
+guarded on the <strong>model</strong>, which survives leaving the section, rather than on the <strong>canvas</strong>, which
+does not. It was also unnecessary — the shell already re-renders every section on resize. The
+other three never said anything at all: the tower control added four listeners per call, the
+surface panels a pair per mount with a <code>detach</code> nobody had ever called, and the fibre panels one
+repaint-per-resize per visit. Each is now registered <strong>once for the page</strong>, over a record of what
+is actually on screen.</p></dd><dt>why</dt><dd><p>Because no gate here could have found them. The harnesses check the mathematics; <code>shoot.mjs</code>
+photographs a section that renders correctly; <code>drive.mjs</code> presses controls that answer; and
+<code>layout.mjs</code> and <code>extremes.mjs</code> ask what a reader sees. All five ask whether a section is right
+<strong>while it is on screen</strong>. This was about what a section leaves behind when it is not, which has
+no picture and no assertion — only a count.</p><p>So <strong><code>build/leaks.mjs</code></strong> asks the browser itself, through <code>DOMDebugger.getEventListeners</code>, how
+many handlers hang off <code>window</code> and <code>document</code>, walks the whole rail twice, and fails if the
+second walk added any. It found three sources the console never mentioned.</p></dd><dt>so</dt><dd><p>Before: 4 listeners on load, 41 after one walk, 78 after two — 37 leaked per pass — and 27
+errors. After: 4, then 17, then 17, and none. And the two Kaluza–Klein landscapes, which have
+said <em>"drag to turn"</em> since the day they shipped and had never been dragged by any gate, are now
+turned by a real mouse and turned <strong>again</strong> after leaving the section and coming back: the exact
+way rewiring them could have broken the gesture while every other check stayed green.</p></dd><dt>check</dt><dd>open the browser's console, walk the whole rail once, and resize the window on the way. It stays empty. Then open <strong>Simulator</strong>, drag the Kaluza–Klein landscape to turn it, go to any other section and come back, and drag it again — it turns from where you left it, both times.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-04</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Four published models, taken off their pages and run through one engine</h3><dl><dt>what</dt><dd><p><code>src/modules/papers.mjs</code> takes four published five-dimensional gauge-Higgs models off their own
+pages — Kubo–Lim–Yamashita's SU(3), Kawamura's SU(5), Burdman–Nomura's SU(6) and
+Haba–Hosotani–Kawamura's SU(5) — and puts every statement each one prints that this engine can
+compute beside the number it returns. Twenty-eight anchors, each carrying its locator and the
+scope it was read at. <strong>Twenty-four are reproduced, one differs, three are outside this engine
+and say which representation or which file they would need.</strong> The new section loads any of the
+four into the SU(N) builder, so the spectrum, the anomaly ledger, the brane panel and the
+simulator all read somebody else's published model.</p><p>Nothing is fitted. The boundary condition is typed off the paper, the bulk content is typed off
+the paper, and Haba–Yamashita's general formula does the rest. Kubo–Lim–Yamashita's whole eq.
+(33) comes out to <strong>1.7 × 10⁻¹³</strong> over forty-one values of α and five fermion counts; their eq.
+(34), their Table 1 and their eq. (39) follow. Burdman–Nomura's eqs. (38) <strong>and</strong> (39) — ten
+parity assignments, the two halves of one hypermultiplet — both fall out of one line of content,
+because only the product ηη′ is physical and this instrument's single <code>eta</code> names the pair.
+Kawamura's own footnote says the Hosotani mechanism cannot work in his model; the engine returns
+<strong>zero Wilson-line phases</strong>, which is that sentence counted rather than argued.</p></dd><dt>why</dt><dd><p>Every other harness in this repository holds the instrument to <strong>our</strong> reading of a formula. A
+general formula that reproduces four papers it was never fitted to is a general formula; one that
+reproduces only the paper it came from is a transcription. And the point of the SU(N) builder is
+that the model is the input — which is worth nothing to a reader who cannot check that the engine
+behind it is right on models whose answers are already in print.</p></dd><dt>so</dt><dd><p>One row differs, and it is the reason the section exists. <strong>Kubo–Lim–Yamashita's eq. (35)</strong>, the
+Higgs mass-squared at their α = 0 vacuum, reads (9 − N_f) where their own eq. (33) differentiates
+to (9 − 2N_f). The same second derivative taken at their <em>other</em> vacuum reproduces their eq. (39)
+exactly for every N_f; at N_f = 0 eq. (35) agrees too, which fixes the prefactor and leaves the
+fermion term as the only thing in question; and their eq. (34) is a second, independent witness,
+exact with the 4N_f of eq. (32) and wrong by a factor of three with a 2N_f. <strong>None of their
+conclusions moves</strong> — α = 0 is the vacuum only for N_f ≤ 1, where both readings give a positive
+mass — and the row says so, because a defect whose consequences are nil should be reported as
+one. Read off the <strong>rendered page</strong>, not a text extraction, after this house spent 2026-08-30
+proving a correct published formula wrong on a dropped delimiter. Their eq. (34) also needs its
+printed lower limit n = 1 read as n = 0; with n = 1 the closed form is about 222 times too small
+and the sign, which is all their argument uses, is unaffected either way.</p><p>Two conventions are marked rather than hidden. Their eq. (28) puts the singlet zero mode in ψ_R
+and the doublet in ψ_L and this instrument returns the mirror: only the relative chirality is
+physical, the absolute labels follow the γ₅ sign in their eq. (1), and the potential — which
+cannot see γ₅ — pins η = +1 either way. And three of the four papers are <strong>supersymmetric</strong> while
+this engine's one-loop potential is not, so every anchor taken from them is parity linear
+algebra and never their dynamics; the header, each model card and the closing card each say it,
+because <em>"the instrument reproduces Burdman–Nomura"</em> is a sentence somebody will write and it is
+only true of the half that was looked at.</p></dd><dt>check</dt><dd>open <strong>Paper models</strong>, pick <em>Kubo–Lim–Yamashita · SU(3)</em> and read the table: eight rows green and one amber. The amber one is their eq. (35). Move the dial to <strong>N_f = 0</strong> and it turns green — with no fermions the two readings coincide, which is what fixes the prefactor. Move it back and read the sentence under <em>The rows that need a sentence</em>. Then pick <em>Burdman–Nomura · SU(6)</em>, press <strong>Load into the SU(N) builder</strong>, and walk <strong>4D spectrum</strong>, <strong>Anomalies</strong> and <strong>Simulator</strong> on their model.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
@@ -291,7 +280,7 @@ paper keeps working even after the living instrument has been rewritten.</p>
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
-This page was generated on 2026-09-03 and reaches nothing outside itself.</p>
+This page was generated on 2026-09-04 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>

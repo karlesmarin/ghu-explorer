@@ -150,7 +150,63 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Who pays the anomaly bill, and what it costs</h3><dl><dt>what</dt><dd><p><code>src/modules/brane.mjs</code> puts fermions on the two fixed points and holds the choice to <strong>two</strong>
+<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-09-04</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page kept after you left a section, and the gate that counts it</h3><dl><dt>what</dt><dd><p>Twenty-four console errors, all of one kind, and none of them belonged to the section that was
+on screen. <code>init</code> runs on every mount of a section and <code>render</code> on every change of the model, and
+four different places registered a listener on <code>window</code> inside one of the two and never removed
+it. Each copy kept a canvas the shell had already replaced with the next section's markup, so a
+later resize redrew a picture that was no longer in the document.</p><p>The one that threw was the simulator's, and it is the clearest statement of the mistake: it
+guarded on the <strong>model</strong>, which survives leaving the section, rather than on the <strong>canvas</strong>, which
+does not. It was also unnecessary — the shell already re-renders every section on resize. The
+other three never said anything at all: the tower control added four listeners per call, the
+surface panels a pair per mount with a <code>detach</code> nobody had ever called, and the fibre panels one
+repaint-per-resize per visit. Each is now registered <strong>once for the page</strong>, over a record of what
+is actually on screen.</p></dd><dt>why</dt><dd><p>Because no gate here could have found them. The harnesses check the mathematics; <code>shoot.mjs</code>
+photographs a section that renders correctly; <code>drive.mjs</code> presses controls that answer; and
+<code>layout.mjs</code> and <code>extremes.mjs</code> ask what a reader sees. All five ask whether a section is right
+<strong>while it is on screen</strong>. This was about what a section leaves behind when it is not, which has
+no picture and no assertion — only a count.</p><p>So <strong><code>build/leaks.mjs</code></strong> asks the browser itself, through <code>DOMDebugger.getEventListeners</code>, how
+many handlers hang off <code>window</code> and <code>document</code>, walks the whole rail twice, and fails if the
+second walk added any. It found three sources the console never mentioned.</p></dd><dt>so</dt><dd><p>Before: 4 listeners on load, 41 after one walk, 78 after two — 37 leaked per pass — and 27
+errors. After: 4, then 17, then 17, and none. And the two Kaluza–Klein landscapes, which have
+said <em>"drag to turn"</em> since the day they shipped and had never been dragged by any gate, are now
+turned by a real mouse and turned <strong>again</strong> after leaving the section and coming back: the exact
+way rewiring them could have broken the gesture while every other check stayed green.</p></dd><dt>check</dt><dd>open the browser's console, walk the whole rail once, and resize the window on the way. It stays empty. Then open <strong>Simulator</strong>, drag the Kaluza–Klein landscape to turn it, go to any other section and come back, and drag it again — it turns from where you left it, both times.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-04</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Four published models, taken off their pages and run through one engine</h3><dl><dt>what</dt><dd><p><code>src/modules/papers.mjs</code> takes four published five-dimensional gauge-Higgs models off their own
+pages — Kubo–Lim–Yamashita's SU(3), Kawamura's SU(5), Burdman–Nomura's SU(6) and
+Haba–Hosotani–Kawamura's SU(5) — and puts every statement each one prints that this engine can
+compute beside the number it returns. Twenty-eight anchors, each carrying its locator and the
+scope it was read at. <strong>Twenty-four are reproduced, one differs, three are outside this engine
+and say which representation or which file they would need.</strong> The new section loads any of the
+four into the SU(N) builder, so the spectrum, the anomaly ledger, the brane panel and the
+simulator all read somebody else's published model.</p><p>Nothing is fitted. The boundary condition is typed off the paper, the bulk content is typed off
+the paper, and Haba–Yamashita's general formula does the rest. Kubo–Lim–Yamashita's whole eq.
+(33) comes out to <strong>1.7 × 10⁻¹³</strong> over forty-one values of α and five fermion counts; their eq.
+(34), their Table 1 and their eq. (39) follow. Burdman–Nomura's eqs. (38) <strong>and</strong> (39) — ten
+parity assignments, the two halves of one hypermultiplet — both fall out of one line of content,
+because only the product ηη′ is physical and this instrument's single <code>eta</code> names the pair.
+Kawamura's own footnote says the Hosotani mechanism cannot work in his model; the engine returns
+<strong>zero Wilson-line phases</strong>, which is that sentence counted rather than argued.</p></dd><dt>why</dt><dd><p>Every other harness in this repository holds the instrument to <strong>our</strong> reading of a formula. A
+general formula that reproduces four papers it was never fitted to is a general formula; one that
+reproduces only the paper it came from is a transcription. And the point of the SU(N) builder is
+that the model is the input — which is worth nothing to a reader who cannot check that the engine
+behind it is right on models whose answers are already in print.</p></dd><dt>so</dt><dd><p>One row differs, and it is the reason the section exists. <strong>Kubo–Lim–Yamashita's eq. (35)</strong>, the
+Higgs mass-squared at their α = 0 vacuum, reads (9 − N_f) where their own eq. (33) differentiates
+to (9 − 2N_f). The same second derivative taken at their <em>other</em> vacuum reproduces their eq. (39)
+exactly for every N_f; at N_f = 0 eq. (35) agrees too, which fixes the prefactor and leaves the
+fermion term as the only thing in question; and their eq. (34) is a second, independent witness,
+exact with the 4N_f of eq. (32) and wrong by a factor of three with a 2N_f. <strong>None of their
+conclusions moves</strong> — α = 0 is the vacuum only for N_f ≤ 1, where both readings give a positive
+mass — and the row says so, because a defect whose consequences are nil should be reported as
+one. Read off the <strong>rendered page</strong>, not a text extraction, after this house spent 2026-08-30
+proving a correct published formula wrong on a dropped delimiter. Their eq. (34) also needs its
+printed lower limit n = 1 read as n = 0; with n = 1 the closed form is about 222 times too small
+and the sign, which is all their argument uses, is unaffected either way.</p><p>Two conventions are marked rather than hidden. Their eq. (28) puts the singlet zero mode in ψ_R
+and the doublet in ψ_L and this instrument returns the mirror: only the relative chirality is
+physical, the absolute labels follow the γ₅ sign in their eq. (1), and the potential — which
+cannot see γ₅ — pins η = +1 either way. And three of the four papers are <strong>supersymmetric</strong> while
+this engine's one-loop potential is not, so every anchor taken from them is parity linear
+algebra and never their dynamics; the header, each model card and the closing card each say it,
+because <em>"the instrument reproduces Burdman–Nomura"</em> is a sentence somebody will write and it is
+only true of the half that was looked at.</p></dd><dt>check</dt><dd>open <strong>Paper models</strong>, pick <em>Kubo–Lim–Yamashita · SU(3)</em> and read the table: eight rows green and one amber. The amber one is their eq. (35). Move the dial to <strong>N_f = 0</strong> and it turns green — with no fermions the two readings coincide, which is what fixes the prefactor. Move it back and read the sentence under <em>The rows that need a sentence</em>. Then pick <em>Burdman–Nomura · SU(6)</em>, press <strong>Load into the SU(N) builder</strong>, and walk <strong>4D spectrum</strong>, <strong>Anomalies</strong> and <strong>Simulator</strong> on their model.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-03</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Who pays the anomaly bill, and what it costs</h3><dl><dt>what</dt><dd><p><code>src/modules/brane.mjs</code> puts fermions on the two fixed points and holds the choice to <strong>two</strong>
 verdicts at once: the anomaly ledger, recomputed over bulk and brane together, and Part I's
 boundary-mass gate, which says which zero modes that same matter has just given a mass. A brane
 field is a representation of the <strong>local group</strong> — the commutant of the one reflection acting
@@ -1058,7 +1114,7 @@ what the tool displays, with the disjunctive form beside it.</p></dd><dt>check</
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
-This page was generated on 2026-09-03 and reaches nothing outside itself.</p>
+This page was generated on 2026-09-04 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>
