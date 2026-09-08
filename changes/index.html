@@ -150,7 +150,74 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-09-04</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page kept after you left a section, and the gate that counts it</h3><dl><dt>what</dt><dd><p>Twenty-four console errors, all of one kind, and none of them belonged to the section that was
+<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-09-08</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page was still doing after you left a section, and the button that stayed dead</h3><dl><dt>what</dt><dd><p>A section's listeners were given a lifecycle four days ago. Its <strong>timers</strong> were not, and that is
+the same defect one turn later.</p><p>Every long computation here is sliced so the page keeps answering while it runs — the
+calculator's sweep is seventeen seconds of arithmetic in blocks of ten representations, the BLKT
+demonstration walks eight coefficients at 620 ms apiece, and eight more panels defer their work
+the same way. Each slice was scheduled by a section and written as though that section were
+still on screen. It need not be: picking another panel replaces the whole of <code>#section</code>, and the
+pending timer outlives the elements its callback reaches for.</p><p><code>document.getElementById("cSweepNote").textContent = …</code> is then <code>null.textContent</code>. Three panels
+threw it — the calculator, the BLKT demonstration and the literature census — and in the
+demonstration the exception landed <strong>above</strong> the line that clears its <code>running</code> flag. <code>_demo</code>
+opens with <code>if (BLK_S.running) return;</code>, so one mistimed click on the rail left the ▶ button
+dead until the page was reloaded.</p><p>A timer now belongs to the <strong>mount</strong> rather than to the closure that asked for it: <code>ctx.later</code>
+registers it with the shell, and leaving the section cancels every one and calls the section's
+<code>dispose</code>. Ten call sites moved; three panels that keep a flag gating their own button give it
+back there.</p><p>Three smaller things, found on the way. <code>ctx.load()</code> wrote η and role only for the multiplets the
+incoming model <strong>names</strong> and left the others carrying the previous model's, invisibly, at zero
+multiplicity — so adding one back through the catalogue's <code>+</code> returned it wearing the η of a
+model that was no longer loaded. The link button said <code>copied</code> whether or not the clipboard had
+taken it, which is a lie precisely on the readers this page advertises: <code>file://</code> is not a secure
+context in every browser, and the Clipboard API refuses there. And the home page said *"One bulk
+model, eleven computations over it"<em> and </em>"Seven papers"* — it is three models, twenty-seven
+panels and ten records.</p></dd><dt>why</dt><dd><p>Because a null-check at each of the ten call sites would have silenced the exception and <strong>kept</strong>
+the bug. The work would still run, off screen, against a model the reader has since changed, and
+its result would be cached as though it were about what is now on the page. The exception was the
+symptom; the section owning a timer the shell cannot cancel was the defect.</p><p>And because the counting had the same shape as the sentence. <code>_test_site.py</code> already guarded that
+the home page keeps the sentence saying the numbers are not citable; nothing had ever been asked
+whether the page keeps its <strong>arithmetic</strong>. So the counts are no longer written: <code>build_site.py</code>
+reads the section registry and <code>data/series.json</code>, and a new check fails the build if any page
+states a count those two do not support. <code>MODEL_FAMILIES</code> in the registry says which of the six
+families are published models — three — next to where the families are declared, and renaming a
+family now stops the build instead of quietly shrinking the total.</p></dd><dt>so</dt><dd><p><strong><code>build/lifecycle.mjs</code></strong> is the gate, and it does the one thing no other tool here does: it
+starts something long and then walks away, which is what a reader does constantly and what every
+other harness is careful not to do. Nine panels, three claims each — nothing throws, no timer
+outlives its section, and the panel still works when you come back. Pointed at the build that was
+live when it was written it goes red on five of the nine and names the defect: three
+<code>TypeError: Cannot set properties of null (setting 'textContent')</code>.</p><p>Its first version reported six false failures, and the reason is worth keeping. There are two
+shapes of deferred work here and only one can be walked out of: a single block behind a 20 ms
+deferral holds the main thread for seconds and a rail click cannot interrupt it, so the only
+moment a reader can leave is inside that window. Waiting 130 ms and then asserting the caption is
+empty is asserting that a finished computation should be forgotten. Each case now declares when
+it leaves, and reports <strong>NOT IN FLIGHT</strong> rather than passing if it turns out to have abandoned
+nothing.</p><p><code>_test_lifecycle.py</code> is the cheap half and runs on every build: no file under <code>src/sections/</code> may
+call <code>setTimeout</code> directly. The behavioural gate covers the nine panels somebody wrote a case
+for; this one reads all thirty section files, so the next panel to grow a sweep cannot
+reintroduce the defect where no case looks. It flags one more thing, which was a live hole rather
+than a style question: <code>ctx.later</code> claims the mount current at the moment it is <strong>called</strong>, so a
+<code>requestAnimationFrame</code> wrapping it hands the work to the next section's mount, which owns it,
+which runs it. The dossier did exactly that, and the abandoned-work gate caught it as a panel
+that abandoned nothing.</p><p>The build now prints <code>1 964 checks across 47 harnesses</code>, which is where README.md's sentence
+comes from rather than from anyone's memory of it.</p></dd><dt>check</dt><dd>open <strong>Brane-localized kinetic terms</strong>, press ▶, and while the coefficient is still walking click any other section on the rail. Come back and press ▶ again — it runs. Before this it did nothing, for the rest of the page's life. The console stays empty throughout, and the same is true of the calculator's seventeen-second sweep and the literature census.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-07</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>in_window stopped meaning one thing and saying another, and m_h came out as a range</h3><dl><dt>what</dt><dd><p><code>in_window</code> classified with the mass of the small-phase branch and did not say so. On the
+published SU(7) permalink that branch gives 125.85 GeV where the summed potential gives 127.85 —
+one inside the window [125, 127] and the other outside it. A single boolean was deciding between
+them silently.</p><p>Both are now printed, because they are different objects: <code>m_h_summed</code> and <code>in_window_summed</code>
+join the originals, and the source field on the second says which one is being quoted.</p><p>Six modules arrived with it. <strong>rank</strong> — the weighted rank law over SU, SO and Sp. <strong>observables</strong>
+— no state is unobservable in the abstract, only undistinguished by a declared set, with the gate
+that refuses to compare a resolution on a rate against an overlap. <strong>particles</strong> — one row per
+state, with KK parity and a census of channels. <strong>sensitivity</strong> and <strong>robustness</strong> — three
+budgets that never add up. <strong>higgsrate</strong> — the last row of Carson–Okada's Table 1 reproduced,
+1.322 against their 1.32 TeV. <strong>bundle</strong> — the export, with its sources and its disclaimers
+inside the hash rather than beside it.</p><p>And the orbifold section had stopped printing the dimension under the name of the rank.</p></dd><dt>why</dt><dd><p>Because the difference between the two Higgs masses is not a defect to be picked between. H129F
+establishes that it is the domain of the expansion at α ≈ 0.083 — the branch and the sum are
+answering slightly different questions, and at this α the gap between them is the honest size of
+that choice. Printing one of them and calling it <em>the</em> Higgs mass hides a modelling decision
+inside a boolean.</p><p>The same reasoning is why <strong>sensitivity</strong> reports m_h as a <strong>range of 26 GeV</strong> rather than as an
+error bar. An error bar is a statement about measurement; this is three budgets that open a
+convention, and adding them would manufacture a precision nobody has.</p></dd><dt>so</dt><dd><p>The falsifiable list, and a model whose Higgs mass is a range wide enough to contain both the
+measured value and the model's own failure to reach it. That is the instrument working: the
+screen says what is a property of the theory and what is a property of the frame, and here the
+window verdict turned out to be the second thing wearing the first thing's name.</p></dd><dt>check</dt><dd>open the published SU(7) permalink in the <strong>Simulator</strong>. Two Higgs masses are printed, not one — 125.85 GeV from the small-phase branch and 127.85 GeV from the summed potential — and the window verdict names which of the two it is quoting. In <strong>Sensitivity</strong>, the same model's m_h spans 26 GeV across three budgets that are never added together.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-04</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page kept after you left a section, and the gate that counts it</h3><dl><dt>what</dt><dd><p>Twenty-four console errors, all of one kind, and none of them belonged to the section that was
 on screen. <code>init</code> runs on every mount of a section and <code>render</code> on every change of the model, and
 four different places registered a listener on <code>window</code> inside one of the two and never removed
 it. Each copy kept a canvas the shell had already replaced with the next section's markup, so a
@@ -1114,7 +1181,7 @@ what the tool displays, with the disjunctive form beside it.</p></dd><dt>check</
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
-This page was generated on 2026-09-07 and reaches nothing outside itself.</p>
+This page was generated on 2026-09-08 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>
