@@ -209,7 +209,36 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-09-08</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page was still doing after you left a section, and the button that stayed dead</h3><dl><dt>what</dt><dd><p>A section's listeners were given a lifecycle four days ago. Its <strong>timers</strong> were not, and that is
+<div class="entry"><div class="hd"><span class="dt">2026-09-15</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>The vacuum verdict now says what it did not test, and a caveat that was an overclaim came out</h3><dl><dt>what</dt><dd><p>The <code>vacuum</code> result of the hierarchy module used to hand over a three-valued verdict —
+true vacuum, false vacuum, undetermined — and nothing about <strong>what was varied to get it</strong>. It is
+obtained by minimising over the Wilson-line phase <strong>at fixed geometry</strong>. The radius is a field
+too, and it was never varied. Neither was the joint Higgs–radius direction.</p><p>Now the verdict carries its own scope, and the scope travels into <strong>both</strong> exports — the JSON
+card and the plain text:</p><p>scope: { geometry: "fixed",
+varied_fields: ["wilson_line_phase"],
+radius_stability: "not-evaluated",
+joint_higgs_radius_stability: "not-evaluated" }</p><p>And the caveat on the published anchor row of <code>su7_km25</code> used to end *"…and this is the only row
+whose m_h falls inside the 125–127 GeV window"*. That is true by the <strong>approximate</strong> route and
+<strong>false</strong> by the <strong>summed</strong> one, and the two fall on opposite sides of the window. It now says
+that the window is decided by the summed potential, which is what the panel computes.</p></dd><dt>why</dt><dd><p>Because a <code>true-vacuum</code> verdict with no scope reads as a statement about the vacuum of the
+theory, and it is not one — it is a statement about one direction of field space with everything
+else held still. A reader who keeps the exported card keeps the verdict; if the card does not
+carry the hypothesis, the hypothesis is lost at exactly the moment the number starts travelling.</p><p>The caveat had the same shape one level up: a sentence that was true of the route the tool no
+longer uses to decide. Two routes that disagree is not a defect — printing only the one that
+agrees with you is.</p></dd><dt>so</dt><dd><p>The scope is <strong>not prose</strong>. <code>_test_hierarchy.mjs</code> gained a harness of four cases — published
+angular minimum, false angular vacuum, no electroweak breaking, no branch located — and each one
+asserts three things: the verdict still answers the original question, the <strong>JSON</strong> names the
+fixed geometry and both untested stability questions, and the <strong>text</strong> export carries the same
+two sentences. An export that drops the scope fails the build.</p><p><code>build/drive.mjs</code> gained nine assertions through a real mouse holding the panel to the corrected
+caveat: that the anchor header names the summed potential as the window arbiter; that the actual
+anchor spans opposite sides (<code>in_window</code> true, <code>in_window_summed</code> false); that both routes are
+visible with their distinct values; that <strong>only</strong> the summed flag can admit a true angular
+vacuum; that an <strong>unavailable</strong> summed mass gives <em>window undetermined</em> rather than a pass; and
+that the three negative states stay distinguishable — <em>false vacuum</em>, <em>No electroweak breaking</em>,
+<em>No small-phase branch located</em>. Three different reasons for "no" that a single flag would have
+merged.</p><p>Gates on this build: 1 982 checks across 47 harnesses, <code>drive.mjs</code> 206 ok, site 30 ok,
+<code>layout.mjs</code> 0 to fix, <code>extremes.mjs</code> 448 clean renders, <code>leaks.mjs</code> nothing grew with 0 console
+over both walks, <code>lifecycle.mjs</code> 9 panels abandoned with nothing left behind.</p><p>Still not evaluated anywhere: the <strong>radius</strong> direction. The scope now says so, which is the
+honest floor and not a fix.</p></dd><dt>check</dt><dd>open <strong>Hierarchy</strong> with the published anchor row and press ⇩ card. The JSON's <code>vacuum</code> value now carries a <code>scope</code> block — <code>geometry: "fixed"</code>, <code>varied_fields: ["wilson_line_phase"]</code>, <code>radius_stability: "not-evaluated"</code> — and the plain-text export opens the same verdict with <em>"Angular vacuum at fixed geometry."</em> Then read the row's caveat in the model panel: it no longer claims the row is the only one inside the 125–127 GeV window. The panel prints both routes side by side, 125.85 and 127.85 GeV, and they fall on opposite sides.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-08</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page was still doing after you left a section, and the button that stayed dead</h3><dl><dt>what</dt><dd><p>A section's listeners were given a lifecycle four days ago. Its <strong>timers</strong> were not, and that is
 the same defect one turn later.</p><p>Every long computation here is sliced so the page keeps answering while it runs — the
 calculator's sweep is seventeen seconds of arithmetic in blocks of ten representations, the BLKT
 demonstration walks eight coefficients at 620 ms apiece, and eight more panels defer their work
@@ -257,59 +286,24 @@ than a style question: <code>ctx.later</code> claims the mount current at the mo
 <code>requestAnimationFrame</code> wrapping it hands the work to the next section's mount, which owns it,
 which runs it. The dossier did exactly that, and the abandoned-work gate caught it as a panel
 that abandoned nothing.</p><p>The build now prints <code>1 964 checks across 47 harnesses</code>, which is where README.md's sentence
-comes from rather than from anyone's memory of it.</p></dd><dt>check</dt><dd>open <strong>Brane-localized kinetic terms</strong>, press ▶, and while the coefficient is still walking click any other section on the rail. Come back and press ▶ again — it runs. Before this it did nothing, for the rest of the page's life. The console stays empty throughout, and the same is true of the calculator's seventeen-second sweep and the literature census.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-08</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The seven panels that could not export, and the button that had been dead for weeks</h3><dl><dt>what</dt><dd><p>Seven panels hold their own model and could not export it, so this morning both their export
-buttons were hidden — the honest answer, and a loss of capability that was listed here rather
-than left to be discovered. They export now: <code>anomaly5d</code>, <code>bcclass</code>, <code>brane</code>, <code>orbifold</code>,
-<code>relations</code>, <code>spectrum5d</code>, <code>sweep5d</code>.</p><p>Each carries <strong>its own</strong> values, not the builder's. The ledger exports the channels it checked
-and the three-valued verdict, so "no subject" — no massless fermion, nothing to cancel — cannot
-be read as "anomaly-free". The brane panel exports both bills separately, because a content can
-pay the anomaly one without lifting the zero modes, and the mass gate's own control travels with
-the answer. The 4D content exports <strong>where it was read</strong> — the vacuum or a typed Wilson line —
-because the two differ at the lowest level of the adjoint, and a spectrum with no point attached
-is a table with no hypothesis. The class panel exports the <strong>class</strong>, with the reminder that the
-apparent unbroken group is not an invariant of it. The orbifold panel exports a <strong>refusal</strong> as a
-refusal, with no numbers, because an empty alphabet and degree zero look exactly like an answer.
-Relations exports the attribution — whether a row is derived here or read out of Sturmfels and
-Sullivant. The scan exports the whole funnel and both counts, and if it has not been run it says
-so rather than running itself and handing back numbers nobody saw.</p><p>Then pressing the buttons found three defects that were already there.</p><p><strong>The LaTeX button on the published-models panel wrote nothing at all.</strong> <code>papers.mjs</code> prints "a
-triplet leaves ψ₁ᴿ, ψ₂ᴸ, ψ₃ᴸ"; neither superscript was in the glyph table; <code>tex()</code> did what this
-project decided in August that it must — throw rather than drop the character — and the exception
-landed inside a click handler, where it goes to a console nobody has open. The button had been
-dead for as long as that line has existed. <strong>Nine more characters</strong> were one keystroke from the
-same fate: the conjugate bar, the Kaluza-Klein half, the superscript c, the hatted Mandelstam
-variable. And <code>3̄</code> needed a change to <code>tex()</code> rather than to the table: a combining mark modifies
-the character before it, and a map from one code point to one string cannot reach backwards.</p></dd><dt>why</dt><dd><p>Because the alternative to exporting is not neutral. This morning's fix made those seven panels
-honest by taking the buttons away, and honest is where you start, not where you stop: a reader
-who has just watched the anomaly ledger decide something about their model wants to keep it, and
-"we would rather give you nothing than give you the wrong thing" is only the right answer while
-the right thing does not exist yet.</p><p>Four of the seven share the SU(N) builder's model but not its numbers, which is why none of them
-could simply borrow its card. An export naming this boundary condition and then tabulating the
-builder's potential would be about the right model and the wrong computation — the same defect
-the card button had, one level down.</p></dd><dt>so</dt><dd><p><code>drive.mjs</code> now presses <strong>both buttons on every section that holds its own model</strong> and requires
-the two files to name one model. That check is what found the dead button: the panel had had a
-<code>texExport</code> all along, the driver had confirmed the button was VISIBLE, and whether the method
-ran was a different question from whether it existed. Nothing here had ever pressed it.</p><p><code>_test_latex.mjs</code> swept <code>data/</code> and the citation registry and cleared every string in them. The
-string that broke the export was a JS literal, so the sweep now reads the source too — 57 files,
-131 distinct non-ASCII characters, comments stripped. A region a gate filters out is where it is
-blind, and this one was blind to code.</p><p>And with all thirteen panels exporting, the half of the rule that HIDES a button had no section
-left to exercise it. So the driver takes one section's <code>texExport</code> away in the live page, requires
-both buttons to go and pressing them to write nothing, and puts it back — verifying that it did.
-It is the only check in that file which constructs its own failure rather than finding one.</p></dd><dt>check</dt><dd>open <strong>Boundary conditions</strong>, <strong>Orbifold alphabet</strong>, <strong>Relations</strong>, <strong>Scan</strong>, <strong>The 4D content</strong>, <strong>The anomaly ledger</strong> or <strong>Brane matter</strong> and press ⇩ card. Each writes a card about the model that panel is holding, with that panel's own numbers. And on <strong>Four published models</strong>, press ⇩ LaTeX: it writes a file. It had written nothing at all, silently, for as long as that panel has printed the line about ψ₁ᴿ.</dd></dl></div>
+comes from rather than from anyone's memory of it.</p></dd><dt>check</dt><dd>open <strong>Brane-localized kinetic terms</strong>, press ▶, and while the coefficient is still walking click any other section on the rail. Come back and press ▶ again — it runs. Before this it did nothing, for the rest of the page's life. The console stays empty throughout, and the same is true of the calculator's seventeen-second sweep and the literature census.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
 <p>The instrument is one self-contained HTML file with no external request in it, built from a
 Python and JavaScript source tree by <code>build/build_app.py</code>, which re-runs every harness
-and refuses to publish a red build. Each released paper also gets a frozen copy of the tool as it
-stood at publication &mdash; see <a href="editions/index.html">editions</a> &mdash; so a link in a
-paper keeps working even after the living instrument has been rewritten.</p>
+and refuses to publish a red build. It is a living instrument and it is rewritten often; what
+travels with a paper is not this tool but its evidence &mdash; the gate scripts and their archived
+receipts, from which every number in that paper regenerates without this site. What we do keep
+alive is every URL a published record points at &mdash; see <a href="editions/index.html">editions</a>
+&mdash; and the <a href="changes/index.html">log</a> of what has moved since.</p>
 
 </main>
 <footer><div class="in">
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
-This page was generated on 2026-09-08 and reaches nothing outside itself.</p>
+This page was generated on 2026-09-15 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>

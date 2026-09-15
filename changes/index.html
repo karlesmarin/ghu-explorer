@@ -150,7 +150,36 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-09-08</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page was still doing after you left a section, and the button that stayed dead</h3><dl><dt>what</dt><dd><p>A section's listeners were given a lifecycle four days ago. Its <strong>timers</strong> were not, and that is
+<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-09-15</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>The vacuum verdict now says what it did not test, and a caveat that was an overclaim came out</h3><dl><dt>what</dt><dd><p>The <code>vacuum</code> result of the hierarchy module used to hand over a three-valued verdict —
+true vacuum, false vacuum, undetermined — and nothing about <strong>what was varied to get it</strong>. It is
+obtained by minimising over the Wilson-line phase <strong>at fixed geometry</strong>. The radius is a field
+too, and it was never varied. Neither was the joint Higgs–radius direction.</p><p>Now the verdict carries its own scope, and the scope travels into <strong>both</strong> exports — the JSON
+card and the plain text:</p><p>scope: { geometry: "fixed",
+varied_fields: ["wilson_line_phase"],
+radius_stability: "not-evaluated",
+joint_higgs_radius_stability: "not-evaluated" }</p><p>And the caveat on the published anchor row of <code>su7_km25</code> used to end *"…and this is the only row
+whose m_h falls inside the 125–127 GeV window"*. That is true by the <strong>approximate</strong> route and
+<strong>false</strong> by the <strong>summed</strong> one, and the two fall on opposite sides of the window. It now says
+that the window is decided by the summed potential, which is what the panel computes.</p></dd><dt>why</dt><dd><p>Because a <code>true-vacuum</code> verdict with no scope reads as a statement about the vacuum of the
+theory, and it is not one — it is a statement about one direction of field space with everything
+else held still. A reader who keeps the exported card keeps the verdict; if the card does not
+carry the hypothesis, the hypothesis is lost at exactly the moment the number starts travelling.</p><p>The caveat had the same shape one level up: a sentence that was true of the route the tool no
+longer uses to decide. Two routes that disagree is not a defect — printing only the one that
+agrees with you is.</p></dd><dt>so</dt><dd><p>The scope is <strong>not prose</strong>. <code>_test_hierarchy.mjs</code> gained a harness of four cases — published
+angular minimum, false angular vacuum, no electroweak breaking, no branch located — and each one
+asserts three things: the verdict still answers the original question, the <strong>JSON</strong> names the
+fixed geometry and both untested stability questions, and the <strong>text</strong> export carries the same
+two sentences. An export that drops the scope fails the build.</p><p><code>build/drive.mjs</code> gained nine assertions through a real mouse holding the panel to the corrected
+caveat: that the anchor header names the summed potential as the window arbiter; that the actual
+anchor spans opposite sides (<code>in_window</code> true, <code>in_window_summed</code> false); that both routes are
+visible with their distinct values; that <strong>only</strong> the summed flag can admit a true angular
+vacuum; that an <strong>unavailable</strong> summed mass gives <em>window undetermined</em> rather than a pass; and
+that the three negative states stay distinguishable — <em>false vacuum</em>, <em>No electroweak breaking</em>,
+<em>No small-phase branch located</em>. Three different reasons for "no" that a single flag would have
+merged.</p><p>Gates on this build: 1 982 checks across 47 harnesses, <code>drive.mjs</code> 206 ok, site 30 ok,
+<code>layout.mjs</code> 0 to fix, <code>extremes.mjs</code> 448 clean renders, <code>leaks.mjs</code> nothing grew with 0 console
+over both walks, <code>lifecycle.mjs</code> 9 panels abandoned with nothing left behind.</p><p>Still not evaluated anywhere: the <strong>radius</strong> direction. The scope now says so, which is the
+honest floor and not a fix.</p></dd><dt>check</dt><dd>open <strong>Hierarchy</strong> with the published anchor row and press ⇩ card. The JSON's <code>vacuum</code> value now carries a <code>scope</code> block — <code>geometry: "fixed"</code>, <code>varied_fields: ["wilson_line_phase"]</code>, <code>radius_stability: "not-evaluated"</code> — and the plain-text export opens the same verdict with <em>"Angular vacuum at fixed geometry."</em> Then read the row's caveat in the model panel: it no longer claims the row is the only one inside the 125–127 GeV window. The panel prints both routes side by side, 125.85 and 127.85 GeV, and they fall on opposite sides.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-08</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page was still doing after you left a section, and the button that stayed dead</h3><dl><dt>what</dt><dd><p>A section's listeners were given a lifecycle four days ago. Its <strong>timers</strong> were not, and that is
 the same defect one turn later.</p><p>Every long computation here is sliced so the page keeps answering while it runs — the
 calculator's sweep is seventeen seconds of arithmetic in blocks of ten representations, the BLKT
 demonstration walks eight coefficients at 620 ms apiece, and eight more panels defer their work
@@ -1246,7 +1275,7 @@ what the tool displays, with the disjunctive form beside it.</p></dd><dt>check</
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
-This page was generated on 2026-09-08 and reaches nothing outside itself.</p>
+This page was generated on 2026-09-15 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>
