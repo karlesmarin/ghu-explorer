@@ -7,7 +7,7 @@
 <!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
      picture the series is about, and the page still reaches nothing outside itself. -->
 <title>GHU Lab — an instrument for gauge-Higgs unification</title>
-<meta name="description" content="Twenty-seven panels over three published models, every output carrying what is known about it. Runs offline in the browser.">
+<meta name="description" content="Twenty-eight panels over three published models, every output carrying what is known about it. Runs offline in the browser.">
 <style>
 /* site.css — the pages around the instrument.
  *
@@ -160,7 +160,7 @@ to install &mdash; and every number it prints says what is known about it.</p>
 <div class="doors">
   <a class="door" href="app/index.html">
     <b>I read the paper and want to try it &rarr;</b>
-    <span>The instrument. Twenty-seven panels over three published models, each paper's
+    <span>The instrument. Twenty-eight panels over three published models, each paper's
     own model preloaded.</span>
   </a>
   <a class="door" href="papers/index.html">
@@ -174,6 +174,15 @@ to install &mdash; and every number it prints says what is known about it.</p>
   <b>Read this before quoting a number from here.</b>
   Our &alpha; does not reproduce the published &alpha; of N. Haba, T. Yamashita, JHEP 02 (2004) 059 (hep-ph/0401185), eq. (3.20), and the disagreement is <strong>not a constant</strong> &mdash; so it is not a convention that could be absorbed. Every absolute scale on this site (TeV, GeV) inherits that open question and is <strong>not citable</strong> until it closes. What escapes it entirely, because no normalisation enters them: the mass ratio, the bill in eighths, and the two arithmetic laws. The instrument states this in its own header and carries a permanent &ldquo;what this cannot tell you&rdquo; panel; the reasoning is in <a href="changes/index.html">the log</a>.
 </div>
+
+<h2>Explore gravity and gauge fields in 3D</h2>
+<p><a href="app/index.html#s=gravitygauge"><strong>Open Gravity&ndash;gauge &middot; 3D &rarr;</strong></a>
+Change the kinetic deformation and the source position while two interactive plots and a table
+update together. The paired mass tower stays fixed; the source response and Wilson-line kinetic
+scale change. Rotate either plot, or select a point on the response surface to change the inputs.</p>
+<p>This research diagnostic compares a specified family of actions and boundary conditions.
+It does not predict a detected graviton, a Higgs mass or a collider rate.
+<a href="docs/index.html#gravitygauge">Controls, interpretation and limitations &rarr;</a></p>
 
 <h2>Every number carries what is known about it</h2>
 
@@ -238,55 +247,16 @@ that the three negative states stay distinguishable — <em>false vacuum</em>, <
 merged.</p><p>Gates on this build: 1 982 checks across 47 harnesses, <code>drive.mjs</code> 206 ok, site 30 ok,
 <code>layout.mjs</code> 0 to fix, <code>extremes.mjs</code> 448 clean renders, <code>leaks.mjs</code> nothing grew with 0 console
 over both walks, <code>lifecycle.mjs</code> 9 panels abandoned with nothing left behind.</p><p>Still not evaluated anywhere: the <strong>radius</strong> direction. The scope now says so, which is the
-honest floor and not a fix.</p></dd><dt>check</dt><dd>open <strong>Hierarchy</strong> with the published anchor row and press ⇩ card. The JSON's <code>vacuum</code> value now carries a <code>scope</code> block — <code>geometry: "fixed"</code>, <code>varied_fields: ["wilson_line_phase"]</code>, <code>radius_stability: "not-evaluated"</code> — and the plain-text export opens the same verdict with <em>"Angular vacuum at fixed geometry."</em> Then read the row's caveat in the model panel: it no longer claims the row is the only one inside the 125–127 GeV window. The panel prints both routes side by side, 125.85 and 127.85 GeV, and they fall on opposite sides.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-08</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>What the page was still doing after you left a section, and the button that stayed dead</h3><dl><dt>what</dt><dd><p>A section's listeners were given a lifecycle four days ago. Its <strong>timers</strong> were not, and that is
-the same defect one turn later.</p><p>Every long computation here is sliced so the page keeps answering while it runs — the
-calculator's sweep is seventeen seconds of arithmetic in blocks of ten representations, the BLKT
-demonstration walks eight coefficients at 620 ms apiece, and eight more panels defer their work
-the same way. Each slice was scheduled by a section and written as though that section were
-still on screen. It need not be: picking another panel replaces the whole of <code>#section</code>, and the
-pending timer outlives the elements its callback reaches for.</p><p><code>document.getElementById("cSweepNote").textContent = …</code> is then <code>null.textContent</code>. Three panels
-threw it — the calculator, the BLKT demonstration and the literature census — and in the
-demonstration the exception landed <strong>above</strong> the line that clears its <code>running</code> flag. <code>_demo</code>
-opens with <code>if (BLK_S.running) return;</code>, so one mistimed click on the rail left the ▶ button
-dead until the page was reloaded.</p><p>A timer now belongs to the <strong>mount</strong> rather than to the closure that asked for it: <code>ctx.later</code>
-registers it with the shell, and leaving the section cancels every one and calls the section's
-<code>dispose</code>. Ten call sites moved; three panels that keep a flag gating their own button give it
-back there.</p><p>Three smaller things, found on the way. <code>ctx.load()</code> wrote η and role only for the multiplets the
-incoming model <strong>names</strong> and left the others carrying the previous model's, invisibly, at zero
-multiplicity — so adding one back through the catalogue's <code>+</code> returned it wearing the η of a
-model that was no longer loaded. The link button said <code>copied</code> whether or not the clipboard had
-taken it, which is a lie precisely on the readers this page advertises: <code>file://</code> is not a secure
-context in every browser, and the Clipboard API refuses there. And the home page said *"One bulk
-model, eleven computations over it"<em> and </em>"Seven papers"* — it is three models, twenty-seven
-panels and ten records.</p></dd><dt>why</dt><dd><p>Because a null-check at each of the ten call sites would have silenced the exception and <strong>kept</strong>
-the bug. The work would still run, off screen, against a model the reader has since changed, and
-its result would be cached as though it were about what is now on the page. The exception was the
-symptom; the section owning a timer the shell cannot cancel was the defect.</p><p>And because the counting had the same shape as the sentence. <code>_test_site.py</code> already guarded that
-the home page keeps the sentence saying the numbers are not citable; nothing had ever been asked
-whether the page keeps its <strong>arithmetic</strong>. So the counts are no longer written: <code>build_site.py</code>
-reads the section registry and <code>data/series.json</code>, and a new check fails the build if any page
-states a count those two do not support. <code>MODEL_FAMILIES</code> in the registry says which of the six
-families are published models — three — next to where the families are declared, and renaming a
-family now stops the build instead of quietly shrinking the total.</p></dd><dt>so</dt><dd><p><strong><code>build/lifecycle.mjs</code></strong> is the gate, and it does the one thing no other tool here does: it
-starts something long and then walks away, which is what a reader does constantly and what every
-other harness is careful not to do. Nine panels, three claims each — nothing throws, no timer
-outlives its section, and the panel still works when you come back. Pointed at the build that was
-live when it was written it goes red on five of the nine and names the defect: three
-<code>TypeError: Cannot set properties of null (setting 'textContent')</code>.</p><p>Its first version reported six false failures, and the reason is worth keeping. There are two
-shapes of deferred work here and only one can be walked out of: a single block behind a 20 ms
-deferral holds the main thread for seconds and a rail click cannot interrupt it, so the only
-moment a reader can leave is inside that window. Waiting 130 ms and then asserting the caption is
-empty is asserting that a finished computation should be forgotten. Each case now declares when
-it leaves, and reports <strong>NOT IN FLIGHT</strong> rather than passing if it turns out to have abandoned
-nothing.</p><p><code>_test_lifecycle.py</code> is the cheap half and runs on every build: no file under <code>src/sections/</code> may
-call <code>setTimeout</code> directly. The behavioural gate covers the nine panels somebody wrote a case
-for; this one reads all thirty section files, so the next panel to grow a sweep cannot
-reintroduce the defect where no case looks. It flags one more thing, which was a live hole rather
-than a style question: <code>ctx.later</code> claims the mount current at the moment it is <strong>called</strong>, so a
-<code>requestAnimationFrame</code> wrapping it hands the work to the next section's mount, which owns it,
-which runs it. The dossier did exactly that, and the abandoned-work gate caught it as a panel
-that abandoned nothing.</p><p>The build now prints <code>1 964 checks across 47 harnesses</code>, which is where README.md's sentence
-comes from rather than from anyone's memory of it.</p></dd><dt>check</dt><dd>open <strong>Brane-localized kinetic terms</strong>, press ▶, and while the coefficient is still walking click any other section on the rail. Come back and press ▶ again — it runs. Before this it did nothing, for the rest of the page's life. The console stays empty throughout, and the same is true of the calculator's seventeen-second sweep and the literature census.</dd></dl></div>
+honest floor and not a fix.</p></dd><dt>check</dt><dd>open <strong>Hierarchy</strong> with the published anchor row and press ⇩ card. The JSON's <code>vacuum</code> value now carries a <code>scope</code> block — <code>geometry: "fixed"</code>, <code>varied_fields: ["wilson_line_phase"]</code>, <code>radius_stability: "not-evaluated"</code> — and the plain-text export opens the same verdict with <em>"Angular vacuum at fixed geometry."</em> Then read the row's caveat in the model panel: it no longer claims the row is the only one inside the 125–127 GeV window. The panel prints both routes side by side, 125.85 and 127.85 GeV, and they fall on opposite sides.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-15</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Gravity–gauge in 3D — equal masses, different responses</h3><dl><dt>what</dt><dd><p>A new app panel explores a positive gauge kinetic family on a warped interval. Controls,
+two interactive 3D plots, tables, help, result-card and LaTeX exports, and a permalink are all
+part of the existing app. The response surface can show the spectral-weight multiplier or Z.</p></dd><dt>why</dt><dd><p>A complete paired tower of masses and a fixed four-dimensional gauge coupling leave independent
+source-response and Wilson-normalization information. This panel makes that ambiguity testable
+by changing the action while holding those inputs fixed.</p></dd><dt>so</dt><dd><p>The paired tensor-NN/vector-DD spectrum is protected. The vector-NN control has different
+boundaries and moves. p=1.1 has a canonical scalar bulk realization; general p=1 weights are
+kinematic references, with eta=-0.99 recovering minimal RS. No Higgs mass, radion stability or
+collider rate is inferred. The established operator and GHU literature is linked in the panel.</p><p>The normal build runs 104 new checks against independent Python/SciPy references and the
+compiled engine. The new panel passed 20 Chromium interaction/export/layout checks. Read
+<code>docs/h185-gravity-gauge.md</code> for the equations, numerical provenance and full user instructions.</p></dd><dt>check</dt><dd>Open Gravity &amp; gauge · research → Gravity–gauge · 3D, press eta=-0.9 and eta=0, and compare the unchanged paired masses with the changing Wilson scale and response. Rotate the plots or select a point on the surface.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
@@ -303,7 +273,7 @@ alive is every URL a published record points at &mdash; see <a href="editions/in
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
-This page was generated on 2026-09-15 and reaches nothing outside itself.</p>
+This page was generated on 2026-09-16 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>

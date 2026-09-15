@@ -20,17 +20,36 @@ ten Zenodo records, Part IX having gone out as two. It carries three things:
 
 | | |
 |---|---|
-| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | twenty-five sections over three models — and tools for models nobody has written yet, `app/index.html` |
+| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | twenty-eight panels over three models, with tools and research diagnostics, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
-| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, the thirty-four harnesses and the gates |
+| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 49 harnesses and the browser gates |
+
+## Gravity–gauge · 3D
+
+**[Open the new panel](https://karlesmarin.github.io/ghu-explorer/app/index.html#s=gravitygauge)**
+under **Gravity & gauge · research** in the app menu.
+
+- Change the kinetic deformation η, the source position t, or a preset: both 3D plots and the
+  table update in place. Compare equal paired masses with different source responses.
+- Drag to rotate, or use **select point** on the response surface to change the inputs directly.
+  The surface can show the spectral-weight ratio or the kinetic function Z.
+- The panel includes help, reset, its own permalink, and JSON/LaTeX exports of its current model.
+
+This is a diagnostic of a specified action and boundary conditions. The Wilson kinetic scale is
+not a calculated Higgs mass; radion stability and collider rates remain open. No detected graviton
+is claimed. [Quick start and limitations](https://karlesmarin.github.io/ghu-explorer/docs/index.html#gravitygauge)
+· [equations and full guide](https://github.com/karlesmarin/ghu-lab/blob/main/docs/h185-gravity-gauge.md).
+
+The source build runs 2,124 checks across 49 harnesses, including 104 for this feature. Its dedicated
+Chromium harness exercises 20 interaction, export and layout checks.
 
 ## 🔬 The instrument
 
-**Twenty-five sections.** Thirteen answer about three published models — SU(7) on S¹/Z₂ × S¹/Z₂
-(Komori–Maru), SU(4) on T²/Z₂ (AHMN) and Haba–Yamashita's 5D SU(3) on S¹/Z₂ — and twelve take the
-model, the orbifold or the literature as **input**, so they answer about models nobody has
-written. Change a matter content once and every section of its family recomputes.
+**Twenty-eight panels.** The instrument covers three published models — SU(7) on S¹/Z₂ × S¹/Z₂
+(Komori–Maru), SU(4) on T²/Z₂ (AHMN) and Haba–Yamashita's 5D SU(3) on S¹/Z₂ — together with tools
+that take a model, orbifold or literature as input, and a gravity–gauge research diagnostic.
+Change a matter content once and every section of its family recomputes.
 
 The 5D chain runs end to end: a boundary condition → the Wilson-line potential of any SU(N) model
 → its vacuum → the four-dimensional spectrum and the exact Kaluza–Klein towers there → the anomaly
