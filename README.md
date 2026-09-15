@@ -41,7 +41,7 @@ not a calculated Higgs mass; radion stability and collider rates remain open. No
 is claimed. [Quick start and limitations](https://karlesmarin.github.io/ghu-explorer/docs/index.html#gravitygauge)
 · [equations and full guide](https://github.com/karlesmarin/ghu-lab/blob/main/docs/h185-gravity-gauge.md).
 
-The source build runs 2,124 checks across 49 harnesses, including 104 for this feature. Its dedicated
+The source build passed 49 harnesses, including 104 checks for this feature. Its dedicated
 Chromium harness exercises 20 interaction, export and layout checks.
 
 ## 🔬 The instrument
@@ -191,7 +191,8 @@ tolerance in α: the closed form now only locates the basin, and the decision is
 `F` at two numerically refined minima. Both changes are logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
 
-The full source build runs **2,124 checks across 49 harnesses**. The site gate also checks
+The last verified source build passed **49 harnesses**, reporting **2,252 individually counted checks**.
+See the [validation details and counting note](https://github.com/karlesmarin/ghu-lab#-what-is-checked-and-against-what). The site gate also checks
 deliberately broken copies, and `drive.mjs` puts a **real mouse** through the panels
 (208 checks). The gravity–gauge panel has 20 additional Chromium interaction, export and
 layout checks. These tools live in the source tree,
