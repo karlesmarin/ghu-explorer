@@ -150,7 +150,33 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-09-15</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>The vacuum verdict now says what it did not test, and a caveat that was an overclaim came out</h3><dl><dt>what</dt><dd><p>The <code>vacuum</code> result of the hierarchy module used to hand over a three-valued verdict —
+<h1>What changed, when, and why</h1><p class="lead">One stream, newest first. Every entry answers three questions, and the third &mdash; <em>so what</em> &mdash; is the one that decides whether the frozen record has to move.</p><div class="tw"><table><thead><tr><th style="width:120px">severity</th><th>what it is</th><th style="width:150px">new frozen version?</th></tr></thead><tbody><tr><td><strong class="sev-note">note</strong></td><td>a clarification; no number moves</td><td>no</td></tr><tr><td><strong class="sev-extension">extension</strong></td><td>new material; the record is still correct</td><td>no</td></tr><tr><td><strong class="sev-correction">correction</strong></td><td>a number or a statement moves</td><td><strong>yes</strong></td></tr><tr><td><strong class="sev-withdrawal">withdrawal</strong></td><td>a claim is retracted</td><td><strong>yes</strong></td></tr></tbody></table></div><p>Git history is the audit trail underneath; this log is the human layer on top. They are not the same thing and neither replaces the other.</p><div class="entry"><div class="hd"><span class="dt">2026-09-18</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>Every card now says which arithmetic made it, and the text export no longer drops the structured values</h3><dl><dt>what</dt><dd><p>Two things that travelled with every result this tool has ever handed out, and neither was
+right.</p><p><strong>The card did not say which arithmetic produced it.</strong> <code>card.mjs</code> has always documented its
+provenance block as <em>"tool version, build, kernel hash, model id"</em>. The field existed, the
+printer printed it — and nothing ever filled it. Counted on 18 September: seventeen call sites,
+seventeen passing <code>version</code> and <code>build</code>, <strong>none</strong> passing a hash. The line was printed only when
+the value was present, so its absence was invisible. Every card said which release and when it
+was built; no card said against which engine.</p><p>Now the build computes a digest over <code>src/kernel/</code> and <code>src/modules/</code> — the files where the
+arithmetic lives — and injects it into the page; <code>makeCard</code> <strong>refuses to build a card without
+one</strong>, and the text form prints it always.</p><p><strong>The text export silently dropped structured values.</strong> A result whose value is an object —
+<code>coords</code>, the five complete invariants of Part VII Theorem 3; <code>moments</code>; <code>laws</code>; <code>seed</code>;
+<code>vacuum</code> — came out as <code>[object Object]</code>. Five of the nineteen rows of an SU(7) card. The
+<code>.json</code> export beside it was complete the whole time, so the two exports of the same card
+disagreed and only one of them was ever read.</p></dd><dt>why</dt><dd><p>Because a fingerprint is what lets you tell two situations apart that otherwise look identical.
+Same input, same fingerprint, different numbers is a bug worth reporting. Same input,
+<strong>different</strong> fingerprint, different numbers means the engine moved between the two runs, and
+this log says what moved. Without it you cannot distinguish them, and a reader comparing two
+cards months apart has no way to know which of the two they are looking at.</p><p>And because a value that disappears without saying so is worse than one that is absent. A reader
+pasting the plain text into an email lost the five invariants that decide whether two contents
+have the same one-loop potential, with nothing on the page to suggest anything was missing.</p></dd><dt>so</dt><dd><p>The printed record does not move: no number in any paper changes, and the JSON exports were
+always complete. What moves is what an exported card can be trusted to tell you about itself.
+<strong>Any <code>.txt</code> card exported before today is missing its structured rows and cannot name its
+engine</strong>; re-export it. A <code>.json</code> card from before today is complete except for the fingerprint,
+which will read <code>null</code>.</p><p>The seam is now held by a harness of its own, <code>_test_card.mjs</code>: the guard fires, every call site
+in the source passes a hash, the fingerprint in the built page equals the digest of the sources
+on disk — so a stale build is caught rather than published with a fingerprint that lies — and no
+card's text form may contain <code>[object Object]</code>. A full guide to reading a card, on a real
+export, is in [<code>docs/result-card.md</code>](https://github.com/karlesmarin/ghu-lab/blob/main/docs/result-card.md).</p></dd><dt>check</dt><dd>open any panel and press ⇩ card. The header block of the <code>.txt</code> now carries a <code>kernel</code> line — sixteen hex characters — and it was absent from every card the tool has ever exported. Then open a card from <strong>Hierarchy</strong> with a published row and look at <code>coords</code>, <code>moments</code>, <code>laws</code>, <code>seed</code> and <code>vacuum</code>: they now print as JSON. Until today they printed <code>[object Object]</code>, five of nineteen rows, while the <code>.json</code> beside them was complete. If you hold an exported <code>.txt</code> older than this entry, re-export it.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-15</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>The vacuum verdict now says what it did not test, and a caveat that was an overclaim came out</h3><dl><dt>what</dt><dd><p>The <code>vacuum</code> result of the hierarchy module used to hand over a three-valued verdict —
 true vacuum, false vacuum, undetermined — and nothing about <strong>what was varied to get it</strong>. It is
 obtained by minimising over the Wilson-line phase <strong>at fixed geometry</strong>. The radius is a field
 too, and it was never varied. Neither was the joint Higgs–radius direction.</p><p>Now the verdict carries its own scope, and the scope travels into <strong>both</strong> exports — the JSON
@@ -1284,7 +1310,7 @@ what the tool displays, with the disjunctive form beside it.</p></dd><dt>check</
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
-This page was generated on 2026-09-16 and reaches nothing outside itself.</p>
+This page was generated on 2026-09-18 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>

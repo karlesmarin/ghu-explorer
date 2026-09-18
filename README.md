@@ -20,10 +20,10 @@ ten Zenodo records, Part IX having gone out as two. It carries four things:
 
 | | |
 |---|---|
-| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | twenty-eight panels over three models, with tools and research diagnostics, `app/index.html` |
+| 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | twenty-nine panels over three models, with tools and research diagnostics, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
-| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 49 harnesses and the browser gates |
+| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 51 harnesses and the browser gates |
 
 ## 🌌 Gravity–gauge · 3D
 
@@ -41,12 +41,12 @@ not a calculated Higgs mass; radion stability and collider rates remain open. No
 is claimed. [Quick start and limitations](https://karlesmarin.github.io/ghu-explorer/docs/index.html#gravitygauge)
 · [equations and full guide](https://github.com/karlesmarin/ghu-lab/blob/main/docs/h185-gravity-gauge.md).
 
-The source build passed 49 harnesses, including 104 checks for this feature. Its dedicated
+The source build passed 51 harnesses, including 104 checks for this feature. Its dedicated
 Chromium harness exercises 20 interaction, export and layout checks.
 
 ## 🔬 The instrument
 
-**Twenty-eight panels.** The instrument covers three published models — SU(7) on S¹/Z₂ × S¹/Z₂
+**Twenty-nine panels.** The instrument covers three published models — SU(7) on S¹/Z₂ × S¹/Z₂
 (Komori–Maru), SU(4) on T²/Z₂ (AHMN) and Haba–Yamashita's 5D SU(3) on S¹/Z₂ — together with tools
 that take a model, orbifold or literature as input, and a gravity–gauge research diagnostic.
 Change a matter content once and every section of its family recomputes.
@@ -87,8 +87,9 @@ measures, beside the measured ones.
 | 26 | **[🌡️ Brane kinetic terms](https://karlesmarin.github.io/ghu-explorer/app/index.html#s=blkt)** · Haba–Yamashita · AHMN | the tower when the Kaluza–Klein masses stop being n/R: the transcendental mass equation solved in the browser, checked against mpmath at forty digits and against the closed-form limit as the coefficient goes to zero |
 | 27 | **[🌌 Gravity–gauge · 3D](https://karlesmarin.github.io/ghu-explorer/app/index.html#s=gravitygauge)** · gravity and gauge research | **equal paired masses, different responses.** Vary the positive gauge kinetic family through η and move the source through t: two interactive 3D plots and the table update in place. The tensor-NN/vector-DD massive tower stays fixed while source residues and the Wilson-line kinetic scale change at fixed g₄; the vector-NN tower is an unprotected control. Rotate the plots or select a point on the response surface, switch between spectral weight and Z, and save the current model with the card, LaTeX or permalink. Help explains the dimensionless reference masses and the open questions: this panel does not compute a Higgs mass, radion stability or a collider rate |
 | 28 | **[📚 The literature](https://karlesmarin.github.io/ghu-explorer/app/index.html#s=litcensus)** · curation | the reading list behind the series, measured for what each paper publishes and curated for what a person has actually read — with the shortlist of what is worth reading next, and an explicit statement of what a keyword sweep cannot see |
+| 29 | **[🔗 Conjugate boundary conditions](https://karlesmarin.github.io/ghu-explorer/app/index.html#s=cbclass)** · research | **how many there are, under each hypothesis — and the hypothesis is open.** A conjugate boundary condition identifies a field with its charge conjugate under the orbifold reflection, so its zero mode is a four-dimensional Majorana fermion. Grządkowski–Wudka derive the allowed twists and Abe–Goto–Kawamura–Nishikawa name and use the object; **neither takes the quotient**, and the papers that do classify never say *conjugate*. The twists move by **congruence**, P<sub>i</sub> → Ω<sub>i</sub>P<sub>i</sub>Ω<sub>i</sub><sup>T</sup>, not by similarity, and whether the two gauge transformations may be taken independent decides between four classes flat in N and no finite count at all. The panel shows **both branches and chooses neither**, together with the dimension count that would settle it — and the exported card carries the hypothesis beside the number, so a count never travels without the condition it rests on |
 
-The table follows the app menu and counts every runnable panel once. **Conjugate boundary conditions** is a planned, disabled menu entry and is excluded from the 28 runnable panels.
+The table follows the app menu and counts every runnable panel once. **Conjugate boundary conditions** was a disabled menu entry until 15 September 2026 and now opens: it is the twenty-ninth, and it is listed because what it puts on screen is a disagreement it declares rather than a count it cannot support.
 
 **What you can find with it.** Type a content and the hierarchy section answers in one sentence
 — *this content puts the compactification scale here, with this Higgs mass* — and then tells you
