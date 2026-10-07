@@ -7,7 +7,7 @@
 <!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
      picture the series is about, and the page still reaches nothing outside itself. -->
 <title>GHU Lab — an instrument for gauge-Higgs unification</title>
-<meta name="description" content="Interactive GHU research laboratory: model builders, three Simulator modes, seven embedded experiments, neutrino and thermal diagnostics, and experimental comparisons.">
+<meta name="description" content="Interactive GHU research laboratory: model builders, three Simulator modes, eight embedded experiments, neutrino and thermal diagnostics, and experimental comparisons.">
 <style>
 /* site.css — the pages around the instrument.
  *
@@ -162,7 +162,7 @@ engine &mdash; and every result states its assumptions.</p>
   <a class="door" href="app/index.html">
     <b>I read the paper and want to try it &rarr;</b>
     <span>The instrument. Twenty-nine menu sections, three Simulator model
-    modes and seven embedded experiment cards, with integrated diagnostics and
+    modes and eight embedded experiment cards, with integrated diagnostics and
     experimental comparisons.</span>
   </a>
   <a class="door" href="papers/index.html">
@@ -183,9 +183,9 @@ inside those sections; the laboratory also supplies reproducible command-line st
 <div class="tw"><table><thead><tr><th>Area</th><th>Available work</th></tr></thead><tbody>
 <tr><td>🏗️ Models and structure</td><td>SU(7), SU(4), general 5D SU(N), spectra, anomalies, brane matter, inverse design, census and boundary-condition classification.</td></tr>
 <tr><td>🔮 Simulator</td><td>Builder predictions, top-KK Higgs production and the neutrino ring, including CMS HNL comparisons, lifetime, flight and coherence.</td></tr>
-<tr><td>🧪 Experiments</td><td>Flat and warped SU(6), three active flavours, RS anomaly flow, thermal SU(3), integrated transition history and HiggsTools.</td></tr>
+<tr><td>🧪 Experiments</td><td>Flat and warped SU(6), three active flavours, fixed-light-input neutrino paths, RS anomaly flow, thermal SU(3), integrated transition history and HiggsTools.</td></tr>
 <tr><td>📊 Diagnostics</td><td>Robustness, computed Majoron channels, conditional rung bounds, full-potential witnesses and gravity–gauge 3D responses.</td></tr>
-<tr><td>🔬 Batch research</td><td>Higgs coupling/width scans, thermal assumptions and candidate vacuum screening, with archived JSON, commands and figures.</td></tr>
+<tr><td>🔬 Batch research</td><td>Higgs coupling/width scans, thermal assumptions, candidate vacuum screening and 738 neutrino scan points, with archived JSON, commands and figures.</td></tr>
 </tbody></table></div>
 <p><a href="https://github.com/karlesmarin/ghu-lab/blob/main/docs/laboratory-inventory.md">📋 Complete inventory, first experiments and sources of the counts &rarr;</a></p>
 
@@ -205,6 +205,10 @@ figures together with a research summary. New experiments sit inside the existin
 benchmark, with a conditional acoustic spectrum and explicit wall assumptions. Reproducible
 studies compare Higgs coupling/width degeneracy, 160 thermal scenarios and 80 selected full-potential
 vacua. <a href="https://github.com/karlesmarin/ghu-lab/blob/main/docs/research-exploration-2026-10-07.md">Results, figures and limits of the searches &rarr;</a></p>
+
+<h2>🧬 Same light inputs, different neutrino responses</h2>
+<p>In <a href="app/index.html#s=predict">Simulator → Neutrino ring</a>, open <strong>Fixed light inputs</strong>. Five descriptive figures compare heavy centres, pair splitting, raw and normalized vacuum current factors, a magnified difference and the archived IceCube DeepCore 2018 map. Compare the common and unequal deficit presets; save the complete inputs and SVG figures.</p>
+<p><a href="https://github.com/karlesmarin/ghu-lab/blob/main/docs/neutrino-identifiability.md">Method, first experiments and data provenance →</a>. The light inputs are reconstructed. The standard-three-neutrino map is not a ring likelihood and is not combined with NuFIT.</p>
 
 <h2>🌌 Explore gravity and gauge fields in 3D</h2>
 <p><a href="app/index.html#s=gravitygauge"><strong>Open Gravity&ndash;gauge &middot; 3D &rarr;</strong></a>
@@ -263,18 +267,17 @@ numerical evidence and assumptions.</p></dd><dt>so</dt><dd><p>The certificates r
 numerical witnesses, not proven global optima. The thermal acoustic amplitude is sensitive to
 supplied plasma parameters. The scalar fit, thermal SU(3) and candidate SU(7) are separate
 models; no combined GHU likelihood or detector significance is claimed. Existing papers and
-archived editions are unchanged.</p></dd><dt>check</dt><dd>In Simulator select SU(N) builder and a thermal paper case, then vary wall speed and efficiency in the integrated history. In Screen a table open the conditional bounds and witness checks. Run build/build_app.py --browser and tools/plot_exploration.py research/2026-10-07.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-07</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Complete laboratory map, source-derived counts and updated neutrino scope</h3><dl><dt>what</dt><dd><p>🧭 Both READMEs and the public home/docs now expose the complete laboratory: model
-families, three Simulator modes, seven attached experiment cards, integrated analyses,
-optional scientific engines, experimental references and three reproducible batch studies.
-The 29-entry navigation catalog follows the actual registry order. A detailed map and
-source-derived JSON inventory show where each capability lives.
-🧬 The neutrino guides, model explanation and exports acknowledge computed leading
-Majoron light/heavy widths and the separate three-copy flavour reconstruction.
-The unresolved full width, joint fits and uncomputed channels retain their scope.</p></dd><dt>why</dt><dd><p>A navigation count alone hid much of the implemented laboratory. Older descriptions
-also continued to list Majoron phenomenology and all flavour work as wholly uncomputed.</p></dd><dt>so</dt><dd><p>Readers can find and try the current capabilities without inferring them from the
-historical panel count. Emojis and aligned route tables make the map easier to scan.
-Numerical calculations and archived scientific results are unchanged.
-Long paths in the change log wrap within their column on narrow screens.</p></dd><dt>check</dt><dd>Run tools/laboratory_inventory.py, compare both README catalogs with its menu order, run build/build_app.py --browser and build/build_site.py, and follow the laboratory-inventory guide.</dd></dl></div>
+archived editions are unchanged.</p></dd><dt>check</dt><dd>In Simulator select SU(N) builder and a thermal paper case, then vary wall speed and efficiency in the integrated history. In Screen a table open the conditional bounds and witness checks. Run build/build_app.py --browser and tools/plot_exploration.py research/2026-10-07.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-07</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Fixed light inputs, neutrino responses and descriptive experimental-reference figures</h3><dl><dt>what</dt><dd><p>A new experiment reconstructs the same light inputs along nine ring/deficit paths. Five
+descriptive figures display heavy centres, splitting, raw and explicitly normalized vacuum
+current factors, a magnified difference and the archived DeepCore 2018 reference map.
+The fourth study category archives 738 scan points and standalone SVG/PNG/PDF figures.
+Original experimental tables, hashes, independent NumPy/SVD references and browser checks
+accompany the code. Both READMEs, inventory, help and public guides describe the complete route.</p></dd><dt>why</dt><dd><p>Reproducing supplied masses does not make them predictions. A research tool must show which
+additional responses change, where normalization hides an effect, and which data assumptions
+permit a comparison. Captions, scales, fixed-input labels and difference plots make this visible.</p></dd><dt>so</dt><dd><p>This is tree-level, leading-Majorana reconstruction with specified vacuum current normalization.
+DeepCore is an archived standard-three-neutrino reference, not a nonunitary ring fit. No ordering
+odds, extrapolation, ring exclusion or sum with NuFIT is assigned. Detector response, matter,
+weak-input refits and radiative stability remain open. Frozen papers and editions are unchanged.</p></dd><dt>check</dt><dd>In Simulator select Neutrino ring and open Fixed light inputs. Compare the three presets and change the sweep position. Run node _test_neutrino_research.mjs, node tools/neutrino_identifiability.mjs and build/build_app.py --browser.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>🔧 The code</h2>
