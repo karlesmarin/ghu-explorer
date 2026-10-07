@@ -7,7 +7,7 @@
 <!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
      picture the series is about, and the page still reaches nothing outside itself. -->
 <title>GHU Lab — an instrument for gauge-Higgs unification</title>
-<meta name="description" content="Twenty-nine panels over three published models, every output carrying what is known about it. Runs offline in the browser.">
+<meta name="description" content="Interactive GHU research laboratory: model builders, three Simulator modes, seven embedded experiments, neutrino and thermal diagnostics, and experimental comparisons.">
 <style>
 /* site.css — the pages around the instrument.
  *
@@ -112,9 +112,9 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
 .entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
 .entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
 .entry h3{margin:6px 0 10px;font-size:16.5px}
-.entry dl{margin:0;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px minmax(0,1fr);gap:4px 12px}
 .entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
-.entry dd{margin:0}
+.entry dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .entry dd p:last-child{margin-bottom:0}
 .sev-note{color:var(--ink2)}
 .sev-extension{color:var(--green)}
@@ -131,7 +131,7 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
 
 @media (max-width:640px){
   .doors{grid-template-columns:1fr}
-  .dl,.entry dl{grid-template-columns:1fr;gap:2px}
+  .dl,.entry dl{grid-template-columns:minmax(0,1fr);gap:2px}
   .record .k{min-width:0}
   h1{font-size:24px}
 }
@@ -150,7 +150,7 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
   </nav>
 </div></header>
 <main>
-<h1>An instrument for gauge&#8209;Higgs unification, and the papers it comes from</h1>
+<h1>🧪 A research laboratory for gauge&#8209;Higgs unification</h1>
 
 <p class="lead">Pick a model of extra&#8209;dimensional matter and this page computes what it predicts:
 which Wilson&#8209;line domain is legal, where the vacuum sits, the Higgs mass, the anomaly bill, and
@@ -161,8 +161,9 @@ engine &mdash; and every result states its assumptions.</p>
 <div class="doors">
   <a class="door" href="app/index.html">
     <b>I read the paper and want to try it &rarr;</b>
-    <span>The instrument. Twenty-nine panels over three published models, each paper's
-    own model preloaded.</span>
+    <span>The instrument. Twenty-nine menu sections, three Simulator model
+    modes and seven embedded experiment cards, with integrated diagnostics and
+    experimental comparisons.</span>
   </a>
   <a class="door" href="papers/index.html">
     <b>I found the tool and want to know what it is &rarr;</b>
@@ -176,7 +177,19 @@ engine &mdash; and every result states its assumptions.</p>
   Our &alpha; does not reproduce the published &alpha; of N. Haba, T. Yamashita, JHEP 02 (2004) 059 (hep-ph/0401185), eq. (3.20), and the disagreement is <strong>not a constant</strong> &mdash; so it is not a convention that could be absorbed. Every absolute scale on this site (TeV, GeV) inherits that open question and is <strong>not citable</strong> until it closes. What escapes it entirely, because no normalisation enters them: the mass ratio, the bill in eighths, and the two arithmetic laws. The instrument states this in its own header and carries a permanent &ldquo;what this cannot tell you&rdquo; panel; the reasoning is in <a href="changes/index.html">the log</a>.
 </div>
 
-<h2>Choose a research question</h2>
+<h2>🧭 The laboratory at a glance</h2>
+<p>The menu count describes navigation. Model modes, experiment cards and diagnostic tools live
+inside those sections; the laboratory also supplies reproducible command-line studies.</p>
+<div class="tw"><table><thead><tr><th>Area</th><th>Available work</th></tr></thead><tbody>
+<tr><td>🏗️ Models and structure</td><td>SU(7), SU(4), general 5D SU(N), spectra, anomalies, brane matter, inverse design, census and boundary-condition classification.</td></tr>
+<tr><td>🔮 Simulator</td><td>Builder predictions, top-KK Higgs production and the neutrino ring, including CMS HNL comparisons, lifetime, flight and coherence.</td></tr>
+<tr><td>🧪 Experiments</td><td>Flat and warped SU(6), three active flavours, RS anomaly flow, thermal SU(3), integrated transition history and HiggsTools.</td></tr>
+<tr><td>📊 Diagnostics</td><td>Robustness, computed Majoron channels, conditional rung bounds, full-potential witnesses and gravity–gauge 3D responses.</td></tr>
+<tr><td>🔬 Batch research</td><td>Higgs coupling/width scans, thermal assumptions and candidate vacuum screening, with archived JSON, commands and figures.</td></tr>
+</tbody></table></div>
+<p><a href="https://github.com/karlesmarin/ghu-lab/blob/main/docs/laboratory-inventory.md">📋 Complete inventory, first experiments and sources of the counts &rarr;</a></p>
+
+<h2>🔬 Choose a research question</h2>
 <p>Change a parameter, compare with a saved reference, read the key indicators and export the
 figures together with a research summary. New experiments sit inside the existing sections.</p>
 <ul>
@@ -193,7 +206,7 @@ benchmark, with a conditional acoustic spectrum and explicit wall assumptions. R
 studies compare Higgs coupling/width degeneracy, 160 thermal scenarios and 80 selected full-potential
 vacua. <a href="https://github.com/karlesmarin/ghu-lab/blob/main/docs/research-exploration-2026-10-07.md">Results, figures and limits of the searches &rarr;</a></p>
 
-<h2>Explore gravity and gauge fields in 3D</h2>
+<h2>🌌 Explore gravity and gauge fields in 3D</h2>
 <p><a href="app/index.html#s=gravitygauge"><strong>Open Gravity&ndash;gauge &middot; 3D &rarr;</strong></a>
 Change the kinetic deformation and the source position while two interactive plots and a table
 update together. The paired mass tower stays fixed; the source response and Wilson-line kinetic
@@ -202,7 +215,7 @@ scale change. Rotate either plot, or select a point on the response surface to c
 It does not predict a detected graviton, a Higgs mass or a collider rate.
 <a href="docs/index.html#gravitygauge">Controls, interpretation and limitations &rarr;</a></p>
 
-<h2>Every number carries what is known about it</h2>
+<h2>🧾 Every number carries what is known about it</h2>
 
 <p>Four words, and they are fields in the exported result card rather than decoration. This is the
 whole difference between an instrument and a demonstration.</p>
@@ -230,10 +243,10 @@ May 2026 and withdrawn in July on finding it was a corollary of Helset&ndash;Mar
 2020. The algebra was right; the claim about its standing was not. A tool that could not label its
 own output <em>unknown</em> would have no way to do that to itself.</p>
 
-<h2>The series</h2>
+<h2>📚 The series</h2>
 <div class="tw"><table><thead><tr><th style="width:44px">part</th><th>paper</th><th style="width:118px">record</th></tr></thead><tbody><tr><td class="num">I</td><td><a href="papers/part-i/index.html">Anomaly- and Tadpole-Compatible Fermion Completion of Six-Dimensional SU(4) Gauge-Higgs Unification</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21432625">10.5281/zenodo.21432625</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">0 changes</span></td></tr><tr><td class="num">II</td><td><a href="papers/part-ii/index.html">Three Gates to a Quark Generation: An Exact Criterion for Which SU(4) Representations Contain the Standard Model</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21432627">10.5281/zenodo.21432627</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">0 changes</span></td></tr><tr><td class="num">III</td><td><a href="papers/part-iii/index.html">A Centre-Charge Selection Rule for the Wilson-Line Potential: The Fundamental Domain of Gauge-Higgs Unification Is Representation-Dependent</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21438226">10.5281/zenodo.21438226</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">2 changes</span></td></tr><tr><td class="num">IV</td><td><a href="papers/part-iv/index.html">Schur Functions at (1,-1,t,t^{-1}): A Closed Form on the Non-Identity Component of O(4)</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21463000">10.5281/zenodo.21463000</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">1 change</span></td></tr><tr><td class="num">V</td><td><a href="papers/part-v/index.html">What the Higgs Potential Cannot See: Bulk Matter That Cannot Help Select a Boundary Condition</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.21727094">10.5281/zenodo.21727094</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">1 change</span></td></tr><tr><td class="num">VI</td><td><a href="papers/part-vi/index.html">Proton Decay in SU(7) Grand Gauge-Higgs Unification: An Obstruction, Its Minimal Escapes, and the One Row of Their Table 1 That Can Pay for Them</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.22033302">10.5281/zenodo.22033302</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">2 changes</span></td></tr><tr><td class="num">VII</td><td><a href="papers/part-vii/index.html">An Upper Bound on the Compactification Scale of SU(7) Grand Gauge-Higgs Unification, and the Dijet Angular Distribution That Tests It</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.22087251">10.5281/zenodo.22087251</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">3 changes</span></td></tr><tr><td class="num">VIII</td><td><a href="papers/part-viii/index.html">A Certified 2.68 TeV Gap in the Closed-Form Map of the Compactification Scale in SU(7) Grand Gauge-Higgs Unification, and the Invariant Its Two Observables Cannot See</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.22159036">10.5281/zenodo.22159036</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">1 change</span></td></tr><tr><td class="num">IX-A</td><td><a href="papers/part-ix-a/index.html">The Alphabet of Orbifold Boundary Conditions: a boundary condition is a representation, and the alphabet is forced by the fixed-point counts (Part IX-A)</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.22254861">10.5281/zenodo.22254861</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">0 changes</span></td></tr><tr><td class="num">IX-B</td><td><a href="papers/part-ix-b/index.html">An Affine Semigroup from Orbifold Boundary Conditions: cut, phylogenetic and hierarchical models in the unit-weight sector, and weighted configurations beyond them (Part IX-B)</a><br><span style="font-size:13px;color:var(--ink3)"><a href="https://doi.org/10.5281/zenodo.22254863">10.5281/zenodo.22254863</a></span></td><td><span class="chip thm">published</span><br><span style="font-size:12.5px;color:var(--ink3)">0 changes</span></td></tr></tbody></table></div>
 
-<h2>What has moved</h2>
+<h2>📝 What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
 <div class="entry"><div class="hd"><span class="dt">2026-10-07</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Integrated transition history, conditional rung bounds and reproducible assumption studies</h3><dl><dt>what</dt><dd><p>Thermal SU(3) now integrates nucleation, percolation, completion and expanding bubble volumes
@@ -250,25 +263,21 @@ numerical evidence and assumptions.</p></dd><dt>so</dt><dd><p>The certificates r
 numerical witnesses, not proven global optima. The thermal acoustic amplitude is sensitive to
 supplied plasma parameters. The scalar fit, thermal SU(3) and candidate SU(7) are separate
 models; no combined GHU likelihood or detector significance is claimed. Existing papers and
-archived editions are unchanged.</p></dd><dt>check</dt><dd>In Simulator select SU(N) builder and a thermal paper case, then vary wall speed and efficiency in the integrated history. In Screen a table open the conditional bounds and witness checks. Run build/build_app.py --browser and tools/plot_exploration.py research/2026-10-07.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-06</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>GHU research experiments with visual comparisons and scientific backends</h3><dl><dt>what</dt><dd><p>Count a rung now builds its plot automatically. Candidate-seed curves and recurrence checks use the half-integral A4 grid; the published measured-mass fibre and budget comparisons are not transferred to that seed.
-Existing sections gain Maru–Nago SU(6), warped differential gauge running, a three-copy neutrino
-flavour construction, computed Majoron decay channels, RS gauge/baryon anomalies, thermal SU(3)
-with real PhaseTracer bounces, and complete Higgs scenarios evaluated with official HiggsTools
-datasets. Each experiment has a question, key indicators, interpretation, comparison snapshots,
-expandable numerical details, figure selection and a readable research summary export.</p></dd><dt>why</dt><dd><p>A useful calculation must make its inputs, numerical stability and permitted conclusion visible
-together. The existing navigation already provides the right places for these questions.
-New external calculations record program and dataset versions and are rejected when their inputs
-do not match the current scenario. The static reference examples and browser calculations work
-offline; an optional local scientific engine handles new bounce and experimental-fit points.</p></dd><dt>so</dt><dd><p>These are explicitly scoped model calculations. PMNS inputs are reconstructed, not predicted;
-finite-temperature nucleation uses an S3/T proxy, with precision sensitivity displayed; Higgs
-exclusion applies to the specified scalar scenario. Frozen Editions physically omit the local
-network bridge. Source tests, independent SciPy/Sage checks, real external runs and Chromium
-interaction tests accompany the new modules. No paper or archived checkpoint is revised.</p><p>Screen 3 now draws the candidate-seed arithmetic comb instead of leaving its canvas empty.
-Its missing per-rung ceiling certificates and physical reachability are stated explicitly;
-it no longer presents the other seed's ceiling table beside an empty candidate plot.</p></dd><dt>check</dt><dd>Open the experiment shortcuts in Paper models, Brane kinetic terms, Simulator, Anomalies &amp; proton and Collider. Save a reference point, change a parameter and compare the indicators and figures. Run build/build_app.py --browser.</dd></dl></div>
+archived editions are unchanged.</p></dd><dt>check</dt><dd>In Simulator select SU(N) builder and a thermal paper case, then vary wall speed and efficiency in the integrated history. In Screen a table open the conditional bounds and witness checks. Run build/build_app.py --browser and tools/plot_exploration.py research/2026-10-07.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-07</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Complete laboratory map, source-derived counts and updated neutrino scope</h3><dl><dt>what</dt><dd><p>🧭 Both READMEs and the public home/docs now expose the complete laboratory: model
+families, three Simulator modes, seven attached experiment cards, integrated analyses,
+optional scientific engines, experimental references and three reproducible batch studies.
+The 29-entry navigation catalog follows the actual registry order. A detailed map and
+source-derived JSON inventory show where each capability lives.
+🧬 The neutrino guides, model explanation and exports acknowledge computed leading
+Majoron light/heavy widths and the separate three-copy flavour reconstruction.
+The unresolved full width, joint fits and uncomputed channels retain their scope.</p></dd><dt>why</dt><dd><p>A navigation count alone hid much of the implemented laboratory. Older descriptions
+also continued to list Majoron phenomenology and all flavour work as wholly uncomputed.</p></dd><dt>so</dt><dd><p>Readers can find and try the current capabilities without inferring them from the
+historical panel count. Emojis and aligned route tables make the map easier to scan.
+Numerical calculations and archived scientific results are unchanged.
+Long paths in the change log wrap within their column on narrow screens.</p></dd><dt>check</dt><dd>Run tools/laboratory_inventory.py, compare both README catalogs with its menu order, run build/build_app.py --browser and build/build_site.py, and follow the laboratory-inventory guide.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
-<h2>The code</h2>
+<h2>🔧 The code</h2>
 <p>The instrument is one self-contained HTML file with no automatic external requests, built from a
 Python and JavaScript source tree by <code>build/build_app.py</code>, which re-runs every harness
 and refuses to publish a red build. It is a living instrument and it is rewritten often; what

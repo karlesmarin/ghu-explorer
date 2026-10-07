@@ -112,9 +112,9 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
 .entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
 .entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
 .entry h3{margin:6px 0 10px;font-size:16.5px}
-.entry dl{margin:0;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px minmax(0,1fr);gap:4px 12px}
 .entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
-.entry dd{margin:0}
+.entry dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .entry dd p:last-child{margin-bottom:0}
 .sev-note{color:var(--ink2)}
 .sev-extension{color:var(--green)}
@@ -131,7 +131,7 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
 
 @media (max-width:640px){
   .doors{grid-template-columns:1fr}
-  .dl,.entry dl{grid-template-columns:1fr;gap:2px}
+  .dl,.entry dl{grid-template-columns:minmax(0,1fr);gap:2px}
   .record .k{min-width:0}
   h1{font-size:24px}
 }
@@ -164,7 +164,18 @@ numerical evidence and assumptions.</p></dd><dt>so</dt><dd><p>The certificates r
 numerical witnesses, not proven global optima. The thermal acoustic amplitude is sensitive to
 supplied plasma parameters. The scalar fit, thermal SU(3) and candidate SU(7) are separate
 models; no combined GHU likelihood or detector significance is claimed. Existing papers and
-archived editions are unchanged.</p></dd><dt>check</dt><dd>In Simulator select SU(N) builder and a thermal paper case, then vary wall speed and efficiency in the integrated history. In Screen a table open the conditional bounds and witness checks. Run build/build_app.py --browser and tools/plot_exploration.py research/2026-10-07.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-06</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>GHU research experiments with visual comparisons and scientific backends</h3><dl><dt>what</dt><dd><p>Count a rung now builds its plot automatically. Candidate-seed curves and recurrence checks use the half-integral A4 grid; the published measured-mass fibre and budget comparisons are not transferred to that seed.
+archived editions are unchanged.</p></dd><dt>check</dt><dd>In Simulator select SU(N) builder and a thermal paper case, then vary wall speed and efficiency in the integrated history. In Screen a table open the conditional bounds and witness checks. Run build/build_app.py --browser and tools/plot_exploration.py research/2026-10-07.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-07</span><span class="sev-note" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">note</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Complete laboratory map, source-derived counts and updated neutrino scope</h3><dl><dt>what</dt><dd><p>🧭 Both READMEs and the public home/docs now expose the complete laboratory: model
+families, three Simulator modes, seven attached experiment cards, integrated analyses,
+optional scientific engines, experimental references and three reproducible batch studies.
+The 29-entry navigation catalog follows the actual registry order. A detailed map and
+source-derived JSON inventory show where each capability lives.
+🧬 The neutrino guides, model explanation and exports acknowledge computed leading
+Majoron light/heavy widths and the separate three-copy flavour reconstruction.
+The unresolved full width, joint fits and uncomputed channels retain their scope.</p></dd><dt>why</dt><dd><p>A navigation count alone hid much of the implemented laboratory. Older descriptions
+also continued to list Majoron phenomenology and all flavour work as wholly uncomputed.</p></dd><dt>so</dt><dd><p>Readers can find and try the current capabilities without inferring them from the
+historical panel count. Emojis and aligned route tables make the map easier to scan.
+Numerical calculations and archived scientific results are unchanged.
+Long paths in the change log wrap within their column on narrow screens.</p></dd><dt>check</dt><dd>Run tools/laboratory_inventory.py, compare both README catalogs with its menu order, run build/build_app.py --browser and build/build_site.py, and follow the laboratory-inventory guide.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-06</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>GHU research experiments with visual comparisons and scientific backends</h3><dl><dt>what</dt><dd><p>Count a rung now builds its plot automatically. Candidate-seed curves and recurrence checks use the half-integral A4 grid; the published measured-mass fibre and budget comparisons are not transferred to that seed.
 Existing sections gain Maru–Nago SU(6), warped differential gauge running, a three-copy neutrino
 flavour construction, computed Majoron decay channels, RS gauge/baryon anomalies, thermal SU(3)
 with real PhaseTracer bounces, and complete Higgs scenarios evaluated with official HiggsTools
