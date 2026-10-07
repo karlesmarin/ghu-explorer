@@ -17,16 +17,39 @@ experimental references and export the calculation with its assumptions. Browser
 and stored benchmarks run offline; new PhaseTracer and HiggsTools runs use the optional local engine.
 
 This repository is the published home of a **nine-part series** on gauge–Higgs unification —
-ten Zenodo records, Part IX having gone out as two. It carries four things:
+ten Zenodo records, Part IX having gone out as two. Its main entry points are:
 
 | | |
 |---|---|
 | 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | model builders, three Simulator modes, embedded experiments, diagnostics and experimental comparisons, `app/index.html` |
+| 🎬 [**video guide · guía en vídeo**](https://karlesmarin.github.io/ghu-explorer/video/index.html) | English and Spanish narration, subtitles, searchable chapters, transcripts and downloads |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
 | 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 65 harnesses and the browser gates |
 
 <a id="october-2026-research-experiments"></a>
+
+## 🎬 Learn by watching · Aprende con el vídeo
+
+**[English video guide](https://karlesmarin.github.io/ghu-explorer/video/index.html?lang=en) · [Guía en español](https://karlesmarin.github.io/ghu-explorer/video/index.html?lang=es)**
+
+Two narrated Full HD versions demonstrate the real interface in **43 chapters**: all **29 menu
+sections**, the **3 Simulator modes**, the **8 research cards**, integrated diagnostics and exports.
+Each chapter connects a question, a control change and the result, with the assumptions needed
+to interpret it. Use the searchable chapter list, subtitles, transcript and MP4 download. Changing
+language preserves your position within the chapter. Narration is synthetic; the interface keeps
+its English button labels. Recorded on **7 October 2026**.
+
+🇪🇸 **Cómo empezar:** abre la guía, elige Español y busca el módulo. Pulsa Reproducir y usa la
+pantalla completa para leer las gráficas. «Probar esta sección» abre el laboratorio. Cambia una
+entrada, compara la respuesta y exporta los resultados junto con sus hipótesis.
+
+🇬🇧 **Getting started:** open the guide, choose English and find your module. Press Play and use
+full screen for the figures. “Try this section” opens the laboratory. Change one input, compare
+the response, and export the results with their assumptions.
+
+The chapter count describes the tutorial; it does not add new navigation panels or scientific
+models. Representative controls are demonstrated, rather than every possible input combination.
 
 ## 🧭 What the laboratory contains
 
