@@ -13,7 +13,7 @@ model reproduced and falsified on the same screen, with every source named.*
 
 One bulk model, several computations over it, and **every output carrying what is known about
 it** — `theorem`, `verified`, `measured` or `unknown`. One HTML file. Open it; no server, no
-install, no network. Nothing you type leaves the page, and it works from `file://`.
+install or network for the browser calculations and stored benchmarks. Optional PhaseTracer and HiggsTools runs send the chosen numerical scenario to your local engine; no remote service is used.
 
 This repository is the published home of a **nine-part series** on gauge–Higgs unification —
 ten Zenodo records, Part IX having gone out as two. It carries four things:
@@ -23,7 +23,17 @@ ten Zenodo records, Part IX having gone out as two. It carries four things:
 | 🔬 [**the instrument**](https://karlesmarin.github.io/ghu-explorer/app/) | twenty-nine panels over three models, with tools and research diagnostics, `app/index.html` |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
-| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 51 harnesses and the browser gates |
+| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 62 harnesses and the browser gates |
+
+## October 2026 research experiments
+
+SU(6) content, warped running, neutrino flavour and Majoron widths, RS anomalies, thermal GHU and complete Higgs scenarios now fit inside the existing panels. Each experiment starts with a question, key indicators and a reading of the result. Save a reference point, compare changes, export any figure and download a research summary.
+
+[Start here: routes, examples, limitations and local scientific engine](https://github.com/karlesmarin/ghu-lab/blob/main/docs/research-extensions.md).
+
+Screen 3 also draws the candidate-seed arithmetic comb. Its missing per-rung ceilings are reported, so an arithmetic match is not mistaken for a viable model.
+
+Count a rung now draws automatically on entry and after extending the range. Candidate-seed curves use the correct half-integral A4 grid, checked against independent enumeration; published mass fibres and benchmarks are not transferred to that seed.
 
 ## 🌌 Gravity–gauge · 3D
 
@@ -192,7 +202,7 @@ tolerance in α: the closed form now only locates the basin, and the decision is
 `F` at two numerically refined minima. Both changes are logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
 
-The last verified source build passed **49 harnesses**, reporting **2,252 individually counted checks**.
+The October 2026 source build passed **62 harnesses**, reporting **3,738 individually counted checks**, plus all nine browser gates. The counts below describe earlier releases.
 See the [validation details and counting note](https://github.com/karlesmarin/ghu-lab#-what-is-checked-and-against-what). The site gate also checks
 deliberately broken copies, and `drive.mjs` puts a **real mouse** through the panels
 (208 checks). The gravity–gauge panel has 20 additional Chromium interaction, export and

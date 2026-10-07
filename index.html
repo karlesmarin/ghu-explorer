@@ -154,8 +154,9 @@ td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-n
 
 <p class="lead">Pick a model of extra&#8209;dimensional matter and this page computes what it predicts:
 which Wilson&#8209;line domain is legal, where the vacuum sits, the Higgs mass, the anomaly bill, and
-how high the compactification scale can go. It runs entirely in your browser, offline, with nothing
-to install &mdash; and every number it prints says what is known about it.</p>
+how high the compactification scale can go. Its interactive calculations and reference examples run
+offline in your browser. Optional PhaseTracer and HiggsTools calculations use a local scientific
+engine &mdash; and every result states its assumptions.</p>
 
 <div class="doors">
   <a class="door" href="app/index.html">
@@ -174,6 +175,18 @@ to install &mdash; and every number it prints says what is known about it.</p>
   <b>Read this before quoting a number from here.</b>
   Our &alpha; does not reproduce the published &alpha; of N. Haba, T. Yamashita, JHEP 02 (2004) 059 (hep-ph/0401185), eq. (3.20), and the disagreement is <strong>not a constant</strong> &mdash; so it is not a convention that could be absorbed. Every absolute scale on this site (TeV, GeV) inherits that open question and is <strong>not citable</strong> until it closes. What escapes it entirely, because no normalisation enters them: the mass ratio, the bill in eighths, and the two arithmetic laws. The instrument states this in its own header and carries a permanent &ldquo;what this cannot tell you&rdquo; panel; the reasoning is in <a href="changes/index.html">the log</a>.
 </div>
+
+<h2>Choose a research question</h2>
+<p>Change a parameter, compare with a saved reference, read the key indicators and export the
+figures together with a research summary. New experiments sit inside the existing sections.</p>
+<ul>
+<li><a href="app/index.html#s=papers">SU(6) matter content and Wilson-potential convergence</a></li>
+<li><a href="app/index.html#s=predict">Neutrino flavour, Majoron decays and thermal GHU</a></li>
+<li><a href="app/index.html#s=blkt">Warped gauge running and UV brane terms</a></li>
+<li><a href="app/index.html#s=anomalies">RS gauge cancellation and the baryon current</a></li>
+<li><a href="app/index.html#s=collider">Higgs widths, rates and versioned experimental tests</a></li>
+</ul>
+<p><a href="https://github.com/karlesmarin/ghu-lab/blob/main/docs/research-extensions.md">Quick start, interpretation and local scientific engine &rarr;</a></p>
 
 <h2>Explore gravity and gauge fields in 3D</h2>
 <p><a href="app/index.html#s=gravitygauge"><strong>Open Gravity&ndash;gauge &middot; 3D &rarr;</strong></a>
@@ -218,7 +231,22 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-09-18</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>Every card now says which arithmetic made it, and the text export no longer drops the structured values</h3><dl><dt>what</dt><dd><p>Two things that travelled with every result this tool has ever handed out, and neither was
+<div class="entry"><div class="hd"><span class="dt">2026-10-06</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>GHU research experiments with visual comparisons and scientific backends</h3><dl><dt>what</dt><dd><p>Count a rung now builds its plot automatically. Candidate-seed curves and recurrence checks use the half-integral A4 grid; the published measured-mass fibre and budget comparisons are not transferred to that seed.
+Existing sections gain Maru–Nago SU(6), warped differential gauge running, a three-copy neutrino
+flavour construction, computed Majoron decay channels, RS gauge/baryon anomalies, thermal SU(3)
+with real PhaseTracer bounces, and complete Higgs scenarios evaluated with official HiggsTools
+datasets. Each experiment has a question, key indicators, interpretation, comparison snapshots,
+expandable numerical details, figure selection and a readable research summary export.</p></dd><dt>why</dt><dd><p>A useful calculation must make its inputs, numerical stability and permitted conclusion visible
+together. The existing navigation already provides the right places for these questions.
+New external calculations record program and dataset versions and are rejected when their inputs
+do not match the current scenario. The static reference examples and browser calculations work
+offline; an optional local scientific engine handles new bounce and experimental-fit points.</p></dd><dt>so</dt><dd><p>These are explicitly scoped model calculations. PMNS inputs are reconstructed, not predicted;
+finite-temperature nucleation uses an S3/T proxy, with precision sensitivity displayed; Higgs
+exclusion applies to the specified scalar scenario. Frozen Editions physically omit the local
+network bridge. Source tests, independent SciPy/Sage checks, real external runs and Chromium
+interaction tests accompany the new modules. No paper or archived checkpoint is revised.</p><p>Screen 3 now draws the candidate-seed arithmetic comb instead of leaving its canvas empty.
+Its missing per-rung ceiling certificates and physical reachability are stated explicitly;
+it no longer presents the other seed's ceiling table beside an empty candidate plot.</p></dd><dt>check</dt><dd>Open the experiment shortcuts in Paper models, Brane kinetic terms, Simulator, Anomalies &amp; proton and Collider. Save a reference point, change a parameter and compare the indicators and figures. Run build/build_app.py --browser.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-18</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>Every card now says which arithmetic made it, and the text export no longer drops the structured values</h3><dl><dt>what</dt><dd><p>Two things that travelled with every result this tool has ever handed out, and neither was
 right.</p><p><strong>The card did not say which arithmetic produced it.</strong> <code>card.mjs</code> has always documented its
 provenance block as <em>"tool version, build, kernel hash, model id"</em>. The field existed, the
 printer printed it — and nothing ever filled it. Counted on 18 September: seventeen call sites,
@@ -244,40 +272,11 @@ which will read <code>null</code>.</p><p>The seam is now held by a harness of it
 in the source passes a hash, the fingerprint in the built page equals the digest of the sources
 on disk — so a stale build is caught rather than published with a fingerprint that lies — and no
 card's text form may contain <code>[object Object]</code>. A full guide to reading a card, on a real
-export, is in [<code>docs/result-card.md</code>](https://github.com/karlesmarin/ghu-lab/blob/main/docs/result-card.md).</p></dd><dt>check</dt><dd>open any panel and press ⇩ card. The header block of the <code>.txt</code> now carries a <code>kernel</code> line — sixteen hex characters — and it was absent from every card the tool has ever exported. Then open a card from <strong>Hierarchy</strong> with a published row and look at <code>coords</code>, <code>moments</code>, <code>laws</code>, <code>seed</code> and <code>vacuum</code>: they now print as JSON. Until today they printed <code>[object Object]</code>, five of nineteen rows, while the <code>.json</code> beside them was complete. If you hold an exported <code>.txt</code> older than this entry, re-export it.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-15</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>The vacuum verdict now says what it did not test, and a caveat that was an overclaim came out</h3><dl><dt>what</dt><dd><p>The <code>vacuum</code> result of the hierarchy module used to hand over a three-valued verdict —
-true vacuum, false vacuum, undetermined — and nothing about <strong>what was varied to get it</strong>. It is
-obtained by minimising over the Wilson-line phase <strong>at fixed geometry</strong>. The radius is a field
-too, and it was never varied. Neither was the joint Higgs–radius direction.</p><p>Now the verdict carries its own scope, and the scope travels into <strong>both</strong> exports — the JSON
-card and the plain text:</p><p>scope: { geometry: "fixed",
-varied_fields: ["wilson_line_phase"],
-radius_stability: "not-evaluated",
-joint_higgs_radius_stability: "not-evaluated" }</p><p>And the caveat on the published anchor row of <code>su7_km25</code> used to end *"…and this is the only row
-whose m_h falls inside the 125–127 GeV window"*. That is true by the <strong>approximate</strong> route and
-<strong>false</strong> by the <strong>summed</strong> one, and the two fall on opposite sides of the window. It now says
-that the window is decided by the summed potential, which is what the panel computes.</p></dd><dt>why</dt><dd><p>Because a <code>true-vacuum</code> verdict with no scope reads as a statement about the vacuum of the
-theory, and it is not one — it is a statement about one direction of field space with everything
-else held still. A reader who keeps the exported card keeps the verdict; if the card does not
-carry the hypothesis, the hypothesis is lost at exactly the moment the number starts travelling.</p><p>The caveat had the same shape one level up: a sentence that was true of the route the tool no
-longer uses to decide. Two routes that disagree is not a defect — printing only the one that
-agrees with you is.</p></dd><dt>so</dt><dd><p>The scope is <strong>not prose</strong>. <code>_test_hierarchy.mjs</code> gained a harness of four cases — published
-angular minimum, false angular vacuum, no electroweak breaking, no branch located — and each one
-asserts three things: the verdict still answers the original question, the <strong>JSON</strong> names the
-fixed geometry and both untested stability questions, and the <strong>text</strong> export carries the same
-two sentences. An export that drops the scope fails the build.</p><p><code>build/drive.mjs</code> gained nine assertions through a real mouse holding the panel to the corrected
-caveat: that the anchor header names the summed potential as the window arbiter; that the actual
-anchor spans opposite sides (<code>in_window</code> true, <code>in_window_summed</code> false); that both routes are
-visible with their distinct values; that <strong>only</strong> the summed flag can admit a true angular
-vacuum; that an <strong>unavailable</strong> summed mass gives <em>window undetermined</em> rather than a pass; and
-that the three negative states stay distinguishable — <em>false vacuum</em>, <em>No electroweak breaking</em>,
-<em>No small-phase branch located</em>. Three different reasons for "no" that a single flag would have
-merged.</p><p>Gates on this build: 1 982 checks across 47 harnesses, <code>drive.mjs</code> 206 ok, site 30 ok,
-<code>layout.mjs</code> 0 to fix, <code>extremes.mjs</code> 448 clean renders, <code>leaks.mjs</code> nothing grew with 0 console
-over both walks, <code>lifecycle.mjs</code> 9 panels abandoned with nothing left behind.</p><p>Still not evaluated anywhere: the <strong>radius</strong> direction. The scope now says so, which is the
-honest floor and not a fix.</p></dd><dt>check</dt><dd>open <strong>Hierarchy</strong> with the published anchor row and press ⇩ card. The JSON's <code>vacuum</code> value now carries a <code>scope</code> block — <code>geometry: "fixed"</code>, <code>varied_fields: ["wilson_line_phase"]</code>, <code>radius_stability: "not-evaluated"</code> — and the plain-text export opens the same verdict with <em>"Angular vacuum at fixed geometry."</em> Then read the row's caveat in the model panel: it no longer claims the row is the only one inside the 125–127 GeV window. The panel prints both routes side by side, 125.85 and 127.85 GeV, and they fall on opposite sides.</dd></dl></div>
+export, is in [<code>docs/result-card.md</code>](https://github.com/karlesmarin/ghu-lab/blob/main/docs/result-card.md).</p></dd><dt>check</dt><dd>open any panel and press ⇩ card. The header block of the <code>.txt</code> now carries a <code>kernel</code> line — sixteen hex characters — and it was absent from every card the tool has ever exported. Then open a card from <strong>Hierarchy</strong> with a published row and look at <code>coords</code>, <code>moments</code>, <code>laws</code>, <code>seed</code> and <code>vacuum</code>: they now print as JSON. Until today they printed <code>[object Object]</code>, five of nineteen rows, while the <code>.json</code> beside them was complete. If you hold an exported <code>.txt</code> older than this entry, re-export it.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
-<p>The instrument is one self-contained HTML file with no external request in it, built from a
+<p>The instrument is one self-contained HTML file with no automatic external requests, built from a
 Python and JavaScript source tree by <code>build/build_app.py</code>, which re-runs every harness
 and refuses to publish a red build. It is a living instrument and it is rewritten often; what
 travels with a paper is not this tool but its evidence &mdash; the gate scripts and their archived
@@ -290,7 +289,7 @@ alive is every URL a published record points at &mdash; see <a href="editions/in
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
-This page was generated on 2026-09-18 and reaches nothing outside itself.</p>
+This page was generated on 2026-10-07 and reaches nothing outside itself.</p>
 </div></footer>
 </body>
 </html>
