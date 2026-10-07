@@ -185,8 +185,13 @@ figures together with a research summary. New experiments sit inside the existin
 <li><a href="app/index.html#s=blkt">Warped gauge running and UV brane terms</a></li>
 <li><a href="app/index.html#s=anomalies">RS gauge cancellation and the baryon current</a></li>
 <li><a href="app/index.html#s=collider">Higgs widths, rates and versioned experimental tests</a></li>
+<li><a href="app/index.html#s=screen">Conditional SU(7) rung bounds and full-potential vacuum checks</a></li>
 </ul>
 <p><a href="https://github.com/karlesmarin/ghu-lab/blob/main/docs/research-extensions.md">Quick start, interpretation and local scientific engine &rarr;</a></p>
+<p>The October 7 update adds integrated nucleation, percolation and completion to the thermal
+benchmark, with a conditional acoustic spectrum and explicit wall assumptions. Reproducible
+studies compare Higgs coupling/width degeneracy, 160 thermal scenarios and 80 selected full-potential
+vacua. <a href="https://github.com/karlesmarin/ghu-lab/blob/main/docs/research-exploration-2026-10-07.md">Results, figures and limits of the searches &rarr;</a></p>
 
 <h2>Explore gravity and gauge fields in 3D</h2>
 <p><a href="app/index.html#s=gravitygauge"><strong>Open Gravity&ndash;gauge &middot; 3D &rarr;</strong></a>
@@ -231,7 +236,21 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-10-06</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>GHU research experiments with visual comparisons and scientific backends</h3><dl><dt>what</dt><dd><p>Count a rung now builds its plot automatically. Candidate-seed curves and recurrence checks use the half-integral A4 grid; the published measured-mass fibre and budget comparisons are not transferred to that seed.
+<div class="entry"><div class="hd"><span class="dt">2026-10-07</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Integrated transition history, conditional rung bounds and reproducible assumption studies</h3><dl><dt>what</dt><dd><p>Thermal SU(3) now integrates nucleation, percolation, completion and expanding bubble volumes
+from refined PhaseTracer actions. A gated acoustic spectrum retains supplied wall, efficiency,
+expansion and reheating assumptions. Screen a table gains interval certificates for listed
+candidate and published rungs, plus independent full-Fourier witness checks.
+Three reproducible studies archive actual HiggsTools coupling/width profiles, 160 thermal
+scenarios and 80 selected vacuum checks after a budgeted candidate enumeration. Both repository
+READMEs, panel help, public documentation, result-card guidance and the handoff describe the new
+routes, outputs, reproduction commands and limits.</p></dd><dt>why</dt><dd><p>The S3/T proxy does not itself establish percolation or completion. A small-angle moment
+ceiling does not certify the full-potential vacuum. A Higgs width constraint depends on which
+couplings may vary. Each calculation now exposes these distinctions with the corresponding
+numerical evidence and assumptions.</p></dd><dt>so</dt><dd><p>The certificates remain conditional small-angle bounds; selected full-potential survivors are
+numerical witnesses, not proven global optima. The thermal acoustic amplitude is sensitive to
+supplied plasma parameters. The scalar fit, thermal SU(3) and candidate SU(7) are separate
+models; no combined GHU likelihood or detector significance is claimed. Existing papers and
+archived editions are unchanged.</p></dd><dt>check</dt><dd>In Simulator select SU(N) builder and a thermal paper case, then vary wall speed and efficiency in the integrated history. In Screen a table open the conditional bounds and witness checks. Run build/build_app.py --browser and tools/plot_exploration.py research/2026-10-07.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-06</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>GHU research experiments with visual comparisons and scientific backends</h3><dl><dt>what</dt><dd><p>Count a rung now builds its plot automatically. Candidate-seed curves and recurrence checks use the half-integral A4 grid; the published measured-mass fibre and budget comparisons are not transferred to that seed.
 Existing sections gain Maru–Nago SU(6), warped differential gauge running, a three-copy neutrino
 flavour construction, computed Majoron decay channels, RS gauge/baryon anomalies, thermal SU(3)
 with real PhaseTracer bounces, and complete Higgs scenarios evaluated with official HiggsTools
@@ -246,33 +265,7 @@ exclusion applies to the specified scalar scenario. Frozen Editions physically o
 network bridge. Source tests, independent SciPy/Sage checks, real external runs and Chromium
 interaction tests accompany the new modules. No paper or archived checkpoint is revised.</p><p>Screen 3 now draws the candidate-seed arithmetic comb instead of leaving its canvas empty.
 Its missing per-rung ceiling certificates and physical reachability are stated explicitly;
-it no longer presents the other seed's ceiling table beside an empty candidate plot.</p></dd><dt>check</dt><dd>Open the experiment shortcuts in Paper models, Brane kinetic terms, Simulator, Anomalies &amp; proton and Collider. Save a reference point, change a parameter and compare the indicators and figures. Run build/build_app.py --browser.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-09-18</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>Every card now says which arithmetic made it, and the text export no longer drops the structured values</h3><dl><dt>what</dt><dd><p>Two things that travelled with every result this tool has ever handed out, and neither was
-right.</p><p><strong>The card did not say which arithmetic produced it.</strong> <code>card.mjs</code> has always documented its
-provenance block as <em>"tool version, build, kernel hash, model id"</em>. The field existed, the
-printer printed it — and nothing ever filled it. Counted on 18 September: seventeen call sites,
-seventeen passing <code>version</code> and <code>build</code>, <strong>none</strong> passing a hash. The line was printed only when
-the value was present, so its absence was invisible. Every card said which release and when it
-was built; no card said against which engine.</p><p>Now the build computes a digest over <code>src/kernel/</code> and <code>src/modules/</code> — the files where the
-arithmetic lives — and injects it into the page; <code>makeCard</code> <strong>refuses to build a card without
-one</strong>, and the text form prints it always.</p><p><strong>The text export silently dropped structured values.</strong> A result whose value is an object —
-<code>coords</code>, the five complete invariants of Part VII Theorem 3; <code>moments</code>; <code>laws</code>; <code>seed</code>;
-<code>vacuum</code> — came out as <code>[object Object]</code>. Five of the nineteen rows of an SU(7) card. The
-<code>.json</code> export beside it was complete the whole time, so the two exports of the same card
-disagreed and only one of them was ever read.</p></dd><dt>why</dt><dd><p>Because a fingerprint is what lets you tell two situations apart that otherwise look identical.
-Same input, same fingerprint, different numbers is a bug worth reporting. Same input,
-<strong>different</strong> fingerprint, different numbers means the engine moved between the two runs, and
-this log says what moved. Without it you cannot distinguish them, and a reader comparing two
-cards months apart has no way to know which of the two they are looking at.</p><p>And because a value that disappears without saying so is worse than one that is absent. A reader
-pasting the plain text into an email lost the five invariants that decide whether two contents
-have the same one-loop potential, with nothing on the page to suggest anything was missing.</p></dd><dt>so</dt><dd><p>The printed record does not move: no number in any paper changes, and the JSON exports were
-always complete. What moves is what an exported card can be trusted to tell you about itself.
-<strong>Any <code>.txt</code> card exported before today is missing its structured rows and cannot name its
-engine</strong>; re-export it. A <code>.json</code> card from before today is complete except for the fingerprint,
-which will read <code>null</code>.</p><p>The seam is now held by a harness of its own, <code>_test_card.mjs</code>: the guard fires, every call site
-in the source passes a hash, the fingerprint in the built page equals the digest of the sources
-on disk — so a stale build is caught rather than published with a fingerprint that lies — and no
-card's text form may contain <code>[object Object]</code>. A full guide to reading a card, on a real
-export, is in [<code>docs/result-card.md</code>](https://github.com/karlesmarin/ghu-lab/blob/main/docs/result-card.md).</p></dd><dt>check</dt><dd>open any panel and press ⇩ card. The header block of the <code>.txt</code> now carries a <code>kernel</code> line — sixteen hex characters — and it was absent from every card the tool has ever exported. Then open a card from <strong>Hierarchy</strong> with a published row and look at <code>coords</code>, <code>moments</code>, <code>laws</code>, <code>seed</code> and <code>vacuum</code>: they now print as JSON. Until today they printed <code>[object Object]</code>, five of nineteen rows, while the <code>.json</code> beside them was complete. If you hold an exported <code>.txt</code> older than this entry, re-export it.</dd></dl></div>
+it no longer presents the other seed's ceiling table beside an empty candidate plot.</p></dd><dt>check</dt><dd>Open the experiment shortcuts in Paper models, Brane kinetic terms, Simulator, Anomalies &amp; proton and Collider. Save a reference point, change a parameter and compare the indicators and figures. Run build/build_app.py --browser.</dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>The code</h2>
