@@ -2,3 +2,5 @@
 data/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # External records retain their original whitespace and checksums.
 data/lhc_reference/** -text -whitespace
+# Preserve the verified video revision, including VTT line endings.
+video/media/2026-10-08-certification/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol

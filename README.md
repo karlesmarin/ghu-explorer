@@ -6,13 +6,13 @@ The [English certification dossier](https://karlesmarin.github.io/ghu-explorer/d
 
 [Hierarchy](https://karlesmarin.github.io/ghu-explorer/app/#s=hierarchy) compares quartic-logarithmic and full-Fourier results and separates numerical bounds, the recorded W-mass input uncertainty, coupling scenarios and unquantified physical effects. The thermal experiment in [Simulator](https://karlesmarin.github.io/ghu-explorer/app/#s=predict) compares pinned CosmoTransitions and PhaseTracer results for identical potentials and conventions, with cutoff and tolerance studies. These solvers share shooting-method ancestry; agreement is a numerical cross-check.
 
-ATLAS and CMS Higgs-mass references remain separate comparisons. The archived CMS dijet distributions and correlation table include source records and ingestion checks; they are not a combined likelihood or a GHU exclusion. The dossier links the downloadable evidence and reproduction instructions. The existing video guides remain valid for the demonstrated controls; these additional diagnostic cards are documented here and in the dossier.
+ATLAS and CMS Higgs-mass references remain separate comparisons. The archived CMS dijet distributions and correlation table include source records and ingestion checks; they are not a combined likelihood or a GHU exclusion. The dossier links the downloadable evidence and reproduction instructions. The updated English and Spanish video guides demonstrate these diagnostic cards in 139 narrated scenes across 43 chapters. A visible CC · Subtitles button shows or hides captions and retains the choice across seeks and language changes.
 
 ### Formula consistency correction · 8 October 2026
 
 The SU(N) minimizers now report the same V/C normalization as the potential evaluator. Symmetry is computed from the joint commutant at the located point, including boundary vacua. The comb plot, spacing table and download share one conditional-bound applicability check; these bounds do not establish attainable masses or exclude a full theory.
 
-The simulator uses analytic Fourier Hessians and exports the actual coupling, phase, probe status and calculation scope. SageMath interval checks exclude stationarity over the rounding intervals of all five printed SU(7) phases for the implemented potential. The eight fermion coefficient tables have now been reconstructed independently. The literature mismatch remains open: choosing the physical gauge determinant still requires a complete gauge and boundary analysis. [Proof, results and reproduction](https://github.com/karlesmarin/ghu-lab#formula-consistency-corrections--8-october-2026). The bilingual 8 October video revision includes corrected captures, explanations, subtitles and chapter times. The original 7 October guide remains available from the player as a historical version; frozen editions retain their original checkpoint.
+The simulator uses analytic Fourier Hessians and exports the actual coupling, phase, probe status and calculation scope. SageMath interval checks exclude stationarity over the rounding intervals of all five printed SU(7) phases for the implemented potential. The eight fermion coefficient tables have now been reconstructed independently. The literature mismatch remains open: choosing the physical gauge determinant still requires a complete gauge and boundary analysis. [Proof, results and reproduction](https://github.com/karlesmarin/ghu-lab#formula-consistency-corrections--8-october-2026). The bilingual 8 October video revision includes corrected captures, explanations, subtitles and chapter times. The original 7 October guide and earlier 8 October revision remain available from the player as historical versions; frozen editions retain their original checkpoint.
 
 **▶️ [karlesmarin.github.io/ghu-explorer](https://karlesmarin.github.io/ghu-explorer/)**
 
@@ -359,7 +359,7 @@ tolerance in α: the closed form now only locates the basin, and the decision is
 `F` at two numerically refined minima. Both changes are logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
 
-The current October 8 source build passed **69 harnesses**, reporting **7,805 individually counted checks**, plus all thirteen browser gates and **30 site checks**. The new uncertainty budget adds 57 exact/Arb checks; the moment diagnostic has 110 interval checks, and the dataset ingestion has 175 checks. The closure gate has 39 dedicated browser checks; the formula correction has 13 independent SageMath checks. The batch study has twelve separate consistency checks. Both revised videos pass full decoding and caption checks, and the player passes 20 browser checks. The counts below describe earlier releases.
+The current October 8 source build passed **69 harnesses**, reporting **7,805 individually counted checks**, plus all thirteen browser gates and **32 site checks**. The new uncertainty budget adds 57 exact/Arb checks; the moment diagnostic has 110 interval checks, and the dataset ingestion has 175 checks. The closure gate has 39 dedicated browser checks; the formula correction has 13 independent SageMath checks. The batch study has twelve separate consistency checks. Both revised videos pass 2,005 content, timing and full-decoding checks, and the player passes 27 browser checks. The counts below describe earlier releases.
 See the [validation details and counting note](https://github.com/karlesmarin/ghu-lab#-what-is-checked-and-against-what). The site gate also checks
 deliberately broken copies, and `drive.mjs` puts a **real mouse** through the panels
 (208 checks). The gravity–gauge panel has 20 additional Chromium interaction, export and
@@ -439,3 +439,5 @@ What changed and when, including anything that touched a published record, is in
 ---
 
 Carles Marín · `karlesmarin@gmail.com` · Claude (Anthropic) as AI research assistant · Apache 2.0
+
+The [root XML sitemap](https://karlesmarin.github.io/ghu-explorer/sitemap.xml) is generated from current public pages and linked from the main page.
