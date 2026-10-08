@@ -7,3 +7,5 @@ video/media/2026-10-08-certification/** -text whitespace=blank-at-eol,space-befo
 # Preserve downloadable manual hashes across checkouts.
 guide/manual/** -text
 guide/manual/*.pdf binary
+# Preserve original ownership verification responses.
+google*.html -text
