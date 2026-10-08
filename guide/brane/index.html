@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNycgZmlsbD0nIzE2MjAyYScvPjxnIHN0cm9rZT0nIzVmYjZkNCcgc3Ryb2tlLXdpZHRoPScyLjYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgZmlsbD0nbm9uZSc+PHBhdGggZD0nTTggOWgxNicvPjxwYXRoIGQ9J004IDE2aDMuNU0yMC41IDE2SDI0Jy8+PHBhdGggZD0nTTggMjNoMTYnLz48L2c+PC9zdmc+">
+<!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
+     picture the series is about, and the page still reaches nothing outside itself. -->
+<title>Brane matter — GHU Lab</title>
+<meta name="description" content="Who pays that bill, and what it costs: matter on the two fixed points, held at once to the anomaly ledger and to Part I&#x27;s boundary-mass gate.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px minmax(0,1fr);gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:minmax(0,1fr);gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+.guide-hero{padding:1rem 0}.guide-actions,.guide-switch,.guide-toc,.guide-tasks{display:flex;flex-wrap:wrap;gap:.7rem;margin:1rem 0}.guide-actions a,.guide-tasks a{padding:.6rem .8rem;border:1px solid var(--line,#56616e);border-radius:.5rem}.guide-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem}.guide-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;list-style:none;padding:0}.guide-list li{border:1px solid var(--line,#56616e);border-radius:.6rem;padding:1rem}.guide-list h3{margin:.2rem 0}.guide-list p{margin:.5rem 0}.guide-kind{font-size:.85rem;opacity:.8}.guide-content section{scroll-margin-top:7rem;margin:2.5rem 0}.guide-content td{vertical-align:top;min-width:10rem}.guide-formula{overflow-wrap:anywhere;white-space:pre-wrap;font-family:serif;font-size:1.15rem}.guide-search{max-width:100%;width:34rem;padding:.75rem;font:inherit;border:1px solid #718096;border-radius:.4rem}.guide-example{border-left:4px solid #5fb6d4;padding:.1rem 1.2rem;background:rgba(95,182,212,.07)}.guide-content a{overflow-wrap:anywhere}.guide-content :focus-visible{outline:3px solid #5fb6d4;outline-offset:4px}.guide-content [hidden]{display:none!important}.guide-clear{font:inherit;padding:.6rem;cursor:pointer}.guide-content .guide-toc{padding:0;list-style:none}.guide-content h1{overflow-wrap:anywhere}@media(max-width:600px){.guide-content table{font-size:.94rem}.guide-list{grid-template-columns:1fr}.guide-actions a{flex:1 1 140px}.guide-content h1{font-size:1.9rem}}
+
+</style>
+<link rel="canonical" href="https://karlesmarin.github.io/ghu-explorer/guide/brane/index.html">
+<link rel="alternate" hreflang="en" href="https://karlesmarin.github.io/ghu-explorer/guide/brane/index.html">
+<link rel="alternate" hreflang="es" href="https://karlesmarin.github.io/ghu-explorer/guide/es/brane/index.html">
+<link rel="alternate" hreflang="x-default" href="https://karlesmarin.github.io/ghu-explorer/guide/brane/index.html">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../../index.html">GHU Lab</a>
+  <nav>
+    <a href="../../app/index.html">the instrument</a>
+    <a href="../../guide/index.html" aria-current="page">user guide</a>
+    <a href="../../video/index.html">🎬 video guide</a>
+    <a href="../../papers/index.html">the series</a>
+    <a href="../../changes/index.html">changes</a>
+    <a href="../../docs/index.html">docs</a>
+    <a href="../../editions/index.html">editions</a>
+  </nav>
+</div></header>
+<main>
+<article class="guide-content" id="top"><nav aria-label="Breadcrumb"><a href="../../index.html">GHU Lab</a> / <a href="../../guide/index.html">User guide</a></nav><div class="guide-switch" aria-label="Language"><a href="../../guide/brane/index.html" lang="en" hreflang="en" aria-current="page">English</a><a href="../../guide/es/brane/index.html" lang="es" hreflang="es">Español</a></div><header class="guide-hero"><h1>Brane matter</h1><p>Who pays that bill, and what it costs: matter on the two fixed points, held at once to the anomaly ledger and to Part I&#x27;s boundary-mass gate.</p></header><div class="guide-actions"><a href="../../guide/getting-started/index.html">Getting started</a><a href="../../guide/index.html">All guides</a><a href="../../guide/glossary/index.html">Glossary</a><a href="../../guide/manual/ghu-lab-guide-en.pdf">Download manual (PDF)</a></div><div class="guide-actions"><a href="../../app/index.html#s=brane">Open tool</a><a href="../../video/index.html?lang=en#brane">Video chapter</a></div><p class="note">Control names are kept as they appear in the application. Start with a reference, change one input at a time, and retain the assumptions with your result.</p><nav aria-label="On this page"><ul class="guide-toc"><li><a href="#purpose">What this tool is for</a></li><li><a href="#steps">First steps</a></li><li><a href="#controls">Controls and inputs</a></li><li><a href="#outputs">Reading the results</a></li><li><a href="#example">Worked example</a></li><li><a href="#limits">Scope and limitations</a></li><li><a href="#troubleshooting">If something is unclear</a></li><li><a href="#terms">Terms used here</a></li><li><a href="#related">Continue with</a></li><li><a href="#references">Sources and attribution</a></li></ul></nav><section id="purpose"><h2>What this tool is for</h2><p>Use this to add explicit matter at the two orbifold endpoints and inspect two consequences: changes to the anomaly ledger and possible boundary masses for unwanted zero modes. The local groups at the two endpoints can differ, so a representation that is available at one boundary need not be available at the other.</p></section><section id="steps"><h2>First steps</h2><ol><li>Edit the model in SU(N) builder — or press the example to load Kawamura&#x27;s SU(5).</li><li>Read the two branes first: they are different groups whenever the orbifold breaks anything.</li><li>Add fields with the + buttons, or pick a massless mode and let the partners panel say which representations contain its conjugate.</li><li>Press solve to get the local charges that cancel the linear channels.</li></ol></section><section id="controls"><h2>Controls and inputs</h2><div class="tw"><table><thead><tr><th scope="col">Control</th><th scope="col">Meaning</th><th scope="col">Try this</th></tr></thead><tbody><tr><th scope="row">Builder model / Kawamura SU(5) example</th><td>Sets the bulk model and its local boundary groups.</td><td>Load the named example and read both boundary-group headings.</td></tr><tr><th scope="row">Boundary fields and copy counts</th><td>Add representations of the selected endpoint&#x27;s local group.</td><td>Use the partner suggestions for one massless mode before adding fields arbitrarily.</td></tr><tr><th scope="row">Boundary charges and linear-channel solver</th><td>Choose charges or solve the stated linear anomaly conditions. The remaining channels still need inspection.</td><td>Compare the suggested charge with the charge required for a boundary mass.</td></tr><tr><th scope="row">Clear / reset charges / return to builder model</th><td>Restore a defined starting point for a controlled comparison.</td><td>Save the current choices before resetting.</td></tr></tbody></table></div></section><section id="outputs"><h2>Reading the results</h2><div class="tw"><table><thead><tr><th scope="col">Result</th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row">Anomaly ledger before and after</th><td>Shows what the added fields contribute in the same channel conventions.</td></tr><tr><th scope="row">Possible partners</th><td>Lists supported local representations that contain a conjugate partner for the selected mode.</td></tr><tr><th scope="row">Surviving massless content</th><td>The rank-based result assumes generic allowed couplings; the displayed surviving count is a lower bound under that assumption.</td></tr></tbody></table></div><p>Two verdicts, kept apart on purpose: the bill before and after, and the massless count before and after. The same field can pay one and not the other, because the charge that cancels an anomaly is not in general the charge a mass term needs. The surviving count is a lower bound — the rank test assumes generic couplings.</p></section><section id="example"><h2>Worked example</h2><div class="guide-example"><h3>Check the cost of removing a zero mode</h3><ol><li>Load Kawamura&#x27;s SU(5) example.</li><li>Choose an unwanted massless mode and inspect its possible partners.</li><li>Add a suggested local representation.</li><li>Compare both the anomaly ledger and the boundary-mass condition, including its charge.</li></ol><p><b>What to expect:</b> A field that helps one requirement can leave another unresolved. Read the two outcomes independently.</p></div></section><section id="limits"><h2>Scope and limitations</h2><ul><li>Solving the linear anomaly channels does not by itself solve every cubic condition.</li><li>Generic-coupling rank information does not specify actual numerical masses or a complete Yukawa sector.</li><li>Only the supported local representations and boundary-mass conditions are examined.</li></ul></section><section id="troubleshooting"><h2>If something is unclear</h2><h3>The anomaly-solving charge does not permit the desired mass term.</h3><p>Keep both conditions explicit and try another supported completion; do not treat the two charge requirements as interchangeable.</p><h3>A representation introduces additional fields.</h3><p>Read its full local decomposition, then include those fields in the updated ledger and surviving-content count.</p></section><section id="terms"><h2>Terms used here</h2><ul><li><a href="../../guide/glossary/index.html#brane">branes, and the fixed points</a></li><li><a href="../../guide/glossary/index.html#boundary-mass">a boundary mass, and the rank test</a></li><li><a href="../../guide/glossary/index.html#anomaly-channel">the anomaly channels</a></li><li><a href="../../guide/glossary/index.html#chiral">a chiral spectrum</a></li></ul></section><section id="related"><h2>Continue with</h2><ul><li><a href="../../guide/sun5d/index.html">SU(N) builder</a></li><li><a href="../../guide/spectrum5d/index.html">4D spectrum</a></li><li><a href="../../guide/anomaly5d/index.html">Anomalies</a></li><li><a href="../../guide/sweep5d/index.html">Scan</a></li></ul></section><section id="references"><h2>Sources and attribution</h2><ul><li><a href="https://karlesmarin.github.io/ghu-explorer/papers/part-i/index.html">Part I: boundary masses and representation constraints</a></li><li><a href="https://github.com/karlesmarin/ghu-lab/blob/main/src/sections/brane_section.js">Implementation and source attribution</a></li></ul></section><p class="note">Current instrument guide. Archived editions retain their own scope.</p><a href="#top">Back to top</a></article>
+</main>
+<footer><div class="in">
+<p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; built with Claude (Anthropic) as assistant.<br>
+The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
+This page was generated on 2026-10-09 and reaches nothing outside itself.<br>
+<a href="../../sitemap.xml">XML sitemap</a></p>
+</div></footer>
+</body>
+</html>

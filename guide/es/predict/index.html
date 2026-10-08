@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNycgZmlsbD0nIzE2MjAyYScvPjxnIHN0cm9rZT0nIzVmYjZkNCcgc3Ryb2tlLXdpZHRoPScyLjYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgZmlsbD0nbm9uZSc+PHBhdGggZD0nTTggOWgxNicvPjxwYXRoIGQ9J004IDE2aDMuNU0yMC41IDE2SDI0Jy8+PHBhdGggZD0nTTggMjNoMTYnLz48L2c+PC9zdmc+">
+<!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
+     picture the series is about, and the page still reaches nothing outside itself. -->
+<title>Simulator: elegir el modelo — GHU Lab</title>
+<meta name="description" content="Selecciona entre el modelo 5D del constructor, la referencia de producción del Higgs por torre top y el modelo 4D de anillo de neutrinos.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px minmax(0,1fr);gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:minmax(0,1fr);gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+.guide-hero{padding:1rem 0}.guide-actions,.guide-switch,.guide-toc,.guide-tasks{display:flex;flex-wrap:wrap;gap:.7rem;margin:1rem 0}.guide-actions a,.guide-tasks a{padding:.6rem .8rem;border:1px solid var(--line,#56616e);border-radius:.5rem}.guide-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem}.guide-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;list-style:none;padding:0}.guide-list li{border:1px solid var(--line,#56616e);border-radius:.6rem;padding:1rem}.guide-list h3{margin:.2rem 0}.guide-list p{margin:.5rem 0}.guide-kind{font-size:.85rem;opacity:.8}.guide-content section{scroll-margin-top:7rem;margin:2.5rem 0}.guide-content td{vertical-align:top;min-width:10rem}.guide-formula{overflow-wrap:anywhere;white-space:pre-wrap;font-family:serif;font-size:1.15rem}.guide-search{max-width:100%;width:34rem;padding:.75rem;font:inherit;border:1px solid #718096;border-radius:.4rem}.guide-example{border-left:4px solid #5fb6d4;padding:.1rem 1.2rem;background:rgba(95,182,212,.07)}.guide-content a{overflow-wrap:anywhere}.guide-content :focus-visible{outline:3px solid #5fb6d4;outline-offset:4px}.guide-content [hidden]{display:none!important}.guide-clear{font:inherit;padding:.6rem;cursor:pointer}.guide-content .guide-toc{padding:0;list-style:none}.guide-content h1{overflow-wrap:anywhere}@media(max-width:600px){.guide-content table{font-size:.94rem}.guide-list{grid-template-columns:1fr}.guide-actions a{flex:1 1 140px}.guide-content h1{font-size:1.9rem}}
+
+</style>
+<link rel="canonical" href="https://karlesmarin.github.io/ghu-explorer/guide/es/predict/index.html">
+<link rel="alternate" hreflang="en" href="https://karlesmarin.github.io/ghu-explorer/guide/predict/index.html">
+<link rel="alternate" hreflang="es" href="https://karlesmarin.github.io/ghu-explorer/guide/es/predict/index.html">
+<link rel="alternate" hreflang="x-default" href="https://karlesmarin.github.io/ghu-explorer/guide/predict/index.html">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../../../index.html">GHU Lab</a>
+  <nav>
+    <a href="../../../app/index.html">instrumento</a>
+    <a href="../../../guide/es/index.html" aria-current="page">guía de uso</a>
+    <a href="../../../video/index.html">🎬 vídeo</a>
+    <a href="../../../papers/index.html">papers</a>
+    <a href="../../../changes/index.html">cambios</a>
+    <a href="../../../docs/index.html">documentación</a>
+    <a href="../../../editions/index.html">ediciones</a>
+  </nav>
+</div></header>
+<main>
+<article class="guide-content" id="top"><nav aria-label="Migas de pan"><a href="../../../index.html">GHU Lab</a> / <a href="../../../guide/es/index.html">Guía de uso</a></nav><div class="guide-switch" aria-label="Idioma"><a href="../../../guide/predict/index.html" lang="en" hreflang="en">English</a><a href="../../../guide/es/predict/index.html" lang="es" hreflang="es" aria-current="page">Español</a></div><header class="guide-hero"><h1>Simulator: elegir el modelo</h1><p>Selecciona entre el modelo 5D del constructor, la referencia de producción del Higgs por torre top y el modelo 4D de anillo de neutrinos.</p></header><div class="guide-actions"><a href="../../../guide/es/getting-started/index.html">Primeros pasos</a><a href="../../../guide/es/index.html">Todas las guías</a><a href="../../../guide/es/glossary/index.html">Glosario</a><a href="../../../guide/manual/ghu-lab-guide-es.pdf">Descargar manual (PDF)</a></div><div class="guide-actions"><a href="../../../app/index.html#s=predict">Abrir herramienta</a><a href="../../../video/index.html?lang=es#predict">Capítulo del vídeo</a></div><p class="note">Los nombres de los controles se conservan tal como aparecen en la aplicación. Empieza con una referencia, cambia un parámetro cada vez y conserva las hipótesis junto al resultado.</p><nav aria-label="En esta página"><ul class="guide-toc"><li><a href="#purpose">Para qué sirve</a></li><li><a href="#steps">Primeros pasos</a></li><li><a href="#controls">Controles y parámetros</a></li><li><a href="#outputs">Cómo leer los resultados</a></li><li><a href="#example">Ejemplo guiado</a></li><li><a href="#limits">Alcance y limitaciones</a></li><li><a href="#troubleshooting">Si algo no queda claro</a></li><li><a href="#terms">Términos de esta guía</a></li><li><a href="#related">Continuar con</a></li><li><a href="#references">Fuentes y atribución</a></li></ul></nav><section id="purpose"><h2>Para qué sirve</h2><p>Es el punto de acceso a tres cálculos diferentes. Los experimentos térmicos aparecen en builder; sabores, identificabilidad y desintegraciones pertenecen al modo de neutrinos.</p></section><section id="steps"><h2>Primeros pasos</h2><ol><li>Elige Model to calculate.</li><li>Abre la guía propia del modo y carga una referencia.</li><li>Lee unidades, resultado e hipótesis juntos.</li><li>Consulta los experimentos visibles y guarda entradas y resultados.</li></ol></section><section id="controls"><h2>Controles y parámetros</h2><div class="tw"><table><thead><tr><th scope="col">Control</th><th scope="col">Significado</th><th scope="col">Prueba</th></tr></thead><tbody><tr><th scope="row">Model to calculate</th><td>Selecciona el modelo que suministra resultados y exportaciones.</td><td>Comprueba el nombre después de cada cambio.</td></tr><tr><th scope="row">Mode-specific parameters / experiment shortcuts</th><td>Parámetros y tarjetas pertinentes del modo elegido.</td><td>No traslades convenciones de fase o escala desde otro modo.</td></tr><tr><th scope="row">Save / compare / permalink</th><td>Conservan entradas y el resultado con su alcance.</td><td>Guarda la referencia antes de modificarla.</td></tr></tbody></table></div></section><section id="outputs"><h2>Cómo leer los resultados</h2><div class="tw"><table><thead><tr><th scope="col">Resultado</th><th scope="col">Significado</th></tr></thead><tbody><tr><th scope="row">Resumen del modelo</th><td>Resultados bajo las hipótesis específicas del modo.</td></tr><tr><th scope="row">Experimentos y referencias</th><td>Cálculos adicionales que conservan sus propias entradas y procedencia.</td></tr></tbody></table></div><p>Los modos mantienen entradas distintas. Se calculan respuestas de modelos y comparaciones concretas, no eventos de colisionador. Un cálculo externo sin coincidencia permanece pendiente.</p></section><section id="example"><h2>Ejemplo guiado</h2><div class="guide-example"><h3>Elegir antes de interpretar</h3><ol><li>Abre el selector.</li><li>Escoge neutrino ring.</li><li>Lee su guía y comprueba qué experimentos aparecen.</li></ol><p><b>Qué esperar:</b> Los controles visibles corresponden al modelo elegido y no a una combinación automática de modelos.</p></div></section><section id="limits"><h2>Alcance y limitaciones</h2><ul><li>Ningún modo es un ajuste GHU completo a todas las medidas.</li><li>El SU(3) térmico es independiente del constructor SU(N) y de los certificados SU(7).</li><li>Calibrar o reconstruir un observable dado no lo convierte después en predicción.</li></ul></section><section id="troubleshooting"><h2>Si algo no queda claro</h2><h3>No aparece el experimento buscado.</h3><p>Comprueba primero el modo: térmico en builder; sabores e identificabilidad en neutrino ring.</p></section><section id="terms"><h2>Términos de esta guía</h2><ul><li><a href="../../../guide/es/glossary/index.html#against-the-data">Comparar con datos</a></li><li><a href="../../../guide/es/glossary/index.html#at-the-minimum">En el mínimo</a></li><li><a href="../../../guide/es/glossary/index.html#anchor-scope">Alcance de la referencia</a></li></ul></section><section id="related"><h2>Continuar con</h2><ul><li><a href="../../../guide/es/simulator-builder/index.html">Simulator: predicciones del constructor 5D</a></li><li><a href="../../../guide/es/simulator-higgsrate/index.html">Simulator: producción del Higgs y torre top</a></li><li><a href="../../../guide/es/simulator-neutrino/index.html">Simulator: anillo 4D de neutrinos</a></li><li><a href="../../../guide/es/thermal/index.html">SU(3) térmico: potencial y coexistencia</a></li><li><a href="../../../guide/es/flavour/index.html">Tres sabores activos y rango ligero</a></li><li><a href="../../../guide/es/identifiability/index.html">Datos ligeros fijos y sector pesado</a></li><li><a href="../../../guide/es/neutrino-decays/index.html">Desintegraciones, Majorón y coherencia</a></li></ul></section><section id="references"><h2>Fuentes y atribución</h2><ul><li><a href="https://github.com/karlesmarin/ghu-lab/blob/main/docs/research-extensions.md">Research experiments and reproduction notes</a></li><li><a href="https://github.com/karlesmarin/ghu-lab/blob/main/src/sections/predict_section.js">Implementación y atribución de fuentes</a></li></ul></section><p class="note">Guía del instrumento actual. Las ediciones archivadas conservan su propio alcance.</p><a href="#top">Volver arriba</a></article>
+</main>
+<footer><div class="in">
+<p>Carles Marín, investigador independiente &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; creado con Claude (Anthropic) como asistente.<br>
+Los papers están archivados en Zenodo bajo CC&nbsp;BY&nbsp;4.0; el código usa Apache&nbsp;2.0.
+Página generada el 2026-10-09; se muestra sin cargar recursos externos.<br>
+<a href="../../../sitemap.xml">Mapa XML del sitio</a></p>
+</div></footer>
+</body>
+</html>

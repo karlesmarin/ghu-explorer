@@ -1,5 +1,35 @@
 # 🧭 GHU Lab — an instrument for gauge–Higgs unification
 
+## User guides · 9 October 2026
+
+[English](https://karlesmarin.github.io/ghu-explorer/guide/index.html)
+· [Castellano](https://karlesmarin.github.io/ghu-explorer/guide/es/index.html)
+· [Getting started](https://karlesmarin.github.io/ghu-explorer/guide/getting-started/index.html)
+· [Spanish manual (PDF)](https://karlesmarin.github.io/ghu-explorer/guide/manual/ghu-lab-guide-es.pdf).
+
+The searchable guide index organizes tasks and model families. **42 guides** cover the 29 menu
+sections, three Simulator modes, eight embedded experiments, neutrino decays and getting started;
+these overlap and are not a count of independent panels. Each guide explains controls, outputs,
+an example, assumptions, troubleshooting and source attribution. The 59-term glossary and inline
+help share the English/Spanish catalogues, so scope corrections reach both places.
+
+The application links each section, mode and experiment to its guide. Help language persists without
+resetting the calculation; full guides open separately. The website pages remain readable without
+JavaScript and have canonical URLs and reciprocal language alternatives. The root
+[sitemap](https://karlesmarin.github.io/ghu-explorer/sitemap.xml) is generated from current pages,
+including both guide languages; archived artifacts remain accessible through Editions.
+
+In the [source repository](https://github.com/karlesmarin/ghu-lab), maintain
+`docs/user-guides.json` and `docs/user-guides.es.json`; rebuild there with
+`python build/guide_manual.py` (pdfLaTeX and Babel), `python tools/laboratory_inventory.py`,
+`python build/build_app.py --browser`, then `python build/build_site.py --legacy <legacy-directory>`.
+Run `node build/guide_pages.mjs` to check the generated guides in desktop and mobile Chromium.
+The Spanish manual uses Babel’s `spanish,es-noshorthands,es-nodecimaldot,es-tabla` options.
+Babel handles typesetting; translations are explicit source content. Guide checks reject missing
+tools, wrong mode/focus routes and formula differences between languages. The corrected glossary
+keeps gauge-seed parity, moment ceilings, boundary assumptions and experimental comparisons scoped.
+
+
 ### Certificates, thermal comparison and uncertainty budget · 8 October 2026
 
 The [English certification dossier](https://karlesmarin.github.io/ghu-explorer/docs/su7-certification.html) records 26 Lean theorems, ten certified global minima for fixed one-phase SU(7) potentials, formula attribution and the remaining gauge-determinant question. The certificates establish statements under explicit assumptions; they do not establish physical validity or scientific originality.
@@ -359,7 +389,7 @@ tolerance in α: the closed form now only locates the basin, and the decision is
 `F` at two numerically refined minima. Both changes are logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
 
-The current October 8 source build passed **69 harnesses**, reporting **7,805 individually counted checks**, plus all thirteen browser gates and **32 site checks**. The new uncertainty budget adds 57 exact/Arb checks; the moment diagnostic has 110 interval checks, and the dataset ingestion has 175 checks. The closure gate has 39 dedicated browser checks; the formula correction has 13 independent SageMath checks. The batch study has twelve separate consistency checks. Both revised videos pass 2,005 content, timing and full-decoding checks, and the player passes 27 browser checks. The counts below describe earlier releases.
+The October 9 source build passed **70 harnesses**, reporting **8,023 individually counted checks**, plus all fourteen browser gates. The site passes **32 site checks**, **118 guide/link/language/manual checks** and **190 guide-page browser checks**. The new uncertainty budget adds 57 exact/Arb checks; the moment diagnostic has 110 interval checks, and the dataset ingestion has 175 checks. The closure gate has 43 dedicated browser checks; the formula correction has 13 independent SageMath checks. The batch study has twelve separate consistency checks. Both revised videos pass 2,005 content, timing and full-decoding checks, and the player passes 27 browser checks. The counts below describe earlier releases.
 See the [validation details and counting note](https://github.com/karlesmarin/ghu-lab#-what-is-checked-and-against-what). The site gate also checks
 deliberately broken copies, and `drive.mjs` puts a **real mouse** through the panels
 (208 checks). The gravity–gauge panel has 20 additional Chromium interaction, export and

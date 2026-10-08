@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNycgZmlsbD0nIzE2MjAyYScvPjxnIHN0cm9rZT0nIzVmYjZkNCcgc3Ryb2tlLXdpZHRoPScyLjYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgZmlsbD0nbm9uZSc+PHBhdGggZD0nTTggOWgxNicvPjxwYXRoIGQ9J004IDE2aDMuNU0yMC41IDE2SDI0Jy8+PHBhdGggZD0nTTggMjNoMTYnLz48L2c+PC9zdmc+">
+<!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
+     picture the series is about, and the page still reaches nothing outside itself. -->
+<title>Glosario — GHU Lab</title>
+<meta name="description" content="Definiciones de los términos de GHU Lab con convenciones de modelos, alcance matemático y límites de interpretación.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px minmax(0,1fr);gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:minmax(0,1fr);gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+.guide-hero{padding:1rem 0}.guide-actions,.guide-switch,.guide-toc,.guide-tasks{display:flex;flex-wrap:wrap;gap:.7rem;margin:1rem 0}.guide-actions a,.guide-tasks a{padding:.6rem .8rem;border:1px solid var(--line,#56616e);border-radius:.5rem}.guide-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem}.guide-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;list-style:none;padding:0}.guide-list li{border:1px solid var(--line,#56616e);border-radius:.6rem;padding:1rem}.guide-list h3{margin:.2rem 0}.guide-list p{margin:.5rem 0}.guide-kind{font-size:.85rem;opacity:.8}.guide-content section{scroll-margin-top:7rem;margin:2.5rem 0}.guide-content td{vertical-align:top;min-width:10rem}.guide-formula{overflow-wrap:anywhere;white-space:pre-wrap;font-family:serif;font-size:1.15rem}.guide-search{max-width:100%;width:34rem;padding:.75rem;font:inherit;border:1px solid #718096;border-radius:.4rem}.guide-example{border-left:4px solid #5fb6d4;padding:.1rem 1.2rem;background:rgba(95,182,212,.07)}.guide-content a{overflow-wrap:anywhere}.guide-content :focus-visible{outline:3px solid #5fb6d4;outline-offset:4px}.guide-content [hidden]{display:none!important}.guide-clear{font:inherit;padding:.6rem;cursor:pointer}.guide-content .guide-toc{padding:0;list-style:none}.guide-content h1{overflow-wrap:anywhere}@media(max-width:600px){.guide-content table{font-size:.94rem}.guide-list{grid-template-columns:1fr}.guide-actions a{flex:1 1 140px}.guide-content h1{font-size:1.9rem}}
+
+</style>
+<link rel="canonical" href="https://karlesmarin.github.io/ghu-explorer/guide/es/glossary/index.html">
+<link rel="alternate" hreflang="en" href="https://karlesmarin.github.io/ghu-explorer/guide/glossary/index.html">
+<link rel="alternate" hreflang="es" href="https://karlesmarin.github.io/ghu-explorer/guide/es/glossary/index.html">
+<link rel="alternate" hreflang="x-default" href="https://karlesmarin.github.io/ghu-explorer/guide/glossary/index.html">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../../../index.html">GHU Lab</a>
+  <nav>
+    <a href="../../../app/index.html">instrumento</a>
+    <a href="../../../guide/es/index.html" aria-current="page">guía de uso</a>
+    <a href="../../../video/index.html">🎬 vídeo</a>
+    <a href="../../../papers/index.html">papers</a>
+    <a href="../../../changes/index.html">cambios</a>
+    <a href="../../../docs/index.html">documentación</a>
+    <a href="../../../editions/index.html">ediciones</a>
+  </nav>
+</div></header>
+<main>
+<article class="guide-content" id="top"><nav aria-label="Migas de pan"><a href="../../../index.html">GHU Lab</a> / <a href="../../../guide/es/index.html">Guía de uso</a></nav><div class="guide-switch" aria-label="Idioma"><a href="../../../guide/glossary/index.html" lang="en" hreflang="en">English</a><a href="../../../guide/es/glossary/index.html" lang="es" hreflang="es" aria-current="page">Español</a></div><header class="guide-hero"><h1>Glosario</h1><p>Definiciones de los términos de GHU Lab con convenciones de modelos, alcance matemático y límites de interpretación.</p></header><div class="guide-actions"><a href="../../../guide/es/getting-started/index.html">Primeros pasos</a><a href="../../../guide/es/index.html">Todas las guías</a><a href="../../../guide/es/glossary/index.html">Glosario</a><a href="../../../guide/manual/ghu-lab-guide-es.pdf">Descargar manual (PDF)</a></div><section id="alphabet"><h2>Alfabeto</h2><p>Las condiciones admitidas se construyen con representaciones irreducibles del grupo espacial Γ = Λ ⋊ Z_m. La Parte IX-A obtiene estas letras mediante inversión de Möbius sobre puntos fijos; la teoría de Clifford proporciona sus pesos. Los datos posteriores se derivan de ese alfabeto bajo las hipótesis de clasificación.</p><a href="#top">Volver arriba</a></section><section id="weight"><h2>Peso de una letra</h2><p>Es su dimensión. Una letra de peso uno representa una condición diagonal; pesos mayores permiten condiciones no diagonales. Un ansatz exclusivamente diagonal no recupera esas letras. Los pesos determinan el coste de enumerar un rango.</p><a href="#top">Volver arriba</a></section><section id="local-datum"><h2>Dato local</h2><p>En un punto cónico de orden e, registra las multiplicidades de los autovalores de la isotropía entre las raíces e-ésimas de la unidad. Describe ese punto fijo, no toda la geometría del orbifold.</p><a href="#top">Volver arriba</a></section><section id="class"><h2>Clase de una condición</h2><p>En la clasificación indicada, se registra mediante una tupla de datos locales, uno por punto cónico. La equivalencia considerada debe conservarlos. Un movimiento que cambia uno no preserva esa clase; comprobarlo no requiere terminar toda la clasificación.</p><a href="#top">Volver arriba</a></section><section id="fibre"><h2>Fibra</h2><p>Conjunto de entradas que comparten los datos fijados. En clasificación reúne condiciones con la misma clase, indexadas por el mapa marginal; en conteos de materia reúne contenidos con las coordenadas impuestas. El contexto determina qué se está fijando y contando.</p><a href="#top">Volver arriba</a></section><section id="cone"><h2>Puntos cónicos y signatura</h2><p>Puntos fijos de la rotación del toro con el orden de su grupo de isotropía. La lista de órdenes es la signatura. Bajo las hipótesis de clasificación determina el grado de crecimiento del conteo antes de enumerar condiciones.</p><a href="#top">Volver arriba</a></section><section id="frobenius-schur"><h2>Indicador de Frobenius–Schur</h2><p>Los valores +1, 0 y −1 distinguen letras reales, complejas y cuaterniónicas. Determina cómo se reorganiza el alfabeto entre SU, SO y Sp; por ejemplo, las letras complejas se emparejan con sus conjugadas.</p><a href="#top">Volver arriba</a></section><section id="degree"><h2>Grado del conteo</h2><p>Bajo las hipótesis indicadas, el grado de crecimiento polinómico es e₁ − 1, con e₁ = 1 + Σ c(mᵢ), donde c(m) = m−1 para SU y ⌊m/2⌋ para SO y Sp. Este grado asintótico no afirma que todo conteo exacto de rango finito sea un único polinomio sin términos periódicos.</p><a href="#top">Volver arriba</a></section><section id="hilbert-series"><h2>Serie de Hilbert</h2><p>Función generatriz de los conteos del semigrupo, escrita como P(x) / ∏(1−x^w) con los pesos de las letras. La terminación de P se comprueba en el cálculo indicado; después la recurrencia permite obtener conteos sin enumerar cada condición.</p><a href="#top">Volver arriba</a></section><section id="unbroken-group"><h2>Grupo aparente no roto</h2><p>Grupo gauge que parece conservar una descripción de frontera. Para un alfabeto de peso uno se expresa como S(∏ U(n_ℓ)). Puede variar entre representantes de una misma clase; ordenar modelos solo por este grupo puede contar varias veces descripciones equivalentes.</p><a href="#top">Volver arriba</a></section><section id="smith-normal-form"><h2>Forma normal de Smith</h2><p>Permite enumerar los puntos fijos descritos por M⁻¹Zʳ/Zʳ, de orden |det M|. Recorre el grupo finito pertinente en lugar de una caja de candidatos mucho mayor. Es una herramienta algebraica para el conteo, no una hipótesis física adicional.</p><a href="#top">Volver arriba</a></section><section id="crystallographic"><h2>Matriz rechazada</h2><p>La rotación entera debe tener orden finito y satisfacer la hipótesis ciclotómica de la Parte IX-A. Fuera de ese dominio el cálculo se rechaza. Devolver un alfabeto vacío como si fuera un conteo válido ocultaría que no se cumplen las hipótesis.</p><a href="#top">Volver arriba</a></section><section id="move"><h2>Movimiento</h2><p>Reescritura que preserva los datos de clase indicados. La completitud exige además conectar todos los miembros de cada fibra pertinente. Un recorrido finito comprueba el caso elegido; movimientos válidos o éxito en un rango no prueban completitud en todos.</p><a href="#top">Volver arriba</a></section><section id="affine-semigroup"><h2>Semigrupo afín</h2><p>Los datos de clase se indexan mediante el semigrupo asociado al mapa marginal, con generadores procedentes del alfabeto. Identificarlo conserva la atribución a configuraciones ya estudiadas, como las de cortes sobre Z₂, y permite consultar sus invariantes publicados.</p><a href="#top">Volver arriba</a></section><section id="wilson-line"><h2>Línea y fase de Wilson</h2><p>La fase del campo gauge en la dimensión extra parametriza el fondo de Wilson. En la convención SU(7) indicada, 1/R₅ = 2m_W/α para fase no nula. Esa conversión requiere sus entradas y normalización; no se copia automáticamente a otro modelo.</p><a href="#top">Volver arriba</a></section><section id="hosotani"><h2>Mecanismo de Hosotani</h2><p>Una componente del campo gauge de dimensión superior puede aportar el modo cero que actúa como Higgs 4D. Su potencial de Wilson se genera radiativamente en el planteamiento protegido admitido. Calcular una fase no fija por sí solo todos los datos dimensionales; usar mW como calibración no predice ese mismo dato.</p><a href="#top">Volver arriba</a></section><section id="parities"><h2>Paridades</h2><p>Signos de una componente en los puntos fijos, como (+,+) o (+,−). En el intervalo ordinario sin fondo de Wilson, (+,+) admite un modo constante antes de masas adicionales. En un vacío no trivial hay que resolver el problema conjunto de frontera; la tabla sola no es todo el espectro físico.</p><a href="#top">Volver arriba</a></section><section id="zero-mode"><h2>Modo cero</h2><p>Modo sin masa bajo el fondo y problema de frontera especificados. En el punto simétrico ordinario su existencia se deduce de las paridades. Fondos de Wilson, masas de frontera e interacciones pueden cambiar el contenido sin masa; hay que indicar el fondo del conteo.</p><a href="#top">Volver arriba</a></section><section id="kk-tower"><h2>Torre Kaluza–Klein</h2><p>Modos 4D asociados a un campo en la dimensión extra. En el caso simple sin torsión sus masas son n/R; fases de frontera desplazan niveles y términos cinéticos de brana pueden cambiar la ecuación espectral. La torre conserva fronteras, fase y multiplicidades, y no determina por sí sola tasas de colisionador.</p><a href="#top">Volver arriba</a></section><section id="bulk-content"><h2>Contenido del bulk</h2><p>Representaciones que se propagan en las dimensiones extra, con paridades y multiplicidades. Es una entrada fundamental del potencial, espectro y anomalías; para definir el modelo también deben conservarse las fronteras y convenciones indicadas.</p><a href="#top">Volver arriba</a></section><section id="brane"><h2>Brana o frontera</h2><p>En el intervalo orbifold, los extremos son puntos fijos donde puede localizarse materia además de la que se propaga en el bulk. Esa materia puede contribuir a anomalías y emparejar modos cero bajo las condiciones de representación y carga correspondientes.</p><a href="#top">Volver arriba</a></section><section id="local-group"><h2>Grupo local</h2><p>En y = 0 es el conmutante de P₀; con bloques diagonales, S(U(n₊₊ + n₊₋) × U(n₋₊ + n₋₋)). En y = πR es el conmutante de P₁. Pueden diferir; el grupo 4D en el punto simétrico conmuta con ambos. Una representación local puede descomponerse bajo ese subgrupo común.</p><a href="#top">Volver arriba</a></section><section id="boundary-mass"><h2>Masa de frontera</h2><p>En convención completamente levógira, un modo r_q puede emparejarse con un Weyl localizado en la representación conjugada y de carga opuesta. Con acoplamientos genéricos, el rango máximo deja el valor absoluto de la diferencia por cada clase. Hay que descomponer antes de contar modos levantados.</p><a href="#top">Volver arriba</a></section><section id="one-loop-potential"><h2>Potencial a un lazo</h2><p>Potencial efectivo de Wilson obtenido del contenido y espectro admitidos. Su parte dependiente de la fase es finita en el planteamiento protegido indicado. Eso no cuantifica todas las correcciones de lazos superiores ni interacciones de frontera; normalización y contenido siguen necesitando justificación física.</p><a href="#top">Volver arriba</a></section><section id="alpha-min"><h2>Mínimo aproximado</h2><p>La expresión cerrada localiza una rama estacionaria de la expansión de fase pequeña y se compara con la búsqueda numérica del potencial de Fourier. Pueden diferir. Ni esa expresión ni una retícula finita por sí solas certifican el vacío global.</p><a href="#top">Volver arriba</a></section><section id="chiral"><h2>Contenido quiral</h2><p>Las componentes de quiralidad izquierda y derecha tienen representaciones diferentes. La proyección orbifold puede producir este contenido 4D. Las anomalías gauge del modelo completo deben cancelarse canal por canal.</p><a href="#top">Volver arriba</a></section><section id="anomaly-channel"><h2>Canal de anomalía</h2><p>Condición independiente de cancelación del espectro quiral considerado. Una entrada no nula del subtotal del bulk señala una contribución pendiente cuando se permite materia de frontera; no sustituye el balance del modelo completo ni construye automáticamente su completación.</p><a href="#top">Volver arriba</a></section><section id="blkt"><h2>Término cinético localizado</h2><p>Contribución cinética situada en un punto fijo. Puede modificar la ecuación espectral de la torre: las masas pasan a ser raíces de una ecuación trascendente. Su solución y sus hipótesis deben conservarse al construir el potencial o comparar límites.</p><a href="#top">Volver arriba</a></section><section id="boundary-condition"><h2>Condición de contorno</h2><p>Especifica cómo actúa el grupo gauge en las fronteras. En la familia SU(N) ordinaria sobre S¹/Z₂ se registra mediante cuatro bloques [p, q, r, s]. Diferentes descripciones pueden estar relacionadas por la equivalencia gauge indicada.</p><a href="#top">Volver arriba</a></section><section id="equivalence-class"><h2>Clase de equivalencia</h2><p>Agrupa condiciones relacionadas por las transformaciones gauge permitidas. El grupo aparente de un representante puede cambiar dentro de la clase. La comparación física exige conservar la relación de equivalencia y transformar coherentemente el resto de los datos del modelo.</p><a href="#top">Volver arriba</a></section><section id="moments"><h2>Momentos del potencial</h2><p>Momentos segundo y cuarto ponderados por cargas de Wilson, usados en la reducción de fase pequeña. La aritmética depende de la semilla: la publicada SU(7) tiene 8D impar y la candidata admite peldaños pares. Los momentos no determinan en general todo el potencial; hay que conservar semilla y condiciones de no degeneración.</p><a href="#top">Volver arriba</a></section><section id="rung"><h2>Peldaño</h2><p>Valor cuantizado de la coordenada de curvatura D en la reducción indicada. Paridad y valores accesibles dependen de la semilla. Los conteos finitos requieren las cotas adicionales de coordenadas o masa especificadas. Un presupuesto agotado no demuestra que no haya solución.</p><a href="#top">Volver arriba</a></section><section id="ceiling"><h2>Techo condicionado</h2><p>Cota superior de escala para un relajamiento de momentos, semilla, acoplamiento y ventana de masa concretos. Un certificado racional o por intervalos demuestra esa cota con sus hipótesis. No tiene por qué alcanzarse ni ser una cota universal de vacíos globales del potencial completo.</p><a href="#top">Volver arriba</a></section><section id="reachable-set"><h2>Conjunto alcanzable</h2><p>Escalas obtenidas por contenidos enteros admitidos en el problema inverso especificado. Pueden formar grupos separados. Un hueco conserva semilla, ventana, acoplamiento y aproximación; una gráfica o búsqueda incompleta no certifica por sí sola la imposibilidad de todas las escalas intermedias.</p><a href="#top">Volver arriba</a></section><section id="certificate"><h2>Certificado</h2><p>Evidencia de una afirmación matemática precisa: obstrucción aritmética, cota racional o prueba por intervalos de un potencial fijo, por ejemplo. Hipótesis y dominio viajan con ella. Un presupuesto agotado queda sin decidir; certificar una fórmula no prueba toda su aplicabilidad física ni novedad.</p><a href="#top">Volver arriba</a></section><section id="vector-partition-function"><h2>Función de partición vectorial</h2><p>Cuenta puntos enteros no negativos que satisfacen las coordenadas y congruencias impuestas, aquí en (A₄, 8D). La programación dinámica puede calcular muchos conteos sin construir cada contenido. El resultado sigue siendo un conteo aritmético, no una prueba de viabilidad física.</p><a href="#top">Volver arriba</a></section><section id="same-potential"><h2>Igualdad de potenciales</h2><p>El Teorema 3 de la Parte VII da un criterio necesario y suficiente de cinco coordenadas para la familia implementada. Contenidos distintos pueden tener el mismo potencial. Coincidir en momentos o muestras gráficas es más débil; tampoco la igualdad del potencial prueba identidad de espectros e interacciones completos.</p><a href="#top">Volver arriba</a></section><section id="canonical-representative"><h2>Representante canónico</h2><p>Contenido distinguido entre los que comparten el potencial implementado, definido en la ecuación (43) de la Parte VII. Representa esa igualdad algebraica; no representa automáticamente una teoría física completa, pues otras cantidades pueden diferir.</p><a href="#top">Volver arriba</a></section><section id="selection-rule"><h2>Regla de selección</h2><p>La condición aritmética de la Parte III determina cuándo es redundante la mitad del toro en la proyección SU(4) indicada. Deben conservarse sus hipótesis antes de reducir una búsqueda. La comprobación directa ofrece un contraste independiente de la formulación por etiquetas de Dynkin.</p><a href="#top">Volver arriba</a></section><section id="eta"><h2>Signo η</h2><p>Producto de signos de frontera η = η₀η₁. En el problema SU(4) estudiado en las Partes IV–V, el índice especificado controla la respuesta del potencial a ese signo. La clase de anulación tiene que interpretarse para esa contribución y proyección.</p><a href="#top">Volver arriba</a></section><section id="eta-blindness"><h2>Insensibilidad a η</h2><p>En la contribución SU(4) y proyección estudiadas, la clase de índice nulo no tiene respuesta dependiente de η. Aumentar su multiplicidad no crea esa diferencia. No significa que desaparezcan potencial completo, espectro u otros efectos; compara las dos vistas por separado.</p><a href="#top">Volver arriba</a></section><section id="k-invariant"><h2>Invariante K y normalización</h2><p>En la convención registrada, m_h a / √F'' = 2.2456 g₄. A m_h de entrada fijo, F → λF cambia K por λ^(−½); la invariancia requiere recalcular también m_h como √λ m_h. Compara el acoplamiento implícito, no demuestra estacionariedad ni mínimo global. Parte VI, problema abierto 3.</p><a href="#top">Volver arriba</a></section><section id="comb"><h2>Estructura discreta de escalas</h2><p>La separación aritmética se expresa en M², no en M, con las cotas condicionadas de cada peldaño. La posición conserva el residuo de referencia y g₄. Hay que distinguir separación y posición antes de atribuir un desacuerdo a una fuente publicada.</p><a href="#top">Volver arriba</a></section><section id="bill-in-eighths"><h2>Contribución en octavos</h2><p>Coste de la construcción de protección frente al problema de desintegración del protón, medido en la unidad de D indicada. La razón entera permite comparar esa contabilidad sin una normalización global de masa, manteniendo las hipótesis de la construcción.</p><a href="#top">Volver arriba</a></section><section id="rung-cube"><h2>Cubo de peldaños</h2><p>Visualiza las 64 ternas ordenadas de peldaños leptónicos de la familia examinada. La diagonal universal entre familias tiene A_j nulos y pierde la protección indicada. La afirmación geométrica se refiere a esta familia y a la regla de selección especificada.</p><a href="#top">Volver arriba</a></section><section id="coloron"><h2>Colorón</h2><p>Vector octete de color usado en la comparación dijet del laboratorio. Masa, anchura y acoplamiento dependen de localización y compactificación del modelo. No se transfiere un límite de otra resonancia, producción o patrón de desintegración solo porque coincida una masa.</p><a href="#top">Volver arriba</a></section><section id="recast"><h2>Reinterpretación de un límite</h2><p>Límite experimental publicado expresado en la escala del modelo bajo hipótesis compatibles. Los valores Δχ² del panel dijet se citan del registro publicado; no se recalculan ni se convierten automáticamente en un nuevo ajuste por almacenar otros datos.</p><a href="#top">Volver arriba</a></section><section id="anchor"><h2>Referencia reproducida</h2><p>Cálculo publicado que el instrumento vuelve a evaluar y muestra mediante un indicador. Informa de si reproduce esa referencia y bajo qué alcance antes de interpretar entradas modificadas. No certifica por sí solo toda la fenomenología.</p><a href="#top">Volver arriba</a></section><section id="gauge-or-physics"><h2>Descripción y cantidad física</h2><p>Un diagnóstico de teoría debe conservarse al cambiar coherentemente a una descripción gauge equivalente. El dossier recomputa filas y etiqueta lo observado. Una cantidad al punto simétrico del representante puede variar; la comparación al mínimo plantea otra pregunta y conserva el alcance del ensayo.</p><a href="#top">Volver arriba</a></section><section id="sm-cell"><h2>Encaje del Modelo Estándar</h2><p>Busca la estructura SU(3)×SU(2)×U(1)_Y y componentes Q, uᶜ, dᶜ, L y eᶜ con sus hipercargas. Resuelve Y en los generadores abelianos de los bloques; cuando queda fijado determina sin²θ_W = tr T₃² / (tr T₃² + tr Y²). Se examina el punto simétrico más cercano al vacío y se declaran los campos ausentes.</p><a href="#top">Volver arriba</a></section><section id="against-the-data"><h2>Comparar con datos</h2><p>En builder, el vacío aporta m_W R adimensional y la masa W registrada calibra 1/R. Las cantidades dimensionales son condicionales a ese anclaje. Un límite octete de color requiere sus hipótesis, incluido color en el bulk. Cada modo conserva datos y convenciones propios; referencia, intervalo y verosimilitud son comparaciones distintas.</p><a href="#top">Volver arriba</a></section><section id="at-the-minimum"><h2>En el mínimo</h2><p>Al eliminar el fondo constante A_y mediante una transformación gauge, la reflexión se modifica con la holonomía: P₁′ = W⁻¹P₁. El contenido sin masa es el espacio fijado por ambas condiciones. Hosotani y Haba–Hosotani–Kawamura proporcionan el marco; las rutas de cálculo del laboratorio se contrastan. Las direcciones escalares planas son de árbol y se declara la tolerancia de extremos.</p><a href="#top">Volver arriba</a></section><section id="separates-nothing"><h2>Invariancia sin separación</h2><p>Una cantidad puede ser constante dentro de cada clase y tomar además el mismo valor en todas. Entonces no distingue teorías aunque sea invariante. El dossier mide por separado variación dentro de una clase y capacidad de separar las clases examinadas.</p><a href="#top">Volver arriba</a></section><section id="keyword-sweep"><h2>Búsqueda por palabras clave</h2><p>Reduce un corpus a candidatos de lectura. Una coincidencia significa que conviene abrir la fuente, no que quede demostrada una afirmación sobre el paper. Señales automáticas y conclusiones revisadas se registran por separado.</p><a href="#top">Volver arriba</a></section><section id="measured-vs-read"><h2>Extraído, leído y no evaluado</h2><p>Measured describe la extracción o búsqueda reproducible en el corpus declarado. Read identifica una afirmación revisada con página o ecuación. Si la extracción pierde símbolos, no demuestra que el paper omita una fórmula; el fallo de extracción se separa del hallazgo bibliográfico negativo.</p><a href="#top">Volver arriba</a></section><section id="tripod"><h2>Cota del trípode</h2><p>Para el modelo basado en un grupo abeliano finito G sobre el árbol de tres hojas, la afirmación global indicada es intersección completa si y solo si |G| ≤ 3. La cota |G|² − 6|G| + 6 ≤ 0 descarta órdenes desde cinco. El orden cuatro la pasa pero se resuelve aparte por enumeración en la Parte IX-B, §5.</p><a href="#top">Volver arriba</a></section><section id="complete-intersection"><h2>Intersección completa local y global</h2><p>Casanellas, Fernández-Sánchez y Michałek prueban la propiedad en un abierto de Zariski. La pregunta del panel es global, sobre el ideal tórico. El trípode Z₄ distingue ambas: localmente sí y globalmente no. Una afirmación no sustituye a la otra.</p><a href="#top">Volver arriba</a></section><section id="anchor-verdicts"><h2>Veredictos de referencia</h2><p>Verde: reproduce la cantidad publicada bajo el alcance indicado. Ámbar: difiere y localiza las ecuaciones pertinentes. Gris: fuera del motor. No evaluado no equivale a falso. Las comprobaciones detectan cambios inesperados de esos veredictos, incluida una discrepancia conocida que debe seguir visible.</p><a href="#top">Volver arriba</a></section><section id="anchor-scope"><h2>Alcance de la referencia</h2><p>Tres de los cuatro modelos archivados son supersimétricos y el potencial del motor no lo es: sus filas se limitan a álgebra de paridades, grupos y modos cero. Kubo–Lim–Yamashita no es supersimétrico y permite también las comparaciones dinámicas indicadas. La transferencia no añade interacciones ausentes.</p><a href="#top">Volver arriba</a></section><p class="note">Guía del instrumento actual. Las ediciones archivadas conservan su propio alcance.</p><a href="#top">Volver arriba</a></article>
+</main>
+<footer><div class="in">
+<p>Carles Marín, investigador independiente &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; creado con Claude (Anthropic) como asistente.<br>
+Los papers están archivados en Zenodo bajo CC&nbsp;BY&nbsp;4.0; el código usa Apache&nbsp;2.0.
+Página generada el 2026-10-09; se muestra sin cargar recursos externos.<br>
+<a href="../../../sitemap.xml">Mapa XML del sitio</a></p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNycgZmlsbD0nIzE2MjAyYScvPjxnIHN0cm9rZT0nIzVmYjZkNCcgc3Ryb2tlLXdpZHRoPScyLjYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgZmlsbD0nbm9uZSc+PHBhdGggZD0nTTggOWgxNicvPjxwYXRoIGQ9J004IDE2aDMuNU0yMC41IDE2SDI0Jy8+PHBhdGggZD0nTTggMjNoMTYnLz48L2c+PC9zdmc+">
+<!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
+     picture the series is about, and the page still reaches nothing outside itself. -->
+<title>Atlas — GHU Lab</title>
+<meta name="description" content="Browse the 1,286 supported SU(7) bulk contents with at most five multiplets, compare their potential shapes and load an example into the model.">
+<style>
+/* site.css — the pages around the instrument.
+ *
+ * Copyright (c) 2026 Carles Marin. All rights reserved.
+ * Author: Carles Marin <karlesmarin@gmail.com>  (with Claude, Anthropic, as assistant)
+ *
+ * Same tokens as src/shell/app_shell.html, deliberately: a reader who moves from a paper page into
+ * the app must not feel they have left the site.  The tokens are duplicated rather than shared
+ * because the app is a single self-contained file by decision (DESIGN.md D1) and may not link a
+ * stylesheet — so this file is the copy, and _test_site.py checks the two palettes agree.
+ */
+:root{
+  --ink:#16202a; --ink2:#4a5b6a; --ink3:#7d8c99;
+  --line:#dfe6ec; --bg:#fbfcfd; --card:#ffffff;
+  --blue:#1B6F8C; --blue-d:#12546b; --blue-l:#e8f2f6;
+  --rust:#B5530F; --rust-l:#fbeee5;
+  --green:#1f7a4d; --green-l:#e6f4ec;
+  --amber:#8a6d1f; --amber-l:#fbf3dd;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* Flex column so the footer sits at the bottom of a short page instead of halfway up it — the
+ * editions page is two paragraphs long and looked unfinished without this. */
+body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;
+     display:flex;flex-direction:column;
+     font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",sans-serif}
+a{color:var(--blue);text-underline-offset:2px}
+a:hover{color:var(--rust)}
+code{font:13.5px/1.4 var(--mono);background:#eef3f6;padding:1px 5px;border-radius:4px}
+.lc{text-transform:none}                       /* Greek stays lower-case: uppercased, eta is an H */
+
+/* ------------------------------------------------------------------ frame */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:9}
+.top .in{max-width:920px;margin:0 auto;padding:11px 22px;display:flex;align-items:baseline;
+         gap:18px;flex-wrap:wrap}
+.top .brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:16px;font-size:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover,.top nav a[aria-current]{color:var(--blue-d);text-decoration:underline}
+main{max-width:920px;margin:0 auto;padding:34px 22px 70px;width:100%;flex:1}
+footer{border-top:1px solid var(--line);background:#fff}
+footer .in{max-width:920px;margin:0 auto;padding:20px 22px 34px;font-size:13.5px;color:var(--ink3)}
+
+/* ------------------------------------------------------------------ type */
+h1{font-size:29px;line-height:1.24;letter-spacing:-.02em;margin:0 0 10px;font-weight:700}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);
+   margin:40px 0 13px;font-weight:650}
+h3{font-size:18px;margin:26px 0 8px;font-weight:650;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18.5px;line-height:1.55;color:var(--ink2);margin:0 0 20px}
+.sub{font-size:14px;color:var(--ink3);margin:0 0 26px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 7px}
+
+/* ------------------------------------------------------------------ pieces */
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:17px 19px;
+      margin:0 0 15px}
+.chip{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:99px;
+      border:1px solid transparent;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.chip.thm{background:var(--green-l);color:var(--green);border-color:#bfe0cd}
+.chip.ver{background:var(--amber-l);color:var(--amber);border-color:#e7d9ab}
+.chip.mea{background:var(--blue-l);color:var(--blue-d);border-color:#c3dce6}
+.chip.unk{background:#fff;color:var(--ink2);border-color:var(--line)}
+.chip.bad{background:#fdecec;color:#9b2226;border-color:#f2c9c9}
+
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:0 0 10px}
+.door{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);
+      border-radius:11px;padding:19px 20px}
+.door:hover{border-color:var(--blue);box-shadow:0 1px 0 var(--blue-l)}
+.door b{display:block;font-size:17px;margin:0 0 6px;color:var(--blue-d)}
+.door span{font-size:14.5px;color:var(--ink2)}
+
+/* A wide table on a phone pushes the whole document sideways, and the overflow is off the edge of
+ * a screenshot, so it is invisible to every check that looks at a picture.  The build wraps every
+ * table in this, and shoot_site.mjs measures the document against the viewport to prove it. */
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.tw table{margin:0;min-width:min(100%,420px)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0 0 14px}
+th{text-align:left;font-weight:650;color:var(--ink2);font-size:11.5px;text-transform:uppercase;
+   letter-spacing:.05em;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid #f0f4f7;vertical-align:top}
+td.num{font:13px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.warn{border-left:4px solid var(--rust);background:var(--rust-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+.warn b{display:block;margin:0 0 4px}
+.note{border-left:4px solid var(--blue);background:var(--blue-l);border-radius:0 9px 9px 0;
+      padding:14px 17px;margin:0 0 20px}
+
+/* the record banner on a paper page: the honest device, so it is the first thing read */
+.record{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 22px;background:#fff}
+.record .row{display:flex;gap:14px;padding:12px 17px;font-size:14px;align-items:baseline;
+             flex-wrap:wrap}
+.record .row+.row{border-top:1px solid var(--line)}
+.record .k{font:650 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+           color:var(--ink3);min-width:158px}
+.record .frozen{background:#fcfdfe}
+.record .living{background:var(--blue-l)}
+
+.entry{border:1px solid var(--line);border-radius:11px;background:#fff;padding:16px 19px;margin:0 0 14px}
+.entry .hd{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin:0 0 9px}
+.entry .dt{font:600 12.5px/1 var(--mono);color:var(--ink3)}
+.entry h3{margin:6px 0 10px;font-size:16.5px}
+.entry dl{margin:0;display:grid;grid-template-columns:70px minmax(0,1fr);gap:4px 12px}
+.entry dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.entry dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.entry dd p:last-child{margin-bottom:0}
+.sev-note{color:var(--ink2)}
+.sev-extension{color:var(--green)}
+.sev-correction{color:var(--rust)}
+.sev-withdrawal{color:#9b2226}
+
+.abstract{font-size:15.5px;color:var(--ink2)}
+.abstract p{margin:0 0 12px}
+.abstract strong{color:var(--ink)}
+
+.dl{display:grid;grid-template-columns:170px 1fr;gap:7px 14px;font-size:14.5px;margin:0 0 16px}
+.dl dt{font:650 11px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.dl dd{margin:0}
+
+@media (max-width:640px){
+  .doors{grid-template-columns:1fr}
+  .dl,.entry dl{grid-template-columns:minmax(0,1fr);gap:2px}
+  .record .k{min-width:0}
+  h1{font-size:24px}
+}
+
+.guide-hero{padding:1rem 0}.guide-actions,.guide-switch,.guide-toc,.guide-tasks{display:flex;flex-wrap:wrap;gap:.7rem;margin:1rem 0}.guide-actions a,.guide-tasks a{padding:.6rem .8rem;border:1px solid var(--line,#56616e);border-radius:.5rem}.guide-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem}.guide-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;list-style:none;padding:0}.guide-list li{border:1px solid var(--line,#56616e);border-radius:.6rem;padding:1rem}.guide-list h3{margin:.2rem 0}.guide-list p{margin:.5rem 0}.guide-kind{font-size:.85rem;opacity:.8}.guide-content section{scroll-margin-top:7rem;margin:2.5rem 0}.guide-content td{vertical-align:top;min-width:10rem}.guide-formula{overflow-wrap:anywhere;white-space:pre-wrap;font-family:serif;font-size:1.15rem}.guide-search{max-width:100%;width:34rem;padding:.75rem;font:inherit;border:1px solid #718096;border-radius:.4rem}.guide-example{border-left:4px solid #5fb6d4;padding:.1rem 1.2rem;background:rgba(95,182,212,.07)}.guide-content a{overflow-wrap:anywhere}.guide-content :focus-visible{outline:3px solid #5fb6d4;outline-offset:4px}.guide-content [hidden]{display:none!important}.guide-clear{font:inherit;padding:.6rem;cursor:pointer}.guide-content .guide-toc{padding:0;list-style:none}.guide-content h1{overflow-wrap:anywhere}@media(max-width:600px){.guide-content table{font-size:.94rem}.guide-list{grid-template-columns:1fr}.guide-actions a{flex:1 1 140px}.guide-content h1{font-size:1.9rem}}
+
+</style>
+<link rel="canonical" href="https://karlesmarin.github.io/ghu-explorer/guide/atlas7/index.html">
+<link rel="alternate" hreflang="en" href="https://karlesmarin.github.io/ghu-explorer/guide/atlas7/index.html">
+<link rel="alternate" hreflang="es" href="https://karlesmarin.github.io/ghu-explorer/guide/es/atlas7/index.html">
+<link rel="alternate" hreflang="x-default" href="https://karlesmarin.github.io/ghu-explorer/guide/atlas7/index.html">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="../../index.html">GHU Lab</a>
+  <nav>
+    <a href="../../app/index.html">the instrument</a>
+    <a href="../../guide/index.html" aria-current="page">user guide</a>
+    <a href="../../video/index.html">🎬 video guide</a>
+    <a href="../../papers/index.html">the series</a>
+    <a href="../../changes/index.html">changes</a>
+    <a href="../../docs/index.html">docs</a>
+    <a href="../../editions/index.html">editions</a>
+  </nav>
+</div></header>
+<main>
+<article class="guide-content" id="top"><nav aria-label="Breadcrumb"><a href="../../index.html">GHU Lab</a> / <a href="../../guide/index.html">User guide</a></nav><div class="guide-switch" aria-label="Language"><a href="../../guide/atlas7/index.html" lang="en" hreflang="en" aria-current="page">English</a><a href="../../guide/es/atlas7/index.html" lang="es" hreflang="es">Español</a></div><header class="guide-hero"><h1>Atlas</h1><p>Browse the 1,286 supported SU(7) bulk contents with at most five multiplets, compare their potential shapes and load an example into the model.</p></header><div class="guide-actions"><a href="../../guide/getting-started/index.html">Getting started</a><a href="../../guide/index.html">All guides</a><a href="../../guide/glossary/index.html">Glossary</a><a href="../../guide/manual/ghu-lab-guide-en.pdf">Download manual (PDF)</a></div><div class="guide-actions"><a href="../../app/index.html#s=atlas7">Open tool</a><a href="../../video/index.html?lang=en#atlas7">Video chapter</a></div><p class="note">Control names are kept as they appear in the application. Start with a reference, change one input at a time, and retain the assumptions with your result.</p><nav aria-label="On this page"><ul class="guide-toc"><li><a href="#purpose">What this tool is for</a></li><li><a href="#steps">First steps</a></li><li><a href="#controls">Controls and inputs</a></li><li><a href="#outputs">Reading the results</a></li><li><a href="#example">Worked example</a></li><li><a href="#limits">Scope and limitations</a></li><li><a href="#troubleshooting">If something is unclear</a></li><li><a href="#terms">Terms used here</a></li><li><a href="#related">Continue with</a></li><li><a href="#references">Sources and attribution</a></li></ul></nav><section id="purpose"><h2>What this tool is for</h2><p>Use the atlas when you want a visual starting point instead of choosing eight multiplicities from scratch. It shows how different input contents lead to different potential shapes within a small, completely specified catalogue. A useful workflow is to notice an interesting tile, load it, and then inspect its approximation error, anomaly content and source comparison.</p></section><section id="steps"><h2>First steps</h2><ol><li>Draw the lattice and wait for the tiles to finish.</li><li>Read the colour legend and the selected seed before comparing tiles.</li><li>Hover over a tile to inspect its content; select it to see the details.</li><li>Use Load into the model to investigate the selected content in the other SU(7) tools.</li></ol></section><section id="controls"><h2>Controls and inputs</h2><div class="tw"><table><thead><tr><th scope="col">Control</th><th scope="col">Meaning</th><th scope="col">Try this</th></tr></thead><tbody><tr><th scope="row">Draw the whole lattice</th><td>Calculates and displays the finite catalogue. Let the calculation finish before treating an incomplete display as the full set.</td><td>Start once and read the legend while the tiles populate.</td></tr><tr><th scope="row">Tile selection</th><td>Identifies one discrete bulk content and its displayed verdict.</td><td>Compare a flat tile with one that has a nonzero minimum.</td></tr><tr><th scope="row">Load into the model</th><td>Transfers the selected content to the shared SU(7) model used by the neighbouring tools.</td><td>Open Hierarchy immediately after loading and check that the multiplicities match.</td></tr></tbody></table></div></section><section id="outputs"><h2>Reading the results</h2><div class="tw"><table><thead><tr><th scope="col">Result</th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row">Potential tiles</th><td>Small plots ordered by the calculated phase. Read the numerical details before comparing shapes at different scales.</td></tr><tr><th scope="row">Content and verdict</th><td>The supported representation/parity counts and the result of the stated mass-window calculation.</td></tr><tr><th scope="row">Flat potentials</th><td>Contents whose implemented potential has no phase-dependent preference at the displayed order. A unique broken vacuum cannot be inferred from a flat curve.</td></tr></tbody></table></div><p>Each tile is a content in a finite catalogue. Its colour summarizes the displayed calculation under its conventions. A flat-potential tile is a mathematical outcome, not missing experimental data; a favourable colour is not a complete model-validation claim.</p></section><section id="example"><h2>Worked example</h2><div class="guide-example"><h3>Turn a visual candidate into an inspectable model</h3><ol><li>Draw the atlas with the default conventions.</li><li>Select the tile corresponding to a named published row and inspect its content.</li><li>Load it into the model and open Hierarchy.</li><li>Compare the mass-window verdict with the full-potential and uncertainty diagnostics.</li></ol><p><b>What to expect:</b> The same input content can be followed from a thumbnail to a detailed calculation. The catalogue&#x27;s size limit remains part of what was searched.</p></div></section><section id="limits"><h2>Scope and limitations</h2><ul><li>The catalogue stops at five multiplets; it is not an enumeration of every possible bulk content.</li><li>A plotted minimum or mass-window colour is not a proof of anomaly cancellation, a complete flavour sector or experimental viability.</li><li>The SU(7) normalization and literature-discrepancy cautions also apply to these tiles.</li></ul></section><section id="troubleshooting"><h2>If something is unclear</h2><h3>A tile appears blank or flat.</h3><p>Inspect its content and flat-potential classification before assuming a drawing failure.</p><h3>The loaded model seems different from another comparison.</h3><p>Check its gauge seed and every multiplicity; a tile label alone does not specify a different panel&#x27;s coupling or approximation settings.</p></section><section id="terms"><h2>Terms used here</h2><ul><li><a href="../../guide/glossary/index.html#bulk-content">the bulk content</a></li><li><a href="../../guide/glossary/index.html#one-loop-potential">the one-loop potential</a></li><li><a href="../../guide/glossary/index.html#zero-mode">a zero mode</a></li></ul></section><section id="related"><h2>Continue with</h2><ul><li><a href="../../guide/hierarchy/index.html">Hierarchy</a></li><li><a href="../../guide/samepot/index.html">Same potential?</a></li><li><a href="../../guide/census/index.html">Count a rung</a></li></ul></section><section id="references"><h2>Sources and attribution</h2><ul><li><a href="https://karlesmarin.github.io/ghu-explorer/papers/part-vii/index.html">Part VII: SU(7) potential and finite catalogue</a></li><li><a href="https://karlesmarin.github.io/ghu-explorer/docs/su7-certification.html">Certification and source-discrepancy scope</a></li><li><a href="https://github.com/karlesmarin/ghu-lab/blob/main/src/sections/atlas_section.js">Implementation and source attribution</a></li></ul></section><p class="note">Current instrument guide. Archived editions retain their own scope.</p><a href="#top">Back to top</a></article>
+</main>
+<footer><div class="in">
+<p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
+&middot; built with Claude (Anthropic) as assistant.<br>
+The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
+This page was generated on 2026-10-09 and reaches nothing outside itself.<br>
+<a href="../../sitemap.xml">XML sitemap</a></p>
+</div></footer>
+</body>
+</html>
