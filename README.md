@@ -1,5 +1,11 @@
 # 🧭 GHU Lab — an instrument for gauge–Higgs unification
 
+### Formula consistency correction · 8 October 2026
+
+The SU(N) minimizers now report the same V/C normalization as the potential evaluator. Symmetry is computed from the joint commutant at the located point, including boundary vacua. The comb plot, spacing table and download share one conditional-bound applicability check; these bounds do not establish attainable masses or exclude a full theory.
+
+The simulator uses analytic Fourier Hessians and exports the actual coupling, phase, probe status and calculation scope. SageMath interval checks exclude stationarity over the rounding intervals of all five printed SU(7) phases for the implemented potential. The literature mismatch remains open; the field-content transcription still needs reconciliation. [Proof, results and reproduction](https://github.com/karlesmarin/ghu-lab#formula-consistency-corrections--8-october-2026). The bilingual 8 October video revision includes corrected captures, explanations, subtitles and chapter times. The original 7 October guide remains available from the player as a historical version; frozen editions retain their original checkpoint.
+
 **▶️ [karlesmarin.github.io/ghu-explorer](https://karlesmarin.github.io/ghu-explorer/)**
 
 [![The hierarchy section of the instrument](preview_app.png)](https://karlesmarin.github.io/ghu-explorer/app/)
@@ -25,7 +31,7 @@ ten Zenodo records, Part IX having gone out as two. Its main entry points are:
 | 🎬 [**video guide · guía en vídeo**](https://karlesmarin.github.io/ghu-explorer/video/index.html) | English and Spanish narration, subtitles, searchable chapters, transcripts and downloads |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
-| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 65 harnesses and the browser gates |
+| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 66 harnesses and the browser gates |
 
 <a id="october-2026-research-experiments"></a>
 
@@ -38,7 +44,7 @@ sections**, the **3 Simulator modes**, the **8 research cards**, integrated diag
 Each chapter connects a question, a control change and the result, with the assumptions needed
 to interpret it. Use the searchable chapter list, subtitles, transcript and MP4 download. Changing
 language preserves your position within the chapter. Narration is synthetic; the interface keeps
-its English button labels. Recorded on **7 October 2026**.
+its English button labels. Revised and recaptured on **8 October 2026**; the original 7 October guide remains available as a historical version.
 
 🇪🇸 **Cómo empezar:** abre la guía, elige Español y busca el módulo. Pulsa Reproducir y usa la
 pantalla completa para leer las gráficas. «Probar esta sección» abre el laboratorio. Cambia una
@@ -345,7 +351,7 @@ tolerance in α: the closed form now only locates the basin, and the decision is
 `F` at two numerically refined minima. Both changes are logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
 
-The October 7 source build passed **65 harnesses**, reporting **3,895 individually counted checks**, plus all eleven browser gates and **30 site checks**. The new closure gate has 21 dedicated browser checks; the batch study has twelve separate consistency checks. The counts below describe earlier releases.
+The October 8 source build passed **66 harnesses**, reporting **5,867 individually counted checks**, plus all eleven browser gates and **30 site checks**. The closure gate has 39 dedicated browser checks; the formula correction has 13 independent SageMath checks. The batch study has twelve separate consistency checks. Both revised videos pass full decoding and caption checks, and the player passes 20 browser checks. The counts below describe earlier releases.
 See the [validation details and counting note](https://github.com/karlesmarin/ghu-lab#-what-is-checked-and-against-what). The site gate also checks
 deliberately broken copies, and `drive.mjs` puts a **real mouse** through the panels
 (208 checks). The gravity–gauge panel has 20 additional Chromium interaction, export and
