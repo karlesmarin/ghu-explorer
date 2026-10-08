@@ -1,0 +1,4 @@
+# Preserve downloaded evidence and its SHA-256 chain across platforms.
+data/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# External records retain their original whitespace and checksums.
+data/lhc_reference/** -text -whitespace

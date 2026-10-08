@@ -1,10 +1,18 @@
 # 🧭 GHU Lab — an instrument for gauge–Higgs unification
 
+### Certificates, thermal comparison and uncertainty budget · 8 October 2026
+
+The [English certification dossier](https://karlesmarin.github.io/ghu-explorer/docs/su7-certification.html) records 26 Lean theorems, ten certified global minima for fixed one-phase SU(7) potentials, formula attribution and the remaining gauge-determinant question. The certificates establish statements under explicit assumptions; they do not establish physical validity or scientific originality.
+
+[Hierarchy](https://karlesmarin.github.io/ghu-explorer/app/#s=hierarchy) compares quartic-logarithmic and full-Fourier results and separates numerical bounds, the recorded W-mass input uncertainty, coupling scenarios and unquantified physical effects. The thermal experiment in [Simulator](https://karlesmarin.github.io/ghu-explorer/app/#s=predict) compares pinned CosmoTransitions and PhaseTracer results for identical potentials and conventions, with cutoff and tolerance studies. These solvers share shooting-method ancestry; agreement is a numerical cross-check.
+
+ATLAS and CMS Higgs-mass references remain separate comparisons. The archived CMS dijet distributions and correlation table include source records and ingestion checks; they are not a combined likelihood or a GHU exclusion. The dossier links the downloadable evidence and reproduction instructions. The existing video guides remain valid for the demonstrated controls; these additional diagnostic cards are documented here and in the dossier.
+
 ### Formula consistency correction · 8 October 2026
 
 The SU(N) minimizers now report the same V/C normalization as the potential evaluator. Symmetry is computed from the joint commutant at the located point, including boundary vacua. The comb plot, spacing table and download share one conditional-bound applicability check; these bounds do not establish attainable masses or exclude a full theory.
 
-The simulator uses analytic Fourier Hessians and exports the actual coupling, phase, probe status and calculation scope. SageMath interval checks exclude stationarity over the rounding intervals of all five printed SU(7) phases for the implemented potential. The literature mismatch remains open; the field-content transcription still needs reconciliation. [Proof, results and reproduction](https://github.com/karlesmarin/ghu-lab#formula-consistency-corrections--8-october-2026). The bilingual 8 October video revision includes corrected captures, explanations, subtitles and chapter times. The original 7 October guide remains available from the player as a historical version; frozen editions retain their original checkpoint.
+The simulator uses analytic Fourier Hessians and exports the actual coupling, phase, probe status and calculation scope. SageMath interval checks exclude stationarity over the rounding intervals of all five printed SU(7) phases for the implemented potential. The eight fermion coefficient tables have now been reconstructed independently. The literature mismatch remains open: choosing the physical gauge determinant still requires a complete gauge and boundary analysis. [Proof, results and reproduction](https://github.com/karlesmarin/ghu-lab#formula-consistency-corrections--8-october-2026). The bilingual 8 October video revision includes corrected captures, explanations, subtitles and chapter times. The original 7 October guide remains available from the player as a historical version; frozen editions retain their original checkpoint.
 
 **▶️ [karlesmarin.github.io/ghu-explorer](https://karlesmarin.github.io/ghu-explorer/)**
 
@@ -15,7 +23,7 @@ The simulator uses analytic Fourier Hessians and exports the actual coupling, ph
 *The **Simulator** on the model of Haba–Hosotani–Kawamura–Yamashita (hep-ph/0401183, Fig. 1): their
 published vacuum a = 0.058 comes out as 0.0583, the measured W mass turns it into 1/R = 2.755 TeV,
 and the curvature of the potential gives a Higgs of 53.4 GeV against the measured 125.20 — the
-model reproduced and falsified on the same screen, with every source named.*
+benchmark reproduced and compared with measurement under its stated one-loop assumptions, with every source named.*
 
 🧪 **An interactive research laboratory for GHU, thermal transitions, neutrinos and collider comparisons.**
 Build a model, inspect its potential and spectrum, vary research scenarios, compare with named
@@ -351,7 +359,7 @@ tolerance in α: the closed form now only locates the basin, and the decision is
 `F` at two numerically refined minima. Both changes are logged in
 [changes](https://karlesmarin.github.io/ghu-explorer/changes/); no published number moved.
 
-The October 8 source build passed **66 harnesses**, reporting **5,867 individually counted checks**, plus all eleven browser gates and **30 site checks**. The closure gate has 39 dedicated browser checks; the formula correction has 13 independent SageMath checks. The batch study has twelve separate consistency checks. Both revised videos pass full decoding and caption checks, and the player passes 20 browser checks. The counts below describe earlier releases.
+The current October 8 source build passed **69 harnesses**, reporting **7,805 individually counted checks**, plus all thirteen browser gates and **30 site checks**. The new uncertainty budget adds 57 exact/Arb checks; the moment diagnostic has 110 interval checks, and the dataset ingestion has 175 checks. The closure gate has 39 dedicated browser checks; the formula correction has 13 independent SageMath checks. The batch study has twelve separate consistency checks. Both revised videos pass full decoding and caption checks, and the player passes 20 browser checks. The counts below describe earlier releases.
 See the [validation details and counting note](https://github.com/karlesmarin/ghu-lab#-what-is-checked-and-against-what). The site gate also checks
 deliberately broken copies, and `drive.mjs` puts a **real mouse** through the panels
 (208 checks). The gravity–gauge panel has 20 additional Chromium interaction, export and
