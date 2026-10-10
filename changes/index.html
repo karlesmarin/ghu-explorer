@@ -161,7 +161,36 @@ laboratory, and the opening scene mentions the new chapter.</p></dd><dt>why</dt>
 Collider chapter.</p></dd><dt>so</dt><dd><p>The player, subtitles, transcripts and downloads select the 10 October revision. The certification
 revision of 8 October stays available as a historical page with its original media, as do the
 earlier guides. Narration remains synthetic, and results in the recording are computed by the
-application.</p></dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The first KK gluon against ATLAS, CMS dijet and CMS m(tt̄) data</h3><dl><dt>what</dt><dd><p>A ninth experiment card, Collider → First KK gluon at the LHC. Choose the flat GHU coloron or a
+application.</p></dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Video guide re-recorded on the current laboratory, with the 🎬 Demo buttons</h3><dl><dt>what</dt><dd><p>All 44 chapters and 145 scenes of the bilingual video guide were captured again on the laboratory as it now
+stands. The previous revision (morning of 10 October) predates the guided 🎬 Demo buttons, so none of its screens
+showed them. The welcome now says that every section and card has a Demo button, and the KK-gluon chapter opens by
+starting that card's own demo, then stops it and takes over. Its narration follows the card after the external
+review of the same day: the published RS point with all nine bulk masses, and the m(tt̄) Δχ² with the SM-theory
+uncertainty taken as one correlated normalisation (5.3 instead of 1.8 for the flat coloron at 4.5 TeV).</p></dd><dt>why</dt><dd><p>A walkthrough whose screens no longer match the laboratory teaches the wrong page.</p></dd><dt>so</dt><dd><p><code>tools/video_guide/add_revision_demos.py</code> makes the revision; every chapter was recorded, narrated, rendered and
+verified against the application now in the tree. The 10 October morning revision is preserved as
+<code>video/2026-10-10-kkgluon.html</code> with its original media, and the video gate checks that it still plays. Demos are
+generated from the same storyboard; the video's start and stop of a card demo are left out of them (a demo cannot
+start itself), and <code>_test_demo_scripts.mjs</code> checks both.</p></dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-correction" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">correction</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: <strong>YES</strong></span></div><h3>The KK-gluon card after an external review — nine bulk masses, the ATLAS control with its chiral couplings, and certificates that can fail</h3><dl><dt>what</dt><dd><p>An independent review of the laboratory found six defects in the KK-gluon card and its harnesses; each was reproduced
+here before it was fixed.</p><p>- <strong>The published RS point was a reduced one.</strong> The card set Q₂ = Q₁ and d₁ = d₂ = u₁. It now carries all nine bulk
+masses of arXiv:0807.4937, still in the flavour-diagonal zero-mode approximation without mass-basis rotations. At
+3.75 TeV this moves σ × BR(tt̄) by 1.2% and the dijet σ × B by 19%; the tt̄ crossing moves from 3.73 to 3.72 TeV.
+- <strong>The ATLAS control ran the wrong chirality.</strong> ATLAS's benchmark has g_tL = g_s and g_tR ≈ 4 g_s; the harness used
+the vector top threshold. With the benchmark's couplings, our LO curve falls from 1.11 to 0.82 of ATLAS's between 1
+and 5 TeV: within 15% from 1 to 4 TeV, 15–18% low at 4.5–5 TeV. The vector threshold had inflated the low tail and
+kept 5 TeV inside 15%. The mass slope is not explained; 4.5–5 TeV is pinned as a known deviation.
+- <strong>The live reference check could not fail.</strong> With an empty reference it returned perfect agreement, having compared
+nothing. It now counts its comparisons, reads an empty block or a non-finite difference as a failure, and judges the
+result by the harness's own tolerances.
+- <strong>The covariance solve accepted a non-symmetric matrix</strong>, reading only its lower triangle. It now refuses one.
+- <strong>A resonance with no top coupling gave NaN</strong> (0·0/0) instead of zero.
+- <strong>The dijet certificate said 4% and its harness tested 5%.</strong> The real worst case is 3.85%; the harness now tests 4%.</p></dd><dt>why</dt><dd><p>A certificate that cannot fail certifies nothing, and a control run with the wrong couplings passes for the wrong
+reason. The review found both; neither was visible from inside, because every harness was green.</p></dd><dt>so</dt><dd><p>The labels say what is assumed. The m(tt̄) sensitivity rests on a 10% SM-theory uncertainty that this tool chooses:
+it is now shown both uncorrelated and fully correlated, since CMS correlates its theory errors and the answer depends
+on that choice. The same K-factor for SM, octet and interference is stated as assumed, not validated. α_s is labelled
+as run at one loop from its value at M_Z; <code>tools/alphas_table_check.py</code> measures it against the PDF set's own table:
+0.55–0.72% higher between 0.5 and 8 TeV (data/alphas_table_check.txt). Each fix has a negative control in its
+harness: an empty, corrupted or NaN reference fails; a non-symmetric matrix is refused; zero top coupling gives zero.
+The build now prints FAILED beside a harness that dies on an assertion, instead of "(no output)".</p></dd><dt>check</dt><dd>open <strong>Collider → First KK gluon at the LHC</strong> and press <strong>Published RS point (arXiv:0807.4937)</strong>. r(tt̄) at 3.75 TeV reads 0.96 (it read 0.98), and the m(tt̄) paragraph now gives three Δχ²: 3.2 with the SM-theory uncertainty uncorrelated between bins, 5.6 with it as one correlated normalisation, 5.6 with the experimental covariance alone. The certificate tt_control says 1 to 4 TeV, not 1 to 5.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The first KK gluon against ATLAS, CMS dijet and CMS m(tt̄) data</h3><dl><dt>what</dt><dd><p>A ninth experiment card, Collider → First KK gluon at the LHC. Choose the flat GHU coloron or a
 warped KK gluon with zero-mode quarks of bulk mass c; read couplings, widths and branching
 fractions; compare LO σ × BR(tt̄) with the ATLAS observed limit and σ × B × A(dijet) with the CMS
 spin-1 limits interpolated to the width, as r = prediction / limit. The card also computes the

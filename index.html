@@ -284,19 +284,16 @@ laboratory, and the opening scene mentions the new chapter.</p></dd><dt>why</dt>
 Collider chapter.</p></dd><dt>so</dt><dd><p>The player, subtitles, transcripts and downloads select the 10 October revision. The certification
 revision of 8 October stays available as a historical page with its original media, as do the
 earlier guides. Narration remains synthetic, and results in the recording are computed by the
-application.</p></dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>The first KK gluon against ATLAS, CMS dijet and CMS m(tt̄) data</h3><dl><dt>what</dt><dd><p>A ninth experiment card, Collider → First KK gluon at the LHC. Choose the flat GHU coloron or a
-warped KK gluon with zero-mode quarks of bulk mass c; read couplings, widths and branching
-fractions; compare LO σ × BR(tt̄) with the ATLAS observed limit and σ × B × A(dijet) with the CMS
-spin-1 limits interpolated to the width, as r = prediction / limit. The card also computes the
-m(tt̄) spectrum with the interference between the KK gluon and the QCD gluon in the bins of the
-CMS parton-level measurement, and the expected Δχ² against its covariance.</p></dd><dt>why</dt><dd><p>The collider section compared a mass with a bound; an experimental limit is on σ × BR, so the
-meaningful comparison is a rate. A broad KK gluon also changes the tt̄ spectrum below its pole
-through interference, whose sign depends on the couplings: destructive for flat GHU, constructive
-for the published warped reference point.</p></dd><dt>so</dt><dd><p>Every number carries its status and witness. Couplings are checked against a 40-digit reference;
-ATLAS's and CMS's own theory curves are reproduced; the spectrum agrees with an independent
-computation from Dirac traces and LHAPDF, recomputed in the page. A crossing is a comparison with
-each experiment's benchmark and the spectrum Δχ² is a sensitivity, not an exclusion. LO only;
-four-top production and fermion KK modes are not computed.</p></dd></dl></div>
+application.</p></dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Video guide re-recorded on the current laboratory, with the 🎬 Demo buttons</h3><dl><dt>what</dt><dd><p>All 44 chapters and 145 scenes of the bilingual video guide were captured again on the laboratory as it now
+stands. The previous revision (morning of 10 October) predates the guided 🎬 Demo buttons, so none of its screens
+showed them. The welcome now says that every section and card has a Demo button, and the KK-gluon chapter opens by
+starting that card's own demo, then stops it and takes over. Its narration follows the card after the external
+review of the same day: the published RS point with all nine bulk masses, and the m(tt̄) Δχ² with the SM-theory
+uncertainty taken as one correlated normalisation (5.3 instead of 1.8 for the flat coloron at 4.5 TeV).</p></dd><dt>why</dt><dd><p>A walkthrough whose screens no longer match the laboratory teaches the wrong page.</p></dd><dt>so</dt><dd><p><code>tools/video_guide/add_revision_demos.py</code> makes the revision; every chapter was recorded, narrated, rendered and
+verified against the application now in the tree. The 10 October morning revision is preserved as
+<code>video/2026-10-10-kkgluon.html</code> with its original media, and the video gate checks that it still plays. Demos are
+generated from the same storyboard; the video's start and stop of a card demo are left out of them (a demo cannot
+start itself), and <code>_test_demo_scripts.mjs</code> checks both.</p></dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>🔧 The code</h2>
