@@ -173,7 +173,18 @@ for the published warped reference point.</p></dd><dt>so</dt><dd><p>Every number
 ATLAS's and CMS's own theory curves are reproduced; the spectrum agrees with an independent
 computation from Dirac traces and LHAPDF, recomputed in the page. A crossing is a comparison with
 each experiment's benchmark and the spectrum Δχ² is a sensitivity, not an exclusion. LO only;
-four-top production and fermion KK modes are not computed.</p></dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A guided simulation in the first KK gluon card</h3><dl><dt>what</dt><dd><p>The First KK gluon card has a 🎬 Demo button. In about forty seconds it loads the published
+four-top production and fermion KK modes are not computed.</p></dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A guided 🎬 Demo in every section, Simulator mode and experiment card</h3><dl><dt>what</dt><dd><p>All 44 parts of the laboratory now have a 🎬 Demo button: 29 menu sections and the Simulator
+modes in "How to use this section" (a section with several demos offers a menu), and the nine
+experiment cards in their heading. A demo presses the real controls, explains each step in a
+banner with Next and stop buttons, and ends with how to read the result and a link to the full
+guide. A link with demo=&lt;id&gt; starts one; lang=es gives it in Spanish.</p></dd><dt>why</dt><dd><p>The first demo, in the KK gluon card, showed that a reader understands a panel fastest by watching
+it answer. The video guide already scripts every panel; the demos reuse that script inside the
+laboratory, where the reader can take over at the end.</p></dd><dt>so</dt><dd><p>The demos are generated from the video storyboard and the user guides, so the two cannot drift
+apart: a harness fails if either changes without regenerating them. A browser gate runs all 44
+demos to their closing panel and requires that no step fail, with negative controls proving the
+gate can fail. The nine experiment cards have hand-written demos instead: each follows the question its
+card answers, presses its own presets, and every number in the banner is read from the card at that
+step (src/view/card_demos_cards.js).</p></dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>A guided simulation in the first KK gluon card</h3><dl><dt>what</dt><dd><p>The First KK gluon card has a 🎬 Demo button. In about forty seconds it loads the published
 warped reference point, reads r against the ATLAS tt̄ limit, shows the m(tt̄) spectrum with its
 interference, switches to the flat GHU coloron, and sets the SM theory uncertainty to zero, with a
 banner explaining each step and a closing panel on how to read the card. A link with

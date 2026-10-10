@@ -77,6 +77,13 @@ ten Zenodo records, Part IX having gone out as two. Its main entry points are:
 
 **[English video guide](https://karlesmarin.github.io/ghu-explorer/video/index.html?lang=en) · [Guía en español](https://karlesmarin.github.io/ghu-explorer/video/index.html?lang=es)**
 
+**🎬 Or let the laboratory show you.** Every menu section, Simulator mode and experiment card has a **🎬 Demo**
+button — in *How to use this section*, or in the card heading. It presses the real controls, a banner explains each
+step (with **Next ▶** and **✕**), and a closing panel says how to read the result. The 44 demos run the same actions
+as the 44 video chapters (they are generated from the video's script) and finish with the user guide's reading. A
+link starts one directly, e.g. [`#s=samepot&demo=samepot`](https://karlesmarin.github.io/ghu-explorer/app/index.html#s=samepot&demo=samepot);
+add `&lang=es` for Spanish.
+
 Two narrated Full HD versions demonstrate the real interface in **44 chapters**: all **29 menu
 sections**, the **3 Simulator modes**, the **9 research cards** (the 10 October revision adds the first KK gluon at the
 LHC, with its m(tt̄) spectrum against CMS), integrated diagnostics and exports.
