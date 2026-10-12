@@ -6,6 +6,7 @@ data/lhc_reference/** -text -whitespace
 video/media/2026-10-08-certification/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
 video/media/2026-10-10-kkgluon/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
 video/media/2026-10-10-demos/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
+video/media/2026-10-12-boundary-research/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
 # Preserve downloadable manual hashes across checkouts.
 guide/manual/** -text
 guide/manual/*.pdf binary

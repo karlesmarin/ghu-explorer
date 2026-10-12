@@ -7,7 +7,7 @@
 <!-- The ladder of odd eighths, middle rung absent, drawn inline: the tab shows the one
      picture the series is about, and the page still reaches nothing outside itself. -->
 <title>GHU Lab — an instrument for gauge-Higgs unification</title>
-<meta name="description" content="Interactive GHU research laboratory: model builders, three Simulator modes, nine embedded experiments, neutrino and thermal diagnostics, and experimental comparisons.">
+<meta name="description" content="Interactive GHU research laboratory: model builders, three Simulator modes, ten embedded experiments, neutrino and thermal diagnostics, and experimental comparisons.">
 <style>
 /* site.css — the pages around the instrument.
  *
@@ -165,7 +165,7 @@ engine &mdash; and every result states its assumptions.</p>
   <a class="door" href="app/index.html">
     <b>I read the paper and want to try it &rarr;</b>
     <span>The instrument. Twenty-nine menu sections, three Simulator model
-    modes and nine embedded experiment cards, with integrated diagnostics and
+    modes and ten embedded experiment cards, with integrated diagnostics and
     experimental comparisons.</span>
   </a>
   <a class="door" href="papers/index.html">
@@ -276,7 +276,23 @@ own output <em>unknown</em> would have no way to do that to itself.</p>
 <h2>📝 What has moved</h2>
 <p>The papers are frozen; this site is not. Every change is logged with what moved, why, and
 whether it affects the version of record.</p>
-<div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Video guide revision with the first KK gluon chapter</h3><dl><dt>what</dt><dd><p>The English and Spanish video guides gain chapter 43, First KK gluon at the LHC: the published
+<div class="entry"><div class="hd"><span class="dt">2026-10-12</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Boundary research tools with linked 2D and 3D mass views, explicit assumptions and bilingual guidance</h3><dl><dt>what</dt><dd><p>The tenth embedded research card adds four reusable calculations: a flat Robin boundary
+spectrum, complex profile Gram rank, exact parity-inserted half-spin traces, and a restricted
+six-dimensional SU(2) tensor condition. The map, rotatable-perspective surface and spectrum
+slice share the same computed masses. Selecting points updates the physical inputs; the
+camera angle changes only the view. SVG and JSON exports retain the grid and input values.</p><p>English/Español switches the new card's controls, results, graph labels, messages and demo
+without resetting inputs. The Spanish guide uses the translated control names; the general
+video has separate English and Spanish captures so the new Spanish chapter shows Spanish results.</p></dd><dt>why</dt><dd><p>An unwanted zero mode, linearly dependent profiles and an anomaly obstruction are different
+failure mechanisms. A diagnostic should expose which requirement fails without turning a
+partial success into a complete model verdict. Nonzero overlaps do not establish dependence,
+and factorized anomaly polynomials do not establish an integral tensor charge lattice.</p></dd><dt>so</dt><dd><p>The worked examples, assumptions, formulas, API, failure cases and independent reference
+calculations are documented in docs/boundary-research.md. The 44 English/Spanish guides and
+their manuals include the new card. The general video revision 2026-10-12-boundary-research
+has 45 chapters and 154 scenes in each language. The 10 October Demo revision keeps its
+original page and media. Tool version is 1.0.0; the application release is 0.2.1.</p><p>Numerical references use SciPy, NumPy and Fraction; browser checks exercise graph selection,
+numeric controls, saved links, exports and mobile layout. The full local/global anomaly
+calculation, normalized coefficients, integral charge lattice, Wilson vacuum, realistic flavour
+and neutrino masses remain open. None of the frozen paper records is revised by this addition.</p></dd><dt>check</dt><dd>Open Anomalies → Boundary research. Compare boundary coupling 0 and 1, profile mass 0 and 1, and one and three identical 6D families. Select a point on the 2D map or 3D mesh and confirm that the numerical controls update. Full anomaly cancellation must remain unknown.</dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Video guide revision with the first KK gluon chapter</h3><dl><dt>what</dt><dd><p>The English and Spanish video guides gain chapter 43, First KK gluon at the LHC: the published
 warped reference point at the edge of the ATLAS tt̄ comparison, the m(tt̄) spectrum with
 constructive interference, the flat GHU coloron where it turns destructive, and how the expected
 Δχ² moves with the SM theory uncertainty. All 44 chapters were recaptured against the current
@@ -284,16 +300,7 @@ laboratory, and the opening scene mentions the new chapter.</p></dd><dt>why</dt>
 Collider chapter.</p></dd><dt>so</dt><dd><p>The player, subtitles, transcripts and downloads select the 10 October revision. The certification
 revision of 8 October stays available as a historical page with its original media, as do the
 earlier guides. Narration remains synthetic, and results in the recording are computed by the
-application.</p></dd></dl></div><div class="entry"><div class="hd"><span class="dt">2026-10-10</span><span class="sev-extension" style="font-weight:650;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em">extension</span><span style="font-size:12.5px;color:var(--ink3);margin-left:auto">the instrument &middot; affects the record: no</span></div><h3>Video guide re-recorded on the current laboratory, with the 🎬 Demo buttons</h3><dl><dt>what</dt><dd><p>All 44 chapters and 145 scenes of the bilingual video guide were captured again on the laboratory as it now
-stands. The previous revision (morning of 10 October) predates the guided 🎬 Demo buttons, so none of its screens
-showed them. The welcome now says that every section and card has a Demo button, and the KK-gluon chapter opens by
-starting that card's own demo, then stops it and takes over. Its narration follows the card after the external
-review of the same day: the published RS point with all nine bulk masses, and the m(tt̄) Δχ² with the SM-theory
-uncertainty taken as one correlated normalisation (5.3 instead of 1.8 for the flat coloron at 4.5 TeV).</p></dd><dt>why</dt><dd><p>A walkthrough whose screens no longer match the laboratory teaches the wrong page.</p></dd><dt>so</dt><dd><p><code>tools/video_guide/add_revision_demos.py</code> makes the revision; every chapter was recorded, narrated, rendered and
-verified against the application now in the tree. The 10 October morning revision is preserved as
-<code>video/2026-10-10-kkgluon.html</code> with its original media, and the video gate checks that it still plays. Demos are
-generated from the same storyboard; the video's start and stop of a card demo are left out of them (a demo cannot
-start itself), and <code>_test_demo_scripts.mjs</code> checks both.</p></dd></dl></div>
+application.</p></dd></dl></div>
 <p><a href="changes/index.html">The whole log &rarr;</a></p>
 
 <h2>🔧 The code</h2>
@@ -310,7 +317,7 @@ alive is every URL a published record points at &mdash; see <a href="editions/in
 <p>Carles Marín, independent researcher &middot; <a href="mailto:karlesmarin@gmail.com">karlesmarin@gmail.com</a>
 &middot; built with Claude (Anthropic) as assistant.<br>
 The papers are archived on Zenodo under CC&nbsp;BY&nbsp;4.0; the code is Apache&nbsp;2.0.
-This page was generated on 2026-10-10 and reaches nothing outside itself.<br>
+This page was generated on 2026-10-12 and reaches nothing outside itself.<br>
 <a href="sitemap.xml">XML sitemap</a></p>
 </div></footer>
 </body>

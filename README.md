@@ -1,14 +1,34 @@
 # 🧭 GHU Lab — an instrument for gauge–Higgs unification
 
-## User guides · 9 October 2026
+## Boundary research · Lab 0.2.1 · 12 October 2026
+
+The tenth research card is **Anomalies & proton → Boundary research**. Explore the flat
+boundary spectrum with linked 2D/3D mass plots, test profile independence using a Gram
+matrix, inspect exact parity-inserted spinor traces, and evaluate a restricted 6D family
+condition. Change numeric inputs or select points in the plots; save inputs, results and SVGs.
+These diagnostics have separate assumptions. Full local/global anomaly cancellation remains open.
+
+[Guided demonstration in Spanish](https://karlesmarin.github.io/ghu-explorer/app/index.html#s=anomalies&demo=boundaryresearch&lang=es)
+· [Guía en español](https://karlesmarin.github.io/ghu-explorer/guide/es/boundaryresearch/index.html)
+· [English guide](https://karlesmarin.github.io/ghu-explorer/guide/boundaryresearch/index.html)
+· [New video chapter](https://karlesmarin.github.io/ghu-explorer/video/index.html?lang=es#boundaryresearch)
+· [Equations, API and reproduction](https://github.com/karlesmarin/ghu-lab/blob/main/docs/boundary-research.md)
+· [Download offline edition 0.2.1](https://karlesmarin.github.io/ghu-explorer/editions/ghu-lab-v0.2.1.html).
+
+Both PDF manuals and all 44 bilingual task guides accompany the 45-chapter, 154-scene
+general video. The 10 October video remains available as a historical version.
+The source build passes 8,793 checks across 77 harnesses and sixteen browser gates;
+site/manual checks and video verification are reported separately in the source README.
+
+## User guides · 12 October 2026
 
 [English](https://karlesmarin.github.io/ghu-explorer/guide/index.html)
 · [Castellano](https://karlesmarin.github.io/ghu-explorer/guide/es/index.html)
 · [Getting started](https://karlesmarin.github.io/ghu-explorer/guide/getting-started/index.html)
 · [Spanish manual (PDF)](https://karlesmarin.github.io/ghu-explorer/guide/manual/ghu-lab-guide-es.pdf).
 
-The searchable guide index organizes tasks and model families. **43 guides** cover the 29 menu
-sections, three Simulator modes, nine embedded experiments, neutrino decays and getting started;
+The searchable guide index organizes tasks and model families. **44 guides** cover the 29 menu
+sections, three Simulator modes, ten embedded experiments, neutrino decays and getting started;
 these overlap and are not a count of independent panels. Each guide explains controls, outputs,
 an example, assumptions, troubleshooting and source attribution. The 59-term glossary and inline
 help share the English/Spanish catalogues, so scope corrections reach both places.
@@ -69,7 +89,7 @@ ten Zenodo records, Part IX having gone out as two. Its main entry points are:
 | 🎬 [**video guide · guía en vídeo**](https://karlesmarin.github.io/ghu-explorer/video/index.html) | English and Spanish narration, subtitles, searchable chapters, transcripts and downloads |
 | 📄 [**a page per paper**](https://karlesmarin.github.io/ghu-explorer/papers/) | what each one claims, what it does not |
 | 🗄️ [**the July 2026 tools**](https://karlesmarin.github.io/ghu-explorer/tools-2026-07/index.html) | the earlier three pages, carried over unchanged |
-| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 66 harnesses and the browser gates |
+| 🔧 [**the source**](https://github.com/karlesmarin/ghu-lab) | `karlesmarin/ghu-lab` — the tree this page is built from: kernel, modules, sections, 77 harnesses and the browser gates |
 
 <a id="october-2026-research-experiments"></a>
 
@@ -85,13 +105,13 @@ banner says what the page does not; the welcome and export demos follow the vide
 link starts one directly, e.g. [`#s=samepot&demo=samepot`](https://karlesmarin.github.io/ghu-explorer/app/index.html#s=samepot&demo=samepot);
 add `&lang=es` for Spanish.
 
-Two narrated Full HD versions demonstrate the real interface in **44 chapters**: all **29 menu
-sections**, the **3 Simulator modes**, the **9 research cards** (the 10 October revision adds the first KK gluon at the
+Two narrated Full HD versions demonstrate the real interface in **45 chapters and 154 scenes**: all **29 menu
+sections**, the **3 Simulator modes**, the **10 research cards** (the 10 October revision adds the first KK gluon at the
 LHC, with its m(tt̄) spectrum against CMS), integrated diagnostics and exports.
 Each chapter connects a question, a control change and the result, with the assumptions needed
 to interpret it. Use the searchable chapter list, subtitles, transcript and MP4 download. Changing
-language preserves your position within the chapter. Narration is synthetic; the interface keeps
-its English button labels. Revised and recaptured on **8 October 2026**; the original 7 October guide remains available as a historical version.
+language preserves your position within the chapter. Narration is synthetic. The boundary research card has English/Spanish controls, results and plots;
+older sections retain their English button labels. Revised and recaptured on **12 October 2026**; the original 7 October guide remains available as a historical version.
 
 🇪🇸 **Cómo empezar:** abre la guía, elige Español y busca el módulo. Pulsa Reproducir y usa la
 pantalla completa para leer las gráficas. «Probar esta sección» abre el laboratorio. Cambia una
@@ -110,15 +130,15 @@ models. Representative controls are demonstrated, rather than every possible inp
 |---|---|---|
 | 🗂️ Navigation | **29 menu sections**, covering model construction, spectra, anomalies, vacua, orbifolds, collider comparisons and research diagnostics | The complete section catalog below, in the actual menu order |
 | 🔮 Simulator models | **3 modes:** the 5D SU(N) builder, Higgs production from a top KK tower, and the 4D neutrino ring | [Simulator](https://karlesmarin.github.io/ghu-explorer/app/index.html#s=predict) → model selector |
-| 🧪 Embedded experiments | **9 dedicated experiment cards:** Maru–Nago SU(6), warped SU(6) running, three active flavours, fixed-light-input neutrino paths, thermal potential, integrated transition history, RS anomaly flow, HiggsTools and the first KK gluon against ATLAS/CMS limits | Inside Paper models, Brane kinetic terms, Simulator, Anomalies & proton and Collider |
+| 🧪 Embedded experiments | **10 dedicated experiment cards:** Maru–Nago SU(6), warped SU(6) running, three active flavours, fixed-light-input neutrino paths, thermal potential, integrated transition history, RS anomaly flow, HiggsTools the first KK gluon against ATLAS/CMS limits and boundary research | Inside Paper models, Brane kinetic terms, Simulator, Anomalies & proton and Collider |
 | 📊 Integrated analyses | SU(7) robustness; CMS HNL comparisons; neutrino decays, lifetime, flight and coherence with optional computed Majoron channels; conditional rung certificates and full-potential witnesses | Hierarchy, Simulator → Neutrino ring, and Screen a table |
 | 🔬 Reproducible studies | **4 archived batch studies:** Higgs coupling/width assumptions, thermal assumptions, candidate vacuum screening and fixed-light-input neutrino paths | [Higgs/thermal/vacuum studies](https://github.com/karlesmarin/ghu-lab/blob/main/docs/research-exploration-2026-10-07.md) · [Neutrino study](https://github.com/karlesmarin/ghu-lab/blob/main/research/2026-10-07-neutrinos/README.md) |
 | ⚙️ Scientific engines | **PhaseTracer** for bounce actions and **HiggsTools** for scalar-rate tests with pinned HiggsBounds/HiggsSignals datasets | Optional local engine; saved benchmark results remain available offline |
 | 🧾 Experimental references | CMS dijet and HNL limits, ATLAS/CMS Higgs datasets, archived IceCube DeepCore 2018 maps, NuFIT flavour inputs and named PDG inputs, with the hypothesis and provenance of each comparison | The relevant result cards, guides and JSON exports |
 
-**How the counts work:** 29 counts navigation entries. The three Simulator modes and nine
+**How the counts work:** 29 counts navigation entries. The three Simulator modes and ten
 experiment cards describe what is available inside those entries. The October additions
-below comprise those nine cards plus the Majoron and conditional-bound extensions. These
+below comprise those ten cards plus the Majoron and conditional-bound extensions. These
 overlapping inventories are not added into an artificial total of independent panels.
 
 [📋 Full laboratory map and first experiments](https://github.com/karlesmarin/ghu-lab/blob/main/docs/laboratory-inventory.md)
