@@ -82,5 +82,32 @@ Cambiamos el número de familias en el laboratorio y mantenemos la quiralidad de
 00:10:52.375 — Evidencia / Cuatro preguntas y cuatro evidencias
 Hemos seguido cuatro preguntas distintas. Las condiciones de contorno seleccionaron un espectro. Los productos internos integrados comprobaron independencia de funciones. Las sumas de pesos determinaron un polinomio. Una condición de residuos restringió asignaciones idénticas. Cada cálculo tiene una razón, unos datos y unos límites. Superar estos diagnósticos separados no determina por sí solo un vacío de Higgs, las masas de neutrinos ni una construcción completa del Modelo Estándar.
 
-00:11:25.250 — Evidencia / Sigue el argumento y reproduce el resultado
-La página del vídeo enlaza el laboratorio, las demostraciones matemáticas, los certificados exactos y su verificador. También incluye los artículos originales que sustentan las hipótesis. No se afirma una formalización en un asistente de demostraciones. Puedes cambiar las variables, reproducir los cálculos y cuestionar las hipótesis físicas que faltan. El propósito es hacer visible, y comprobable, el camino entre física y matemáticas.
+00:11:25.250 — Evidencia / Sigue el argumento. Reproduce el resultado.
+Los primeros cuatro ejemplos tienen demostraciones ordinarias y comprobaciones ejecutables. El nuevo módulo de cuantización añade otra evidencia: veintitrés declaraciones de teoremas Lean, junto a las veintiséis anteriores de S U siete. Los siguientes capítulos explican cómo se conectan estos certificados con las hipótesis físicas. Una demostración verifica una implicación. Aplicarla a la naturaleza requiere además la correspondencia física adecuada.
+
+00:11:54.792 — Significado físico / Dónde se encuentran física y matemáticas
+Un objeto matemático adquiere significado físico mediante una identificación concreta. En el ejemplo del intervalo, un autovalor se convierte en una masa normal al cuadrado al fijar la longitud y la normalización cinética. Una matriz de Gram describe solapamientos; las familias físicas requieren además el dominio real de los campos. La cuantización sigue el mismo principio. Debemos fijar el grupo gauge, los fibrados permitidos y la acción antes de interpretar un certificado aritmético como restricción física.
+
+00:12:27.500 — Cuantización / Un campo periódico debe recuperar la misma fase
+Esta es una conexión concreta. En este ejemplo normalizado del axión, la acción topológica es theta por el período de Q. Desplazar theta en dos pi multiplica la fase cuántica por la exponencial de dos pi i por ese período. Un período entero recupera la misma fase. Un semientero da un signo menos. El diagrama ilustra esta condición de consistencia. No es una medida experimental ni una construcción completa de la acción.
+
+00:12:55.292 — Cuantización / El grupo global relaciona los coeficientes
+El álgebra de Lie no fija por sí sola el grupo gauge global. Para H igual a S de U dos por U tres, la correspondencia de clases características combina tres coeficientes en alfa, beta y delta. La integralidad universal exige que esas tres combinaciones sean enteras. Fija alfa y beta en uno y gamma en siete doceavos. Delta vale cero: la clase total es A más B. Lean verifica el criterio aritmético; la interpretación mediante clases características se aporta por separado.
+
+00:13:26.417 — Fondos / Cambiar los fondos cambia el criterio
+Considera ahora Q igual a C partido por dos. Una prueba universal sobre el plano proyectivo detecta un período semientero. En una variedad espín cerrada suave de dimensión cuatro, el cuadrado de una clase integral de grado dos tiene período par, por la fórmula de Wu. Por eso se cumple el criterio espín indicado. Son preguntas distintas, no respuestas contradictorias. Lean comprueba la aritmética de coeficientes. La paridad de Wu y la elección de fondos admisibles del orbifold son pasos separados.
+
+00:14:00.000 — U(2) conjunto / Dos contribuciones fraccionarias, una clase integral
+En el ejemplo U dos hay que sumar las contribuciones de los dos factores. Con b cero igual a uno y b uno igual a seis, el cocarácter uno, cero da un cuarto más tres cuartos: exactamente uno. Para todo m y n enteros, la suma es m al cuadrado más m n más n al cuadrado. El certificado demuestra el criterio conjunto, incluidos coeficientes racionales. Esto establece una clase característica integral, no un espectro de supergravedad libre de anomalías con esos coeficientes.
+
+00:14:32.292 — Respuesta de frontera / Una combinación conservada detecta una obstrucción
+Una respuesta parental propuesta debe pertenecer a la imagen del mapa de transferencia permitido. El funcional ele anula las dos columnas mostradas, así que toda respuesta en esa imagen tiene ele igual a cero. Para la respuesta requerida, seis ele vale dieciséis menos tres p menos tres q menos seis r. Es uno módulo tres para todos los enteros. Esto descarta el emparejamiento dentro de esa familia de respuestas. Términos de esquina, otro espectro u otra construcción global exigirían un análisis nuevo.
+
+00:15:05.000 — Acción del grupo / Una involución en un campo no fija el levantamiento
+El elemento Clifford de grado dieciocho t a tiene cuadrado menos uno. Multiplicarlo por menos i produce U a, cuyo cuadrado es más uno en la representación. Ambas identidades son correctas, pero responden a preguntas diferentes. Una simetría física debe actuar coherentemente sobre todos los campos e interacciones, incluido el campo bosónico Omega. Puede ser posible una acción torcida o combinada. La auditoría exacta no demuestra inconsistencia y no es una formalización Lean.
+
+00:15:36.833 — Certificados en el laboratorio / Del teorema al control y a la figura exacta
+El módulo permite utilizar estos enunciados de alcance definido. Cada control cambia entradas racionales exactas. El criterio y su testigo determinan la retícula y el mapa de cocaracteres mostrados. Una figura finita ilustra el resultado; la prueba Lean aporta el enunciado aritmético universal. Cuatro archivos Lean contienen cuarenta y nueve declaraciones de teoremas en total. La descarga completa incluye los ochenta archivos de datos mantenidos. Los hashes, las comprobaciones numéricas y las pruebas formales certifican cosas diferentes.
+
+00:16:12.417 — Contraste experimental / Dónde entran los datos medidos
+Estos valores proceden de las búsquedas publicadas de ATLAS en pares top y de CMS en dijets que ya usa el laboratorio. Son límites superiores observados con hipótesis de resonancia diferentes, no tasas medidas de producción de nuevas partículas. Ninguna de esas búsquedas comunica una señal significativa de nuevas partículas. Para contrastar nuestros ejemplos de cuantización sigue faltando conectarlos físicamente con masas, acoplamientos, anchuras y tasas predichas, con sus incertidumbres. Los datos pueden respaldar esa realización física. No sustituyen su demostración matemática, y quedar bajo un límite no es un descubrimiento.

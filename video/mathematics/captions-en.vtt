@@ -444,20 +444,218 @@ Passing these separate diagnostics does not by itself determine a Higgs vacuum, 
 00:11:01.933 --> 00:11:05.588
 masses or a complete Standard Model construction.
 
-00:11:06.950 --> 00:11:11.950
-The companion page links the laboratory, ordinary proofs, exact certificates and their
+00:11:06.950 --> 00:11:11.575
+The first four examples have ordinary proofs and executable checks.
 
-00:11:11.950 --> 00:11:17.300
-checker. It also links the primary papers behind the assumptions.
+00:11:11.575 --> 00:11:16.470
+The new quantization module adds a different kind of evidence: twenty three Lean theorem
 
-00:11:17.300 --> 00:11:20.800
-No proof assistant formalization is claimed.
+00:11:16.470 --> 00:11:22.030
+declarations, alongside twenty six existing S U seven declarations.
 
-00:11:20.800 --> 00:11:26.170
-You can change the variables, reproduce the calculations, and challenge the missing physical
+00:11:22.030 --> 00:11:27.085
+The next chapters explain how these certificates connect to physical assumptions.
 
-00:11:26.170 --> 00:11:31.830
-assumptions. The purpose is to make the path between physics and mathematics visible,
+00:11:27.085 --> 00:11:29.670
+A proof checks an implication.
 
-00:11:31.830 --> 00:11:33.255
-and checkable.
+00:11:29.670 --> 00:11:33.970
+Applying it to nature also requires the right physical dictionary.
+
+00:11:35.325 --> 00:11:40.360
+A mathematical object becomes physical through a specified identification.
+
+00:11:40.360 --> 00:11:45.640
+In the interval example, an operator eigenvalue becomes a squared normal mass after fixing
+
+00:11:45.640 --> 00:11:48.735
+the length scale and kinetic normalization.
+
+00:11:48.735 --> 00:11:54.005
+A Gram matrix describes overlaps; physical families additionally require the actual
+
+00:11:54.005 --> 00:11:58.370
+field domain. Quantization works the same way.
+
+00:11:58.370 --> 00:12:02.805
+We must name the gauge group, the allowed bundles and the action before an arithmetic
+
+00:12:02.805 --> 00:12:05.815
+certificate becomes a physical constraint.
+
+00:12:07.200 --> 00:12:09.645
+Here is a concrete connection.
+
+00:12:09.645 --> 00:12:14.735
+In this normalized axion example, the topological action is theta times the period
+
+00:12:14.735 --> 00:12:19.570
+of Q. Shifting theta by two pi multiplies the quantum phase by the exponential of two
+
+00:12:19.570 --> 00:12:25.300
+pi i times that period. An integer period returns to the same phase.
+
+00:12:25.300 --> 00:12:27.995
+A half integer gives a minus sign.
+
+00:12:27.995 --> 00:12:32.145
+The phase diagram illustrates this consistency requirement.
+
+00:12:32.145 --> 00:12:37.225
+It is not an experimental measurement, or a complete construction of the action.
+
+00:12:38.575 --> 00:12:42.685
+The Lie algebra alone does not fix the global gauge group.
+
+00:12:42.685 --> 00:12:48.175
+For H equal to S of U two times U three, the characteristic class dictionary combines
+
+00:12:48.175 --> 00:12:51.950
+three coefficients into alpha, beta and delta.
+
+00:12:51.950 --> 00:12:56.940
+Universal integrality requires these three combinations to be integers.
+
+00:12:56.940 --> 00:13:01.035
+Set alpha and beta to one and gamma to seven twelfths.
+
+00:13:01.035 --> 00:13:04.320
+Delta becomes zero: the total class is A plus B.
+
+00:13:04.320 --> 00:13:09.425
+Lean verifies the arithmetic criterion; the characteristic class interpretation is
+
+00:13:09.425 --> 00:13:11.210
+supplied separately.
+
+00:13:12.575 --> 00:13:15.530
+Now take Q equal to C over two.
+
+00:13:15.530 --> 00:13:20.160
+A universal test on the projective plane detects a half integer period.
+
+00:13:20.160 --> 00:13:25.000
+On a closed smooth spin four manifold, the square of an integral degree two class has
+
+00:13:25.000 --> 00:13:28.035
+even period, by the Wu formula.
+
+00:13:28.035 --> 00:13:31.055
+The stated spin test therefore passes.
+
+00:13:31.055 --> 00:13:35.240
+These are different questions, not conflicting answers.
+
+00:13:35.240 --> 00:13:38.200
+Lean checks the coefficient arithmetic.
+
+00:13:38.200 --> 00:13:43.635
+Wu parity and the choice of physically admissible orbifold backgrounds are separate steps.
+
+00:13:44.992 --> 00:13:49.932
+In the U two example, the two factor contributions have to be added.
+
+00:13:49.932 --> 00:13:55.012
+With b zero equal to one and b one equal to six, the cocharacter one, zero
+
+00:13:55.012 --> 00:13:59.252
+gives one quarter plus three quarters: exactly one.
+
+00:13:59.252 --> 00:14:04.502
+For every integer m and n the sum is m squared plus m n plus n squared.
+
+00:14:04.502 --> 00:14:09.932
+The certificate proves the joint criterion, including rational coefficients.
+
+00:14:09.932 --> 00:14:15.042
+This establishes an integral characteristic class, not an anomaly free supergravity
+
+00:14:15.042 --> 00:14:17.557
+spectrum with those coefficients.
+
+00:14:18.908 --> 00:14:23.933
+A proposed parent response must lie in the image of its allowed transfer map.
+
+00:14:23.933 --> 00:14:28.928
+Both displayed columns are annihilated by ell, so every response in that image has ell
+
+00:14:28.928 --> 00:14:34.028
+equal to zero. For the required response, six ell equals sixteen
+
+00:14:34.028 --> 00:14:37.618
+minus three p minus three q minus six r.
+
+00:14:37.618 --> 00:14:40.813
+It is one modulo three for all integers.
+
+00:14:40.813 --> 00:14:44.348
+This rules out matching within that response family.
+
+00:14:44.348 --> 00:14:49.298
+Extra corner terms, a different spectrum or a different global construction would require
+
+00:14:49.298 --> 00:14:51.078
+a new analysis.
+
+00:14:52.450 --> 00:14:56.650
+The degree eighteen Clifford element t a squares to minus one.
+
+00:14:56.650 --> 00:15:02.695
+Multiplying by minus i produces U a, whose square is plus one on the representation.
+
+00:15:02.695 --> 00:15:07.250
+Both identities are correct, but they answer different questions.
+
+00:15:07.250 --> 00:15:12.315
+A physical symmetry must act consistently on all fields and interactions, including the
+
+00:15:12.315 --> 00:15:17.830
+bosonic Omega field. A twisted or combined action may be possible.
+
+00:15:17.830 --> 00:15:23.730
+The exact lift audit does not prove inconsistency, and it is not a Lean formalization.
+
+00:15:25.117 --> 00:15:28.777
+The module is the interface to these scoped statements.
+
+00:15:28.777 --> 00:15:32.462
+Each control changes the exact rational inputs.
+
+00:15:32.462 --> 00:15:37.537
+The criterion and its witness determine the displayed lattice and cocharacter map.
+
+00:15:37.537 --> 00:15:42.632
+A finite figure illustrates the result; the Lean proof supplies the universal arithmetic
+
+00:15:42.632 --> 00:15:48.727
+statement. Four Lean files contain forty nine theorem declarations in total.
+
+00:15:48.727 --> 00:15:53.097
+The complete download includes all eighty maintained data files.
+
+00:15:53.097 --> 00:15:58.657
+Integrity hashes, numerical checks and formal proofs certify different things.
+
+00:16:00.033 --> 00:16:05.258
+These plotted values come from the published ATLAS top pair and CMS dijet searches already
+
+00:16:05.258 --> 00:16:11.033
+used by the laboratory. They are observed upper limits under different resonance assumptions,
+
+00:16:11.033 --> 00:16:14.218
+not measured new particle production rates.
+
+00:16:14.218 --> 00:16:18.043
+Neither search reports a significant new particle signal.
+
+00:16:18.043 --> 00:16:24.078
+To test our quantization examples, we still need a physical map to masses, couplings,
+
+00:16:24.078 --> 00:16:27.833
+widths and predicted rates, with uncertainties.
+
+00:16:27.833 --> 00:16:31.058
+Data can support that physical realization.
+
+00:16:31.058 --> 00:16:36.853
+They cannot replace its mathematical proof, and remaining below a limit is not a discovery.

@@ -48,6 +48,7 @@
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/es/orbifold/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/es/papers/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/es/predict/index.html</loc></url>
+  <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/es/quantization/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/es/relations/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/es/rsanomaly/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/es/rsrunning/index.html</loc></url>
@@ -82,6 +83,7 @@
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/orbifold/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/papers/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/predict/index.html</loc></url>
+  <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/quantization/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/relations/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/rsanomaly/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/guide/rsrunning/index.html</loc></url>
@@ -109,8 +111,13 @@
   <url><loc>https://karlesmarin.github.io/ghu-explorer/papers/part-vi/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/papers/part-vii/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/papers/part-viii/index.html</loc></url>
+  <url><loc>https://karlesmarin.github.io/ghu-explorer/proof/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/video/index.html</loc></url>
+  <url><loc>https://karlesmarin.github.io/ghu-explorer/video/mathematics/bridge-es.html</loc></url>
+  <url><loc>https://karlesmarin.github.io/ghu-explorer/video/mathematics/bridge.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/video/mathematics/index-es.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/video/mathematics/index.html</loc></url>
   <url><loc>https://karlesmarin.github.io/ghu-explorer/video/mathematics/proof-notes.html</loc></url>
+  <url><loc>https://karlesmarin.github.io/ghu-explorer/video/quantization/index-es.html</loc></url>
+  <url><loc>https://karlesmarin.github.io/ghu-explorer/video/quantization/index.html</loc></url>
 </urlset>

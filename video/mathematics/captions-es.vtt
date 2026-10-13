@@ -450,20 +450,218 @@ Superar estos diagnósticos separados no determina por sí solo un vacío de Hig
 00:11:20.500 --> 00:11:24.310
 de neutrinos ni una construcción completa del Modelo Estándar.
 
-00:11:25.700 --> 00:11:31.140
-La página del vídeo enlaza el laboratorio, las demostraciones matemáticas, los certificados
+00:11:25.700 --> 00:11:31.270
+Los primeros cuatro ejemplos tienen demostraciones ordinarias y comprobaciones ejecutables.
 
-00:11:31.140 --> 00:11:36.265
-exactos y su verificador. También incluye los artículos originales que sustentan
+00:11:31.270 --> 00:11:36.215
+El nuevo módulo de cuantización añade otra evidencia: veintitrés declaraciones de teoremas
 
-00:11:36.265 --> 00:11:42.160
-las hipótesis. No se afirma una formalización en un asistente de demostraciones.
+00:11:36.215 --> 00:11:40.275
+Lean, junto a las veintiséis anteriores de S U siete.
 
-00:11:42.160 --> 00:11:47.060
-Puedes cambiar las variables, reproducir los cálculos y cuestionar las hipótesis físicas
+00:11:40.275 --> 00:11:44.720
+Los siguientes capítulos explican cómo se conectan estos certificados con las hipótesis
 
-00:11:47.060 --> 00:11:52.185
-que faltan. El propósito es hacer visible, y comprobable, el camino
+00:11:44.720 --> 00:11:49.205
+físicas. Una demostración verifica una implicación.
 
-00:11:52.185 --> 00:11:54.530
-entre física y matemáticas.
+00:11:49.205 --> 00:11:53.865
+Aplicarla a la naturaleza requiere además la correspondencia física adecuada.
+
+00:11:55.242 --> 00:12:00.737
+Un objeto matemático adquiere significado físico mediante una identificación concreta.
+
+00:12:00.737 --> 00:12:05.247
+En el ejemplo del intervalo, un autovalor se convierte en una masa normal al cuadrado
+
+00:12:05.247 --> 00:12:08.687
+al fijar la longitud y la normalización cinética.
+
+00:12:08.687 --> 00:12:13.717
+Una matriz de Gram describe solapamientos; las familias físicas requieren además el dominio
+
+00:12:13.717 --> 00:12:18.562
+real de los campos. La cuantización sigue el mismo principio.
+
+00:12:18.562 --> 00:12:23.127
+Debemos fijar el grupo gauge, los fibrados permitidos y la acción antes de interpretar
+
+00:12:23.127 --> 00:12:26.592
+un certificado aritmético como restricción física.
+
+00:12:27.950 --> 00:12:30.455
+Esta es una conexión concreta.
+
+00:12:30.455 --> 00:12:35.075
+En este ejemplo normalizado del axión, la acción topológica es theta por el período de
+
+00:12:35.075 --> 00:12:39.255
+Q. Desplazar theta en dos pi multiplica la fase cuántica por la exponencial de dos pi
+
+00:12:39.255 --> 00:12:43.975
+i por ese período. Un período entero recupera la misma fase.
+
+00:12:43.975 --> 00:12:46.535
+Un semientero da un signo menos.
+
+00:12:46.535 --> 00:12:50.065
+El diagrama ilustra esta condición de consistencia.
+
+00:12:50.065 --> 00:12:54.375
+No es una medida experimental ni una construcción completa de la acción.
+
+00:12:55.742 --> 00:12:59.547
+El álgebra de Lie no fija por sí sola el grupo gauge global.
+
+00:12:59.547 --> 00:13:04.537
+Para H igual a S de U dos por U tres, la correspondencia de clases características combina
+
+00:13:04.537 --> 00:13:07.992
+tres coeficientes en alfa, beta y delta.
+
+00:13:07.992 --> 00:13:12.602
+La integralidad universal exige que esas tres combinaciones sean enteras.
+
+00:13:12.602 --> 00:13:16.062
+Fija alfa y beta en uno y gamma en siete doceavos.
+
+00:13:16.062 --> 00:13:18.687
+Delta vale cero: la clase total es A más B.
+
+00:13:18.687 --> 00:13:23.552
+Lean verifica el criterio aritmético; la interpretación mediante clases características
+
+00:13:23.552 --> 00:13:25.492
+se aporta por separado.
+
+00:13:26.867 --> 00:13:30.057
+Considera ahora Q igual a C partido por dos.
+
+00:13:30.057 --> 00:13:34.767
+Una prueba universal sobre el plano proyectivo detecta un período semientero.
+
+00:13:34.767 --> 00:13:39.592
+En una variedad espín cerrada suave de dimensión cuatro, el cuadrado de una clase integral
+
+00:13:39.592 --> 00:13:43.367
+de grado dos tiene período par, por la fórmula de Wu.
+
+00:13:43.367 --> 00:13:46.527
+Por eso se cumple el criterio espín indicado.
+
+00:13:46.527 --> 00:13:50.817
+Son preguntas distintas, no respuestas contradictorias.
+
+00:13:50.817 --> 00:13:54.052
+Lean comprueba la aritmética de coeficientes.
+
+00:13:54.052 --> 00:13:59.087
+La paridad de Wu y la elección de fondos admisibles del orbifold son pasos separados.
+
+00:14:00.450 --> 00:14:04.725
+En el ejemplo U dos hay que sumar las contribuciones de los dos factores.
+
+00:14:04.725 --> 00:14:09.750
+Con b cero igual a uno y b uno igual a seis, el cocarácter uno, cero da un cuarto más
+
+00:14:09.750 --> 00:14:12.750
+tres cuartos: exactamente uno.
+
+00:14:12.750 --> 00:14:18.260
+Para todo m y n enteros, la suma es m al cuadrado más m n más n al cuadrado.
+
+00:14:18.260 --> 00:14:23.915
+El certificado demuestra el criterio conjunto, incluidos coeficientes racionales.
+
+00:14:23.915 --> 00:14:28.705
+Esto establece una clase característica integral, no un espectro de supergravedad libre
+
+00:14:28.705 --> 00:14:31.390
+de anomalías con esos coeficientes.
+
+00:14:32.742 --> 00:14:36.972
+Una respuesta parental propuesta debe pertenecer a la imagen del mapa de transferencia
+
+00:14:36.972 --> 00:14:41.977
+permitido. El funcional ele anula las dos columnas mostradas, así que toda
+
+00:14:41.977 --> 00:14:45.167
+respuesta en esa imagen tiene ele igual a cero.
+
+00:14:45.167 --> 00:14:49.982
+Para la respuesta requerida, seis ele vale dieciséis menos tres p menos tres q menos seis
+
+00:14:49.982 --> 00:14:54.117
+r. Es uno módulo tres para todos los enteros.
+
+00:14:54.117 --> 00:14:58.397
+Esto descarta el emparejamiento dentro de esa familia de respuestas.
+
+00:14:58.397 --> 00:15:04.092
+Términos de esquina, otro espectro u otra construcción global exigirían un análisis nuevo.
+
+00:15:05.450 --> 00:15:09.700
+El elemento Clifford de grado dieciocho t a tiene cuadrado menos uno.
+
+00:15:09.700 --> 00:15:15.130
+Multiplicarlo por menos i produce U a, cuyo cuadrado es más uno en la representación.
+
+00:15:15.130 --> 00:15:20.075
+Ambas identidades son correctas, pero responden a preguntas diferentes.
+
+00:15:20.075 --> 00:15:24.970
+Una simetría física debe actuar coherentemente sobre todos los campos e interacciones,
+
+00:15:24.970 --> 00:15:27.650
+incluido el campo bosónico Omega.
+
+00:15:27.650 --> 00:15:31.025
+Puede ser posible una acción torcida o combinada.
+
+00:15:31.025 --> 00:15:35.920
+La auditoría exacta no demuestra inconsistencia y no es una formalización Lean.
+
+00:15:37.283 --> 00:15:41.453
+El módulo permite utilizar estos enunciados de alcance definido.
+
+00:15:41.453 --> 00:15:44.983
+Cada control cambia entradas racionales exactas.
+
+00:15:44.983 --> 00:15:50.123
+El criterio y su testigo determinan la retícula y el mapa de cocaracteres mostrados.
+
+00:15:50.123 --> 00:15:54.768
+Una figura finita ilustra el resultado; la prueba Lean aporta el enunciado aritmético
+
+00:15:54.768 --> 00:15:59.828
+universal. Cuatro archivos Lean contienen cuarenta y nueve declaraciones de teoremas en
+
+00:15:59.828 --> 00:16:05.493
+total. La descarga completa incluye los ochenta archivos de datos mantenidos.
+
+00:16:05.493 --> 00:16:11.508
+Los hashes, las comprobaciones numéricas y las pruebas formales certifican cosas diferentes.
+
+00:16:12.867 --> 00:16:17.652
+Estos valores proceden de las búsquedas publicadas de ATLAS en pares top y de CMS en dijets
+
+00:16:17.652 --> 00:16:22.902
+que ya usa el laboratorio. Son límites superiores observados con hipótesis de resonancia
+
+00:16:22.902 --> 00:16:27.507
+diferentes, no tasas medidas de producción de nuevas partículas.
+
+00:16:27.507 --> 00:16:32.597
+Ninguna de esas búsquedas comunica una señal significativa de nuevas partículas.
+
+00:16:32.597 --> 00:16:37.207
+Para contrastar nuestros ejemplos de cuantización sigue faltando conectarlos físicamente
+
+00:16:37.207 --> 00:16:43.577
+con masas, acoplamientos, anchuras y tasas predichas, con sus incertidumbres.
+
+00:16:43.577 --> 00:16:47.067
+Los datos pueden respaldar esa realización física.
+
+00:16:47.067 --> 00:16:52.962
+No sustituyen su demostración matemática, y quedar bajo un límite no es un descubrimiento.
