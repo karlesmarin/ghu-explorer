@@ -453,209 +453,338 @@ The new quantization module adds a different kind of evidence: twenty three Lean
 00:11:16.470 --> 00:11:22.030
 declarations, alongside twenty six existing S U seven declarations.
 
-00:11:22.030 --> 00:11:27.085
+00:11:22.030 --> 00:11:26.925
+Ten further rational algebra statements now support the hypothesis card.
+
+00:11:26.925 --> 00:11:31.980
 The next chapters explain how these certificates connect to physical assumptions.
 
-00:11:27.085 --> 00:11:29.670
+00:11:31.980 --> 00:11:34.565
 A proof checks an implication.
 
-00:11:29.670 --> 00:11:33.970
+00:11:34.565 --> 00:11:38.865
 Applying it to nature also requires the right physical dictionary.
 
-00:11:35.325 --> 00:11:40.360
+00:11:40.242 --> 00:11:45.277
 A mathematical object becomes physical through a specified identification.
 
-00:11:40.360 --> 00:11:45.640
+00:11:45.277 --> 00:11:50.557
 In the interval example, an operator eigenvalue becomes a squared normal mass after fixing
 
-00:11:45.640 --> 00:11:48.735
+00:11:50.557 --> 00:11:53.652
 the length scale and kinetic normalization.
 
-00:11:48.735 --> 00:11:54.005
+00:11:53.652 --> 00:11:58.922
 A Gram matrix describes overlaps; physical families additionally require the actual
 
-00:11:54.005 --> 00:11:58.370
+00:11:58.922 --> 00:12:03.287
 field domain. Quantization works the same way.
 
-00:11:58.370 --> 00:12:02.805
+00:12:03.287 --> 00:12:07.722
 We must name the gauge group, the allowed bundles and the action before an arithmetic
 
-00:12:02.805 --> 00:12:05.815
+00:12:07.722 --> 00:12:10.732
 certificate becomes a physical constraint.
 
-00:12:07.200 --> 00:12:09.645
+00:12:12.117 --> 00:12:14.562
 Here is a concrete connection.
 
-00:12:09.645 --> 00:12:14.735
+00:12:14.562 --> 00:12:19.652
 In this normalized axion example, the topological action is theta times the period
 
-00:12:14.735 --> 00:12:19.570
+00:12:19.652 --> 00:12:24.487
 of Q. Shifting theta by two pi multiplies the quantum phase by the exponential of two
 
-00:12:19.570 --> 00:12:25.300
+00:12:24.487 --> 00:12:30.217
 pi i times that period. An integer period returns to the same phase.
 
-00:12:25.300 --> 00:12:27.995
+00:12:30.217 --> 00:12:32.912
 A half integer gives a minus sign.
 
-00:12:27.995 --> 00:12:32.145
+00:12:32.912 --> 00:12:37.062
 The phase diagram illustrates this consistency requirement.
 
-00:12:32.145 --> 00:12:37.225
+00:12:37.062 --> 00:12:42.142
 It is not an experimental measurement, or a complete construction of the action.
 
-00:12:38.575 --> 00:12:42.685
+00:12:43.492 --> 00:12:47.602
 The Lie algebra alone does not fix the global gauge group.
 
-00:12:42.685 --> 00:12:48.175
+00:12:47.602 --> 00:12:53.092
 For H equal to S of U two times U three, the characteristic class dictionary combines
 
-00:12:48.175 --> 00:12:51.950
+00:12:53.092 --> 00:12:56.867
 three coefficients into alpha, beta and delta.
 
-00:12:51.950 --> 00:12:56.940
+00:12:56.867 --> 00:13:01.857
 Universal integrality requires these three combinations to be integers.
 
-00:12:56.940 --> 00:13:01.035
+00:13:01.857 --> 00:13:05.952
 Set alpha and beta to one and gamma to seven twelfths.
 
-00:13:01.035 --> 00:13:04.320
+00:13:05.952 --> 00:13:09.237
 Delta becomes zero: the total class is A plus B.
 
-00:13:04.320 --> 00:13:09.425
+00:13:09.237 --> 00:13:14.342
 Lean verifies the arithmetic criterion; the characteristic class interpretation is
 
-00:13:09.425 --> 00:13:11.210
+00:13:14.342 --> 00:13:16.127
 supplied separately.
 
-00:13:12.575 --> 00:13:15.530
+00:13:17.492 --> 00:13:20.447
 Now take Q equal to C over two.
 
-00:13:15.530 --> 00:13:20.160
+00:13:20.447 --> 00:13:25.077
 A universal test on the projective plane detects a half integer period.
 
-00:13:20.160 --> 00:13:25.000
+00:13:25.077 --> 00:13:29.917
 On a closed smooth spin four manifold, the square of an integral degree two class has
 
-00:13:25.000 --> 00:13:28.035
+00:13:29.917 --> 00:13:32.952
 even period, by the Wu formula.
 
-00:13:28.035 --> 00:13:31.055
+00:13:32.952 --> 00:13:35.972
 The stated spin test therefore passes.
 
-00:13:31.055 --> 00:13:35.240
+00:13:35.972 --> 00:13:40.157
 These are different questions, not conflicting answers.
 
-00:13:35.240 --> 00:13:38.200
+00:13:40.157 --> 00:13:43.117
 Lean checks the coefficient arithmetic.
 
-00:13:38.200 --> 00:13:43.635
+00:13:43.117 --> 00:13:48.552
 Wu parity and the choice of physically admissible orbifold backgrounds are separate steps.
 
-00:13:44.992 --> 00:13:49.932
+00:13:49.908 --> 00:13:54.848
 In the U two example, the two factor contributions have to be added.
 
-00:13:49.932 --> 00:13:55.012
+00:13:54.848 --> 00:13:59.928
 With b zero equal to one and b one equal to six, the cocharacter one, zero
 
-00:13:55.012 --> 00:13:59.252
+00:13:59.928 --> 00:14:04.168
 gives one quarter plus three quarters: exactly one.
 
-00:13:59.252 --> 00:14:04.502
+00:14:04.168 --> 00:14:09.418
 For every integer m and n the sum is m squared plus m n plus n squared.
 
-00:14:04.502 --> 00:14:09.932
+00:14:09.418 --> 00:14:14.848
 The certificate proves the joint criterion, including rational coefficients.
 
-00:14:09.932 --> 00:14:15.042
+00:14:14.848 --> 00:14:19.958
 This establishes an integral characteristic class, not an anomaly free supergravity
 
-00:14:15.042 --> 00:14:17.557
+00:14:19.958 --> 00:14:22.473
 spectrum with those coefficients.
 
-00:14:18.908 --> 00:14:23.933
+00:14:23.825 --> 00:14:28.850
 A proposed parent response must lie in the image of its allowed transfer map.
 
-00:14:23.933 --> 00:14:28.928
+00:14:28.850 --> 00:14:33.845
 Both displayed columns are annihilated by ell, so every response in that image has ell
 
-00:14:28.928 --> 00:14:34.028
+00:14:33.845 --> 00:14:38.945
 equal to zero. For the required response, six ell equals sixteen
 
-00:14:34.028 --> 00:14:37.618
+00:14:38.945 --> 00:14:42.535
 minus three p minus three q minus six r.
 
-00:14:37.618 --> 00:14:40.813
+00:14:42.535 --> 00:14:45.730
 It is one modulo three for all integers.
 
-00:14:40.813 --> 00:14:44.348
+00:14:45.730 --> 00:14:49.265
 This rules out matching within that response family.
 
-00:14:44.348 --> 00:14:49.298
+00:14:49.265 --> 00:14:54.215
 Extra corner terms, a different spectrum or a different global construction would require
 
-00:14:49.298 --> 00:14:51.078
+00:14:54.215 --> 00:14:55.995
 a new analysis.
 
-00:14:52.450 --> 00:14:56.650
+00:14:57.367 --> 00:15:01.567
 The degree eighteen Clifford element t a squares to minus one.
 
-00:14:56.650 --> 00:15:02.695
+00:15:01.567 --> 00:15:07.612
 Multiplying by minus i produces U a, whose square is plus one on the representation.
 
-00:15:02.695 --> 00:15:07.250
+00:15:07.612 --> 00:15:12.167
 Both identities are correct, but they answer different questions.
 
-00:15:07.250 --> 00:15:12.315
+00:15:12.167 --> 00:15:17.232
 A physical symmetry must act consistently on all fields and interactions, including the
 
-00:15:12.315 --> 00:15:17.830
+00:15:17.232 --> 00:15:22.747
 bosonic Omega field. A twisted or combined action may be possible.
 
-00:15:17.830 --> 00:15:23.730
+00:15:22.747 --> 00:15:28.647
 The exact lift audit does not prove inconsistency, and it is not a Lean formalization.
 
-00:15:25.117 --> 00:15:28.777
+00:15:30.033 --> 00:15:33.693
 The module is the interface to these scoped statements.
 
-00:15:28.777 --> 00:15:32.462
+00:15:33.693 --> 00:15:37.378
 Each control changes the exact rational inputs.
 
-00:15:32.462 --> 00:15:37.537
+00:15:37.378 --> 00:15:42.453
 The criterion and its witness determine the displayed lattice and cocharacter map.
 
-00:15:37.537 --> 00:15:42.632
+00:15:42.453 --> 00:15:47.548
 A finite figure illustrates the result; the Lean proof supplies the universal arithmetic
 
-00:15:42.632 --> 00:15:48.727
-statement. Four Lean files contain forty nine theorem declarations in total.
+00:15:47.548 --> 00:15:53.263
+statement. Five Lean files contain fifty nine theorem declarations in total,
 
-00:15:48.727 --> 00:15:53.097
-The complete download includes all eighty maintained data files.
+00:15:53.263 --> 00:15:57.773
+including ten rational algebra statements for the hypothesis card.
 
-00:15:53.097 --> 00:15:58.657
+00:15:57.773 --> 00:16:02.443
+The complete download includes the maintained data and replay scripts.
+
+00:16:02.443 --> 00:16:08.003
 Integrity hashes, numerical checks and formal proofs certify different things.
 
-00:16:00.033 --> 00:16:05.258
+00:16:09.367 --> 00:16:14.592
 These plotted values come from the published ATLAS top pair and CMS dijet searches already
 
-00:16:05.258 --> 00:16:11.033
+00:16:14.592 --> 00:16:20.367
 used by the laboratory. They are observed upper limits under different resonance assumptions,
 
-00:16:11.033 --> 00:16:14.218
+00:16:20.367 --> 00:16:23.552
 not measured new particle production rates.
 
-00:16:14.218 --> 00:16:18.043
+00:16:23.552 --> 00:16:27.377
 Neither search reports a significant new particle signal.
 
-00:16:18.043 --> 00:16:24.078
+00:16:27.377 --> 00:16:33.412
 To test our quantization examples, we still need a physical map to masses, couplings,
 
-00:16:24.078 --> 00:16:27.833
+00:16:33.412 --> 00:16:37.167
 widths and predicted rates, with uncertainties.
 
-00:16:27.833 --> 00:16:31.058
+00:16:37.167 --> 00:16:40.392
 Data can support that physical realization.
 
-00:16:31.058 --> 00:16:36.853
+00:16:40.392 --> 00:16:46.187
 They cannot replace its mathematical proof, and remaining below a limit is not a discovery.
+
+00:16:47.575 --> 00:16:51.550
+A potential describes how the energy changes with a field.
+
+00:16:51.550 --> 00:16:56.555
+Near the chosen vacuum, its curvature determines the squared Higgs mass after canonical
+
+00:16:56.555 --> 00:17:02.925
+normalization. The third and fourth derivatives determine the cubic and quartic coefficients.
+
+00:17:02.925 --> 00:17:08.050
+The factorials matter: the coefficient of a power in the potential is not the same convention
+
+00:17:08.050 --> 00:17:11.205
+as the corresponding interaction vertex.
+
+00:17:11.205 --> 00:17:15.355
+Here the canonical field is f H times the change in theta.
+
+00:17:15.355 --> 00:17:20.330
+Lean checks rational polynomial identities; real differentiation is checked separately
+
+00:17:20.330 --> 00:17:22.345
+with symbolic algebra.
+
+00:17:23.700 --> 00:17:28.015
+These curves use the nine numerical cases stored in the laboratory.
+
+00:17:28.015 --> 00:17:32.605
+Each case is recalibrated to the same vacuum phase and Higgs mass.
+
+00:17:32.605 --> 00:17:37.660
+The plotted quantity subtracts each vacuum value, subtracts reference case one and
+
+00:17:37.660 --> 00:17:43.110
+divides by a common scale. Its values come from the potential engine.
+
+00:17:43.110 --> 00:17:48.570
+Near agreement of the cubic and quartic couplings does not make the whole potential identical.
+
+00:17:48.570 --> 00:17:53.520
+This is a comparison between specified models, not a proof that other parameters never
+
+00:17:53.520 --> 00:17:56.300
+matter and not an experimental test.
+
+00:17:57.658 --> 00:18:03.363
+This is the C M S top pair invariant mass spectrum, not an upper-limit curve.
+
+00:18:03.363 --> 00:18:07.198
+The horizontal intervals cover unequal mass ranges.
+
+00:18:07.198 --> 00:18:12.173
+The vertical values are cross section per unit mass, so an interval contribution is the
+
+00:18:12.173 --> 00:18:17.383
+density times its width. The logarithmic scale makes the small high-mass values
+
+00:18:17.383 --> 00:18:23.163
+visible. Vertical bars show square roots of covariance diagonal entries.
+
+00:18:23.163 --> 00:18:25.983
+They describe marginal uncertainties.
+
+00:18:25.983 --> 00:18:31.138
+A model prediction must match the energy, channel, phase space, level
+
+00:18:31.138 --> 00:18:34.313
+of correction and binning before it can be compared.
+
+00:18:35.700 --> 00:18:40.125
+Each heat-map cell is a correlation between two measured intervals.
+
+00:18:40.125 --> 00:18:45.455
+The diagonal is one. Positive and negative values mean that errors tend to move together
+
+00:18:45.455 --> 00:18:50.530
+or in opposite directions. The exact decimal matrix has a factorization with
+
+00:18:50.530 --> 00:18:56.200
+fifteen positive pivots. That verifies its positive definiteness as published;
+
+00:18:56.200 --> 00:18:59.265
+it does not remove measurement uncertainty.
+
+00:18:59.265 --> 00:19:05.240
+If we normalize a density to unit area, the sum constraint introduces a null direction.
+
+00:19:05.240 --> 00:19:10.335
+Its covariance is singular. Treating all normalized intervals as independent would
+
+00:19:10.335 --> 00:19:12.775
+count information incorrectly.
+
+00:19:14.158 --> 00:19:17.363
+Use three questions when reading a certificate.
+
+00:19:17.363 --> 00:19:22.678
+Is this an exact mathematical identity? Is the numerical error bounded over the domain
+
+00:19:22.678 --> 00:19:29.028
+I use? Does the calculation predict the measured observable with physical uncertainties?
+
+00:19:29.028 --> 00:19:34.063
+The present package supplies ten rational Lean identities, an exact covariance check
+
+00:19:34.063 --> 00:19:37.183
+and three pointwise derivative enclosures.
+
+00:19:37.183 --> 00:19:40.888
+The full integral error and global minimum remain pending.
+
+00:19:40.888 --> 00:19:45.183
+The quartic fitting curve still differs from its published table by about seven point
+
+00:19:45.183 --> 00:19:50.188
+four percent. Download the evidence and use the practical hypothesis chapter
+
+00:19:50.188 --> 00:19:54.453
+to repeat a case comparison without turning these partial guarantees into an observed
+
+00:19:54.453 --> 00:19:55.848
+exclusion.

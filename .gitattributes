@@ -18,3 +18,11 @@ guide/manual/** -text
 guide/manual/*.pdf binary
 # Preserve original ownership verification responses.
 google*.html -text
+
+# Preserve current narrated tutorial assets across checkouts.
+video/media/2026-10-14-hypotheses/** -text
+
+# Hash-pinned Windows artifacts retain CRLF; still check spaces and indentation.
+proof/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
+src/modules/hypothesis_reference.mjs -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
+video/media/2026-10-14-hypotheses/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
