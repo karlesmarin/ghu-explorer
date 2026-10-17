@@ -788,3 +788,81 @@ to repeat a case comparison without turning these partial guarantees into an obs
 
 00:19:54.453 --> 00:19:55.848
 exclusion.
+
+00:19:57.200 --> 00:20:01.995
+The new boundary tool asks whether two finite wall profiles can be distinguished after
+
+00:20:01.995 --> 00:20:05.490
+matching the same source, pole and residue.
+
+00:20:05.490 --> 00:20:10.940
+The model is a declared quadratic problem on a unit square with coupled wall traces.
+
+00:20:10.940 --> 00:20:16.455
+Its stiffness changes with the layer profile, while its mass form stays fixed.
+
+00:20:16.455 --> 00:20:21.690
+The response is matched at s equal to one hundredth, with residue one half.
+
+00:20:21.690 --> 00:20:26.300
+Subtracting the value and first derivative of F isolates the remaining shape dependence
+
+00:20:26.300 --> 00:20:30.865
+exactly. This is a controlled mathematical question.
+
+00:20:30.865 --> 00:20:35.645
+Connecting its coefficients and domain to the full G H U action remains a separate physical
+
+00:20:35.645 --> 00:20:36.930
+task.
+
+00:20:38.283 --> 00:20:43.388
+The numerical witness is a piecewise polynomial, but the conclusion concerns the continuum
+
+00:20:43.388 --> 00:20:49.738
+variational problem. Exact checks establish the boundary and interface conditions.
+
+00:20:49.738 --> 00:20:55.353
+A positive coercivity gap turns the residual into an upper bound on the energy error.
+
+00:20:55.353 --> 00:20:59.458
+This encloses D and its derivative, and therefore F.
+
+00:20:59.458 --> 00:21:04.573
+A standalone Sage verifier independently reconstructs polynomial integrals,
+
+00:21:04.573 --> 00:21:09.208
+uses directed intervals for logarithms and checks the response matching.
+
+00:21:09.208 --> 00:21:15.158
+The archive includes the written functional proof, witnesses, reports and replay command.
+
+00:21:15.158 --> 00:21:19.808
+Its two hundred and twenty eight checks support these instances; this addition is not
+
+00:21:19.808 --> 00:21:21.903
+a Lean formalization.
+
+00:21:23.283 --> 00:21:28.563
+These two horizontal bars are certified intervals for the uniform response minus the triangular
+
+00:21:28.563 --> 00:21:34.863
+response. They show numerical enclosures, not experimental error bars.
+
+00:21:34.863 --> 00:21:39.533
+Both lower endpoints are positive, so the matched response functions are different for
+
+00:21:39.533 --> 00:21:45.603
+this model. The layer width is one eighth, and its amplitude is one twentieth.
+
+00:21:45.603 --> 00:21:51.088
+The laboratory admits only the two verified queries, one quarter and one half.
+
+00:21:51.088 --> 00:21:56.603
+The result does not supply a thin layer convergence rate, separation at every frequency,
+
+00:21:56.603 --> 00:22:01.443
+a complete gauge and boundary construction, or an experimental fit.
+
+00:22:01.443 --> 00:22:06.728
+Use Boundary research and its Demo to replay the comparison and download its evidence.

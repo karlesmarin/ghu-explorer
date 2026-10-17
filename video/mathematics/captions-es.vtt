@@ -794,3 +794,81 @@ coma cuatro por ciento. Descarga la evidencia y usa el capítulo práctico de hi
 
 00:20:05.875 --> 00:20:11.225
 para repetir una comparación, respetando el alcance de estas garantías parciales.
+
+00:20:12.575 --> 00:20:16.795
+La nueva herramienta de fronteras pregunta si dos perfiles de capa finita se distinguen
+
+00:20:16.795 --> 00:20:20.165
+después de igualar fuente, polo y residuo.
+
+00:20:20.165 --> 00:20:24.700
+El modelo es un problema cuadrático declarado en el cuadrado unidad, con trazas de pared
+
+00:20:24.700 --> 00:20:29.955
+acopladas. Su rigidez cambia con el perfil de capa, mientras la forma de masa
+
+00:20:29.955 --> 00:20:35.020
+permanece fija. La respuesta se empareja en ese igual a una centésima, con
+
+00:20:35.020 --> 00:20:40.490
+residuo un medio. Restar el valor y la primera derivada de efe aísla exactamente la dependencia
+
+00:20:40.490 --> 00:20:45.420
+de forma restante. Esta es una pregunta matemática controlada.
+
+00:20:45.420 --> 00:20:50.120
+Conectar coeficientes y dominio con la acción G H U completa sigue siendo una tarea física
+
+00:20:50.120 --> 00:20:51.420
+separada.
+
+00:20:52.783 --> 00:20:57.493
+El testigo numérico es polinómico por tramos, pero la conclusión corresponde al problema
+
+00:20:57.493 --> 00:21:02.723
+variacional continuo. Comprobaciones exactas establecen las condiciones de frontera
+
+00:21:02.723 --> 00:21:08.158
+e interfaz. Una brecha positiva de coercividad convierte el residuo en una cota superior
+
+00:21:08.158 --> 00:21:13.803
+del error de energía. Así se acotan de y su derivada, y por tanto efe.
+
+00:21:13.803 --> 00:21:18.788
+Un verificador Sage autónomo reconstruye independientemente las integrales polinómicas,
+
+00:21:18.788 --> 00:21:23.463
+usa intervalos dirigidos para logaritmos y comprueba el matching de respuesta.
+
+00:21:23.463 --> 00:21:29.998
+El archivo incluye demostración funcional escrita, testigos, informes y orden de repetición.
+
+00:21:29.998 --> 00:21:34.893
+Sus doscientas veintiocho comprobaciones respaldan estas instancias; esta incorporación
+
+00:21:34.893 --> 00:21:37.228
+no es una formalización Lean.
+
+00:21:38.617 --> 00:21:42.862
+Estas dos barras horizontales son intervalos certificados de la respuesta uniforme menos
+
+00:21:42.862 --> 00:21:48.837
+la triangular. Representan cotas numéricas, no barras de error experimental.
+
+00:21:48.837 --> 00:21:53.972
+Ambos extremos inferiores son positivos: las funciones de respuesta emparejadas son distintas
+
+00:21:53.972 --> 00:21:59.382
+para este modelo. La anchura de capa es un octavo y su amplitud un veinteavo.
+
+00:21:59.382 --> 00:22:04.467
+El laboratorio admite solo las dos sondas verificadas, un cuarto y un medio.
+
+00:22:04.467 --> 00:22:10.187
+El resultado no aporta una tasa de convergencia de capa delgada, separación en toda frecuencia,
+
+00:22:10.187 --> 00:22:14.852
+una construcción gauge y de frontera completa ni un ajuste experimental.
+
+00:22:14.852 --> 00:22:20.307
+Usa Investigación de fronteras y su Demo para repetir la comparación y descargar la evidencia.
