@@ -25,3 +25,4 @@ app/index.html -text
 proof/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
 proof/matched-profiles/verify.py -text whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 src/modules/matched_profiles*.mjs -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
+src/modules/z_isolation_reference.mjs -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
