@@ -20,6 +20,7 @@ guide/manual/*.pdf binary
 google*.html -text
 # Preserve all versioned media, the reviewed app and certificate bytes.
 video/media/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
+video/neutral/** -text whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 app/index.html -text
 proof/** -text whitespace=blank-at-eol,space-before-tab,cr-at-eol
 proof/matched-profiles/verify.py -text whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
